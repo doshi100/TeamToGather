@@ -11,7 +11,7 @@ using System.Data.OleDb;
 using System.Threading.Tasks;
 using System.Net.Http;
 
-namespace ClubMedDAL
+namespace DAL
 {
     /// <summary>
     /// DB Helper, methods to do operations on a database
@@ -67,6 +67,7 @@ namespace ClubMedDAL
         /// <returns>the data table, or null if it failed</returns>
         public DataTable GetDataTable(string sql)
         {
+            OpenConnection();
             OleDbDataReader reader = ReadData(sql);
             DataTable output = null;
 
@@ -75,6 +76,7 @@ namespace ClubMedDAL
                 output = new DataTable();
                 output.Load(reader);
             }
+            CloseConnection();
             return output;
         }
 
@@ -87,6 +89,7 @@ namespace ClubMedDAL
         {
             try
             {
+                OpenConnection();
                 OleDbCommand cmd = new OleDbCommand(sql, conn);
 
                 OleDbDataReader reader = cmd.ExecuteReader();
@@ -101,12 +104,17 @@ namespace ClubMedDAL
                         //The new ID will be on the first (and only) column
                         newID = (int)reader[0];
                     }
+                    CloseConnection();
                     return newID;
                 }
-                else return WRITEDATA_ERROR;
+                else
+                {
+                    return WRITEDATA_ERROR;
+                }
             }
             catch
             {
+                CloseConnection();
                 return WRITEDATA_ERROR;
             }
         }
@@ -123,9 +131,8 @@ namespace ClubMedDAL
             {
                 if (!connOpen) return WRITEDATA_ERROR;
                 OleDbCommand cmd = new OleDbCommand(sql, conn);
-
                 OleDbDataReader reader = cmd.ExecuteReader();
-                
+                CloseConnection();
                 return reader.RecordsAffected;
             }
             catch (Exception e)
@@ -144,7 +151,6 @@ namespace ClubMedDAL
         public OleDbDataReader ReadData(string sql)
         {
 
-            
             OleDbCommand cmd = new OleDbCommand(sql, conn);
             // since execute reader returns null on failure, that's all we have to do.
             return cmd.ExecuteReader();
@@ -184,6 +190,7 @@ namespace ClubMedDAL
         {
             try
             {
+                OpenConnection();
                 DataSet set = new DataSet();
                 int i = 1;
                 foreach (string s in sql)
@@ -196,9 +203,11 @@ namespace ClubMedDAL
                     i++;
                 }
 
+                CloseConnection();
                 return set;
             } catch
             {
+                CloseConnection();
                 return null;
             }
         }
