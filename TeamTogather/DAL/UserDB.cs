@@ -10,19 +10,14 @@ namespace DAL
     public class UserDB
     {
         /// <summary>
-        /// the function query's a user's username and password from the database, if there is a match, return TRUE otherwise FALSE
+        /// the function query's the user's credentials by username and password from the database, if there is a match, it will return a DataTable of that user
         /// </summary>
-        public static bool UserAuthintication(string UsNa, string pass)
+        public static DataRow UserAuthintication(string UsNa, string pass)
         {
             DBHelper helper = new DBHelper(Constants.PROVIDER, Constants.PATH);
-            string sql = "SELECT UserName, Pass FROM Users WHERE UserName = " + UsNa + "AND Pass = " + pass + ";";
+            string sql = "SELECT * FROM Users WHERE UserName = '" + UsNa + "' AND Pass = '" + pass + "';";
             DataTable userTable = helper.GetDataTable(sql);
-
-            if(userTable.Rows.Count == 0)
-            {
-                return false;
-            }
-            return true;
+            return userTable.Rows[0];
         }
 
         /// <summary>

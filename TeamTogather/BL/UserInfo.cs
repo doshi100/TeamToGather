@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data;
+using DAL;
 
 namespace BL
 {
@@ -17,8 +19,6 @@ namespace BL
         public string Password { get; set; } // the User Password(could be hashed, not sure at this time)
         public string Email { get; set; } // the User's Email
         public DateTime Birthday { get; set; } // The User Date of Birth
-        public string FirstName { get; set; } // the User first name
-        public string LastName { get; set; } // the user last name
         public int NativeLang { get; set; } // the native language of the user, used later in filtering
         public int Country { get; set; } // the country the user lives in, used later in filtering
         public int Profession { get; set; } // The profession of the user, such as: Animator, Write, Musician and etc', the ID's are in the table 'Professions'
@@ -33,7 +33,61 @@ namespace BL
 
         /// The end of the properties.
 
-        
+        /// <summary>
+        /// constructor no. 1, takes the properties from the user input and builds a User object
+        /// </summary>
+        public UserInfo(int ID, string UserName, string Password, string Email, DateTime Birthday, int NativeLang, int Country
+                        ,int Profession, int WeeklyFreeTime, int NumRateVoters, int UserRate, bool IsBanned, int ProjectSum, DateTime RegistrationDate
+                        ,DateTime LoginDate, int UserType)
+        {
+            this.ID = ID;
+            this.UserName = UserName;
+            this.Password = Password;
+            this.Email = Email;
+            this.Birthday = Birthday;
+            this.NativeLang = NativeLang;
+            this.Country = Country;
+            this.Profession = Profession;
+            this.WeeklyFreeTime = WeeklyFreeTime;
+            this.NumRateVoters = NumRateVoters;
+            this.UserRate = UserRate;
+            this.IsBanned = IsBanned;
+            this.ProjectSum = ProjectSum;
+            this.RegistrationDate = RegistrationDate;
+            this.LoginDate = LoginDate;
+            this.UserType = UserType;
+        }
+
+
+        /// <summary>
+        /// constructor no. 2, takes a datarow of a user and creats an user object
+        /// </summary>
+        public UserInfo(DataRow user)
+        {
+            this.ID = (int)user["ID"];
+            this.UserName = (string)user["UserName"];
+            this.Password = (string)user["Pass"];
+            this.Email = (string)user["Email"];
+            this.Birthday = (DateTime)user["Birthday"]; // I'm not sure it will work needs to be fixed, after I checked it. (DATETIME)
+            this.NativeLang = (int)user["NativeLang"];
+            this.Country = (int)user["Country"];
+            this.Profession = (int)user["Profession"];
+            this.WeeklyFreeTime = (int)user["WeeklyFreeTime"];
+            this.NumRateVoters = (int)user["NumRateVoters"];
+            this.UserRate = (int)user["UserRate"];
+            this.IsBanned = (bool)user["IsBanned"];
+            this.ProjectSum = (int)user["ProjectsSum"];
+            this.RegistrationDate = (DateTime)user["RegistrationDate"]; // needs to be fixed (DATETIME)
+            this.LoginDate = (DateTime)user["LoginDate"]; // needs to be fixed (DATETIME)
+            this.UserType = (int)user["Type"];
+        }
+
+        public static UserInfo Authintication(string UsNa, string pass)
+        {
+            DataRow userRow = UserDB.UserAuthintication(UsNa, pass);
+            UserInfo authUser = new UserInfo(userRow);
+            return authUser;
+        }
 
     }
 }
