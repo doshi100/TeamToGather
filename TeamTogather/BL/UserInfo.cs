@@ -82,11 +82,14 @@ namespace BL
             this.UserType = (int)user["Type"];
         }
 
-        public static UserInfo Authintication(string UsNa, string pass)
+        /// <summary>
+        /// checks if the given password and username match, if so, the function returns true
+        /// </summary>
+        public static bool Authentication(string UsNa, string pass)
         {
-            DataRow userRow = UserDB.UserAuthintication(UsNa, pass);
+            DataRow userRow = UserDB.UserAuthentication(UsNa, pass);
             UserInfo authUser = new UserInfo(userRow);
-            return authUser;
+            return (authUser.Password == pass && authUser.UserName == UsNa);
         }
 
     }
