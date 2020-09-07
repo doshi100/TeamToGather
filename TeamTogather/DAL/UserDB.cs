@@ -20,5 +20,12 @@ namespace DAL
             return userTable.Rows[0];
         }
 
+        public static void UpdateLoginDate(int ID, DateTime dt)
+        {
+            DBHelper helper = new DBHelper(Constants.PROVIDER, Constants.PATH);
+            string sql = "UPDATE Users SET [LogInDate] = " + dt + " WHERE ID = " + ID + ";";
+            helper.WriteData(sql);
+        }
+
     }
 }

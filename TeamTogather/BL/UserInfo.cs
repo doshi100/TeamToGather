@@ -83,14 +83,22 @@ namespace BL
         }
 
         /// <summary>
-        /// checks if the given password and username match, if so, the function returns true
+        /// checks if the given password and username match, if so, the function returns the user cre
         /// </summary>
-        public static bool Authentication(string UsNa, string pass)
+        public static UserInfo Authentication(string UsNa, string pass)
         {
             DataRow userRow = UserDB.UserAuthentication(UsNa, pass);
             UserInfo authUser = new UserInfo(userRow);
-            return (authUser.Password == pass && authUser.UserName == UsNa);
+            return authUser;
         }
+
+
+        public static void UpdateLoginDate(int ID, DateTime dt)
+        {
+            UserDB.UpdateLoginDate(ID, dt);
+        }
+
+
 
     }
 }
