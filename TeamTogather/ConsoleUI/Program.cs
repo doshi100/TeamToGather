@@ -13,14 +13,7 @@ namespace ConsoleUI
         static void Main(string[] args)
         {
             GeneralMethods.SetDBPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "../../../TeamTogatherDB.accdb"));
-            Console.WriteLine(AppDomain.CurrentDomain);
-            UserInfo loginUser = UserInfo.Authentication("doshi", "123");
-            if(loginUser.UserName == "doshi" && loginUser.Password == "123")
-            {
-                Console.WriteLine("true");
-
-                UserInfo.UpdateLoginDate(loginUser.ID, DateTime.Now);
-            }
+            UserInfo.AddUser("gil", "123gili", "gil@gmail.com", DateTime.Now, 61, 6, 1, 5, DateTime.Now);
             Console.ReadKey();
 
             /* things to remember :

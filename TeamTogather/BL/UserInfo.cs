@@ -10,9 +10,8 @@ namespace BL
 {
     public class UserInfo
     {
-        /// <summary>
-        /// the start of the properties
-        /// </summary>
+        
+        // the start of the properties *************************************************************************
 
         public int ID { get; set; } // ID of the user
         public string UserName { get; set; } // the User Name
@@ -30,8 +29,8 @@ namespace BL
         public DateTime RegistrationDate { get; set; } // the date in which the user signed up on.
         public DateTime LoginDate { get; set; } // saves the last date the user was logged in on, this should be changed in the table, only if the date has changed
         public int UserType { get; set; } // the user Type: 1. Admin 2. Regular, user types are available on the UserType Table in the database
-
-        /// The end of the properties.
+        // usertype is ----> Type on the db
+        // The end of the properties. **************************************************************************
 
         /// <summary>
         /// constructor no. 1, takes the properties from the user input and builds a User object
@@ -83,21 +82,40 @@ namespace BL
         }
 
         /// <summary>
-        /// checks if the given password and username match, if so, the function returns the user cre
+        /// checks if the given password and username match, if so, the function returns a user object which contains he's credentials
         /// </summary>
         public static UserInfo Authentication(string UsNa, string pass)
         {
             DataRow userRow = UserDB.UserAuthentication(UsNa, pass);
+            if(userRow == null)
+            {
+                return null;
+            }
             UserInfo authUser = new UserInfo(userRow);
             return authUser;
         }
 
-
-        public static void UpdateLoginDate(int ID, DateTime dt)
+        /// <summary>
+        /// this method updates the db field and object's LoginDate, this method should be used after the user has authinticated using 'Authentication(string UsNa, string pass)'
+        /// </summary>
+        public void UpdateLoginDate()
         {
-            UserDB.UpdateLoginDate(ID, dt);
+            UserDB.UpdateLoginDate(this.ID);
+            this.LoginDate = DateTime.Now;
         }
 
+        /// <summary>
+        /// adds a user to the db
+        /// </summary>
+        /// <returns>true is user has been added false otherwise</returns>
+        public static bool AddUser(string UserName, string Pass, string Email, DateTime Birthday, int NativeLang, int Country
+                         , int Profession, int WeeklyFreeTime, DateTime RegistrationDate
+                         )
+        {
+            return UserDB.AddUser(UserName, Pass, Email, Birthday, NativeLang, Country
+                         , Profession, WeeklyFreeTime, RegistrationDate
+                         );
+        }
 
 
     }

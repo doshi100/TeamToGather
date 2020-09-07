@@ -129,7 +129,7 @@ namespace DAL
         {
             try
             {
-                if (!connOpen) return WRITEDATA_ERROR;
+                if (!connOpen) OpenConnection();
                 OleDbCommand cmd = new OleDbCommand(sql, conn);
                 OleDbDataReader reader = cmd.ExecuteReader();
                 CloseConnection();
@@ -137,6 +137,7 @@ namespace DAL
             }
             catch (Exception e)
             {
+                CloseConnection();
                 Console.WriteLine(e.Message);
                 return WRITEDATA_ERROR;
             }
