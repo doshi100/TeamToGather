@@ -30,6 +30,7 @@ namespace BL
         public DateTime LoginDate { get; set; } // saves the last date the user was logged in on, this should be changed in the table, only if the date has changed
         public int UserType { get; set; } // the user Type: 1. Admin 2. Regular, user types are available on the UserType Table in the database
         // usertype is ----> Type on the db
+        public List<Project> UserProjects { get; set; }
         // The end of the properties. **************************************************************************
 
         /// <summary>
