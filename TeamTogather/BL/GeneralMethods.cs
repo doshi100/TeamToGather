@@ -17,5 +17,12 @@ namespace BL
 
         }
 
+        static public DateTime CreateDateTime(int year, int month, int day)
+        {
+            DateTime dt = new DateTime(year, month, day);
+            Console.WriteLine(dt);
+            return dt;
+        }
+
     }
 }
