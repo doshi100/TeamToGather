@@ -11,6 +11,8 @@ namespace DAL
     {
         /// <summary>
         /// Return a datatable that lists all of the projects the user is in, the method receives the userID
+        /// * the sql statment merges the tables Users, ProjectRequests, ProjectPositions and projects and returns a table with -->
+        ///   the userID and Projects table fields 
         /// </summary>
         public static DataTable ProjectByUserID(int UserID) 
         {
@@ -25,6 +27,7 @@ namespace DAL
             }
             catch(Exception e)
             {
+                Console.WriteLine(e.ToString());
                 return null;
             }
         } 

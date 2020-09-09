@@ -15,7 +15,7 @@ namespace ConsoleUI
             GeneralMethods.SetDBPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "../../../TeamTogatherDB.accdb"));
             //DateTime dt = GeneralMethods.CreateDateTime(2001, 11, 19);
             //UserInfo.AddUser("jane", "living", "jane@gmail.com", dt, 61, 6, 1, 5, DateTime.Now);
-            Project p = new Project(1);
+            UserInfo user = new UserInfo(11);
             Console.ReadKey();
 
             /* things to remember :

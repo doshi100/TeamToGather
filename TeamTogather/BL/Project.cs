@@ -63,7 +63,8 @@ namespace BL
                 newpr.NumRateVoters = (int)row["NumRateVoters"];
                 newpr.ProjectRate = (int)row["ProjectRate"];
                 newpr.TeamSize = (int)row["TeamSize"];
-                newpr.ProjectContent = (string)row["TeamSize"];
+                newpr.ProjectContent = (string)row["ProjectContent"];
+                projects.Add(newpr);
             }
             return projects;
         }

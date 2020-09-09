@@ -28,6 +28,25 @@ namespace DAL
             }
 
         }
+        /// <summary>
+        /// this method takes an id of a user and returns his column in the table "users"
+        /// </summary>
+        /// <returns>a DataRow that contains the user credentials</returns>
+        public static DataRow GetUserByID(int id)
+        {
+            try
+            {
+
+                DBHelper helper = new DBHelper(Constants.PROVIDER, Constants.PATH);
+                string sql = "SELECT * FROM Users WHERE ID = " + id + ";";
+                DataTable userTable = helper.GetDataTable(sql);
+                return userTable.Rows[0];
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
 
 
         /// <summary>

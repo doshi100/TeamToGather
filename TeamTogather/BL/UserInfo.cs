@@ -30,7 +30,8 @@ namespace BL
         public DateTime LoginDate { get; set; } // saves the last date the user was logged in on, this should be changed in the table, only if the date has changed
         public int UserType { get; set; } // the user Type: 1. Admin 2. Regular, user types are available on the UserType Table in the database
         // usertype is ----> Type on the db
-        public List<Project> UserProjects { get; set; }
+        public List<Project> UserProjects { get; set; } // saves the projects the user has.
+        public List<UserKnowledge> UserPK { get; set; }// saves the skills the user have (example, the user knows how to program in c++ or know photoshop)
         // The end of the properties. **************************************************************************
 
         /// <summary>
@@ -56,32 +57,75 @@ namespace BL
             this.RegistrationDate = RegistrationDate;
             this.LoginDate = LoginDate;
             this.UserType = UserType;
-            this.UserProjects = Project.ReturnUserProjects(ID);
+            this.UserProjects = Project.ReturnUserProjects(this.ID);
+            this.UserPK = UserKnowledge.GetUserKnowledgeBL(this.ID);
         }
 
 
         /// <summary>
-        /// constructor no. 2, takes a datarow of a user and creats an user object
+        /// constructor no. 2, takes an ID of a user and creats a user object
         /// </summary>
-        public UserInfo(DataRow user)
+        public UserInfo(int userID)
         {
-            this.ID = (int)user["ID"];
-            this.UserName = (string)user["UserName"];
-            this.Password = (string)user["Pass"];
-            this.Email = (string)user["Email"];
-            this.Birthday = (DateTime)user["Birthday"]; // I'm not sure it will work needs to be fixed, after I checked it. (DATETIME)
-            this.NativeLang = (int)user["NativeLang"];
-            this.Country = (int)user["Country"];
-            this.Profession = (int)user["Profession"];
-            this.WeeklyFreeTime = (int)user["WeeklyFreeTime"];
-            this.NumRateVoters = (int)user["NumRateVoters"];
-            this.UserRate = (int)user["UserRate"];
-            this.IsBanned = (bool)user["IsBanned"];
-            this.ProjectSum = (int)user["ProjectsSum"];
-            this.RegistrationDate = (DateTime)user["RegistrationDate"]; // needs to be fixed (DATETIME)
-            this.LoginDate = (DateTime)user["LoginDate"]; // needs to be fixed (DATETIME)
-            this.UserType = (int)user["Type"];
-            this.UserProjects = Project.ReturnUserProjects(this.ID);
+            try
+            {
+                DataRow userRow = UserDB.GetUserByID(userID);
+                this.ID = (int)userRow["ID"];
+                this.UserName = (string)userRow["UserName"];
+                this.Password = (string)userRow["Pass"];
+                this.Email = (string)userRow["Email"];
+                this.Birthday = (DateTime)userRow["Birthday"]; // I'm not sure it will work needs to be fixed, after I checked it. (DATETIME)
+                this.NativeLang = (int)userRow["NativeLang"];
+                this.Country = (int)userRow["Country"];
+                this.Profession = (int)userRow["Profession"];
+                this.WeeklyFreeTime = (int)userRow["WeeklyFreeTime"];
+                this.NumRateVoters = (int)userRow["NumRateVoters"];
+                this.UserRate = (int)userRow["UserRate"];
+                this.IsBanned = (bool)userRow["IsBanned"];
+                this.ProjectSum = (int)userRow["ProjectsSum"];
+                this.RegistrationDate = (DateTime)userRow["RegistrationDate"]; // needs to be fixed (DATETIME)
+                this.LoginDate = (DateTime)userRow["LoginDate"]; // needs to be fixed (DATETIME)
+                this.UserType = (int)userRow["Type"];
+                this.UserProjects = Project.ReturnUserProjects(this.ID);
+                this.UserPK = UserKnowledge.GetUserKnowledgeBL(this.ID);
+            }
+            catch (Exception)
+            {
+                // does nothing
+            }
+
+        }
+
+
+        /// <summary>
+        /// constructor no. 3, takes the properties from the user input and builds a User object with an option to build user's projects and user's Program Knowledge lists
+        /// </summary>
+        public UserInfo(int ID, string UserName, string Password, string Email, DateTime Birthday, int NativeLang, int Country
+                        , int Profession, int WeeklyFreeTime, int NumRateVoters, int UserRate, bool IsBanned, int ProjectSum, DateTime RegistrationDate
+                        , DateTime LoginDate, int UserType, bool ListsFlag)
+        {
+            this.ID = ID;
+            this.UserName = UserName;
+            this.Password = Password;
+            this.Email = Email;
+            this.Birthday = Birthday;
+            this.NativeLang = NativeLang;
+            this.Country = Country;
+            this.Profession = Profession;
+            this.WeeklyFreeTime = WeeklyFreeTime;
+            this.NumRateVoters = NumRateVoters;
+            this.UserRate = UserRate;
+            this.IsBanned = IsBanned;
+            this.ProjectSum = ProjectSum;
+            this.RegistrationDate = RegistrationDate;
+            this.LoginDate = LoginDate;
+            this.UserType = UserType;
+            if (ListsFlag)
+            {
+                this.UserProjects = Project.ReturnUserProjects(ID);
+                this.UserPK = UserKnowledge.GetUserKnowledgeBL(ID);
+            }
+
         }
 
         /// <summary>
@@ -89,13 +133,22 @@ namespace BL
         /// </summary>
         public static UserInfo Authentication(string UsNa, string pass)
         {
-            DataRow userRow = UserDB.UserAuthentication(UsNa, pass);
-            if(userRow == null)
+            try
+            {
+                DataRow userRow = UserDB.UserAuthentication(UsNa, pass);
+                if (userRow == null)
+                {
+                    return null;
+                }
+                // builds a user object by his ID;
+                UserInfo authUser = new UserInfo((int)userRow["ID"]);
+                return authUser;
+            }
+            catch(Exception)
             {
                 return null;
             }
-            UserInfo authUser = new UserInfo(userRow);
-            return authUser;
+
         }
 
         /// <summary>
