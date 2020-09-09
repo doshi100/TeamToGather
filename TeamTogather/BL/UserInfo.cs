@@ -56,6 +56,7 @@ namespace BL
             this.RegistrationDate = RegistrationDate;
             this.LoginDate = LoginDate;
             this.UserType = UserType;
+            this.UserProjects = Project.ReturnUserProjects(ID);
         }
 
 
@@ -80,6 +81,7 @@ namespace BL
             this.RegistrationDate = (DateTime)user["RegistrationDate"]; // needs to be fixed (DATETIME)
             this.LoginDate = (DateTime)user["LoginDate"]; // needs to be fixed (DATETIME)
             this.UserType = (int)user["Type"];
+            this.UserProjects = Project.ReturnUserProjects(this.ID);
         }
 
         /// <summary>
@@ -117,6 +119,7 @@ namespace BL
                          , Profession, WeeklyFreeTime, RegistrationDate
                          );
         }
+
 
 
     }

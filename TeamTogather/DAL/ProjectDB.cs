@@ -9,7 +9,10 @@ namespace DAL
 {
     public class ProjectDB
     {
-        public static DataRow ProjectByUserID(int UserID) 
+        /// <summary>
+        /// Return a datatable that lists all of the projects the user is in, the method receives the userID
+        /// </summary>
+        public static DataTable ProjectByUserID(int UserID) 
         {
             try
             {
@@ -18,8 +21,7 @@ namespace DAL
                     "(((Users INNER JOIN ProjectRequests ON Users.ID = ProjectRequests.UserID) " +
                     "INNER JOIN ProjectPositions ON ProjectPositions.ID = ProjectRequests.PositionID) INNER JOIN Projects ON ProjectPositions.ProjectID = Projects.ProjectID) WHERE Users.ID = " + 1 + ";";
                 DataTable dt = helper.GetDataTable(sql);
-                DataRow dr = dt.Rows[0];
-                return dr; 
+                return dt; 
             }
             catch(Exception e)
             {

@@ -37,22 +37,35 @@ namespace BL
             this.TeamSize = TeamSize;
             this.ProjectContent = ProjectContent;
         }
+        /// <summary>
+        /// Empty Constructor no.2
+        /// </summary>
+        public Project()
+        {
+
+        }
 
 
         /// <summary>
         /// constructor no 1. by DataRow that is given by ProjectDB.ProjectByUserID(userID); method
         /// </summary>
-        public Project(int userID)
+        public static List<Project> ReturnUserProjects(int userID)
         {
-            DataRow userProject = ProjectDB.ProjectByUserID(userID);
-            ProjectID = (int)userProject["ProjectID"];
-            AdminUSID = (int)userProject["AdminUSID"];
-            MinAge = (int)userProject["MinAge"];
-            ProjectStatus = (int)userProject["ProjectStatus"];
-            NumRateVoters = (int)userProject["NumRateVoters"];
-            ProjectRate = (int)userProject["ProjectRate"];
-            TeamSize = (int)userProject["TeamSize"];
-            ProjectContent = (string)userProject["TeamSize"];
+            List<Project> projects = new List<Project>();
+            DataTable userProject = ProjectDB.ProjectByUserID(userID);
+            foreach (DataRow row in userProject.Rows)
+            {
+                Project newpr = new Project();
+                newpr.ProjectID = (int)row["ProjectID"];
+                newpr.AdminUSID = (int)row["AdminUSID"];
+                newpr.MinAge = (int)row["MinAge"];
+                newpr.ProjectStatus = (int)row["ProjectStatus"];
+                newpr.NumRateVoters = (int)row["NumRateVoters"];
+                newpr.ProjectRate = (int)row["ProjectRate"];
+                newpr.TeamSize = (int)row["TeamSize"];
+                newpr.ProjectContent = (string)row["TeamSize"];
+            }
+            return projects;
         }
         
     }
