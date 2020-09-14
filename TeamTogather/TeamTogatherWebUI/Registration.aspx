@@ -14,7 +14,7 @@
             <li>Email Address :<asp:TextBox ID="EmailAddressReg" runat="server"></asp:TextBox></li> <asp:RegularExpressionValidator ID="EmailValid" runat="server" ErrorMessage="The Email is unvalid, please type again" ControlToValidate="EmailAddressReg" ValidationExpression="^([a-zA-Z0-9.])+@\w{3,7}\.\w{2,3}(\.\w{2,3})?$"></asp:RegularExpressionValidator>
         </ul>
     </div>
-    <%-- this  contains with user's native language, country origin--%>
+    <%-- this  contains with user's native language, country origin--%> 
     <div id ="registrationP2">
 
     </div>
