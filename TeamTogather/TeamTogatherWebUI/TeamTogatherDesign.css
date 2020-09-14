@@ -1,0 +1,10 @@
+﻿body {
+    margin: 0;
+    padding: 0;
+}
+
+.unstyledlist {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}

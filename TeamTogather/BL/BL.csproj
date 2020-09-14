@@ -42,6 +42,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GeneralMethods.cs" />
+    <Compile Include="Knowledge.cs" />
+    <Compile Include="Profession.cs" />
     <Compile Include="Project.cs" />
     <Compile Include="UserInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

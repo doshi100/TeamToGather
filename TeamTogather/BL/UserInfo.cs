@@ -29,6 +29,7 @@ namespace BL
         public DateTime RegistrationDate { get; set; } // the date in which the user signed up on.
         public DateTime LoginDate { get; set; } // saves the last date the user was logged in on, this should be changed in the table, only if the date has changed
         public int UserType { get; set; } // the user Type: 1. Admin 2. Regular, user types are available on the UserType Table in the database
+        public string ProfilePath { get; set; }
         // usertype is ----> Type on the db
         public List<Project> UserProjects { get; set; } // saves the projects the user has.
         public List<UserKnowledge> UserPK { get; set; }// saves the skills the user have (example, the user knows how to program in c++ or know photoshop)
@@ -74,7 +75,7 @@ namespace BL
                 this.UserName = (string)userRow["UserName"];
                 this.Password = (string)userRow["Pass"];
                 this.Email = (string)userRow["Email"];
-                this.Birthday = (DateTime)userRow["Birthday"]; // I'm not sure it will work needs to be fixed, after I checked it. (DATETIME)
+                this.Birthday = (DateTime)userRow["Birthday"]; 
                 this.NativeLang = (int)userRow["NativeLang"];
                 this.Country = (int)userRow["Country"];
                 this.Profession = (int)userRow["Profession"];
@@ -83,9 +84,10 @@ namespace BL
                 this.UserRate = (int)userRow["UserRate"];
                 this.IsBanned = (bool)userRow["IsBanned"];
                 this.ProjectSum = (int)userRow["ProjectsSum"];
-                this.RegistrationDate = (DateTime)userRow["RegistrationDate"]; // needs to be fixed (DATETIME)
-                this.LoginDate = (DateTime)userRow["LoginDate"]; // needs to be fixed (DATETIME)
+                this.RegistrationDate = (DateTime)userRow["RegistrationDate"]; 
+                this.LoginDate = (DateTime)userRow["LoginDate"]; 
                 this.UserType = (int)userRow["Type"];
+                this.ProfilePath = (string)userRow["ProfilePath"];
                 this.UserProjects = Project.ReturnUserProjects(this.ID);
                 this.UserPK = UserKnowledge.GetUserKnowledgeBL(this.ID);
             }

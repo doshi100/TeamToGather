@@ -8,25 +8,22 @@ using System.Data;
 
 namespace BL
 {
-    public class UserKnowledge
+    public class UserKnowledge:Knowledge
     {
         // ** this Class contains the fields of both ProgKnowledge and Programs tables. (it's a merge between the both)
         // the start of the properties *************************************************************************
         public int PKID { get; set; } // The key ID of the ProgKnowledge table 
-        public int ProgramID {get; set; } // the ID of the program/skill the user knows
-        public string PName { get; set; } // the name of the program/skill the user knows
-        public string ProgPath { get; set; } // the path to the photo of this program/skill (example: knows photoshop ---> path to a picture of the logo of Photoshop)
+        // father propertie programID the ID of the program/skill the user knows
+        // father propertie PName the name of the program/skill the user knows
+        // father propertie ProgPath the path to the photo of this program/skill (example: knows photoshop ---> path to a picture of the logo of Photoshop)
         // ********end of properties*****************
 
         /// <summary>
         /// constructor no. 1, it contains all of the UserKnowledge properties
         /// </summary>
-        public UserKnowledge(int PKID, int ProgramID, string PName, string ProgPath)
+        public UserKnowledge(int PKID, int programID, string PName, string ProgPath):base(programID,PName,ProgPath)
         {
             this.PKID = PKID;
-            this.ProgramID = ProgramID;
-            this.PName = PName;
-            this.ProgPath = ProgPath;
         }
 
 
