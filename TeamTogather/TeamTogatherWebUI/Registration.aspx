@@ -15,7 +15,7 @@
         </ul>
     </div>
     <%-- this  contains with user's native language, country origin--%> 
-    <div id ="registrationP2">
+    <div id ="registrationP2"> 
 
     </div>
      <%-- this contains with the user profession, he must choose 1! --%>
