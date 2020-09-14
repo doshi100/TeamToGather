@@ -18,6 +18,7 @@ refrence to subjects
 - User Control tutorial - https://www.c-sharpcorner.com/UploadFile/0c1bb2/creating-user-control-in-Asp-Net/
 - add an attribute dynamically to a control in the page(div in your case) - https://stackoverflow.com/questions/17858742/how-to-add-custom-attributes-to-asp-net-controls
 - add a control to a div/control - https://devnet.kentico.com/questions/how-to-dynamically-add-controls-to-a-form
+- how to check all of the validators in the page using Page.IsValid - https://docs.microsoft.com/en-us/dotnet/api/system.web.ui.page.isvalid?view=netframework-4.8
 
 remember
 --------
