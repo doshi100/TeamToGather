@@ -7,12 +7,16 @@ A platform for creative people who want to start a project togther
 
 
 
-things to work on
+things to work on/things I did last night and it deleted
 -------------------------------
 - open knowledgeDB class on DAL
   - make a method that returns a dataTable of the programs table
 - on Knowledge class in the BL create a method that makes a list of all of the programs/skills (List<Knowledge> list)
-
+- make UserKnowledge inherit from Knowledge Class
+- make registration page
+  - use this for email-regex : ^([a-zA-Z0-9.])+@\w{3,7}\.\w{2,3}(\.\w{2,3})?$ 
+-create Profession and ProfessionDB classes, their job is to return List<Profession>, the same thing as knowledge and knowledgeDB
+- open css file
 refrence to subjects
 ---------------------
 - User Control tutorial - https://www.c-sharpcorner.com/UploadFile/0c1bb2/creating-user-control-in-Asp-Net/
