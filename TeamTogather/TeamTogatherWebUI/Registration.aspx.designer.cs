@@ -7,13 +7,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace TeamTogatherWebUI
-{
-
-
-    public partial class Registration
-    {
-
+namespace TeamTogatherWebUI {
+    
+    
+    public partial class Registration {
+        
         /// <summary>
         /// registrationP1 control.
         /// </summary>
@@ -22,7 +20,7 @@ namespace TeamTogatherWebUI
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl registrationP1;
-
+        
         /// <summary>
         /// UserNameReg control.
         /// </summary>
@@ -31,7 +29,7 @@ namespace TeamTogatherWebUI
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox UserNameReg;
-
+        
         /// <summary>
         /// UsernameValid control.
         /// </summary>
@@ -40,7 +38,7 @@ namespace TeamTogatherWebUI
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RegularExpressionValidator UsernameValid;
-
+        
         /// <summary>
         /// PassReg control.
         /// </summary>
@@ -49,7 +47,7 @@ namespace TeamTogatherWebUI
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox PassReg;
-
+        
         /// <summary>
         /// PassValid control.
         /// </summary>
@@ -58,7 +56,7 @@ namespace TeamTogatherWebUI
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RegularExpressionValidator PassValid;
-
+        
         /// <summary>
         /// ConfiPassReg control.
         /// </summary>
@@ -67,7 +65,7 @@ namespace TeamTogatherWebUI
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox ConfiPassReg;
-
+        
         /// <summary>
         /// PasswordConfirm control.
         /// </summary>
@@ -76,7 +74,7 @@ namespace TeamTogatherWebUI
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator PasswordConfirm;
-
+        
         /// <summary>
         /// EmailAddressReg control.
         /// </summary>
@@ -85,7 +83,7 @@ namespace TeamTogatherWebUI
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox EmailAddressReg;
-
+        
         /// <summary>
         /// EmailValid control.
         /// </summary>
@@ -94,7 +92,7 @@ namespace TeamTogatherWebUI
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RegularExpressionValidator EmailValid;
-
+        
         /// <summary>
         /// registrationP2 control.
         /// </summary>
@@ -103,7 +101,7 @@ namespace TeamTogatherWebUI
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl registrationP2;
-
+        
         /// <summary>
         /// langDropDown control.
         /// </summary>
@@ -112,7 +110,16 @@ namespace TeamTogatherWebUI
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList langDropDown;
-
+        
+        /// <summary>
+        /// CountryDropDown control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList CountryDropDown;
+        
         /// <summary>
         /// registrationP3 control.
         /// </summary>
@@ -121,7 +128,7 @@ namespace TeamTogatherWebUI
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl registrationP3;
-
+        
         /// <summary>
         /// registrationP4 control.
         /// </summary>
@@ -130,7 +137,7 @@ namespace TeamTogatherWebUI
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl registrationP4;
-
+        
         /// <summary>
         /// next control.
         /// </summary>

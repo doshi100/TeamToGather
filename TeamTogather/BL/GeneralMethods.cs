@@ -58,7 +58,7 @@ namespace BL
         /// </summary>
         public static Dictionary<int, string> GetCountries()
         {
-            DataTable countriesdt = GeneralDB.Returnlanguages();
+            DataTable countriesdt = GeneralDB.ReturnCountries();
             if (countriesdt == null)
             {
                 return null;
@@ -67,8 +67,8 @@ namespace BL
             foreach (DataRow row in countriesdt.Rows)
             {
                 int countryid = (int)row["ID"];
-                string LangName = (string)row["LangName"].ToString();
-                CountryDic.Add(countryid, LangName);
+                string CountryName = (string)row["Name"].ToString();
+                CountryDic.Add(countryid, CountryName);
             }
             return CountryDic;
         }

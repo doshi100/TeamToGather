@@ -20,7 +20,9 @@
     <div id ="registrationP2" runat="server" visible="false"> 
         <ul class="unstyledlist">
             <li>
-                Native language<asp:DropDownList ID="langDropDown" runat="server">
+                What is your native language?<asp:DropDownList ID="langDropDown" runat="server">
+        </asp:DropDownList>
+                Where are you from?<asp:DropDownList ID="CountryDropDown" runat="server">
         </asp:DropDownList>
             </li>
         </ul>

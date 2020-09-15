@@ -10,6 +10,7 @@ namespace TeamTogatherWebUI
 {
     public partial class Registration : System.Web.UI.Page
     {
+        // the current registration div id
         static int DivID = 1;
         private string username = "";
         private string password = "";
@@ -20,7 +21,6 @@ namespace TeamTogatherWebUI
 
         protected void next_Click(object sender, EventArgs e)
         {
-            // the current registration div id
 
             if (Page.IsValid)
             {
@@ -35,10 +35,9 @@ namespace TeamTogatherWebUI
                         registrationP2.Visible = true;
                         DivID++;
                         Dictionary<int, string> langdic = GeneralMethods.GetLang();
-                        langDropDown.DataSource = langdic;
-                        langDropDown.DataTextField = "Value";
-                        langDropDown.DataValueField = "Key";
-                        langDropDown.DataBind();
+                        BindDropDown(langDropDown, langdic);
+                        Dictionary<int, string> countrydic = GeneralMethods.GetCountries();
+                        BindDropDown(CountryDropDown, countrydic);
                     }
 
                 }
@@ -59,5 +58,13 @@ namespace TeamTogatherWebUI
             }
         }
 
+
+        public static void BindDropDown(DropDownList list, Dictionary<int, string> dic)
+        {
+            list.DataSource = dic;
+            list.DataTextField = "Value";
+            list.DataValueField = "Key";
+            list.DataBind();
+        }
     }
 }
