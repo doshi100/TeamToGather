@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="Constants.cs" />
     <Compile Include="DBHelper.cs" />
+    <Compile Include="GeneralDB.cs" />
     <Compile Include="KnowledgeDB.cs" />
     <Compile Include="ProfessionDB.cs" />
     <Compile Include="ProjectDB.cs" />

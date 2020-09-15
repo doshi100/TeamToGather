@@ -31,5 +31,48 @@ namespace BL
             return dt;
         }
 
+        /// <summary>
+        /// the method constructs a dictionary from a language DataTable, id - lang,  langname - name of language
+        /// </summary>
+
+        public static Dictionary<int, string> GetLang()
+        {
+            DataTable Langdt = GeneralDB.Returnlanguages();
+            if (Langdt == null)
+            {
+                return null;
+            }
+            Dictionary<int, string> langDic = new Dictionary<int, string>();
+            foreach(DataRow row in Langdt.Rows)
+            {
+                int langid = (int)row["ID"];
+                string LangName = (string)row["LangName"].ToString();
+                langDic.Add(langid, LangName);
+            }
+            return langDic;
+        }
+
+
+        /// <summary>
+        /// the method constructs a dictionary from a Countries DataTable, id - lang,  counryname - name of language
+        /// </summary>
+        public static Dictionary<int, string> GetCountries()
+        {
+            DataTable countriesdt = GeneralDB.Returnlanguages();
+            if (countriesdt == null)
+            {
+                return null;
+            }
+            Dictionary<int, string> CountryDic = new Dictionary<int, string>();
+            foreach (DataRow row in countriesdt.Rows)
+            {
+                int countryid = (int)row["ID"];
+                string LangName = (string)row["LangName"].ToString();
+                CountryDic.Add(countryid, LangName);
+            }
+            return CountryDic;
+        }
+
+
     }
 }

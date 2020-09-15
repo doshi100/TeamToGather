@@ -4,14 +4,60 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using BL;
 
 namespace TeamTogatherWebUI
 {
     public partial class Registration : System.Web.UI.Page
     {
+        static int DivID = 1;
+        private string username = "";
+        private string password = "";
+        private string Email = "";
         protected void Page_Load(object sender, EventArgs e)
         {
-
         }
+
+        protected void next_Click(object sender, EventArgs e)
+        {
+            // the current registration div id
+
+            if (Page.IsValid)
+            {
+                if (DivID == 1)
+                {
+                    if (PassReg.Text == ConfiPassReg.Text)
+                    {
+                        username = UserNameReg.Text;
+                        password = PassReg.Text;
+                        Email = EmailAddressReg.Text;
+                        registrationP1.Visible = false;
+                        registrationP2.Visible = true;
+                        DivID++;
+                        Dictionary<int, string> langdic = GeneralMethods.GetLang();
+                        langDropDown.DataSource = langdic;
+                        langDropDown.DataTextField = "Value";
+                        langDropDown.DataValueField = "Key";
+                        langDropDown.DataBind();
+                    }
+
+                }
+                else if (DivID == 2)
+                {
+                    registrationP2.Visible = false;
+                    registrationP3.Visible = true;
+                    DivID++;
+                }
+                else if (DivID == 3)
+                {
+                    registrationP3.Visible = false;
+                    registrationP4.Visible = true;
+                    DivID++;
+                    next.Visible = false;
+                }
+
+            }
+        }
+
     }
 }
