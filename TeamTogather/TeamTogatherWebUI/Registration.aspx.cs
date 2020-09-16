@@ -32,6 +32,7 @@ namespace TeamTogatherWebUI
                 {
                     if (PassReg.Text == ConfiPassReg.Text)
                     {
+
                         username = UserNameReg.Text;
                         password = PassReg.Text;
                         Email = EmailAddressReg.Text;
@@ -48,6 +49,7 @@ namespace TeamTogatherWebUI
                         BindDropDown(DropDownMonth, dic);
                         dic = GetYear();
                         BindDropDown(DropDownYear, dic);
+
                     }
 
                 }
@@ -73,6 +75,12 @@ namespace TeamTogatherWebUI
 
             }
         }
+
+        private void BindDropDown(object dropDownMonth, Dictionary<int, int> dic)
+        {
+            throw new NotImplementedException();
+        }
+
         public static void BindDropDown(DropDownList list, Dictionary<int, string> dic)
         {
             list.DataSource = dic;
@@ -120,6 +128,18 @@ namespace TeamTogatherWebUI
                 list.Add(i, i);
             }
             return list;
+        }
+
+        protected void UserExist_ServerValidate(object source, ServerValidateEventArgs args)
+        {
+            if (UserInfo.UserExist(UserNameReg.Text))
+            {
+                userNameExistValid.IsValid = false;
+            }
+            else
+            {
+                userNameExistValid.IsValid = true;
+            }
         }
     }
 }

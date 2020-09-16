@@ -175,6 +175,11 @@ namespace BL
                          );
         }
 
+        public static bool UserExist(string userN)
+        {
+            return UserDB.UserExist(userN);
+        }
+
 
 
     }
