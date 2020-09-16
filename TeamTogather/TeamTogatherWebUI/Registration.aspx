@@ -20,10 +20,16 @@
     <div id ="registrationP2" runat="server" visible="false"> 
         <ul class="unstyledlist">
             <li>
-                What is your native language?<asp:DropDownList ID="langDropDown" runat="server">
-        </asp:DropDownList>
-                Where are you from?<asp:DropDownList ID="CountryDropDown" runat="server">
-        </asp:DropDownList>
+                What is your native language?<asp:DropDownList ID="langDropDown" runat="server"></asp:DropDownList>
+            </li>
+            <li>
+                    Where are you from?<asp:DropDownList ID="CountryDropDown" runat="server"></asp:DropDownList>
+            </li>
+            <li>
+                Birthday
+            </li>
+            <li>
+                day: <asp:DropDownList ID="DropDownDay" runat="server"></asp:DropDownList> month: <asp:DropDownList ID="DropDownMonth" runat="server"></asp:DropDownList> year: <asp:DropDownList ID="DropDownYear" runat="server"></asp:DropDownList>
             </li>
         </ul>
     </div >

@@ -77,5 +77,15 @@ namespace DAL
             return (IsAdded == 1); // if one row was affected(added) it return true(the insert was succesful) if not it will return false
         }
 
+        /// <summary>
+        /// return true or false based on weather the user exist on the system, gets a string of the username
+        /// </summary>
+        public static bool UserExist(string usN)
+        {
+            DBHelper helper = new DBHelper(Constants.PROVIDER, Constants.PATH);
+            string sql = "SELECT UserName FROM Users WHERE UserName = '" + usN + "';";
+            DataTable dt = helper.GetDataTable(sql);
+            return dt.Rows.Count == 1;
+        }
     }
 }
