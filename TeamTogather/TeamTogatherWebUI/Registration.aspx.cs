@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Web.UI.HtmlControls;
 using BL;
 
 namespace TeamTogatherWebUI
@@ -18,6 +19,11 @@ namespace TeamTogatherWebUI
         private DateTime Birthday;
         private int Language;
         private int Country;
+
+        protected void Page_Init(object sender, EventArgs e)
+        {
+            
+        }
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -62,6 +68,7 @@ namespace TeamTogatherWebUI
                     Language = int.Parse(langDropDown.SelectedValue);
                     Country = int.Parse(CountryDropDown.SelectedValue);
                     registrationP2.Visible = false;
+                    BindProfessions(registrationP3, Page);
                     registrationP3.Visible = true;
                     DivID++;
                 }
@@ -76,10 +83,6 @@ namespace TeamTogatherWebUI
             }
         }
 
-        private void BindDropDown(object dropDownMonth, Dictionary<int, int> dic)
-        {
-            throw new NotImplementedException();
-        }
 
         public static void BindDropDown(DropDownList list, Dictionary<int, string> dic)
         {
@@ -134,11 +137,24 @@ namespace TeamTogatherWebUI
         {
             if (UserInfo.UserExist(UserNameReg.Text))
             {
-                userNameExistValid.IsValid = false;
+                args.IsValid = false;
             }
             else
             {
-                userNameExistValid.IsValid = true;
+                args.IsValid = true;
+            }
+        }
+
+        public static void BindProfessions(HtmlControl ctrl, Page thispage)
+        {
+            List<Profession> Plist = Profession.GetProfessionList();
+            foreach(Profession p in Plist)
+            {
+                ProfUsControl userprofession = (ProfUsControl)thispage.LoadControl("~/ProfUsControl.ascx");
+                userprofession.imgP = p.ProfPath;
+                userprofession.profName = p.ProfName;
+                userprofession.profID = p.ProfessionID;
+                ctrl.Controls.Add(userprofession);
             }
         }
     }

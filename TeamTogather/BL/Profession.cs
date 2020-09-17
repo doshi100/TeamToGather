@@ -10,9 +10,9 @@ namespace BL
 {
     public class Profession
     {
-        int ProfessionID { get; set; } // ID of the particular profession in the db
-        string ProfName { get; set; } // the profession name in db
-        string ProfPath { get; set; } // the path to the photo of the profession
+        public int ProfessionID { get; } // ID of the particular profession in the db
+        public string ProfName { get; } // the profession name in db
+        public string ProfPath { get; } // the path to the photo of the profession
 
         /// <summary>
         /// constructor no. 1 takes the properties and builds an profession object
