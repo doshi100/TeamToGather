@@ -20,10 +20,6 @@ namespace TeamTogatherWebUI
         private int Language;
         private int Country;
 
-        protected void Page_Init(object sender, EventArgs e)
-        {
-            
-        }
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -31,24 +27,28 @@ namespace TeamTogatherWebUI
 
         protected void next_Click(object sender, EventArgs e)
         {
-
             if (Page.IsValid)
             {
                 if (DivID == 1)
                 {
                     if (PassReg.Text == ConfiPassReg.Text)
                     {
-
+                        // save the username, password and email the user passed to the system
                         username = UserNameReg.Text;
                         password = PassReg.Text;
                         Email = EmailAddressReg.Text;
+                        // change from part 1 of the registration to part 2
                         registrationP1.Visible = false;
                         registrationP2.Visible = true;
-                        DivID++;
+                        // -------------------------------
+                        DivID++; // increment the divID to identify that the user moved to part 2
+                        // set the language and countries dropdown menus
                         Dictionary<int, string> langdic = GeneralMethods.GetLang();
                         BindDropDown(langDropDown, langdic);
                         Dictionary<int, string> countrydic = GeneralMethods.GetCountries();
                         BindDropDown(CountryDropDown, countrydic);
+                        // ------------------------------------------
+                        // sets the Birthday selection dropdowns.
                         Dictionary<int, int> dic = GetDays();
                         BindDropDown(DropDownDay, dic);
                         dic = GetMonth();
@@ -61,15 +61,19 @@ namespace TeamTogatherWebUI
                 }
                 else if (DivID == 2)
                 {
+                    // save the Birthday Date, Language and country of the user.
                     int year = int.Parse(DropDownYear.SelectedValue);
                     int month = int.Parse(DropDownMonth.SelectedValue);
                     int day = int.Parse(DropDownDay.SelectedValue);
                     Birthday = new DateTime(year, month, day);
                     Language = int.Parse(langDropDown.SelectedValue);
                     Country = int.Parse(CountryDropDown.SelectedValue);
+                    // ---------------------------------------------
+                    // change from part 2 of the registration to part 3
                     registrationP2.Visible = false;
                     BindProfessions(registrationP3, Page);
                     registrationP3.Visible = true;
+                    // increment the divID to identify that the user moved to part 3
                     DivID++;
                 }
                 else if (DivID == 3)
@@ -148,7 +152,7 @@ namespace TeamTogatherWebUI
         public static void BindProfessions(HtmlControl ctrl, Page thispage)
         {
             List<Profession> Plist = Profession.GetProfessionList();
-            foreach(Profession p in Plist)
+            foreach (Profession p in Plist)
             {
                 ProfUsControl userprofession = (ProfUsControl)thispage.LoadControl("~/ProfUsControl.ascx");
                 userprofession.imgP = p.ProfPath;

@@ -45,5 +45,5 @@
     <div id ="registrationP4" runat="server" visible="false">
         registration4
     </div>
-    <asp:Button ID="next" runat="server" Text="next" OnClick="next_Click" />
+    <asp:Button ID="next" runat="server" Text="next" OnClick="next_Click"  />
 </asp:Content>
