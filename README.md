@@ -21,7 +21,7 @@ refrence to subjects
 - add an attribute dynamically to a control in the page(div in your case) - https://stackoverflow.com/questions/17858742/how-to-add-custom-attributes-to-asp-net-controls
 - add a control to a div/control - https://devnet.kentico.com/questions/how-to-dynamically-add-controls-to-a-form
 - how to check all of the validators in the page using Page.IsValid - https://docs.microsoft.com/en-us/dotnet/api/system.web.ui.page.isvalid?view=netframework-4.8
-
+- Detecting Refresh or Postback in ASP.NET https://www.codeproject.com/Articles/68371/Detecting-Refresh-or-Postback-in-ASP-NET
 remember
 --------
 - in order to make an element visible in "behind code" on asp.net add **runat="server"** to it's attributes.
