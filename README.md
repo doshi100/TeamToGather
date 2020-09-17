@@ -2,7 +2,11 @@
 A platform for creative people who want to start a project togther
 
 
-
+bugs
+-----
+- you need to change registration text areas to be required, because you can not enter a username and email and 
+  it will still be moving to the next level of the registration page
+- you need to fix the postback issue when the user refresehes the page, the ID is incremented by 1 and for some reason it triggers the button
 
 
 
