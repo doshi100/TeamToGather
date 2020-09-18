@@ -22,6 +22,8 @@ refrence to subjects
 - add a control to a div/control - https://devnet.kentico.com/questions/how-to-dynamically-add-controls-to-a-form
 - how to check all of the validators in the page using Page.IsValid - https://docs.microsoft.com/en-us/dotnet/api/system.web.ui.page.isvalid?view=netframework-4.8
 - Detecting Refresh or Postback in ASP.NET https://www.codeproject.com/Articles/68371/Detecting-Refresh-or-Postback-in-ASP-NET
+- ViewState https://www.c-sharpcorner.com/UploadFile/225740/what-is-view-state-and-how-it-works-in-Asp-Net53/
+  - further reading https://weblogs.asp.net/infinitiesloop/truly-understanding-viewstate
 
 remember
 --------
