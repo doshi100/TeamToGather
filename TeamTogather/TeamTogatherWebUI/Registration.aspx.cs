@@ -23,6 +23,24 @@ namespace TeamTogatherWebUI
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            bool IsPageRefresh = false;
+            if (!IsPostBack)
+            {
+                ViewState["postids"] = System.Guid.NewGuid().ToString();
+                Response.Write(ViewState["postids"].ToString());
+                Session["postid"] = ViewState["postids"].ToString();
+            }
+            else
+            {
+                Response.Write("</br>" + ViewState["postids"].ToString());
+                if (ViewState["postids"].ToString() != Session["postid"].ToString())
+                {
+                    IsPageRefresh = true;
+                }
+                Session["postid"] = System.Guid.NewGuid().ToString();
+                ViewState["postids"] = Session["postid"].ToString();
+                Response.Write("</br>" + ViewState["postids"].ToString());
+            }
         }
 
         protected void next_Click(object sender, EventArgs e)
@@ -86,7 +104,6 @@ namespace TeamTogatherWebUI
 
             }
         }
-
 
         public static void BindDropDown(DropDownList list, Dictionary<int, string> dic)
         {
