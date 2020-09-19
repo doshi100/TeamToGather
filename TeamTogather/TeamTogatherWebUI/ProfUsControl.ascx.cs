@@ -20,6 +20,8 @@ namespace TeamTogatherWebUI
             Profimg.Src = imgP;
             nameContainer.InnerText = profName;
         }
-        
+
+
+
     }
 }

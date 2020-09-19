@@ -12,6 +12,8 @@ namespace TeamTogatherWebUI
     public partial class Registration : System.Web.UI.Page
     {
         // the current registration div id
+        private bool IsPageRefresh; 
+        private int Selection { get; set; }
         static int DivID = 1;
         private string username = "";
         private string password = "";
@@ -23,30 +25,34 @@ namespace TeamTogatherWebUI
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            bool IsPageRefresh = false;
+            IsPageRefresh = false;
             if (!IsPostBack)
             {
                 ViewState["postids"] = System.Guid.NewGuid().ToString();
-                Response.Write(ViewState["postids"].ToString());
                 Session["postid"] = ViewState["postids"].ToString();
             }
             else
             {
-                Response.Write("</br>" + ViewState["postids"].ToString());
                 if (ViewState["postids"].ToString() != Session["postid"].ToString())
                 {
                     IsPageRefresh = true;
                 }
                 Session["postid"] = System.Guid.NewGuid().ToString();
                 ViewState["postids"] = Session["postid"].ToString();
-                Response.Write("</br>" + ViewState["postids"].ToString());
             }
+
         }
 
+        // if the next button is clicked, make the necessary changes.
         protected void next_Click(object sender, EventArgs e)
         {
-            if (Page.IsValid)
+            if (Page.IsValid) // checkes if the page is valid to proceed or to start the form.
             {
+                if (IsPageRefresh)
+                {
+                    DivID--; // if the page was refreshed, make sure to keep the user at the same stage.
+                }
+                
                 if (DivID == 1)
                 {
                     if (PassReg.Text == ConfiPassReg.Text)
@@ -96,9 +102,11 @@ namespace TeamTogatherWebUI
                 }
                 else if (DivID == 3)
                 {
+                    // change from part 3 of the registration to part 4
                     registrationP3.Visible = false;
                     registrationP4.Visible = true;
-                    DivID++;
+                    // ---------------------------------------------
+                    DivID++; // increment the divID to identify that the user moved to part 3
                     next.Visible = false;
                 }
 
