@@ -11,9 +11,9 @@ bugs
 
 
 
-things to work on/things I did last night and it deleted
+things to work on
 -------------------------------
-- make a method that checks if the current username passed in registration is used, if it is, dont allow it and notify the user. 
+- save EACH INPUT FROM THE USER **and save it on Viewstate" 
 
 refrence to subjects
 ---------------------
