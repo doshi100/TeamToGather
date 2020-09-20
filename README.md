@@ -24,6 +24,7 @@ refrence to subjects
 - Detecting Refresh or Postback in ASP.NET https://www.codeproject.com/Articles/68371/Detecting-Refresh-or-Postback-in-ASP-NET
 - ViewState https://www.c-sharpcorner.com/UploadFile/225740/what-is-view-state-and-how-it-works-in-Asp-Net53/
   - further reading https://weblogs.asp.net/infinitiesloop/truly-understanding-viewstate
+- divs as radio buttons https://stackoverflow.com/questions/9207315/asp-net-creating-dynamic-radio-button-list
 
 remember
 --------
