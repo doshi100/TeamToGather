@@ -14,11 +14,13 @@ namespace TeamTogatherWebUI
         public string imgP { get; set; }
         public string profName { get; set; }
         public int profID { get; set; }
+        public string RadioName { get; set; }
 
         protected void Page_Load(object sender, EventArgs e)
         {
             Profimg.Src = imgP;
             nameContainer.InnerText = profName;
+            labelPro.Attributes.Add("for", RadioName);
         }
 
 

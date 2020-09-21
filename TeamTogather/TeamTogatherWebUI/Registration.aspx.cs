@@ -11,10 +11,8 @@ namespace TeamTogatherWebUI
 {
     public partial class Registration : System.Web.UI.Page
     {
-        // the current registration div id
         private bool IsPageRefresh; 
         private int Selection { get; set; }
-        static int DivID = 1;
         private string username = "";
         private string password = "";
         private string Email = "";
@@ -30,6 +28,7 @@ namespace TeamTogatherWebUI
             {
                 ViewState["postids"] = System.Guid.NewGuid().ToString();
                 Session["postid"] = ViewState["postids"].ToString();
+                ViewState["DivID"] = 1;
             }
             else
             {
@@ -41,6 +40,7 @@ namespace TeamTogatherWebUI
                 ViewState["postids"] = Session["postid"].ToString();
             }
 
+
         }
 
         // if the next button is clicked, make the necessary changes.
@@ -50,10 +50,10 @@ namespace TeamTogatherWebUI
             {
                 if (IsPageRefresh)
                 {
-                    DivID--; // if the page was refreshed, make sure to keep the user at the same stage.
+                    ViewState["DivID"] = int.Parse(ViewState["DivID"].ToString()) - 1; // if the page was refreshed, make sure to keep the user at the same stage.
                 }
                 
-                if (DivID == 1)
+                if (int.Parse(ViewState["DivID"].ToString()) == 1)
                 {
                     if (PassReg.Text == ConfiPassReg.Text)
                     {
@@ -61,11 +61,11 @@ namespace TeamTogatherWebUI
                         username = UserNameReg.Text;
                         password = PassReg.Text;
                         Email = EmailAddressReg.Text;
+                        // -------------------------------
                         // change from part 1 of the registration to part 2
                         registrationP1.Visible = false;
                         registrationP2.Visible = true;
                         // -------------------------------
-                        DivID++; // increment the divID to identify that the user moved to part 2
                         // set the language and countries dropdown menus
                         Dictionary<int, string> langdic = GeneralMethods.GetLang();
                         BindDropDown(langDropDown, langdic);
@@ -83,7 +83,7 @@ namespace TeamTogatherWebUI
                     }
 
                 }
-                else if (DivID == 2)
+                else if (int.Parse(ViewState["DivID"].ToString()) == 2)
                 {
                     // save the Birthday Date, Language and country of the user.
                     int year = int.Parse(DropDownYear.SelectedValue);
@@ -95,21 +95,19 @@ namespace TeamTogatherWebUI
                     // ---------------------------------------------
                     // change from part 2 of the registration to part 3
                     registrationP2.Visible = false;
-                    BindProfessions(registrationP3, Page);
+                    BindProfessions(radios, Page);
                     registrationP3.Visible = true;
-                    // increment the divID to identify that the user moved to part 3
-                    DivID++;
+                    radios.Visible = true;
                 }
-                else if (DivID == 3)
+                else if (int.Parse(ViewState["DivID"].ToString()) == 3)
                 {
                     // change from part 3 of the registration to part 4
                     registrationP3.Visible = false;
                     registrationP4.Visible = true;
                     // ---------------------------------------------
-                    DivID++; // increment the divID to identify that the user moved to part 3
                     next.Visible = false;
                 }
-
+                ViewState["DivID"] = int.Parse(ViewState["DivID"].ToString()) + 1; ; // increment the divID to identify that the user moved to the next stage
             }
         }
 
@@ -179,10 +177,18 @@ namespace TeamTogatherWebUI
             List<Profession> Plist = Profession.GetProfessionList();
             foreach (Profession p in Plist)
             {
+                HtmlInputRadioButton rd_button = new HtmlInputRadioButton();
+                rd_button.Value = p.ProfessionID.ToString();
+                const string GROUP_NAME = "Professions";
+                rd_button.Name = GROUP_NAME;
+                string LinkID = "P" + p.ProfessionID.ToString();
+                rd_button.Attributes["id"] = LinkID;
                 ProfUsControl userprofession = (ProfUsControl)thispage.LoadControl("~/ProfUsControl.ascx");
                 userprofession.imgP = p.ProfPath;
                 userprofession.profName = p.ProfName;
                 userprofession.profID = p.ProfessionID;
+                userprofession.RadioName = LinkID;
+                ctrl.Controls.Add(rd_button);
                 ctrl.Controls.Add(userprofession);
             }
         }

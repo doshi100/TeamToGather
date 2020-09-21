@@ -26,3 +26,15 @@
     text-align: center;
     color: blue;
 }
+
+.radios input[type="radio"] {
+    display: none;
+}
+
+.radios label{
+    cursor: pointer;
+}
+
+.radios input[type="radio"]:checked + label {
+    border-color: lightskyblue;
+}

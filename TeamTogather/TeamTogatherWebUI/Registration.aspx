@@ -40,6 +40,8 @@
     </div >
      <%-- this contains with the user profession, he must choose 1! --%>
     <div id ="registrationP3" runat="server" visible="false">
+        <div id="radios" class="radios" runat="server" visible="false">
+        </div>
     </div>
      <%-- this contains with username skills at programs/programming --%>
     <div id ="registrationP4" runat="server" visible="false">
