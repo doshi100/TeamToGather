@@ -14,6 +14,7 @@ bugs
 things to work on
 -------------------------------
 - save EACH INPUT FROM THE USER **and save it on Viewstate" 
+- PROBLEM - Controls don't run on server, read this : https://stackoverflow.com/questions/21329836/asp-net-cant-find-controls-added-from-code-behind-in-a-div
 
 refrence to subjects
 ---------------------
