@@ -102,6 +102,7 @@ namespace TeamTogatherWebUI
                 else if (int.Parse(ViewState["DivID"].ToString()) == 3)
                 {
                     // change from part 3 of the registration to part 4
+                    int id = CheckRadio(radios);
                     registrationP3.Visible = false;
                     registrationP4.Visible = true;
                     // ---------------------------------------------
@@ -190,6 +191,38 @@ namespace TeamTogatherWebUI
                 userprofession.RadioName = LinkID;
                 ctrl.Controls.Add(rd_button);
                 ctrl.Controls.Add(userprofession);
+            }
+        }
+
+        // Takes a Control which has RadioButton and checks if one of them is checked, if anything went wrong it returns -1;
+        public static int CheckRadio(HtmlControl ctrl)
+        {
+            try
+            {
+                int counter = 0;
+                int id = -1;
+                foreach (Control rdButton in ctrl.Controls)
+                {
+                    if(rdButton is HtmlInputRadioButton)
+                    {
+                        HtmlInputRadioButton bu = (HtmlInputRadioButton)rdButton;
+                        if (bu.Checked)
+                        {
+                            counter++;
+                            id = int.Parse(bu.Value);
+                        }   
+                    }
+                }
+                if(counter > 1)
+                {
+                    return -1;
+                }
+                
+                return id;
+            }
+            catch(Exception e)
+            {
+                return -1;
             }
         }
     }
