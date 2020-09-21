@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
+using System.IO;
 using BL;
 
 namespace TeamTogatherWebUI
@@ -189,6 +190,7 @@ namespace TeamTogatherWebUI
                 userprofession.profName = p.ProfName;
                 userprofession.profID = p.ProfessionID;
                 userprofession.RadioName = LinkID;
+                userprofession.EnableViewState = true;
                 ctrl.Controls.Add(rd_button);
                 ctrl.Controls.Add(userprofession);
             }
@@ -203,27 +205,28 @@ namespace TeamTogatherWebUI
                 int id = -1;
                 foreach (Control rdButton in ctrl.Controls)
                 {
-                    if(rdButton is HtmlInputRadioButton)
+                    if (rdButton is HtmlInputRadioButton)
                     {
                         HtmlInputRadioButton bu = (HtmlInputRadioButton)rdButton;
                         if (bu.Checked)
                         {
                             counter++;
                             id = int.Parse(bu.Value);
-                        }   
+                        }
                     }
                 }
-                if(counter > 1)
+                if (counter > 1)
                 {
                     return -1;
                 }
-                
+
                 return id;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return -1;
             }
         }
+
     }
 }
