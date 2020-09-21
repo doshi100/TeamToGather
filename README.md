@@ -26,6 +26,7 @@ refrence to subjects
   - further reading https://weblogs.asp.net/infinitiesloop/truly-understanding-viewstate
 - labels as radio buttons https://stackoverflow.com/questions/9207315/asp-net-creating-dynamic-radio-button-list
 - Page cache - http://www.4guysfromrolla.com/webtech/111500-1.shtml
+  - more: https://www.tutorialspoint.com/asp.net/asp.net_data_caching.htm
 
 remember
 --------
