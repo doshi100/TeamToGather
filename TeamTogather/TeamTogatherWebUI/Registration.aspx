@@ -45,7 +45,9 @@
     </div>
      <%-- this contains with username skills at programs/programming --%>
     <div id ="registrationP4" runat="server" visible="false">
-        registration4
+        <div id="CheckboxCon" class="radios" runat="server" visible="false">
+        </div>
+        <asp:Button ID="register" runat="server" Text="Register" OnClick="register_Click"  />
     </div>
     <asp:Button ID="next" runat="server" Text="next" OnClick="next_Click"  />
 </asp:Content>

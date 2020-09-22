@@ -14,13 +14,7 @@ namespace TeamTogatherWebUI
     {
         private bool IsPageRefresh;
         private int Selection { get; set; }
-        private string username = "";
-        private string password = "";
-        private string Email = "";
         private bool CredentialsFlag = true;
-        private DateTime Birthday;
-        private int Language;
-        private int Country;
 
 
         protected void Page_Load(object sender, EventArgs e)
@@ -44,6 +38,10 @@ namespace TeamTogatherWebUI
             if (int.Parse(ViewState["DivID"].ToString()) == 3)
             {
                 BindProfessions(radios, Page);
+            }
+            else if(int.Parse(ViewState["DivID"].ToString()) == 4)
+            {
+                BindKnowledge(CheckboxCon, Page);
             }
 
         }
@@ -113,14 +111,23 @@ namespace TeamTogatherWebUI
                     ViewState["Profid"] = CheckRadio(radios);
                     registrationP3.Visible = false;
                     registrationP4.Visible = true;
+                    BindKnowledge(CheckboxCon, Page);
+                    CheckboxCon.Visible = true;
                     // ---------------------------------------------
                     next.Visible = false;
                 }
-                if(CredentialsFlag)
+                if (CredentialsFlag)
                 {
                     ViewState["DivID"] = int.Parse(ViewState["DivID"].ToString()) + 1; ; // increment the divID to identify that the user moved to the next stage
                 }
             }
+        }
+
+
+        protected void register_Click(object sender, EventArgs e)
+        {
+            List<int> v = GetCheckBox(CheckboxCon);
+            ViewState["Knowids"] = GetCheckBox(CheckboxCon);
         }
 
         public static void BindDropDown(DropDownList list, Dictionary<int, string> dic)
@@ -195,10 +202,31 @@ namespace TeamTogatherWebUI
                 rd_button.Name = GROUP_NAME;
                 string LinkID = "P" + p.ProfessionID.ToString();
                 rd_button.Attributes["id"] = LinkID;
-                ProfUsControl userprofession = (ProfUsControl)thispage.LoadControl("~/ProfUsControl.ascx");
+                RegisterUserControl userprofession = (RegisterUserControl)thispage.LoadControl("~/RegisterUserControl.ascx");
                 userprofession.imgP = p.ProfPath;
-                userprofession.profName = p.ProfName;
-                userprofession.profID = p.ProfessionID;
+                userprofession.fieldName = p.ProfName;
+                userprofession.IDnum = p.ProfessionID;
+                userprofession.RadioName = LinkID;
+                userprofession.EnableViewState = true;
+                ctrl.Controls.Add(rd_button);
+                ctrl.Controls.Add(userprofession);
+            }
+        }
+
+
+        public static void BindKnowledge(HtmlControl ctrl, Page thispage)
+        {
+            List<Knowledge> Plist = Knowledge.RetKnowledgeList();
+            foreach (Knowledge p in Plist)
+            {
+                HtmlInputCheckBox rd_button = new HtmlInputCheckBox();
+                rd_button.Value = p.ProgramID.ToString();
+                string LinkID = "Know" + p.ProgramID.ToString();
+                rd_button.Attributes["id"] = LinkID;
+                RegisterUserControl userprofession = (RegisterUserControl)thispage.LoadControl("~/RegisterUserControl.ascx");
+                userprofession.imgP = p.ProgPath;
+                userprofession.fieldName = p.PName;
+                userprofession.IDnum = p.ProgramID;
                 userprofession.RadioName = LinkID;
                 userprofession.EnableViewState = true;
                 ctrl.Controls.Add(rd_button);
@@ -238,5 +266,22 @@ namespace TeamTogatherWebUI
             }
         }
 
+        public static List<int> GetCheckBox(HtmlControl ctrl)
+        {
+            List<int> id_list = new List<int>();
+            foreach (Control rdButton in ctrl.Controls)
+            {
+                if (rdButton is HtmlInputCheckBox)
+                {
+                    HtmlInputCheckBox bu = (HtmlInputCheckBox)rdButton;
+                    if (bu.Checked)
+                    {
+                        id_list.Add(int.Parse(bu.Value));
+                    }
+                }
+            }
+            return id_list;
+        }
     }
 }
+

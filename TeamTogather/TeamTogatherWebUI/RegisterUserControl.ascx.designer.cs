@@ -10,7 +10,7 @@
 namespace TeamTogatherWebUI {
     
     
-    public partial class ProfUsControl {
+    public partial class RegisterUserControl {
         
         /// <summary>
         /// labelPro control.
@@ -22,13 +22,13 @@ namespace TeamTogatherWebUI {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl labelPro;
         
         /// <summary>
-        /// Profimg control.
+        /// img control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlImage Profimg;
+        protected global::System.Web.UI.HtmlControls.HtmlImage img;
         
         /// <summary>
         /// nameContainer control.

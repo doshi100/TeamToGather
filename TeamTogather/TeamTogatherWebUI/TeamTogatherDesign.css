@@ -27,7 +27,7 @@
     color: blue;
 }
 
-.radios input[type="radio"] {
+.radios input[type="radio"], input[type="checkbox"] {
     display: none;
 }
 
@@ -35,6 +35,6 @@
     cursor: pointer;
 }
 
-.radios input[type="radio"]:checked + label {
+.radios input[type="radio"]:checked + label, .radios input[type="checkbox"]:checked + label {
     border-color: lightskyblue;
 }

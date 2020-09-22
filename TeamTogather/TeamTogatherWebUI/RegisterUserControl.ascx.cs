@@ -8,18 +8,18 @@ using BL;
 
 namespace TeamTogatherWebUI
 {
-    public partial class ProfUsControl : System.Web.UI.UserControl
+    public partial class RegisterUserControl : System.Web.UI.UserControl
     {
 
         public string imgP { get; set; }
-        public string profName { get; set; }
-        public int profID { get; set; }
+        public string fieldName { get; set; }
+        public int IDnum { get; set; }
         public string RadioName { get; set; }
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            Profimg.Src = imgP;
-            nameContainer.InnerText = profName;
+            img.Src = imgP;
+            nameContainer.InnerText = fieldName;
             labelPro.Attributes.Add("for", RadioName);
         }
 
