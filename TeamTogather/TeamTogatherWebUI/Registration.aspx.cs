@@ -12,11 +12,12 @@ namespace TeamTogatherWebUI
 {
     public partial class Registration : System.Web.UI.Page
     {
-        private bool IsPageRefresh; 
+        private bool IsPageRefresh;
         private int Selection { get; set; }
         private string username = "";
         private string password = "";
         private string Email = "";
+        private bool CredentialsFlag = true;
         private DateTime Birthday;
         private int Language;
         private int Country;
@@ -27,9 +28,9 @@ namespace TeamTogatherWebUI
             IsPageRefresh = false;
             if (!IsPostBack)
             {
+                ViewState["DivID"] = 1;
                 ViewState["postids"] = System.Guid.NewGuid().ToString();
                 Session["postid"] = ViewState["postids"].ToString();
-                ViewState["DivID"] = 1;
             }
             else
             {
@@ -40,7 +41,10 @@ namespace TeamTogatherWebUI
                 Session["postid"] = System.Guid.NewGuid().ToString();
                 ViewState["postids"] = Session["postid"].ToString();
             }
-
+            if (int.Parse(ViewState["DivID"].ToString()) == 3)
+            {
+                BindProfessions(radios, Page);
+            }
 
         }
 
@@ -53,15 +57,15 @@ namespace TeamTogatherWebUI
                 {
                     ViewState["DivID"] = int.Parse(ViewState["DivID"].ToString()) - 1; // if the page was refreshed, make sure to keep the user at the same stage.
                 }
-                
+
                 if (int.Parse(ViewState["DivID"].ToString()) == 1)
                 {
                     if (PassReg.Text == ConfiPassReg.Text)
                     {
                         // save the username, password and email the user passed to the system
-                        username = UserNameReg.Text;
-                        password = PassReg.Text;
-                        Email = EmailAddressReg.Text;
+                        ViewState["username"] = UserNameReg.Text;
+                        ViewState["password"] = PassReg.Text;
+                        ViewState["Email"] = EmailAddressReg.Text;
                         // -------------------------------
                         // change from part 1 of the registration to part 2
                         registrationP1.Visible = false;
@@ -82,17 +86,20 @@ namespace TeamTogatherWebUI
                         BindDropDown(DropDownYear, dic);
 
                     }
+                    else
+                    {
+                        CredentialsFlag = true;
+                    }
 
                 }
                 else if (int.Parse(ViewState["DivID"].ToString()) == 2)
                 {
                     // save the Birthday Date, Language and country of the user.
-                    int year = int.Parse(DropDownYear.SelectedValue);
-                    int month = int.Parse(DropDownMonth.SelectedValue);
-                    int day = int.Parse(DropDownDay.SelectedValue);
-                    Birthday = new DateTime(year, month, day);
-                    Language = int.Parse(langDropDown.SelectedValue);
-                    Country = int.Parse(CountryDropDown.SelectedValue);
+                    ViewState["year"] = int.Parse(DropDownYear.SelectedValue);
+                    ViewState["month"] = int.Parse(DropDownMonth.SelectedValue);
+                    ViewState["day"] = int.Parse(DropDownDay.SelectedValue);
+                    ViewState["Language"] = int.Parse(langDropDown.SelectedValue);
+                    ViewState["Country"] = int.Parse(CountryDropDown.SelectedValue);
                     // ---------------------------------------------
                     // change from part 2 of the registration to part 3
                     registrationP2.Visible = false;
@@ -103,13 +110,16 @@ namespace TeamTogatherWebUI
                 else if (int.Parse(ViewState["DivID"].ToString()) == 3)
                 {
                     // change from part 3 of the registration to part 4
-                    int id = CheckRadio(radios);
+                    ViewState["Profid"] = CheckRadio(radios);
                     registrationP3.Visible = false;
                     registrationP4.Visible = true;
                     // ---------------------------------------------
                     next.Visible = false;
                 }
-                ViewState["DivID"] = int.Parse(ViewState["DivID"].ToString()) + 1; ; // increment the divID to identify that the user moved to the next stage
+                if(CredentialsFlag)
+                {
+                    ViewState["DivID"] = int.Parse(ViewState["DivID"].ToString()) + 1; ; // increment the divID to identify that the user moved to the next stage
+                }
             }
         }
 
