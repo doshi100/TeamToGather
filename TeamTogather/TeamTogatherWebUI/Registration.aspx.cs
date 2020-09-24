@@ -110,12 +110,18 @@ namespace TeamTogatherWebUI
                     // change from part 3 of the registration to part 4
                     ViewState["Profid"] = CheckRadio(radios);
                     registrationP3.Visible = false;
-                    registrationP4.Visible = true;
                     BindKnowledge(CheckboxCon, Page);
+                    registrationP4.Visible = true;
                     CheckboxCon.Visible = true;
                     // ---------------------------------------------
-                    next.Visible = false;
+                    //next.Visible = true;
                 }
+                else if(int.Parse(ViewState["DivID"].ToString()) == 4)
+                {
+                    List<int> v = GetCheckBox(CheckboxCon);
+                    ViewState["Knowids"] = GetCheckBox(CheckboxCon);
+                }
+
                 if (CredentialsFlag)
                 {
                     ViewState["DivID"] = int.Parse(ViewState["DivID"].ToString()) + 1; ; // increment the divID to identify that the user moved to the next stage
@@ -207,7 +213,8 @@ namespace TeamTogatherWebUI
                 userprofession.fieldName = p.ProfName;
                 userprofession.IDnum = p.ProfessionID;
                 userprofession.RadioName = LinkID;
-                userprofession.EnableViewState = true;
+                userprofession.EnableViewState = false;
+                rd_button.EnableViewState = false;
                 ctrl.Controls.Add(rd_button);
                 ctrl.Controls.Add(userprofession);
             }
@@ -228,7 +235,8 @@ namespace TeamTogatherWebUI
                 userprofession.fieldName = p.PName;
                 userprofession.IDnum = p.ProgramID;
                 userprofession.RadioName = LinkID;
-                userprofession.EnableViewState = true;
+                //userprofession.EnableViewState = true;
+                rd_button.EnableViewState = false;
                 ctrl.Controls.Add(rd_button);
                 ctrl.Controls.Add(userprofession);
             }
@@ -257,7 +265,6 @@ namespace TeamTogatherWebUI
                 {
                     return -1;
                 }
-
                 return id;
             }
             catch (Exception e)

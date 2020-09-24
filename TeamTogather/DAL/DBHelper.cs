@@ -112,7 +112,7 @@ namespace DAL
                     return WRITEDATA_ERROR;
                 }
             }
-            catch
+            catch (Exception e)
             {
                 CloseConnection();
                 return WRITEDATA_ERROR;

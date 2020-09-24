@@ -52,6 +52,15 @@ namespace BL
             }
         }
 
+        /// <summary>
+        /// the function gets an ID and a list of chosen Knowledges/skills
+        /// and inserts the knowledges to the user 
+        /// on ProgKnowledge database table.
+        /// </summary>
+        public static int KnowledgeInsert(int userid, List<int> userKnowledgeList)
+        {
+            return UserKnowledgeDB.InsertUserKnowledge(userid, userKnowledgeList);
+        }
 
 
 
