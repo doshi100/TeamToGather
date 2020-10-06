@@ -20,7 +20,7 @@ namespace BL
         public DateTime Birthday { get; set; } // The User Date of Birth
         public int NativeLang { get; set; } // the native language of the user, used later in filtering
         public int Country { get; set; } // the country the user lives in, used later in filtering
-        public int Profession { get; set; } // The profession of the user, such as: Animator, Write, Musician and etc', the ID's are in the table 'Professions'
+        public List<Profession> LisrProf{ get; set; } // The professions of the user, such as: Animator, Write, Musician and etc', the ID's are in the table 'Professions'
         public int WeeklyFreeTime { get; set; } // the number of free time the user has to work on collabrative projects in a week.
         public int NumRateVoters { get; set; } // the number of users who voted if the user is a beginner or etc' used in average calculations later on.
         public int UserRate { get; set; } // the user's Rate, this Rate is incremented(by 1-5 according to the rater) every time someone rates the user, there is no table for Levels, this is written by code.
@@ -39,7 +39,7 @@ namespace BL
         /// constructor no. 1, takes the properties from the user input and builds a User object
         /// </summary>
         public UserInfo(int ID, string UserName, string Password, string Email, DateTime Birthday, int NativeLang, int Country
-                        ,int Profession, int WeeklyFreeTime, int NumRateVoters, int UserRate, bool IsBanned, int ProjectSum, DateTime RegistrationDate
+                        , int WeeklyFreeTime, int NumRateVoters, int UserRate, bool IsBanned, int ProjectSum, DateTime RegistrationDate
                         ,DateTime LoginDate, int UserType)
         {
             this.ID = ID;
@@ -49,7 +49,6 @@ namespace BL
             this.Birthday = Birthday;
             this.NativeLang = NativeLang;
             this.Country = Country;
-            this.Profession = Profession;
             this.WeeklyFreeTime = WeeklyFreeTime;
             this.NumRateVoters = NumRateVoters;
             this.UserRate = UserRate;
@@ -78,7 +77,6 @@ namespace BL
                 this.Birthday = (DateTime)userRow["Birthday"]; 
                 this.NativeLang = (int)userRow["NativeLang"];
                 this.Country = (int)userRow["Country"];
-                this.Profession = (int)userRow["Profession"];
                 this.WeeklyFreeTime = (int)userRow["WeeklyFreeTime"];
                 this.NumRateVoters = (int)userRow["NumRateVoters"];
                 this.UserRate = (int)userRow["UserRate"];
@@ -103,7 +101,7 @@ namespace BL
         /// constructor no. 3, takes the properties from the user input and builds a User object with an option to build user's projects and user's Program Knowledge lists
         /// </summary>
         public UserInfo(int ID, string UserName, string Password, string Email, DateTime Birthday, int NativeLang, int Country
-                        , int Profession, int WeeklyFreeTime, int NumRateVoters, int UserRate, bool IsBanned, int ProjectSum, DateTime RegistrationDate
+                        , int WeeklyFreeTime, int NumRateVoters, int UserRate, bool IsBanned, int ProjectSum, DateTime RegistrationDate
                         , DateTime LoginDate, int UserType, bool ListsFlag)
         {
             this.ID = ID;
@@ -113,7 +111,6 @@ namespace BL
             this.Birthday = Birthday;
             this.NativeLang = NativeLang;
             this.Country = Country;
-            this.Profession = Profession;
             this.WeeklyFreeTime = WeeklyFreeTime;
             this.NumRateVoters = NumRateVoters;
             this.UserRate = UserRate;
@@ -166,13 +163,14 @@ namespace BL
         /// adds a user to the db
         /// </summary>
         /// <returns>true is user has been added false otherwise</returns>
-        public static bool AddUser(string UserName, string Pass, string Email, DateTime Birthday, int NativeLang, int Country
-                         , int Profession, int WeeklyFreeTime, DateTime RegistrationDate
+        public static int AddUser(string UserName, string Pass, string Email, DateTime Birthday, int NativeLang, int Country
+                         , int WeeklyFreeTime, DateTime RegistrationDate
                          )
         {
             return UserDB.AddUser(UserName, Pass, Email, Birthday, NativeLang, Country
-                         , Profession, WeeklyFreeTime, RegistrationDate
+                         , WeeklyFreeTime, RegistrationDate
                          );
+            
         }
 
         public static bool UserExist(string userN)

@@ -49,6 +49,15 @@ namespace TeamTogatherWebUI {
         protected global::System.Web.UI.WebControls.CustomValidator userNameExistValid;
         
         /// <summary>
+        /// RequiredFieldValidator2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator2;
+        
+        /// <summary>
         /// PassReg control.
         /// </summary>
         /// <remarks>
@@ -101,6 +110,15 @@ namespace TeamTogatherWebUI {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RegularExpressionValidator EmailValid;
+        
+        /// <summary>
+        /// RequiredFieldValidator1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator1;
         
         /// <summary>
         /// registrationP2 control.
@@ -166,13 +184,13 @@ namespace TeamTogatherWebUI {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl registrationP3;
         
         /// <summary>
-        /// radios control.
+        /// CheckboxProf control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl radios;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl CheckboxProf;
         
         /// <summary>
         /// registrationP4 control.
@@ -184,13 +202,13 @@ namespace TeamTogatherWebUI {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl registrationP4;
         
         /// <summary>
-        /// CheckboxCon control.
+        /// CheckboxProg control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl CheckboxCon;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl CheckboxProg;
         
         /// <summary>
         /// register control.

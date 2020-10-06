@@ -65,16 +65,17 @@ namespace DAL
         /// inserts a new user to db
         /// </summary>
         /// <returns> return true if the user has been added to the table, false otherwise </returns>
-        public static bool AddUser(string UserName, string Pass, string Email, DateTime Birthday, int NativeLang, int Country
-                        , int Profession, int WeeklyFreeTime, DateTime RegistrationDate
+        public static int AddUser(string UserName, string Pass, string Email, DateTime Birthday, int NativeLang, int Country
+                        , int WeeklyFreeTime, DateTime RegistrationDate
                         )
         {
+            int IsAdded = -1;
             DBHelper helper = new DBHelper(Constants.PROVIDER, Constants.PATH);
-            string sql = "INSERT INTO Users(UserName, Pass, Email, Birthday, NativeLang, Country, Profession, WeeklyFreeTime, NumRateVoters, UserRate, IsBanned, ProjectsSum, RegistrationDate, Type)" +
-                         " VALUES( '" + UserName + "', '" + Pass + "', '" + Email + "', #" + Birthday.ToString("MM/dd/yyyy") + "#, " + NativeLang + ", " + Country + ", " + Profession + ", " + WeeklyFreeTime + ", " + 0 + ", " + 0 + ", " + "false" + ", " + 0
+            string sql = "INSERT INTO Users(UserName, Pass, Email, Birthday, NativeLang, Country, WeeklyFreeTime, NumRateVoters, UserRate, IsBanned, ProjectsSum, RegistrationDate, Type)" +
+                         " VALUES( '" + UserName + "', '" + Pass + "', '" + Email + "', #" + Birthday.ToString("MM/dd/yyyy") + "#, " + NativeLang + ", " + Country + ", "  + WeeklyFreeTime + ", " + 0 + ", " + 0 + ", " + "false" + ", " + 0
                          + ", #" + RegistrationDate.ToString("MM/dd/yyyy HH:mm:ss") + "#, " + 1+ ");";
-            int IsAdded = helper.WriteData(sql);
-            return (IsAdded == 1); // if one row was affected(added) it return true(the insert was succesful) if not it will return false
+            IsAdded = helper.InsertWithAutoNumKey(sql);
+            return (IsAdded); // if one row was affected(added) the method return the id of the user(the insert was succesful) if not it will return -1
         }
 
         /// <summary>
@@ -86,6 +87,28 @@ namespace DAL
             string sql = "SELECT UserName FROM Users WHERE UserName = '" + usN + "';";
             DataTable dt = helper.GetDataTable(sql);
             return dt.Rows.Count == 1;
+        }
+
+
+        /// <summary>
+        /// add a full user into the database, with his chosen Programs and Professions.
+        /// </summary>
+        public static bool GeneralAddUser(string UserName, string Pass, string Email, DateTime Birthday, int NativeLang, int Country
+                        , int WeeklyFreeTime, DateTime RegistrationDate, List<int> ProfessionList, List<int> ProgramsList
+                        )
+        {
+            int userID = AddUser(UserName, Pass, Email, Birthday, NativeLang, Country, WeeklyFreeTime, RegistrationDate);
+            if (userID == -1)
+            {
+                return false;
+            }
+            UserKnowledgeDB.InsertUserKnowledge(userID, ProfessionList);
+            int countProfession = ProfessionDB.InsertUserProfessions(userID, ProgramsList);
+            if(countProfession < 1)
+            {
+                return false;
+            }
+            return true;
         }
     }
 }

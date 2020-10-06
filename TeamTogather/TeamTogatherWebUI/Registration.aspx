@@ -9,6 +9,8 @@
                 
                 <asp:CustomValidator ID="userNameExistValid" runat="server" ControlToValidate="UserNameReg" ErrorMessage="this user name was taken already, please type another one"  onServerValidate="UserExist_ServerValidate" ></asp:CustomValidator>
                 
+                <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="UserNameReg" ErrorMessage="enter a username"></asp:RequiredFieldValidator>
+                
             <li>- use only numbers and characters</li>
             <li>- type at least 3 characters and less than 11</li>
             <li>Password :<asp:TextBox ID="PassReg" Type="password" runat="server"></asp:TextBox></li> <asp:RegularExpressionValidator ID="PassValid" runat="server" ErrorMessage="The password is unvalid, please type again" ControlToValidate="PassReg" ValidationExpression="^([A-Za-z0-9#*]){6,20}$"></asp:RegularExpressionValidator>
@@ -17,6 +19,9 @@
                 <asp:RequiredFieldValidator ID="PasswordConfirm" runat="server" ErrorMessage="please type your password again" ControlToValidate="ConfiPassReg"></asp:RequiredFieldValidator>
             </li>
             <li>Email Address :<asp:TextBox ID="EmailAddressReg" runat="server"></asp:TextBox></li> <asp:RegularExpressionValidator ID="EmailValid" runat="server" ErrorMessage="The Email is unvalid, please type again" ControlToValidate="EmailAddressReg" ValidationExpression="^([a-zA-Z0-9.])+@\w{3,7}\.\w{2,3}(\.\w{2,3})?$"></asp:RegularExpressionValidator>
+
+                <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="EmailAddressReg" ErrorMessage="enter an email"></asp:RequiredFieldValidator>
+
         </ul>
     </div>
     <%-- this  contains with user's native language, country origin--%> 
@@ -38,14 +43,14 @@
             </li>
         </ul>
     </div >
-     <%-- this contains with the user profession, he must choose 1! --%>
+     <%-- this div contains user professions --%>
     <div id ="registrationP3" runat="server" visible="false">
-        <div id="radios" class="radios" runat="server" visible="false">
+        <div id="CheckboxProf" class="radios" runat="server" visible="false">
         </div>
     </div>
-     <%-- this contains with username skills at programs/programming --%>
+     <%-- this div contains username skills at programs/programming --%>
     <div id ="registrationP4" runat="server" visible="false">
-        <div id="CheckboxCon" class="radios" runat="server" visible="false">
+        <div id="CheckboxProg" class="radios" runat="server" visible="false" >
         </div>
         <asp:Button ID="register" runat="server" Text="Register" OnClick="register_Click"  />
     </div>
