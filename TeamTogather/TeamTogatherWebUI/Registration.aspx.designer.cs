@@ -175,6 +175,15 @@ namespace TeamTogatherWebUI {
         protected global::System.Web.UI.WebControls.DropDownList DropDownYear;
         
         /// <summary>
+        /// WeekHours control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox WeekHours;
+        
+        /// <summary>
         /// registrationP3 control.
         /// </summary>
         /// <remarks>
@@ -211,13 +220,22 @@ namespace TeamTogatherWebUI {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl CheckboxProg;
         
         /// <summary>
-        /// register control.
+        /// registrationP5 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button register;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl registrationP5;
+        
+        /// <summary>
+        /// RegistrationMessage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl RegistrationMessage;
         
         /// <summary>
         /// next control.

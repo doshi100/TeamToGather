@@ -25,6 +25,7 @@ namespace TeamTogatherWebUI
             }
             if ((int)Session["DivID"] == 3)
             {
+
                 InitBindProfessions(Page); // problematic bind, if I choose not do build the checkboxes again, the problem does not happen
             }
             else if ((int)Session["DivID"]  == 4)
@@ -50,11 +51,11 @@ namespace TeamTogatherWebUI
                 Session["postid"] = System.Guid.NewGuid().ToString();
                 ViewState["postids"] = Session["postid"].ToString();
             }
-            if((int)Session["DivID"] == 2)
+            if((int)Session["DivID"] == 3)
             {
                 BindProfessions(CheckboxProf, Page);
             }
-            if((int)Session["DivID"] == 3)
+            if((int)Session["DivID"] == 4)
             {
                 BindKnowledge(CheckboxProg, Page);
             }
@@ -108,25 +109,33 @@ namespace TeamTogatherWebUI
                 else if ((int)Session["DivID"] == 2)
                 {
                     // save the Birthday Date, Language and country of the user.
-                    ViewState["year"] = int.Parse(DropDownYear.SelectedValue);
-                    ViewState["month"] = int.Parse(DropDownMonth.SelectedValue);
-                    ViewState["day"] = int.Parse(DropDownDay.SelectedValue);
-                    ViewState["Language"] = int.Parse(langDropDown.SelectedValue);
-                    ViewState["Country"] = int.Parse(CountryDropDown.SelectedValue);
-                    // ---------------------------------------------
-                    // change from part 2 of the registration to part 3
-                    registrationP2.Visible = false;
-                    //BindProfessions(CheckboxProf, Page);
-                    registrationP3.Visible = true;
-                    CheckboxProf.Visible = true;
+                    if (int.Parse(WeekHours.Text) >= 1 && int.Parse(WeekHours.Text) <= 50)
+                    {
+                        ViewState["FreeTime"] = int.Parse(WeekHours.Text);
+                        ViewState["year"] = int.Parse(DropDownYear.SelectedValue);
+                        ViewState["month"] = int.Parse(DropDownMonth.SelectedValue);
+                        ViewState["day"] = int.Parse(DropDownDay.SelectedValue);
+                        ViewState["Language"] = int.Parse(langDropDown.SelectedValue);
+                        ViewState["Country"] = int.Parse(CountryDropDown.SelectedValue);
+                        // ---------------------------------------------
+                        // change from part 2 of the registration to part 3
+                        registrationP2.Visible = false;
+                        BindProfessions(CheckboxProf, Page);
+                        registrationP3.Visible = true;
+                        CheckboxProf.Visible = true;
+                    }
+                    else
+                    {
+                        CredentialsFlag = false;
+                    }
                 }
                 else if ((int)Session["DivID"] == 3)
                 {
                     // change from part 3 of the registration to part 4
-                    List<int> checkboxProf = GetCheckBox(CheckboxProf);
-                    ViewState["Profid"] = checkboxProf;
+                    List<int> UserProf = GetCheckBox(CheckboxProf);
+                    ViewState["Profid"] = UserProf;
                     registrationP3.Visible = false;
-                    //BindKnowledge(CheckboxProg, Page);
+                    BindKnowledge(CheckboxProg, Page);
                     registrationP4.Visible = true;
                     CheckboxProg.Visible = true;
                     // ---------------------------------------------
@@ -134,8 +143,26 @@ namespace TeamTogatherWebUI
                 }
                 else if((int)Session["DivID"] == 4)
                 {
-                    List<int> v = GetCheckBox(CheckboxProg);
-                    ViewState["Knowids"] = v;
+                    List<int> UserKnowledge = GetCheckBox(CheckboxProg);
+                    ViewState["Knowids"] = UserKnowledge;
+                    registrationP4.Visible = false;
+                    registrationP5.Visible = true;
+                    next.Text = "Sign up";
+                    
+                }
+                else if((int)Session["DivID"] == 5)
+                {
+                    DateTime Birthday = GeneralMethods.CreateDateTime((int)ViewState["year"], (int)ViewState["month"], (int)ViewState["day"]);
+                    bool adduser = UserInfo.AddUser((string)ViewState["username"], (string)ViewState["password"], (string)ViewState["Email"], Birthday, (int)ViewState["Language"],
+                        (int)ViewState["Country"], (int)ViewState["FreeTime"], DateTime.Now, (List<int>)ViewState["Profid"], (List<int>)ViewState["Knowids"]);
+                    if(adduser)
+                    {
+                        RegistrationMessage.InnerText = "You Signed up succesfully !";
+                    }
+                    else
+                    {
+                        RegistrationMessage.InnerText = "Something went wrong, were sorry for the inconvenience";
+                    }
                 }
 
                 if (CredentialsFlag)
@@ -146,11 +173,6 @@ namespace TeamTogatherWebUI
         }
 
 
-        protected void register_Click(object sender, EventArgs e)
-        {
-            List<int> v = GetCheckBox(CheckboxProg);
-            ViewState["Knowids"] = v;
-        }
 
         public static void BindDropDown(DropDownList list, Dictionary<int, string> dic)
         {
@@ -221,14 +243,14 @@ namespace TeamTogatherWebUI
                 HtmlInputCheckBox rd_button = new HtmlInputCheckBox();
                 const string GROUP_NAME = "Professions";
                 rd_button.Name = GROUP_NAME;
-                string LinkID = "P" + p.ProfessionID.ToString();
-                rd_button.Attributes["id"] = LinkID;
+                string LinkID = "Prof" + p.ProfessionID.ToString();
+                rd_button.ID = LinkID;
                 rd_button.Value = p.ProfessionID.ToString();
                 RegisterUserControl userprofession = (RegisterUserControl)thispage.LoadControl("~/RegisterUserControl.ascx");
                 userprofession.imgP = p.ProfPath;
                 userprofession.fieldName = p.ProfName;
                 userprofession.IDnum = p.ProfessionID;
-                userprofession.RadioName = LinkID;
+                userprofession.RadioName = "ContentPlaceHolder1_" + LinkID;
                 userprofession.EnableViewState = true;
                 rd_button.EnableViewState = true;
                 ctrl.Controls.Add(rd_button);
@@ -238,22 +260,18 @@ namespace TeamTogatherWebUI
 
         public static void InitBindProfessions(Page thispage)
         {
-            List<Profession> Plist = Profession.GetProfessionList();
-            foreach (Profession p in Plist)
+            List<string> keys = thispage.Request.Form.AllKeys.Where(key => key.Contains("Prof")).ToList();
+            int i = 1;
+            foreach (string key in keys)
             {
                 HtmlInputCheckBox rd_button = new HtmlInputCheckBox();
                 const string GROUP_NAME = "Professions";
                 rd_button.Name = GROUP_NAME;
-                string LinkID = "P" + p.ProfessionID.ToString();
+                string LinkID = "Prof" + i;
                 rd_button.Attributes["id"] = LinkID;
-                rd_button.Value = p.ProfessionID.ToString();
-                RegisterUserControl userprofession = (RegisterUserControl)thispage.LoadControl("~/RegisterUserControl.ascx");
-                userprofession.imgP = p.ProfPath;
-                userprofession.fieldName = p.ProfName;
-                userprofession.IDnum = p.ProfessionID;
-                userprofession.RadioName = LinkID;
-                userprofession.EnableViewState = true;
-                rd_button.EnableViewState = true;
+                rd_button.ID = LinkID;
+                rd_button.Value = i.ToString();
+                i++;
             }
         }
 
@@ -267,12 +285,13 @@ namespace TeamTogatherWebUI
                 checkBox.Name = GROUP_NAME;
                 string LinkID = "Know" + p.ProgramID.ToString();
                 checkBox.Attributes["id"] = LinkID;
+                checkBox.ID = LinkID;
                 checkBox.Value = p.ProgramID.ToString();
                 RegisterUserControl userprofession = (RegisterUserControl)thispage.LoadControl("~/RegisterUserControl.ascx");
                 userprofession.imgP = p.ProgPath;
                 userprofession.fieldName = p.PName;
                 userprofession.IDnum = p.ProgramID;
-                userprofession.RadioName = LinkID;
+                userprofession.RadioName = "ContentPlaceHolder1_" + LinkID;
                 userprofession.EnableViewState = true;
                 checkBox.EnableViewState = true;
                 ctrl.Controls.Add(checkBox);
@@ -282,22 +301,18 @@ namespace TeamTogatherWebUI
 
         public static void InitBindKnowledge(Page thispage)
         {
-            List<Knowledge> Plist = Knowledge.RetKnowledgeList();
-            foreach (Knowledge p in Plist)
+            List<string> keys = thispage.Request.Form.AllKeys.Where(key => key.Contains("Know")).ToList();
+            int i = 1;
+            foreach (string key in keys)
             {
-                HtmlInputCheckBox checkBox = new HtmlInputCheckBox();
+                HtmlInputCheckBox rd_button = new HtmlInputCheckBox();
                 const string GROUP_NAME = "knowledge";
-                checkBox.Name = GROUP_NAME;
-                string LinkID = "Know" + p.ProgramID.ToString();
-                checkBox.Attributes["id"] = LinkID;
-                checkBox.Value = p.ProgramID.ToString();
-                RegisterUserControl userprofession = (RegisterUserControl)thispage.LoadControl("~/RegisterUserControl.ascx");
-                userprofession.imgP = p.ProgPath;
-                userprofession.fieldName = p.PName;
-                userprofession.IDnum = p.ProgramID;
-                userprofession.RadioName = LinkID;
-                userprofession.EnableViewState = true;
-                checkBox.EnableViewState = true;
+                rd_button.Name = GROUP_NAME;
+                string LinkID = "Know" + i;
+                rd_button.Attributes["id"] = LinkID;
+                rd_button.ID = LinkID;
+                rd_button.Value = i.ToString();
+                i++;
             }
         }
 

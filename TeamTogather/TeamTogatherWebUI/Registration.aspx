@@ -41,6 +41,9 @@
                 month: <asp:DropDownList ID="DropDownMonth" runat="server"></asp:DropDownList> 
                 year: <asp:DropDownList ID="DropDownYear" runat="server"></asp:DropDownList>
             </li>
+            <li>
+                How many hours a week can you work on a collabrative Project? (1 hour to 50)<asp:TextBox ID="WeekHours" runat="server"></asp:TextBox>
+            </li>
         </ul>
     </div >
      <%-- this div contains user professions --%>
@@ -52,7 +55,9 @@
     <div id ="registrationP4" runat="server" visible="false">
         <div id="CheckboxProg" class="radios" runat="server" visible="false" >
         </div>
-        <asp:Button ID="register" runat="server" Text="Register" OnClick="register_Click"  />
+    </div>
+    <div id ="registrationP5" runat="server" visible="false">
+        <span id="RegistrationMessage" runat="server">Press Sign up in order to create your user ! </span>
     </div>
     <asp:Button ID="next" runat="server" Text="next" OnClick="next_Click"  />
 </asp:Content>

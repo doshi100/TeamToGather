@@ -63,7 +63,7 @@ namespace DAL
             else
             {
                 string sql = $@"INSERT INTO UserProf ( UserID, ProfID ) " +
-                          @"SELECT UserID, ProgramID " +
+                          @"SELECT UserID, ProfID " +
                           "FROM (";
                 for (int i = 0; i < userprofessionList.Count; i++)
                 {

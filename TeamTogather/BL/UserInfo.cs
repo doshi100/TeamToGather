@@ -163,12 +163,12 @@ namespace BL
         /// adds a user to the db
         /// </summary>
         /// <returns>true is user has been added false otherwise</returns>
-        public static int AddUser(string UserName, string Pass, string Email, DateTime Birthday, int NativeLang, int Country
-                         , int WeeklyFreeTime, DateTime RegistrationDate
-                         )
+        public static bool AddUser(string UserName, string Pass, string Email, DateTime Birthday, int NativeLang, int Country
+                        , int WeeklyFreeTime, DateTime RegistrationDate, List<int> ProfessionList, List<int> ProgramsList
+                        )
         {
-            return UserDB.AddUser(UserName, Pass, Email, Birthday, NativeLang, Country
-                         , WeeklyFreeTime, RegistrationDate
+            return UserDB.GeneralAddUser(UserName, Pass, Email, Birthday, NativeLang, Country
+                         , WeeklyFreeTime, RegistrationDate, ProfessionList, ProgramsList
                          );
             
         }

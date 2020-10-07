@@ -71,7 +71,7 @@ namespace DAL
         {
             int IsAdded = -1;
             DBHelper helper = new DBHelper(Constants.PROVIDER, Constants.PATH);
-            string sql = "INSERT INTO Users(UserName, Pass, Email, Birthday, NativeLang, Country, WeeklyFreeTime, NumRateVoters, UserRate, IsBanned, ProjectsSum, RegistrationDate, Type)" +
+            string sql = "INSERT INTO Users(UserName, Pass, Email, Birthday, NativeLang, Country, WeeklyFreeTime, NumRateVoters, UserRate, IsBanned, ProjectsSum, RegistrationDate, UserType)" +
                          " VALUES( '" + UserName + "', '" + Pass + "', '" + Email + "', #" + Birthday.ToString("MM/dd/yyyy") + "#, " + NativeLang + ", " + Country + ", "  + WeeklyFreeTime + ", " + 0 + ", " + 0 + ", " + "false" + ", " + 0
                          + ", #" + RegistrationDate.ToString("MM/dd/yyyy HH:mm:ss") + "#, " + 1+ ");";
             IsAdded = helper.InsertWithAutoNumKey(sql);
