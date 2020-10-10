@@ -102,8 +102,8 @@ namespace DAL
             {
                 return false;
             }
-            UserKnowledgeDB.InsertUserKnowledge(userID, ProfessionList);
-            int countProfession = ProfessionDB.InsertUserProfessions(userID, ProgramsList);
+            UserKnowledgeDB.InsertUserKnowledge(userID, ProgramsList);
+            int countProfession = ProfessionDB.InsertUserProfessions(userID, ProfessionList);
             if(countProfession < 1)
             {
                 return false;
