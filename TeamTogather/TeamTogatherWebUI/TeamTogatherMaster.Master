@@ -5,13 +5,36 @@
 <html>
 <head runat="server">
     <title></title>
-    <link rel="stylesheet" type="text/css" href="TeamTogatherDesign.css" >
+    <link rel="stylesheet" type="text/css" href="TeamTogatherDesign.css">
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
 <body>
     <form id="form1" runat="server">
         <div>
+
+            <div class="navbar" runat="server" id="navbar1">
+                <ul>
+                    <li>
+                        <img src="#" alt="TeamTogatherLogo"></li>
+                    <li>Home</li>
+                    <li>Project Showcase</li>
+                    <li>User Showcase</li>
+                    <li>Sign Up</li>
+                </ul>
+            </div>
+            <div class="navbar" runat="server" id="Div2" visible="false">
+                <ul>
+                    <li>
+                        <img src="#" alt="TeamTogatherLogo"></li>
+                    <li>Home</li>
+                    <li>Project Showcase</li>
+                    <li>User Showcase</li>
+                    <li>
+                        <div class="profile"></div>
+                    </li>
+                </ul>
+            </div>
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
             </asp:ContentPlaceHolder>
         </div>
