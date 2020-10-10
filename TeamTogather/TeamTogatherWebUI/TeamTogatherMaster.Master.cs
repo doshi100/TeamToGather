@@ -11,7 +11,11 @@ namespace TeamTogatherWebUI
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if(Session["UserID"] != null)
+            {
+                navbar1.Visible = false;
+                navbar2.Visible = true;
+            }
         }
     }
 }

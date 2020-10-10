@@ -7,13 +7,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace TeamTogatherWebUI
-{
-
-
-    public partial class HomePage
-    {
-
+namespace TeamTogatherWebUI {
+    
+    
+    public partial class HomePage {
+        
         /// <summary>
         /// UserNameBox control.
         /// </summary>
@@ -22,7 +20,7 @@ namespace TeamTogatherWebUI
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox UserNameBox;
-
+        
         /// <summary>
         /// PassBox control.
         /// </summary>
@@ -31,7 +29,7 @@ namespace TeamTogatherWebUI
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox PassBox;
-
+        
         /// <summary>
         /// LoginButton control.
         /// </summary>
@@ -40,7 +38,7 @@ namespace TeamTogatherWebUI
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button LoginButton;
-
+        
         /// <summary>
         /// LoginMessage control.
         /// </summary>

@@ -12,7 +12,10 @@ namespace TeamTogatherWebUI
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (Session["UserID"] != null)
+            {
+                LoginMessage.Text = "Logged in!";
+            }
 
         }
 
@@ -26,12 +29,13 @@ namespace TeamTogatherWebUI
                 if(user.Password == password && user.UserName == userName)
                 {
                     Session["UserID"] = user.ID;
-                    LoginMessage.Text = "logged in !";
                     user.UpdateLoginDate();
+                    Response.Redirect("HomePage.aspx");
                 }
             }
             else
             {
+                LoginMessage.Visible = true;
                 LoginMessage.Text = "the login failed";
             }
         }

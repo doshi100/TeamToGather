@@ -65,6 +65,14 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="DesignElements\Characters\purpleCharacterHomePage.png" />
+    <Content Include="DesignElements\Characters\WebSiteCharacterGreen.png" />
+    <Content Include="DesignElements\Characters\WebSiteCharacterPurple.png" />
+    <Content Include="DesignElements\elements\pattern.png" />
+    <Content Include="DesignElements\fonts\righteous\Image sample.jpg" />
+    <Content Include="DesignElements\fonts\righteous\OFL.txt" />
+    <Content Include="DesignElements\fonts\teko\OFL.txt" />
+    <Content Include="DesignElements\logo\TeamTogatherLogo.png" />
     <Content Include="global.asax" />
     <Content Include="HomePage.aspx" />
     <Content Include="RegisterUserControl.ascx" />
@@ -108,6 +116,16 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="TeamTogatherMaster.Master" />
+    <Content Include="DesignElements\fonts\righteous\Abandon Alphabeta.ttf" />
+    <Content Include="DesignElements\fonts\righteous\font.zip" />
+    <Content Include="DesignElements\fonts\righteous\font2.zip" />
+    <Content Include="DesignElements\fonts\righteous\Righteous-Regular.ttf" />
+    <Content Include="DesignElements\fonts\teko\Teko-Bold.ttf" />
+    <Content Include="DesignElements\fonts\teko\Teko-Light.ttf" />
+    <Content Include="DesignElements\fonts\teko\Teko-Medium.ttf" />
+    <Content Include="DesignElements\fonts\teko\Teko-Regular.ttf" />
+    <Content Include="DesignElements\fonts\teko\Teko-SemiBold.ttf" />
+    <Content Include="DesignElements\fonts\teko\teko.zip" />
     <None Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -122,6 +140,7 @@
       <Name>BL</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

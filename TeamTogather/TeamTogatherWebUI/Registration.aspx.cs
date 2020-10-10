@@ -12,14 +12,14 @@ namespace TeamTogatherWebUI
 {
     public partial class Registration : System.Web.UI.Page
     {
-        private bool IsPageRefresh;
+        //private bool IsPageRefresh;
         private int Selection { get; set; }
         private bool CredentialsFlag = true;
 
 
         protected void Page_PreInit(object sender, EventArgs e)
         {
-            if (!IsPostBack)
+            if (!IsPostBack && Session["DivID"] == null)
             {
                 Session["DivID"] = 1;
             }
@@ -36,21 +36,21 @@ namespace TeamTogatherWebUI
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            IsPageRefresh = false;
-            if (!IsPostBack)
-            {
-                ViewState["postids"] = System.Guid.NewGuid().ToString();
-                Session["postid"] = ViewState["postids"].ToString();
-            }
-            else
-            {
-                if (ViewState["postids"].ToString() != Session["postid"].ToString())
-                {
-                    IsPageRefresh = true;
-                }
-                Session["postid"] = System.Guid.NewGuid().ToString();
-                ViewState["postids"] = Session["postid"].ToString();
-            }
+            //IsPageRefresh = false;
+            //if (!IsPostBack)
+            //{
+            //    ViewState["postids"] = System.Guid.NewGuid().ToString();
+            //    Session["postid"] = ViewState["postids"].ToString();
+            //}
+            //else
+            //{
+            //    if (ViewState["postids"].ToString() != Session["postid"].ToString())
+            //    {
+            //        IsPageRefresh = true;
+            //    }
+            //    Session["postid"] = System.Guid.NewGuid().ToString();
+            //    ViewState["postids"] = Session["postid"].ToString();
+            //}
             if((int)Session["DivID"] == 3)
             {
                 BindProfessions(CheckboxProf, Page);
@@ -67,10 +67,10 @@ namespace TeamTogatherWebUI
         {
             if (Page.IsValid) // checkes if the page is valid to proceed or to start the form.
             {
-                if (IsPageRefresh)
-                {
-                    Session["DivID"] = (int)Session["DivID"] - 1; // if the page was refreshed, make sure to keep the user at the same stage.
-                }
+                //if (IsPageRefresh)
+                //{
+                //    Session["DivID"] = (int)Session["DivID"] - 1; // if the page was refreshed, make sure to keep the user at the same stage.
+                //}
 
                 if ((int)Session["DivID"] == 1)
                 {
