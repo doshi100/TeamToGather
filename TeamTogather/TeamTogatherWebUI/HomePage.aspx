@@ -4,12 +4,12 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <div id="backgroundsContainer">
+    <div id="backgroundsContainer" class="HomeSize">
         <div id="BlackBrightDiv">
-            <div id="BrightDivElements">
+            <div id="BrightDivElements" >
                 <div id="imageContainer"><img src="DesignElements/logo/TeamTogatherLogo.png"></div>
                 <span id="slogen">Perfect Ideas require perfect teams.</span>
-                <a href="#">Sign Up</a>
+                <a href="Registration.aspx">Sign Up</a>
             </div>
             <img src="DesignElements/Characters/WebSiteCharacterGreen.png" id="HPCharacter2"/>
         </div>
@@ -30,7 +30,7 @@
             </div>
         </div>
         <div id="BoundingLine"></div>
-        <div class="pattern"></div>
+        <div class="pattern HomeSize" ></div>
     </div>
 
 

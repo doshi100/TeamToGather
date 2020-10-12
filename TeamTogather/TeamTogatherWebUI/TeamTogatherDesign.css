@@ -15,7 +15,11 @@
     src: url("DesignElements/fonts/teko/Teko-Regular.ttf") format('truetype')
 }
 
+* {
+}
+
 body {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
@@ -129,12 +133,16 @@ ul {
 }
 
 .profilePhoto {
-    background-color: white;
-    width: 50px;
-    height:50px;
+    background-color: rgb(11, 11, 11);
+    width: 40px;
+    height:40px;
     border-radius: 50%;
 }
 
+
+.profilePhoto:hover {
+    border: 2px dashed rgb(29, 237, 167);
+}
 /*********************************      End MasterPage/navbar stylesheet    ************************/
 
 
@@ -151,23 +159,14 @@ ul {
         background-position: top right;
     }
 }
-#UPContainer {
-    position: relative;
-    width: 100vw;
-    height: 60vh;
-}
 
 #backgroundsContainer {
     position: relative;
-    width: 100vw;
-    height: 60vh;
     display: flex;
 }
 
 .pattern {
     position: absolute;
-    width: 100vw;
-    height: 60vh;
     top: 0;
     background-image: url(DesignElements/elements/pattern.png);
     background-size: 850px;
@@ -187,12 +186,19 @@ ul {
     z-index: 10;
 }
 
+.HomeSize {
+    width: 100vw;
+    height: 60vh;
+}
+
 #BlackBrightDiv {
     background-color: rgb(30,30,30);
+    order: 1;
 }
 
 #BlackDiv {
     background-color: rgb(11, 11, 11);
+    order: 2;
 }
 
 #loginContainer {
@@ -214,6 +220,7 @@ ul {
     outline: none;    
     font-family: tekoMedium;
     font-size: 0.85em;
+    width: 90%
     
 }
 
@@ -223,13 +230,14 @@ ul {
     flex-direction: column;
     position: relative;
     align-items: flex-start;
-    width:90%;
+    width:85%;
     height: 55%;
     margin-left: 1em;
 }
 
 #loginList li {
     flex-grow: 2;
+    width: 100%;
 }
 
 
@@ -266,7 +274,7 @@ ul {
     border-bottom: 3px solid rgb(210, 210, 210);
     padding-right: 0.3em;
     padding-top: 0.5em;
-    margin: 1em;
+    margin-left: 1em;
     margin-bottom: 2em;
     display: block;
     width:20%;
@@ -297,9 +305,13 @@ input::-webkit-input-placeholder {
 
 #HPCharacter {
     position: absolute;
-    width: 270px;
+    /*width: 270px;*/
     left: 15%;
     top: 6%;
+    width: 70%;
+    display: block;
+    width: 100%;
+    max-width: 270px;
 }
 
 
@@ -308,6 +320,7 @@ input::-webkit-input-placeholder {
     width: 200px;
     left: 3%;
     top: 20%;
+    display: block;
 }
 
 
@@ -356,4 +369,134 @@ input::-webkit-input-placeholder {
     background-color: rgb(50, 93, 219);
     padding-top: 0.2em;
 }
-/*********************************      End HomePage stylesheet    ************************/
+
+@media only screen and (max-height: 820px) {
+    .HomeSize {
+        height: 65vh;
+    }
+}
+
+@media only screen and (max-height: 805px) {
+    .HomeSize {
+        height: calc(100vh - (6vh + 2px));
+    }
+
+    #loginContainer {
+        height: 60%;
+    }
+}
+
+@media only screen and (max-height: 640px) {
+    #loginContainer {
+        height: 70%;
+    }
+}
+
+@media only screen and (max-height: 540px) {
+    #loginContainer {
+        height: 80%;
+    }
+
+    #HPCharacter{
+        width: 240px;
+    }
+}
+
+@media only screen and (max-width: 1730px) {
+    #BrightDivElements span {
+        font-size: 2.5em;
+    }
+
+    #loginContainer span.Black {
+        width: 30%;
+    }
+}
+
+@media only screen and (max-width: 1482px) {
+    #BrightDivElements span {
+        font-size: 2.2em;
+    }
+}
+
+@media only screen and (max-width: 1348px) {
+    #BlackBrightDiv {
+        background-color: rgb(30,30,30);
+        order: 2;
+    }
+
+    #BlackDiv {
+        background-color: rgb(11, 11, 11);
+        order: 1;
+    }
+
+    .HomeSize {
+        height: calc(200vh - (6vh + 2px));
+        width: 100vw;
+    }
+
+    #backgroundsContainer {
+        position: relative;
+        display: flex;
+        flex-direction: column
+    }
+
+    #BlackBrightDiv, #BlackDiv {
+        width: 100%;
+        height: 50%;
+        position: relative;
+    }
+
+    #BoundingLine {
+        width: 75%;
+        height: 0.5px;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, 50%);
+    }
+
+    .navbar {
+        justify-content: space-between
+    }
+
+    body {
+        overflow-x:hidden;
+    }
+
+    #HPCharacter2 {
+        left: 2%
+    }
+}
+
+@media only screen and (max-width:790px) {
+    #HPCharacter {
+        left: 5%
+    }
+
+    #loginContainer {
+        width: 40%;
+    }
+
+    #BrightDivElements span {
+        font-size: 1.5em;
+    }
+}
+
+@media only screen and (max-width:600px) {
+    #HPCharacter2 {
+        display: none;
+    }
+
+    #HPCharacter {
+        width: 170px;
+        top: 20%
+    }
+
+    #loginContainer {
+        width: 50%;
+    }
+
+    #BrightDivElements span {
+        font-size: 1.9em;
+    }
+}
+    /*********************************      End HomePage stylesheet    ************************/

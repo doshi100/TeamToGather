@@ -18,10 +18,10 @@
                     <li>
                         <img src="DesignElements/logo/TeamTogatherLogo.png" id="logoImg" alt="TeamTogatherLogo">
                     </li>
-                    <li class="navTextItem GreenLine"><a href="#">Home</a></li>
+                    <li class="navTextItem GreenLine"><a href="HomePage.aspx">Home</a></li>
                     <li class="navTextItem PinkLineH"><a href="#">Project Showcase</a></li>
                     <li class="navTextItem PinkLineH"><a href="#">User Showcase</a></li>
-                    <li class="navTextItem BlueLineH"><a href="#">Sign Up</a></li>
+                    <li class="navTextItem BlueLineH"><a href="Registration.aspx">Sign Up</a></li>
                 </ul>
             </div>
              <div class="navbar" runat="server" id="navbar2" visible="false">
@@ -29,7 +29,7 @@
                     <li>
                         <img src="DesignElements/logo/TeamTogatherLogo.png" id="logoImg" alt="TeamTogatherLogo">
                     </li>
-                    <li class="navTextItem GreenLine"><a href="#">Home</a></li>
+                    <li class="navTextItem GreenLine"><a href="HomePage.aspx">Home</a></li>
                     <li class="navTextItem PinkLineH"><a href="#">Project Showcase</a></li>
                     <li class="navTextItem PinkLineH"><a href="#">User Showcase</a></li>
                     <li class="navTextItem BlueLineH"><div class="profilePhoto"></div></li>
