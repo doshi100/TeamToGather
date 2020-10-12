@@ -65,6 +65,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="DesignElements\Characters\happpypurpleCharacter.png" />
     <Content Include="DesignElements\Characters\purpleCharacterHomePage.png" />
     <Content Include="DesignElements\Characters\WebSiteCharacterGreen.png" />
     <Content Include="DesignElements\Characters\WebSiteCharacterPurple.png" />
@@ -73,6 +74,24 @@
     <Content Include="DesignElements\fonts\righteous\OFL.txt" />
     <Content Include="DesignElements\fonts\teko\OFL.txt" />
     <Content Include="DesignElements\logo\TeamTogatherLogo.png" />
+    <Content Include="DesignElements\professions\3DBox.png" />
+    <Content Include="DesignElements\professions\Animation.png" />
+    <Content Include="DesignElements\professions\BackEnd.png" />
+    <Content Include="DesignElements\professions\brush.png" />
+    <Content Include="DesignElements\professions\characterArtist.png" />
+    <Content Include="DesignElements\professions\FrontEnd.png" />
+    <Content Include="DesignElements\professions\FXgun.png" />
+    <Content Include="DesignElements\professions\GameDeveloper.png" />
+    <Content Include="DesignElements\professions\GraphicDesigner.png" />
+    <Content Include="DesignElements\professions\Illustrator.png" />
+    <Content Include="DesignElements\professions\Marketing.png" />
+    <Content Include="DesignElements\professions\microphone.png" />
+    <Content Include="DesignElements\professions\musician.png" />
+    <Content Include="DesignElements\professions\Other.png" />
+    <Content Include="DesignElements\professions\SoundEditor.png" />
+    <Content Include="DesignElements\professions\VideoEditor.png" />
+    <Content Include="DesignElements\professions\VoiceActor.png" />
+    <Content Include="DesignElements\professions\writer.png" />
     <Content Include="global.asax" />
     <Content Include="HomePage.aspx" />
     <Content Include="RegisterUserControl.ascx" />

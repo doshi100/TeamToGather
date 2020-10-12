@@ -108,23 +108,31 @@ namespace TeamTogatherWebUI
                 }
                 else if ((int)Session["DivID"] == 2)
                 {
-                    // save the Birthday Date, Language and country of the user.
-                    if (int.Parse(WeekHours.Text) >= 1 && int.Parse(WeekHours.Text) <= 50)
+                    try
                     {
-                        ViewState["FreeTime"] = int.Parse(WeekHours.Text);
-                        ViewState["year"] = int.Parse(DropDownYear.SelectedValue);
-                        ViewState["month"] = int.Parse(DropDownMonth.SelectedValue);
-                        ViewState["day"] = int.Parse(DropDownDay.SelectedValue);
-                        ViewState["Language"] = int.Parse(langDropDown.SelectedValue);
-                        ViewState["Country"] = int.Parse(CountryDropDown.SelectedValue);
-                        // ---------------------------------------------
-                        // change from part 2 of the registration to part 3
-                        registrationP2.Visible = false;
-                        BindProfessions(CheckboxProf, Page);
-                        registrationP3.Visible = true;
-                        CheckboxProf.Visible = true;
+                        // save the Birthday Date, Language and country of the user.
+                        if (int.Parse(WeekHours.Text) >= 1 && int.Parse(WeekHours.Text) <= 50)
+                        {
+                            ViewState["FreeTime"] = int.Parse(WeekHours.Text);
+                            ViewState["year"] = int.Parse(DropDownYear.SelectedValue);
+                            ViewState["month"] = int.Parse(DropDownMonth.SelectedValue);
+                            ViewState["day"] = int.Parse(DropDownDay.SelectedValue);
+                            ViewState["Language"] = int.Parse(langDropDown.SelectedValue);
+                            ViewState["Country"] = int.Parse(CountryDropDown.SelectedValue);
+                            // ---------------------------------------------
+                            // change from part 2 of the registration to part 3
+                            registrationP2.Visible = false;
+                            BindProfessions(CheckboxProf, Page);
+                            registrationP3.Visible = true;
+                            CheckboxProf.Visible = true;
+                        }
+                        else
+                        {
+                            CredentialsFlag = false;
+                        }
+
                     }
-                    else
+                    catch
                     {
                         CredentialsFlag = false;
                     }
@@ -157,11 +165,7 @@ namespace TeamTogatherWebUI
                         (int)ViewState["Country"], (int)ViewState["FreeTime"], DateTime.Now, (List<int>)ViewState["Profid"], (List<int>)ViewState["Knowids"]);
                     if(adduser)
                     {
-                        RegistrationMessage.InnerText = "You Signed up succesfully !";
-                    }
-                    else
-                    {
-                        RegistrationMessage.InnerText = "Something went wrong, were sorry for the inconvenience";
+                        Response.Redirect("HomePage.aspx");
                     }
                 }
 
