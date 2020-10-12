@@ -121,6 +121,15 @@ namespace TeamTogatherWebUI {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator1;
         
         /// <summary>
+        /// next control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button next;
+        
+        /// <summary>
         /// registrationP2 control.
         /// </summary>
         /// <remarks>
@@ -184,6 +193,15 @@ namespace TeamTogatherWebUI {
         protected global::System.Web.UI.WebControls.TextBox WeekHours;
         
         /// <summary>
+        /// Button1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button Button1;
+        
+        /// <summary>
         /// registrationP3 control.
         /// </summary>
         /// <remarks>
@@ -200,6 +218,15 @@ namespace TeamTogatherWebUI {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl CheckboxProf;
+        
+        /// <summary>
+        /// Button2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button Button2;
         
         /// <summary>
         /// registrationP4 control.
@@ -220,6 +247,15 @@ namespace TeamTogatherWebUI {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl CheckboxProg;
         
         /// <summary>
+        /// Button3 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button Button3;
+        
+        /// <summary>
         /// registrationP5 control.
         /// </summary>
         /// <remarks>
@@ -238,12 +274,12 @@ namespace TeamTogatherWebUI {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl RegistrationMessage;
         
         /// <summary>
-        /// next control.
+        /// Button4 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button next;
+        protected global::System.Web.UI.WebControls.Button Button4;
     }
 }

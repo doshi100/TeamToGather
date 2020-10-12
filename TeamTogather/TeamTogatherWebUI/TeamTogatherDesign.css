@@ -32,6 +32,12 @@ ul {
 .Black {
     color: rgb(30, 30, 30)
 }
+
+.blackTeko {
+    color: rgb(30,30, 30);
+    font-family: tekoregular;
+    font-size: 2.5em;
+}
 /*********************************      End General stylesheet    ************************/
 
 /*********************************      Registration stylesheet    ************************/
@@ -500,3 +506,45 @@ input::-webkit-input-placeholder {
     }
 }
     /*********************************      End HomePage stylesheet    ************************/
+
+/*********************************      Regisration stylesheet    ************************/
+
+.registration {
+    width: 100vw;
+    height: calc(100vh - (6vh + 2px));
+    display: flex;
+    flex-direction: row;
+}
+
+.grayDivRe {
+    background-color: rgb(243, 243, 243);
+    position: relative;
+    height: 100%;
+    width: 25%;
+    display: flex;
+    align-items: center;
+    justify-content:center
+}
+
+.BoundingLBlue {
+    background-color: rgb(50, 93, 219);
+    width: 2px;
+    height: 70%;
+    position: absolute;
+    top: 15%;
+    right: 0%;
+}
+
+.grayDivRe img {
+    max-width: 300px;
+    width: 60%;
+    align-self: center;
+}
+
+.WhiteDivRe {
+    background-color: rgb(254, 254, 254);
+    width: 75%;
+    height:100%;
+    display: flex;
+    flex-direction: column;
+}
