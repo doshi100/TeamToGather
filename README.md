@@ -32,3 +32,4 @@ refrence to subjects
 remember
 --------
 - in order to make an element visible in "behind code" on asp.net add **runat="server"** to it's attributes.
+- IN EVERY GUEST PAGE do Session["DivID"].ABANDON because it will keep running if the user have clicked on one of the nav items.
