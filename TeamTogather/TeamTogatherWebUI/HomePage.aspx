@@ -22,7 +22,7 @@
                         <asp:TextBox ID="UserNameBox" placeholder="Username" runat="server"></asp:TextBox>
                     </li>
                     <li>
-                        <asp:TextBox ID="PassBox" placeholder="Password" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="PassBox" placeholder="Password" Type="password" runat="server"></asp:TextBox>
                     </li>
                 </ul>
                         <asp:Button ID="LoginButton" CssClass="LoginButton" runat="server" Text="Log In" OnClick="LoginButton_Click" />

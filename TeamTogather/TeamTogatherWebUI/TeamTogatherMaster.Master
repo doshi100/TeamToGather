@@ -12,7 +12,7 @@
 <body>
     <form id="form1" runat="server">
         <div>
-
+            <%--NavBar of the guest user--%>
             <div class="navbar" runat="server" id="navbar1">
                 <ul>
                     <li>
@@ -24,6 +24,7 @@
                     <li class="navTextItem BlueLineH"><a href="Registration.aspx">Sign Up</a></li>
                 </ul>
             </div>
+            <%--Navbar of the User--%>
              <div class="navbar" runat="server" id="navbar2" visible="false">
                 <ul>
                     <li>
@@ -32,12 +33,68 @@
                     <li class="navTextItem GreenLine"><a href="HomePage.aspx">Home</a></li>
                     <li class="navTextItem PinkLineH"><a href="#">Project Showcase</a></li>
                     <li class="navTextItem PinkLineH"><a href="#">User Showcase</a></li>
+                    <li class="navTextItem PinkLineH"><a href="#">Team Search</a></li>
+                    <li class="navTextItem PinkLineH"><a href="#">User Search</a></li>
                     <li class="navTextItem BlueLineH"><div class="profilePhoto"></div></li>
+                </ul>
+            </div>
+            <%--small menu of the regular User--%>
+            <div class="loginsmlMenu unstyledlist" id="LoginsmlMenuUser" runat="server" visible="false">
+                <ul>
+                    <li class="navsmlItem" runat="server">
+                         <asp:LinkButton ID="LinkButton1" runat="server" CssClass="LogOut" OnClick="logOut_Click">Log Out</asp:LinkButton>
+                    </li>
+                    <li class="navsmlItem">
+                        <a href="#">Profile</a>
+                    </li>
+                </ul>
+                <ul class="optional unstyledlist">
+                    <li class="navsmlItem"><a href="HomePage.aspx">Home</a></li>
+                    <li class="navsmlItem"><a href="#">Project Showcase</a></li>
+                    <li class="navsmlItem"><a href="#">User Showcase</a></li>
+                    <li class="navsmlItem"><a href="#">Team Search</a></li>
+                    <li class="navsmlItem"><a href="#">User Search</a></li>
+                </ul>
+            </div>
+            <%--Admin NavBar--%>
+            <div class="navbar" runat="server" id="NavBarAdmin" visible="false">
+                <ul>
+                    <li>
+                        <img src="DesignElements/logo/TeamTogatherLogo.png" id="logoImg" alt="TeamTogatherLogo">
+                    </li>
+                    <li class="navTextItem GreenLine"><a href="HomePage.aspx">Home</a></li>
+                    <li class="navTextItem PinkLineH"><a href="#">Project Showcase</a></li>
+                    <li class="navTextItem PinkLineH"><a href="#">User Showcase</a></li>
+                    <li class="navTextItem PinkLineH"><a href="#">Team Search</a></li>
+                    <li class="navTextItem PinkLineH"><a href="#">User Search</a></li>
+                    <li class="navTextItem BlueLineH"><div class="profilePhoto"></div></li>
+                </ul>
+            </div>
+            <%--small menu of the Admin--%>
+            <div class="loginsmlMenu unstyledlist" id="loginsmlMenuAdmin" runat="server" visible="false">
+                <ul>
+                    <li class="navsmlItem">
+                        <asp:LinkButton ID="LinkButton" runat="server" CssClass="LogOut" OnClick="logOut_Click">Log Out</asp:LinkButton>
+                    </li>
+                    <li class="navsmlItem">
+                        <a href="#">Profile</a>
+                    </li>
+                    <li class="navsmlItem">
+                        <a href="#">Admin</a>
+                    </li>
+                </ul>
+                <ul class="optional unstyledlist">
+                    <li class="navsmlItem"><a href="HomePage.aspx">Home</a></li>
+                    <li class="navsmlItem"><a href="#">Project Showcase</a></li>
+                    <li class="navsmlItem"><a href="#">User Showcase</a></li>
+                    <li class="navsmlItem"><a href="#">Team Search</a></li>
+                    <li class="navsmlItem"><a href="#">User Search</a></li>
                 </ul>
             </div>
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
             </asp:ContentPlaceHolder>
         </div>
     </form>
+    <script src="TogatherJS.js"></script>
 </body>
 </html>

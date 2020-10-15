@@ -179,6 +179,9 @@ namespace BL
         }
 
 
-
+        public static bool CheckAdmin(int id)
+        {
+            return UserDB.CheckAdmin(id);
+        }
     }
 }

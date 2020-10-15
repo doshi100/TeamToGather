@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using BL;
 
 namespace TeamTogatherWebUI
 {
@@ -13,9 +14,25 @@ namespace TeamTogatherWebUI
         {
             if(Session["UserID"] != null)
             {
+                bool isAdmin = UserInfo.CheckAdmin((int)Session["UserID"]);
                 navbar1.Visible = false;
-                navbar2.Visible = true;
+                if(isAdmin)
+                {
+                    NavBarAdmin.Visible = true;
+                    loginsmlMenuAdmin.Visible = true;
+                }
+                else
+                {
+                    navbar2.Visible = true;
+                    LoginsmlMenuUser.Visible = true;
+                }
             }
+        }
+
+        protected void logOut_Click(object sender, EventArgs e)
+        {
+            Session.Abandon();
+            Response.Redirect("HomePage.aspx");
         }
     }
 }

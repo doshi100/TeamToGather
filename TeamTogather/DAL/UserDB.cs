@@ -110,5 +110,20 @@ namespace DAL
             }
             return true;
         }
+
+        /// <summary>
+        /// checkes if a user is an Admin returns true if he is, and false if he is not.
+        /// </summary>
+        public static bool CheckAdmin(int id)
+        {
+            DBHelper helper = new DBHelper(Constants.PROVIDER, Constants.PATH);
+            string sql = $"SELECT UserType FROM Users WHERE ID = {id} AND UserType = 2";
+            DataTable ifAdmin = helper.GetDataTable(sql);
+            if (ifAdmin.Rows.Count == 1)
+            {
+                return true;
+            }
+            return false;
+        }
     }
 }

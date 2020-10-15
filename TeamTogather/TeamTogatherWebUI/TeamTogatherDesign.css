@@ -73,14 +73,32 @@ input[type="text"], input[type="password"] {
     background-color: rgb(251, 251, 251);
 }
 
-    input[type="text"]:focus, input[type="password"]:focus {
-        border-color: rgb(112, 131, 224);
-        outline: none;
-    }
+input[type="text"]:focus, input[type="password"]:focus {
+    border-color: rgb(112, 131, 224);
+    outline: none;
+}
 
 .gray {
     color: rgb(200, 200, 200);
     font-size: 0.7em;
+}
+
+.unstyledlist {
+    list-style-type: none;
+}
+
+.Header {
+    color: rgb(11, 11, 11);
+    font-size: 90%;
+    font-family: tekoSemiBold;
+    margin: 0 auto;
+    padding-top: 6%;
+}
+
+.smlText {
+    color: rgb(11, 11, 11);
+    font-size: 1.2em;
+    font-family: tekoSemiBold;
 }
 /*********************************      End General stylesheet    ************************/
 
@@ -91,6 +109,48 @@ input[type="text"], input[type="password"] {
 
 
 /*********************************      MasterPage/navbar stylesheet    ************************/
+.loginsmlMenu {
+    display: none;
+    background-color: rgb(30, 30, 30);
+    border: 2px solid rgb(51, 51, 51);
+    flex-direction: column;
+    justify-content: center;
+    width: 10%;
+    position: absolute;
+    right: 0;
+    top: 6vh;
+    z-index: 12;
+}
+
+.loginsmlMenu ul {
+    list-style-type: none;
+}
+
+
+.loginsmlMenu li {
+    width: 100%;
+    height: 2em;
+    border-top: 2px solid rgb(51, 51, 51);
+    text-align: center;
+    font-size: 1.3em;
+}
+
+.loginsmlMenu li a {
+    color: white;
+    font-family: tekoMedium;
+    text-decoration: none;
+    display: block;
+    margin-top: 3%;
+}
+
+
+.optional {
+    display: none;
+    border-top: 2px solid rgb(51, 51, 51);
+    text-align: center;
+}
+
+
 
 .navbar {
     width: 100vw;
@@ -100,30 +160,30 @@ input[type="text"], input[type="password"] {
     border-bottom: 2px solid rgb(51, 51, 51);
 }
 
-    .navbar ul {
-        list-style-type: none;
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        flex: 1;
-    }
+.navbar ul {
+list-style-type: none;
+display: flex;
+flex-direction: row;
+align-items: center;
+flex: 1;
+}
 
-        .navbar ul li {
-            color: white;
-            font-family: "tekoSemiBold";
-            font-size: 1.2em;
-            letter-spacing: 0.08em;
-        }
+.navbar ul li {
+color: white;
+font-family: "tekoSemiBold";
+font-size: 1.2em;
+letter-spacing: 0.08em;
+}
 
-            .navbar ul li:nth-last-child(2) {
-                flex-grow: 4;
-            }
+.navbar ul li:nth-last-child(2) {
+    flex-grow: 4;
+}
 
 
-            .navbar ul li a {
-                text-decoration: none;
-                color: white;
-            }
+.navbar ul li a {
+    text-decoration: none;
+    color: white;
+}
 
 
 
@@ -154,12 +214,18 @@ input[type="text"], input[type="password"] {
     width: 40px;
     height: 40px;
     border-radius: 50%;
+    z-index: 13;
 }
 
 
-    .profilePhoto:hover {
-        border: 2px dashed rgb(29, 237, 167);
-    }
+.profilePhoto:hover {
+    border: 2px dashed rgb(29, 237, 167);
+}
+
+.LogOut {
+    height: 100%;
+    width: 100%;
+}
 /*********************************      End MasterPage/navbar stylesheet    ************************/
 
 
@@ -230,7 +296,7 @@ input[type="text"], input[type="password"] {
     font-size: 1.6em;
 }
 
-#loginList input[type="text"] {
+#loginList input[type="text"], #loginList input[type="password"] {
     border: none;
     border-bottom: 2px solid rgb(30, 30, 30);
     background-color: rgb(243, 243, 243);
@@ -281,7 +347,7 @@ input[type="text"], input[type="password"] {
 
 
 
-#loginList input[type="text"]:focus {
+#loginList input[type="text"]:focus, input[type="password"]:focus {
     border-bottom: solid rgb(29, 237, 167) 2px;
 }
 
@@ -354,37 +420,37 @@ input::-webkit-input-placeholder {
     right: 10%;
 }
 
-    #BrightDivElements img {
-        align-self: center;
-        width: 360px;
+#BrightDivElements img {
+    align-self: center;
+    width: 360px;
+}
+
+#BrightDivElements span {
+    font-family: tekoregular;
+    color: white;
+    font-size: 3em;
+    border-bottom: solid 3px rgb(29, 237, 167);
+    padding: 0 0.3em;
+    padding-bottom: 0.5em;
+}
+
+
+#BrightDivElements a {
+    font-family: tekoregular;
+    color: white;
+    font-size: 2.5em;
+    border-bottom: solid 3px rgb(50, 93, 219);
+    padding: 0 0.5em;
+    padding-bottom: 0.3em;
+    text-decoration: none;
+}
+
+    #BrightDivElements a:hover {
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        background-color: rgb(50, 93, 219);
+        padding-top: 0.2em;
     }
-
-    #BrightDivElements span {
-        font-family: tekoregular;
-        color: white;
-        font-size: 3em;
-        border-bottom: solid 3px rgb(29, 237, 167);
-        padding: 0 0.3em;
-        padding-bottom: 0.5em;
-    }
-
-
-    #BrightDivElements a {
-        font-family: tekoregular;
-        color: white;
-        font-size: 2.5em;
-        border-bottom: solid 3px rgb(50, 93, 219);
-        padding: 0 0.5em;
-        padding-bottom: 0.3em;
-        text-decoration: none;
-    }
-
-        #BrightDivElements a:hover {
-            border-top-left-radius: 10px;
-            border-top-right-radius: 10px;
-            background-color: rgb(50, 93, 219);
-            padding-top: 0.2em;
-        }
 
 @media only screen and (max-height: 820px) {
     .HomeSize {
@@ -535,37 +601,43 @@ input::-webkit-input-placeholder {
     align-items: center;
 }
 
-    .registrationFinal img {
-        margin: 0 auto;
-        display: block;
-        max-width: 250px;
-        padding-bottom: 1em;
-    }
+.registrationFinal img {
+    margin: 0 auto;
+    display: block;
+    max-width: 250px;
+    padding-bottom: 1em;
+}
 
 .registrationFinal input[type=submit] {
     font-family: tekoSemiBold;
-    font-size: 3em;
+    font-size: 2.5em;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     background-color: rgb(50, 93, 219);
     padding-top: 0.2em;
+    padding-bottom: 0.4em;
     border: none;
     color: white;
+    margin-top: 1em;
+}
+
+.registrationFinal input[type=submit]:hover {
+    background-color: rgb(112, 131, 224);
 }
 
 
 #RegistrationMessage {
     font-family: tekoSemiBold;
     font-size: 3em;
-    margin-bottom: 5%;
+    margin-bottom: 0.6%;
 }
 
 .BoundingLBlue2 {
     background-color: rgb(50, 93, 219);
     width: 70%;
-    height: 4px;
+    height: 3px;
     display: block;
-    margin-bottom: 5%;
+    margin-bottom: 2%;
 }
 
 .grayDivRe {
@@ -604,6 +676,21 @@ input::-webkit-input-placeholder {
 }
 
 
+.WhiteDivRe input[type="text"], .WhiteDivRe input[type="password"] {
+    border: solid 3px rgb(50, 93, 219);
+    border-radius: 5px;
+    width: 7em;
+    height: 0.8em;
+    font-size: 1em;
+    font-family: tekoregular;
+    background-color: rgb(251, 251, 251);
+}
+
+.WhiteDivRe input[type="text"]:focus, input[type="password"]:focus {
+    border-color: rgb(112, 131, 224);
+    outline: none;
+}
+
 
 .regList {
     width: 80%;
@@ -617,16 +704,16 @@ input::-webkit-input-placeholder {
 }
 
 
-    .regList li {
-        width: 90%;
-        display: grid;
-        grid-template-columns: 30% 30% 40%;
-    }
+.regList li {
+    width: 90%;
+    display: grid;
+    grid-template-columns: 30% 30% 40%;
+}
 
 
-        .regList li input[type=text], input[type=text] {
-            flex-grow: 2;
-        }
+.regList li input[type=text], input[type=text] {
+    flex-grow: 2;
+}
 
 .WhiteDivRe input[type=submit] {
     position: absolute;
@@ -643,9 +730,9 @@ input::-webkit-input-placeholder {
     border-top-right-radius: 3px;
 }
 
-    .WhiteDivRe input[type=submit]:hover {
-        background-color: rgb(112, 131, 224);
-    }
+.WhiteDivRe input[type=submit]:hover {
+    background-color: rgb(112, 131, 224);
+}
 
 .graysml {
     font-size: 0.6em;
@@ -672,12 +759,20 @@ input::-webkit-input-placeholder {
     position: relative;
     background-color: rgb(251, 251, 251);
     left: 5%;
+    border: solid 3px rgb(254, 254, 254);
 }
 
-    .ProfessionContainer img {
-        display: block;
-        margin: 0 auto;
-    }
+.ProfessionContainer img {
+    display: block;
+    margin: 0 auto;
+}
+
+.imgContainerUserC img {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
 
 .ProfName {
     position: absolute;
@@ -702,3 +797,16 @@ input::-webkit-input-placeholder {
 .radios input[type="radio"]:checked + label, .radios input[type="checkbox"]:checked + label {
     border: solid 3px rgb(50, 93, 219);
 }
+
+.logoImgS5 {
+    background-color: rgb(11, 11, 11);
+    border-radius: 8px;
+    border: 2px solid rgb(11, 11, 11);
+    padding: 0.1em 0.2em;
+}
+
+.registrationFinal .smlText {
+    margin: 0.3em 0;
+}
+
+

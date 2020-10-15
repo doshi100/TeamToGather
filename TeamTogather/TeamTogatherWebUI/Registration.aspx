@@ -79,6 +79,7 @@
             <img src="DesignElements/Characters/purpleCharacterHomePage.png">
         </div>
         <div class="WhiteDivRe">
+            <span class="Header">Choose your Professions</span>
             <div id="CheckboxProf" class="radios" runat="server" visible="false">
             </div>
             <asp:Button ID="Button2" runat="server" Text="next" OnClick="next_Click" />
@@ -91,6 +92,7 @@
             <img src="DesignElements/Characters/purpleCharacterHomePage.png">
         </div>
         <div class="WhiteDivRe">
+            <span class="Header">Choose The Programs/Programming Languages you know how to use</span>
             <div id="CheckboxProg" class="radios" runat="server" visible="false">
             </div>
             <asp:Button ID="Button3" runat="server" Text="next" OnClick="next_Click" />
@@ -100,7 +102,9 @@
             <img src="DesignElements/Characters/happpypurpleCharacter.png" />
             <div class="BoundingLBlue2"></div>
             <span id="RegistrationMessage">Press Sign up And join the family !</span>
-        <asp:Button ID="Button4" runat="server" Text="Sign up" OnClick="next_Click" />
+            <img src="DesignElements/logo/TeamTogatherLogo.png" alt="TeamTogatherlogo" class="logoImgS5" />
+            <span class="smlText">Perfect ideas require Perfect teams.</span>
+            <asp:Button ID="Button4" runat="server" Text="Sign up" OnClick="next_Click" />
     </div>
 
 </asp:Content>

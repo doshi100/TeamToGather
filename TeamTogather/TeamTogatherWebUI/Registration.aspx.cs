@@ -19,18 +19,25 @@ namespace TeamTogatherWebUI
 
         protected void Page_PreInit(object sender, EventArgs e)
         {
-            if (!IsPostBack && Session["DivID"] == null)
+            try
             {
-                Session["DivID"] = 1;
-            }
-            if ((int)Session["DivID"] == 3)
-            {
+                if (!IsPostBack && Session["DivID"] == null)
+                {
+                    Session["DivID"] = 1;
+                }
+                if ((int)Session["DivID"] == 3)
+                {
 
-                InitBindProfessions(Page); // problematic bind, if I choose not do build the checkboxes again, the problem does not happen
+                    InitBindProfessions(Page); // problematic bind, if I choose not do build the checkboxes again, the problem does not happen
+                }
+                else if ((int)Session["DivID"] == 4)
+                {
+                    InitBindKnowledge(Page);
+                }
             }
-            else if ((int)Session["DivID"]  == 4)
+            catch
             {
-                InitBindKnowledge(Page);
+                Response.Redirect("HomePage.aspx");
             }
         }
 
@@ -51,13 +58,21 @@ namespace TeamTogatherWebUI
             //    Session["postid"] = System.Guid.NewGuid().ToString();
             //    ViewState["postids"] = Session["postid"].ToString();
             //}
-            if((int)Session["DivID"] == 3)
+            try
             {
-                BindProfessions(CheckboxProf, Page);
+                if ((int)Session["DivID"] == 3)
+                {
+                    BindProfessions(CheckboxProf, Page);
+                }
+                if ((int)Session["DivID"] == 4)
+                {
+                    BindKnowledge(CheckboxProg, Page);
+                }
+
             }
-            if((int)Session["DivID"] == 4)
+            catch
             {
-                BindKnowledge(CheckboxProg, Page);
+                Response.Redirect("HomePage.aspx");
             }
 
         }
@@ -65,66 +80,42 @@ namespace TeamTogatherWebUI
         // if the next button is clicked, make the necessary changes.
         protected void next_Click(object sender, EventArgs e)
         {
-            if (Page.IsValid) // checkes if the page is valid to proceed or to start the form.
+            try
             {
-                //if (IsPageRefresh)
-                //{
-                //    Session["DivID"] = (int)Session["DivID"] - 1; // if the page was refreshed, make sure to keep the user at the same stage.
-                //}
-
-                if ((int)Session["DivID"] == 1)
+                if (Page.IsValid) // checkes if the page is valid to proceed or to start the form.
                 {
-                    if (PassReg.Text == ConfiPassReg.Text)
-                    {
-                        // save the username, password and email the user passed to the system
-                        ViewState["username"] = UserNameReg.Text;
-                        ViewState["password"] = PassReg.Text;
-                        ViewState["Email"] = EmailAddressReg.Text;
-                        // -------------------------------
-                        // change from part 1 of the registration to part 2
-                        registrationP1.Visible = false;
-                        registrationP2.Visible = true;
-                        // -------------------------------
-                        // set the language and countries dropdown menus
-                        Dictionary<int, string> langdic = GeneralMethods.GetLang();
-                        BindDropDown(langDropDown, langdic);
-                        Dictionary<int, string> countrydic = GeneralMethods.GetCountries();
-                        BindDropDown(CountryDropDown, countrydic);
-                        // ------------------------------------------
-                        // sets the Birthday selection dropdowns.
-                        Dictionary<int, int> dic = GetDays();
-                        BindDropDown(DropDownDay, dic);
-                        dic = GetMonth();
-                        BindDropDown(DropDownMonth, dic);
-                        dic = GetYear();
-                        BindDropDown(DropDownYear, dic);
+                    //if (IsPageRefresh)
+                    //{
+                    //    Session["DivID"] = (int)Session["DivID"] - 1; // if the page was refreshed, make sure to keep the user at the same stage.
+                    //}
 
-                    }
-                    else
+                    if ((int)Session["DivID"] == 1)
                     {
-                        CredentialsFlag = false;
-                    }
-
-                }
-                else if ((int)Session["DivID"] == 2)
-                {
-                    try
-                    {
-                        // save the Birthday Date, Language and country of the user.
-                        if (int.Parse(WeekHours.Text) >= 1 && int.Parse(WeekHours.Text) <= 50)
+                        if (PassReg.Text == ConfiPassReg.Text)
                         {
-                            ViewState["FreeTime"] = int.Parse(WeekHours.Text);
-                            ViewState["year"] = int.Parse(DropDownYear.SelectedValue);
-                            ViewState["month"] = int.Parse(DropDownMonth.SelectedValue);
-                            ViewState["day"] = int.Parse(DropDownDay.SelectedValue);
-                            ViewState["Language"] = int.Parse(langDropDown.SelectedValue);
-                            ViewState["Country"] = int.Parse(CountryDropDown.SelectedValue);
-                            // ---------------------------------------------
-                            // change from part 2 of the registration to part 3
-                            registrationP2.Visible = false;
-                            BindProfessions(CheckboxProf, Page);
-                            registrationP3.Visible = true;
-                            CheckboxProf.Visible = true;
+                            // save the username, password and email the user passed to the system
+                            ViewState["username"] = UserNameReg.Text;
+                            ViewState["password"] = PassReg.Text;
+                            ViewState["Email"] = EmailAddressReg.Text;
+                            // -------------------------------
+                            // change from part 1 of the registration to part 2
+                            registrationP1.Visible = false;
+                            registrationP2.Visible = true;
+                            // -------------------------------
+                            // set the language and countries dropdown menus
+                            Dictionary<int, string> langdic = GeneralMethods.GetLang();
+                            BindDropDown(langDropDown, langdic);
+                            Dictionary<int, string> countrydic = GeneralMethods.GetCountries();
+                            BindDropDown(CountryDropDown, countrydic);
+                            // ------------------------------------------
+                            // sets the Birthday selection dropdowns.
+                            Dictionary<int, int> dic = GetDays();
+                            BindDropDown(DropDownDay, dic);
+                            dic = GetMonth();
+                            BindDropDown(DropDownMonth, dic);
+                            dic = GetYear();
+                            BindDropDown(DropDownYear, dic);
+
                         }
                         else
                         {
@@ -132,48 +123,88 @@ namespace TeamTogatherWebUI
                         }
 
                     }
-                    catch
+                    else if ((int)Session["DivID"] == 2)
                     {
-                        CredentialsFlag = false;
-                    }
-                }
-                else if ((int)Session["DivID"] == 3)
-                {
-                    // change from part 3 of the registration to part 4
-                    List<int> UserProf = GetCheckBox(CheckboxProf);
-                    ViewState["Profid"] = UserProf;
-                    registrationP3.Visible = false;
-                    BindKnowledge(CheckboxProg, Page);
-                    registrationP4.Visible = true;
-                    CheckboxProg.Visible = true;
-                    // ---------------------------------------------
-                    //next.Visible = true;
-                }
-                else if((int)Session["DivID"] == 4)
-                {
-                    List<int> UserKnowledge = GetCheckBox(CheckboxProg);
-                    ViewState["Knowids"] = UserKnowledge;
-                    registrationP4.Visible = false;
-                    registrationP5.Visible = true;
-                    next.Text = "Sign up";
-                    
-                }
-                else if((int)Session["DivID"] == 5)
-                {
-                    DateTime Birthday = GeneralMethods.CreateDateTime((int)ViewState["year"], (int)ViewState["month"], (int)ViewState["day"]);
-                    bool adduser = UserInfo.AddUser((string)ViewState["username"], (string)ViewState["password"], (string)ViewState["Email"], Birthday, (int)ViewState["Language"],
-                        (int)ViewState["Country"], (int)ViewState["FreeTime"], DateTime.Now, (List<int>)ViewState["Profid"], (List<int>)ViewState["Knowids"]);
-                    if(adduser)
-                    {
-                        Response.Redirect("HomePage.aspx");
-                    }
-                }
+                        try
+                        {
+                            // save the Birthday Date, Language and country of the user.
+                            if (int.Parse(WeekHours.Text) >= 1 && int.Parse(WeekHours.Text) <= 50)
+                            {
+                                ViewState["FreeTime"] = int.Parse(WeekHours.Text);
+                                ViewState["year"] = int.Parse(DropDownYear.SelectedValue);
+                                ViewState["month"] = int.Parse(DropDownMonth.SelectedValue);
+                                ViewState["day"] = int.Parse(DropDownDay.SelectedValue);
+                                ViewState["Language"] = int.Parse(langDropDown.SelectedValue);
+                                ViewState["Country"] = int.Parse(CountryDropDown.SelectedValue);
+                                // ---------------------------------------------
+                                // change from part 2 of the registration to part 3
+                                registrationP2.Visible = false;
+                                BindProfessions(CheckboxProf, Page);
+                                registrationP3.Visible = true;
+                                CheckboxProf.Visible = true;
+                            }
+                            else
+                            {
+                                CredentialsFlag = false;
+                            }
 
-                if (CredentialsFlag)
-                {
-                    Session["DivID"] = (int)Session["DivID"] + 1; ; // increment the divID to identify that the user moved to the next stage
+                        }
+                        catch
+                        {
+                            CredentialsFlag = false;
+                        }
+                    }
+                    else if ((int)Session["DivID"] == 3)
+                    {
+                        // change from part 3 of the registration to part 4
+                        List<int> UserProf = GetCheckBox(CheckboxProf);
+                        if (UserProf.Count >= 1)
+                        {
+                            ViewState["Profid"] = UserProf;
+                            registrationP3.Visible = false;
+                            BindKnowledge(CheckboxProg, Page);
+                            registrationP4.Visible = true;
+                            CheckboxProg.Visible = true;
+                            // ---------------------------------------------
+                            //next.Visible = true;
+                        }
+                        else
+                        {
+                            CredentialsFlag = false;
+                        }
+
+                    }
+                    else if ((int)Session["DivID"] == 4)
+                    {
+                        List<int> UserKnowledge = GetCheckBox(CheckboxProg);
+                        ViewState["Knowids"] = UserKnowledge;
+                        registrationP4.Visible = false;
+                        registrationP5.Visible = true;
+                        next.Text = "Sign up";
+
+                    }
+                    else if ((int)Session["DivID"] == 5)
+                    {
+                        DateTime Birthday = GeneralMethods.CreateDateTime((int)ViewState["year"], (int)ViewState["month"], (int)ViewState["day"]);
+                        bool adduser = UserInfo.AddUser((string)ViewState["username"], (string)ViewState["password"], (string)ViewState["Email"], Birthday, (int)ViewState["Language"],
+                            (int)ViewState["Country"], (int)ViewState["FreeTime"], DateTime.Now, (List<int>)ViewState["Profid"], (List<int>)ViewState["Knowids"]);
+                        if (adduser)
+                        {
+                            Response.Redirect("HomePage.aspx");
+                        }
+                    }
+
+                    if (CredentialsFlag)
+                    {
+                        Session["DivID"] = (int)Session["DivID"] + 1; ; // increment the divID to identify that the user moved to the next stage
+                    }
                 }
             }
+            catch
+            {
+                Response.Redirect("HomePage.aspx");
+            }
+            
         }
 
 
@@ -336,7 +367,7 @@ namespace TeamTogatherWebUI
                         {
                             counter++;
                             id = int.Parse(bu.Value);
-                            
+
                         }
                     }
                 }

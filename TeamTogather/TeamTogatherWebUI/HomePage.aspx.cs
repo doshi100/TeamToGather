@@ -12,9 +12,9 @@ namespace TeamTogatherWebUI
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["UserID"] != null)
+            if(Session["DivID"] != null)
             {
-                LoginMessage.Text = "Logged in!";
+                Session.Remove("DivID");
             }
 
         }
