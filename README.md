@@ -1,12 +1,25 @@
 # TeamToGather
 A platform for creative people who want to start a project togther
 
+How to add project positions to a project in Projects and project programs to projectPositions
+------------------------------------------------
+add project positions to a project
+------------------
+1. create a OrderedDictionary<int profession, List<int> Programs>
+2. sort the dictonary by profession(numerically)
+3. run over the dictionary keys and add professions(positions) to the project.
+  
+add project positions to a project
+------------------------------------
+4. run over the dictionary again.
+5. do a SELECT statement to get a table of that profession (SELECT 'TABLEPRF' FROM 'TABLENAME' WHERE PROF=thispair.key)
+6. run over with a loop over the retrieved table and add the programs in the specified ProjectPosition
+7. IF there is more than one position to run on, add i+1 to the first for loop.
+8. do 6 again until it gets out of the loop, and back to 4.
 
 bugs
 -----
-- you need to change registration text areas to be required, because you can not enter a username and email and 
-  it will still be moving to the next level of the registration page
-- you need to fix the postback issue when the user refresehes the page, the ID is incremented by 1 and for some reason it triggers the button
+
 
 
 
