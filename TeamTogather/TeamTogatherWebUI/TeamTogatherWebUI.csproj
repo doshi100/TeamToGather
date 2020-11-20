@@ -69,6 +69,7 @@
     <Content Include="DesignElements\Characters\purpleCharacterHomePage.png" />
     <Content Include="DesignElements\Characters\WebSiteCharacterGreen.png" />
     <Content Include="DesignElements\Characters\WebSiteCharacterPurple.png" />
+    <Content Include="DesignElements\elements\Arrow.png" />
     <Content Include="DesignElements\elements\pattern.png" />
     <Content Include="DesignElements\fonts\righteous\Image sample.jpg" />
     <Content Include="DesignElements\fonts\righteous\OFL.txt" />
@@ -123,6 +124,13 @@
     <Content Include="DesignElements\ProgramsLogo\ZBrush.png" />
     <Content Include="global.asax" />
     <Content Include="HomePage.aspx" />
+    <Content Include="librarys\medium.js" />
+    <Content Include="librarys\medium.min.js" />
+    <Content Include="librarys\rangy-classapplier.js" />
+    <Content Include="librarys\rangy-core.js" />
+    <Content Include="librarys\undo.js" />
+    <Content Include="medium.css" />
+    <Content Include="ProjectCreation.aspx" />
     <Content Include="RegisterUserControl.ascx" />
     <Content Include="Registration.aspx" />
     <Content Include="TeamTogatherDesign.css" />
@@ -139,6 +147,13 @@
     </Compile>
     <Compile Include="HomePage.aspx.designer.cs">
       <DependentUpon>HomePage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ProjectCreation.aspx.cs">
+      <DependentUpon>ProjectCreation.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ProjectCreation.aspx.designer.cs">
+      <DependentUpon>ProjectCreation.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegisterUserControl.ascx.cs">

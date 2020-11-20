@@ -19,14 +19,14 @@ namespace BL
         public int ProjectStatus { get; set; }
         public int NumRateVoters { get; set; }
         public int ProjectRate { get; set; }
-        public int TeamSize { get; set; }
         public string ProjectContent { get; set; }
+        public DateTime DateCreated { get; set; }
         // ********end of properties*****************
 
         /// <summary>
         /// constructor no 1. by manual fields
         /// </summary>
-        public Project(int ProjectID, int AdminUSID, int MinAge, int ProjectStatus, int NumRateVoters, int ProjectRate, int TeamSize, string ProjectContent)
+        public Project(int ProjectID, int AdminUSID, int MinAge, int ProjectStatus, int NumRateVoters, int ProjectRate, string ProjectContent, DateTime DateCreated)
         {
             this.ProjectID = ProjectID;
             this.AdminUSID = AdminUSID;
@@ -34,8 +34,8 @@ namespace BL
             this.ProjectStatus = ProjectStatus;
             this.NumRateVoters = NumRateVoters;
             this.ProjectRate = ProjectRate;
-            this.TeamSize = TeamSize;
             this.ProjectContent = ProjectContent;
+            this.DateCreated = DateCreated;
         }
         /// <summary>
         /// Empty Constructor no.2
@@ -47,7 +47,7 @@ namespace BL
 
 
         /// <summary>
-        /// constructor no 1. by DataRow that is given by ProjectDB.ProjectByUserID(userID); method
+        /// method that use the DataRow that is given by ProjectDB.ProjectByUserID(userID) and returns a list of projects the user has, that method will later be used +
         /// </summary>
         public static List<Project> ReturnUserProjects(int userID)
         {
@@ -62,12 +62,20 @@ namespace BL
                 newpr.ProjectStatus = (int)row["ProjectStatus"];
                 newpr.NumRateVoters = (int)row["NumRateVoters"];
                 newpr.ProjectRate = (int)row["ProjectRate"];
-                newpr.TeamSize = (int)row["TeamSize"];
                 newpr.ProjectContent = (string)row["ProjectContent"];
+                newpr.DateCreated = (DateTime)row["DateCreated"];
                 projects.Add(newpr);
             }
             return projects;
         }
-        
+
+
+        public static bool AddProject(int AdminUSID, int MinAge, int ProjectStatus, string ProjectContent,
+            int AdminProfession, List<KeyValuePair<int, List<int>>> ProfessionList)
+        {
+            return ProjectDB.AddProject(AdminUSID, MinAge, ProjectStatus, ProjectContent, AdminProfession, ProfessionList);
+        }
+
+
     }
 }

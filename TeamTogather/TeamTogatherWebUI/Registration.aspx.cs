@@ -19,6 +19,7 @@ namespace TeamTogatherWebUI
 
         protected void Page_PreInit(object sender, EventArgs e)
         {
+            
             try
             {
                 if (!IsPostBack && Session["DivID"] == null)
@@ -28,7 +29,7 @@ namespace TeamTogatherWebUI
                 if ((int)Session["DivID"] == 3)
                 {
 
-                    InitBindProfessions(Page); // problematic bind, if I choose not do build the checkboxes again, the problem does not happen
+                    InitBindProfessions(Page); 
                 }
                 else if ((int)Session["DivID"] == 4)
                 {
@@ -190,7 +191,7 @@ namespace TeamTogatherWebUI
                             (int)ViewState["Country"], (int)ViewState["FreeTime"], DateTime.Now, (List<int>)ViewState["Profid"], (List<int>)ViewState["Knowids"]);
                         if (adduser)
                         {
-                            Response.Redirect("HomePage.aspx");
+                            Response.Redirect("HomePage.aspx", false);
                         }
                     }
 
@@ -200,7 +201,7 @@ namespace TeamTogatherWebUI
                     }
                 }
             }
-            catch
+            catch (Exception i)
             {
                 Response.Redirect("HomePage.aspx");
             }
