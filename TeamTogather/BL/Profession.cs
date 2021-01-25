@@ -24,6 +24,16 @@ namespace BL
             this.ProfPath = ProfPath;
         }
 
+        public Profession (int profID)
+        {
+            DataRow prof = ProfessionDB.RetProfession(profID);
+            if(prof != null)
+            {
+                this.ProfessionID = (int)prof["ProfessionID"];
+                this.ProfName = (string)prof["ProfName"].ToString();
+                this.ProfPath = (string)prof["ProfPath"].ToString();
+            }
+        }
 
         /// <summary>
         /// the method builds a profession list from a datatable(the table in the db) and returns it

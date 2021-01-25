@@ -10,6 +10,27 @@ namespace DAL
     public class ProfessionDB
     {
 
+
+        /// <summary>
+        /// returns profession row for a chosen Profession ID.
+        /// </summary>
+        public static DataRow RetProfession(int ProfID)
+        {
+            try
+            {
+                DBHelper helper = new DBHelper(Constants.PROVIDER, Constants.PATH);
+                string sql = $"SELECT * FROM Professions WHERE ProfessionID = {ProfID};";
+                DataTable dtprof = helper.GetDataTable(sql);
+                return dtprof.Rows[0];
+            }
+            catch
+            {
+                return null;
+            }
+        }
+        
+        
+        
         /// <summary>
         /// returns a the db Profession table as a DataTable 
         /// </summary>

@@ -33,6 +33,8 @@ namespace BL
         // usertype is ----> Type on the db
         public List<Project> UserProjects { get; set; } // saves the projects the user has.
         public List<UserKnowledge> UserPK { get; set; }// saves the skills the user have (example, the user knows how to program in c++ or know photoshop)
+        private List<UserContact> userContacts; // user's contacts such as youtube, facebook, instagram and etc. NOT INITATED IN A *****CONSTRUCTOR*****
+        private List<ProtfolioCreation> UserCreations; // user's creations that are saved in a local folder, the creations are photos. NOT INITATED IN A *****CONSTRUCTOR*****
         // The end of the properties. **************************************************************************
 
         /// <summary>
@@ -81,13 +83,49 @@ namespace BL
                 this.NumRateVoters = (int)userRow["NumRateVoters"];
                 this.UserRate = (int)userRow["UserRate"];
                 this.IsBanned = (bool)userRow["IsBanned"];
-                this.ProjectSum = (int)userRow["ProjectsSum"];
                 this.RegistrationDate = (DateTime)userRow["RegistrationDate"]; 
                 this.LoginDate = (DateTime)userRow["LoginDate"]; 
-                this.UserType = (int)userRow["Type"];
+                this.UserType = (int)userRow["UserType"];
                 this.ProfilePath = (string)userRow["ProfilePath"];
                 this.UserProjects = Project.ReturnUserProjects(this.ID);
                 this.UserPK = UserKnowledge.GetUserKnowledgeBL(this.ID);
+            }
+            catch (Exception)
+            {
+                // does nothing
+            }
+
+        }
+
+
+        /// <summary>
+        /// constructor no. 2, takes an ID of a user and creats a user object without or with lists of knowledge and professions. 'thing' doesn't matter.
+        /// </summary>
+        public UserInfo(int userID, bool BuildLists, bool thing)
+        {
+            try
+            {
+                DataRow userRow = UserDB.GetUserByID(userID);
+                this.ID = (int)userRow["ID"];
+                this.UserName = (string)userRow["UserName"];
+                this.Password = (string)userRow["Pass"];
+                this.Email = (string)userRow["Email"];
+                this.Birthday = (DateTime)userRow["Birthday"];
+                this.NativeLang = (int)userRow["NativeLang"];
+                this.Country = (int)userRow["Country"];
+                this.WeeklyFreeTime = (int)userRow["WeeklyFreeTime"];
+                this.NumRateVoters = (int)userRow["NumRateVoters"];
+                this.UserRate = (int)userRow["UserRate"];
+                this.IsBanned = (bool)userRow["IsBanned"];
+                this.RegistrationDate = (DateTime)userRow["RegistrationDate"];
+                this.LoginDate = (DateTime)userRow["LoginDate"];
+                this.UserType = (int)userRow["UserType"];
+                this.ProfilePath = (string)userRow["ProfilePath"];
+                if(BuildLists)
+                {
+                    this.UserProjects = Project.ReturnUserProjects(this.ID);
+                    this.UserPK = UserKnowledge.GetUserKnowledgeBL(this.ID);
+                }
             }
             catch (Exception)
             {
@@ -125,6 +163,17 @@ namespace BL
                 this.UserPK = UserKnowledge.GetUserKnowledgeBL(ID);
             }
 
+        }
+
+        /// <summary>
+        /// Creates an Object of a user and with only his ID
+        /// </summary>
+        public UserInfo(int UserID, bool CreateObject)
+        {
+            if (CreateObject)
+            {
+                this.ID = UserID; 
+            }
         }
 
         /// <summary>
@@ -183,5 +232,206 @@ namespace BL
         {
             return UserDB.CheckAdmin(id);
         }
+
+        /// <summary>
+        /// Gets the user Professions by his id And returns a dictonary that contains valus as  : <ProfessionID><professionName>
+        /// </summary>
+        /// <returns></returns>
+        public Dictionary<int, string> GetUserProfessions()
+        {
+            Dictionary<int, string> userProfessions = new Dictionary<int, string>();
+            DataTable dtProf = UserDB.GetUserProfessions(this.ID);
+            if (dtProf != null)
+            {
+                foreach (DataRow row in dtProf.Rows)
+                {
+                    userProfessions.Add((int)row["ProfID"], (string)row["ProfName"]);
+                }
+            }
+            return userProfessions;
+        }
+        /// <summary>
+        /// NON-STATIC : Gets the user Professions by his id And returns a list that contains valus as a list of : <ProfessionID>
+        /// </summary>
+        public List<int> GetUserProfessionsList()
+        {
+            List<int> userProfessions = new List<int>();
+            DataTable dtProf = UserDB.GetUserProfessions(this.ID);
+            if (dtProf != null)
+            {
+                foreach (DataRow row in dtProf.Rows)
+                {
+                    userProfessions.Add((int)row["ProfID"]);
+                }
+            }
+            return userProfessions;
+        }
+
+        public List<Profession> GetUserProfessionsList2()
+        {
+            List<Profession> userProfessions = new List<Profession>();
+            DataTable dtProf = UserDB.GetUserProfessions2(this.ID);
+            if (dtProf != null)
+            {
+                foreach (DataRow row in dtProf.Rows)
+                {
+                    Profession prof = new Profession((int)row["ProfessionID"], (string)row["ProfName"], (string)row["ProfPath"]);
+                    userProfessions.Add(prof);
+                }
+            }
+            return userProfessions;
+        }
+        /// <summary>
+        /// STATIC : Gets the user Professions by his id And returns a list that contains valus as a list of : <ProfessionID>
+        /// </summary>
+        public static List<int> GetUserProfessions(int id)
+        {
+            List<int> userProfessions = new List<int>();
+            DataTable dtProf = UserDB.GetUserProfessions(id);
+            if (dtProf != null)
+            {
+                foreach (DataRow row in dtProf.Rows)
+                {
+                    userProfessions.Add((int)row["ProfID"]);
+                }
+            }
+            return userProfessions;
+        }
+
+
+        public static List<UserInfo> ShowUsers(int profID, DateTime age, int langID, int WeeklyFreeTime, int userRate,
+                                          int IndexUserID)
+        {
+            List<UserInfo> users = new List<UserInfo>();
+            DataTable dtUsers = UserDB.ShowUsers(profID, age, langID, WeeklyFreeTime, userRate, IndexUserID);
+            if (dtUsers.Rows.Count != 0)
+            {
+                foreach (DataRow row in dtUsers.Rows)
+                {
+                    UserInfo p = new UserInfo((int)row["ID"], true);
+                    p.UserName = (string)row["UserName"];
+                    if(row["ProfilePath"] != DBNull.Value)
+                    {
+                        p.ProfilePath = (string)row["ProfilePath"];
+                    }
+                    else
+                    {
+                        p.ProfilePath = "";
+                    }
+                    users.Add(p);
+                }
+            }
+            return users;
+        }
+
+        /// <summary>
+        /// setter for user's contacts
+        /// </summary>
+        public void SetUserContacts()
+        {
+            List<UserContact> Lusercontacts = new List<UserContact>();
+            DataTable contacts = UserDB.GetUserContacts(this.ID);
+            if(contacts.Rows.Count > 0)
+            {
+                foreach(DataRow contact in contacts.Rows)
+                {
+                    UserContact contact_obj = new UserContact(contact);
+                    Lusercontacts.Add(contact_obj);
+                }
+            }
+            this.userContacts = Lusercontacts;
+        }
+
+        /// <summary>
+        /// getter for user's contacts
+        /// </summary>
+        public List<UserContact> GetUserContacts()
+        {
+            List<UserContact> contacts = new List<UserContact>(this.userContacts);
+            return contacts;
+        }
+
+        /// <summary>
+        /// setter for user's creations
+        /// </summary>
+        public void SetUserCreations()
+        {
+            List<ProtfolioCreation> Lusercreations = new List<ProtfolioCreation>();
+            DataTable creations = UserDB.GetUserCreations(this.ID);
+            if (creations.Rows.Count > 0)
+            {
+                foreach (DataRow creation in creations.Rows)
+                {
+                    ProtfolioCreation creation_obj = new ProtfolioCreation(creation);
+                    Lusercreations.Add(creation_obj);
+                }
+            }
+            this.UserCreations = Lusercreations;
+        }
+
+        /// <summary>
+        /// getter for user's contacts
+        /// </summary>
+        public List<ProtfolioCreation> GetUserCreations()
+        {
+            List<ProtfolioCreation> creations = new List<ProtfolioCreation>(this.UserCreations);
+            return creations;
+        }
+
+        public static bool RateUser(int UserRatedID, int userID, int UserRate)
+        {
+            return UserDB.RateUser(UserRatedID, userID, UserRate);
+        }
+
+
+        public List<Project> GetUserDoneProjects(DateTime projectDate)
+        {
+            List<Project> doneProjects = new List<Project>();
+            DataTable doneProjects_dt = UserDB.GetUserDoneProjects(this.ID , projectDate);
+            if(doneProjects_dt.Rows.Count > 0)
+            {
+                foreach(DataRow row in doneProjects_dt.Rows)
+                {
+                    Project rowP = new Project(row, true);
+                    doneProjects.Add(rowP);
+                }
+            }
+            return doneProjects;
+        }
+
+        public Dictionary<Request, string> GetProjectsUserRequest(DateTime projectDate)
+        {
+            Dictionary<Request, string> requests = new Dictionary<Request, string>();
+            DataTable dt = UserDB.GetProjectsUserRequest(this.ID, projectDate);
+            if(dt.Rows.Count > 0)
+            {
+                foreach(DataRow row in dt.Rows)
+                {
+                    string projectContent = (string)row["ProjectContent"];
+                    Request re = new Request(row, true);
+                    requests.Add(re, projectContent);
+                }
+            }
+            return requests;
+        }
+
+        public Dictionary<Request, Project> GetUserRequestsToProjects(DateTime projectDate)
+        {
+            Dictionary<Request, Project> requests = new Dictionary<Request, Project>();
+            DataTable dt = UserDB.GetUserRequestsToProjects(this.ID, projectDate);
+            if (dt.Rows.Count > 0)
+            {
+                foreach (DataRow row in dt.Rows)
+                {
+                    Request re = new Request(row, true);
+                    Project proj = new Project(row, false);
+                    requests.Add(re, proj);
+                }
+            }
+            return requests;
+        }
+
+
+
     }
 }

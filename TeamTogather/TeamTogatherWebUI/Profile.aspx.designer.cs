@@ -10,78 +10,87 @@
 namespace TeamTogatherWebUI {
     
     
-    public partial class ProjectCreation {
+    public partial class Profile {
         
         /// <summary>
-        /// EditorText control.
+        /// PostRate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox EditorText;
+        protected global::System.Web.UI.WebControls.HiddenField PostRate;
         
         /// <summary>
-        /// PositionsPostPassed control.
+        /// PostProjID control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField PositionsPostPassed;
+        protected global::System.Web.UI.WebControls.HiddenField PostProjID;
         
         /// <summary>
-        /// ProfContainer control.
+        /// JoinRequestID control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl ProfContainer;
+        protected global::System.Web.UI.WebControls.HiddenField JoinRequestID;
         
         /// <summary>
-        /// ProgContainer control.
+        /// ProjectShownScriptManager control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl ProgContainer;
+        protected global::System.Web.UI.ScriptManager ProjectShownScriptManager;
         
         /// <summary>
-        /// AgeDropDown control.
+        /// UpdateShownProjects control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList AgeDropDown;
+        protected global::System.Web.UI.UpdatePanel UpdateShownProjects;
         
         /// <summary>
-        /// ProjectStatus control.
+        /// ShownProjectsIndex control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ProjectStatus;
+        protected global::System.Web.UI.WebControls.HiddenField ShownProjectsIndex;
         
         /// <summary>
-        /// PrimaryPositionDrop control.
+        /// ProjectsShowArea control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList PrimaryPositionDrop;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl ProjectsShowArea;
         
         /// <summary>
-        /// CreateProjectB control.
+        /// ProjectRepeater control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button CreateProjectB;
+        protected global::System.Web.UI.WebControls.Repeater ProjectRepeater;
+        
+        /// <summary>
+        /// LoadMoreProjB control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button LoadMoreProjB;
     }
 }

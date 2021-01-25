@@ -43,6 +43,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="HtmlAgilityPack, Version=1.11.28.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
+      <HintPath>..\packages\HtmlAgilityPack.1.11.28\lib\Net45\HtmlAgilityPack.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=2.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
@@ -70,7 +73,13 @@
     <Content Include="DesignElements\Characters\WebSiteCharacterGreen.png" />
     <Content Include="DesignElements\Characters\WebSiteCharacterPurple.png" />
     <Content Include="DesignElements\elements\Arrow.png" />
+    <Content Include="DesignElements\elements\delete.png" />
+    <Content Include="DesignElements\elements\HoverDelete.png" />
+    <Content Include="DesignElements\elements\Loading2.gif" />
     <Content Include="DesignElements\elements\pattern.png" />
+    <Content Include="DesignElements\elements\ProfilePicEmpty.png" />
+    <Content Include="DesignElements\elements\ProjectTemplate.jpg" />
+    <Content Include="DesignElements\elements\projectTemplate2.jpg" />
     <Content Include="DesignElements\fonts\righteous\Image sample.jpg" />
     <Content Include="DesignElements\fonts\righteous\OFL.txt" />
     <Content Include="DesignElements\fonts\teko\OFL.txt" />
@@ -93,6 +102,8 @@
     <Content Include="DesignElements\professions\VideoEditor.png" />
     <Content Include="DesignElements\professions\VoiceActor.png" />
     <Content Include="DesignElements\professions\writer.png" />
+    <Content Include="DesignElements\ProfilePictures\monkey.jpg" />
+    <Content Include="DesignElements\ProfilePictures\NoUserProfile.png" />
     <Content Include="DesignElements\ProgramsLogo\3DSMAX.png" />
     <Content Include="DesignElements\ProgramsLogo\AdobeXD.png" />
     <Content Include="DesignElements\ProgramsLogo\Animate.png" />
@@ -130,11 +141,15 @@
     <Content Include="librarys\rangy-core.js" />
     <Content Include="librarys\undo.js" />
     <Content Include="medium.css" />
+    <Content Include="Profile.aspx" />
     <Content Include="ProjectCreation.aspx" />
+    <Content Include="ProjectDescription.aspx" />
+    <Content Include="ProjectShowcase.aspx" />
     <Content Include="RegisterUserControl.ascx" />
     <Content Include="Registration.aspx" />
     <Content Include="TeamTogatherDesign.css" />
     <Content Include="TogatherJS.js" />
+    <Content Include="UserShowcase.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -148,12 +163,33 @@
     <Compile Include="HomePage.aspx.designer.cs">
       <DependentUpon>HomePage.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Profile.aspx.cs">
+      <DependentUpon>Profile.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Profile.aspx.designer.cs">
+      <DependentUpon>Profile.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ProjectCreation.aspx.cs">
       <DependentUpon>ProjectCreation.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="ProjectCreation.aspx.designer.cs">
       <DependentUpon>ProjectCreation.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ProjectDescription.aspx.cs">
+      <DependentUpon>ProjectDescription.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ProjectDescription.aspx.designer.cs">
+      <DependentUpon>ProjectDescription.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ProjectShowcase.aspx.cs">
+      <DependentUpon>ProjectShowcase.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ProjectShowcase.aspx.designer.cs">
+      <DependentUpon>ProjectShowcase.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegisterUserControl.ascx.cs">
@@ -176,6 +212,13 @@
     </Compile>
     <Compile Include="TeamTogatherMaster.Master.designer.cs">
       <DependentUpon>TeamTogatherMaster.Master</DependentUpon>
+    </Compile>
+    <Compile Include="UserShowcase.aspx.cs">
+      <DependentUpon>UserShowcase.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserShowcase.aspx.designer.cs">
+      <DependentUpon>UserShowcase.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

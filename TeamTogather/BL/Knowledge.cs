@@ -13,6 +13,7 @@ namespace BL
         public int ProgramID { get; set; } // the ID of the program/skill the user knows
         public string PName { get; set; } // the name of the program/skill the user knows
         public string ProgPath { get; set; } // the path to the photo of this program/skill (example: knows photoshop ---> path to a picture of the logo of Photoshop)
+         
 
 
         /// <summary>
@@ -23,6 +24,13 @@ namespace BL
             this.ProgramID = ProgramID;
             this.PName = PName;
             this.ProgPath = ProgPath;
+        }
+
+        /// <summary>
+        /// constructor no.2 builds an empty knowledge object
+        /// </summary>
+        public Knowledge()
+        {
         }
 
 
