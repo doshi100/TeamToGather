@@ -432,6 +432,25 @@ namespace BL
         }
 
 
+        public List<Project> ReturnUserProjects(DateTime dtIndex)
+        {
+            List<Project> projects = new List<Project>();
+            DataTable userProject = ProjectDB.ProjectsByUserID(this.ID, dtIndex);
+            foreach (DataRow row in userProject.Rows)
+            {
+                Project newpr = new Project();
+                newpr.ProjectID = (int)row["ProjectID"];
+                newpr.AdminUSID = (int)row["AdminUSID"];
+                newpr.MinAge = (int)row["MinAge"];
+                newpr.ProjectStatus = (int)row["ProjectStatus"];
+                newpr.NumRateVoters = (int)row["NumRateVoters"];
+                newpr.ProjectRate = (int)row["ProjectRate"];
+                newpr.ProjectContent = (string)row["ProjectContent"];
+                newpr.DateCreated = (DateTime)row["DateCreated"];
+                projects.Add(newpr);
+            }
+            return projects;
+        }
 
     }
 }

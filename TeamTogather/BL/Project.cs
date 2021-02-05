@@ -215,6 +215,11 @@ namespace BL
             return ProjectDB.UpdateRequestStatus(requestStatus, requestID);
         }
 
+        public static bool UpdateRequestStatusByPos(int positionID, int userID, int statusRe)
+        {
+            return ProjectDB.UpdateRequestStatusByPos(positionID, userID, statusRe);
+        }
+
         public static bool UpdateProject(int minage, int projectStatus, string ProjectContent, int projectID)
         {
             string ProjectContentSanitized = ProjectContent.Replace("'", "''"); // santize the apostrophe(') for sql later on to reduce inconvenience
@@ -224,6 +229,11 @@ namespace BL
         public static bool DeletePos(int positionID)
         {
             return ProjectDB.DeletePos(positionID);
+        }
+
+        public static bool neutralizePositionsRequests(int positionID)
+        {
+            return ProjectDB.neutralizePositionsRequests(positionID);
         }
 
     }

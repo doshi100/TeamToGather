@@ -19,9 +19,28 @@ namespace DAL
             try
             {
                 DBHelper helper = new DBHelper(Constants.PROVIDER, Constants.PATH);
-                string sql = "Select Users.ID, Projects.* FROM " +
+                string sql = "Select DISTINCT Users.ID, Projects.* FROM " +
                     "(((Users INNER JOIN ProjectRequests ON Users.ID = ProjectRequests.UserID) " +
-                    "INNER JOIN ProjectPositions ON ProjectPositions.ID = ProjectRequests.PositionID) INNER JOIN Projects ON ProjectPositions.ProjectID = Projects.ProjectID) WHERE Users.ID = " + UserID + ";";
+                    "INNER JOIN ProjectPositions ON ProjectPositions.ID = ProjectRequests.PositionID) INNER JOIN Projects ON ProjectPositions.ProjectID = Projects.ProjectID) WHERE Users.ID = " + UserID + " AND Projects.ProjectStatus <> 3;";
+                DataTable dt = helper.GetDataTable(sql);
+                return dt;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+                return null;
+            }
+        }
+        
+        public static DataTable ProjectsByUserID(int UserID, DateTime indexDate)
+        {
+            try
+            {
+                DBHelper helper = new DBHelper(Constants.PROVIDER, Constants.PATH);
+                string sql = "Select DISTINCT TOP 10 Projects.* FROM " +
+                    "(((Users INNER JOIN ProjectRequests ON Users.ID = ProjectRequests.UserID) " +
+                    "INNER JOIN ProjectPositions ON ProjectPositions.ID = ProjectRequests.PositionID) INNER JOIN Projects ON ProjectPositions.ProjectID = Projects.ProjectID) WHERE ProjectPositions.UserID = " + UserID + " AND Projects.ProjectStatus <> 3" +
+                    $"AND Projects.DateCreated< FORMAT(#{indexDate}#, 'mm / dd / yyyy hh: nn: ss') ORDER BY Projects.DateCreated DESC;";
                 DataTable dt = helper.GetDataTable(sql);
                 return dt;
             }
@@ -474,6 +493,14 @@ namespace DAL
             return affected > 0;
         }
 
+        public static bool UpdateRequestStatusByPos(int positionID, int userID, int statusRe)
+        {
+            DBHelper helper = new DBHelper(Constants.PROVIDER, Constants.PATH);
+            string query = $"UPDATE ProjectRequests SET RequestStatus = {statusRe} WHERE ProjectRequests.PositionID = {positionID} AND ProjectRequests.UserID = {userID};";
+            int affected = helper.WriteData(query);
+            return affected > 0;
+        }
+
         /// <summary>
         /// update Min Age, Project Status and Project Content of a specific Project by its ID (positions are updated differently)
         /// </summary>
@@ -489,6 +516,14 @@ namespace DAL
         {
             DBHelper helper = new DBHelper(Constants.PROVIDER, Constants.PATH);
             string query = $"UPDATE ProjectPositions SET IsDeleted = 2, DateDeleted = FORMAT(Now(), 'mm / dd / yyyy hh: nn: ss') WHERE ProjectPositions.ID = {positionID};";
+            int affected = helper.WriteData(query);
+            return affected > 0;
+        }
+
+        public static bool neutralizePositionsRequests(int positionID)
+        {
+            DBHelper helper = new DBHelper(Constants.PROVIDER, Constants.PATH);
+            string query = $"UPDATE ProjectRequests SET RequestStatus = 3 WHERE PositionID = {positionID};";
             int affected = helper.WriteData(query);
             return affected > 0;
         }

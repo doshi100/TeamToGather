@@ -16,13 +16,16 @@ namespace TeamTogatherWebUI
             {
                 bool isAdmin = UserInfo.CheckAdmin((int)Session["UserID"]);
                 navbar1.Visible = false;
+                string LoggedInID = ((int)Session["UserID"]).ToString();
                 if(isAdmin)
                 {
+                    ProfileDirectionAdmin.Attributes.Add("href", $"profile.aspx?userid={LoggedInID}&section=5");
                     NavBarAdmin.Visible = true;
                     loginsmlMenuAdmin.Visible = true;
                 }
                 else
                 {
+                    ProfileDirection.Attributes.Add("href", $"profile.aspx?userid={LoggedInID}&section=5");
                     navbar2.Visible = true;
                     LoginsmlMenuUser.Visible = true;
                 }

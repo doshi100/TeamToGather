@@ -12,6 +12,10 @@ namespace TeamTogatherWebUI
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if(!IsPostBack)
+            {
+                Session["ShownUsers"] =null;
+            }
             if (Session["UserID"] == null)
             {
                 Response.Redirect("HomePage.aspx", true);

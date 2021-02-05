@@ -36,13 +36,18 @@ let elementsContainer = document.querySelector(".ProfContainer"),
 
 let PopUpButton = document.querySelector(".OpenPopUp"),
     popUp = document.querySelector(".popUp"),
-    hiddenPostID = document.querySelector('#ctl00_ContentPlaceHolder1_PostProjID'),
+    hiddenPostID = document.getElementById('PostProjID'),
     BackDrop = document.querySelector(".backDrop"),
     closePopUpButton = document.querySelector(".ClosePopUp"),
     sendRequestB = document.querySelector(".SendRequestB"),
     UpdateRate = document.querySelector(".UpdateRate"),
-    hiddenPostRate = document.querySelector("#ctl00_ContentPlaceHolder1_PostRate"),
-    hiddenPostRequest = document.querySelector("#ctl00_ContentPlaceHolder1_JoinRequestID");
+    hiddenPostRate = document.querySelector("#PostRate"),
+    hiddenPostPosID = document.querySelector("#PostPosID"),
+    hiddenPostReqID = document.querySelector("#PostRequestID"),
+    hiddenPostRequest = document.querySelector("#JoinRequestID"),
+    hiddenPostUserID = document.querySelector("#PostUserID"),
+    RemovePos = document.querySelector(".RemovePos"),
+    RemoveUser = document.querySelector(".RemoveUser");
 
 
 
@@ -56,7 +61,7 @@ if (scrollContainer != null) {
     SummaryForm.addEventListener('paste', detectPaste_Limit);
     var path = window.location.pathname;
     var page = path.split("/").pop();
-    if (page == "ProjectCreation.aspx") {
+    if (page == "ProjectCreation.aspx" || page == "Profile.aspx") {
         addPos_button.addEventListener('click', CreatePositions)
         addProg_button.addEventListener('click', () => AddPrograms(checkedElement));
         arrowB.addEventListener('click', () => BackToPos());
@@ -389,6 +394,12 @@ function OpenPopUp(e) {
     PopUpButton.click();
 }
 
+function OpenPopUp_date(e) {
+    let id = e.querySelector(".projBox_DateRequested").innerText;
+    hiddenPostID.value = id;
+    PopUpButton.click();
+}
+
 function ClosePopUp(e) {
     closePopUpButton.click();
 }
@@ -400,6 +411,28 @@ function RequstPos(e) {
     sendRequestB.click();
     e.setAttribute("disabled", "disabled")
     e.classList.remove("ButtonBlue")
+}
+
+function RemoveUserFromPos(e) {
+    let posIDNode = e.parentNode.querySelector(".posNumber");
+    let posID = posIDNode.innerText;
+    let UserIDNode = e.parentNode.querySelector(".userNumber");
+    let userID = UserIDNode.innerText;
+    hiddenPostPosID.value = posID;
+    hiddenPostUserID.value = userID;
+    RemoveUser.click();
+    e.setAttribute("disabled", "disabled")
+    e.classList.remove("ButtonRed")
+}
+
+function DeletePos(e) {
+    let parent = e.parentNode.parentNode.parentNode;
+    let posIDNode = e.parentNode.parentNode.parentNode.querySelector(".posNumber");
+    let posID = posIDNode.innerText;
+    hiddenPostPosID.value = posID;
+    parent.classList.add("deletePosAnim");
+    setTimeout(function () { parent.parentNode.removeChild(parent); }, 1000);
+    RemovePos.click();
 }
 
 function PostUpdateRate(e) {
@@ -414,7 +447,25 @@ function PostUpdateRate(e) {
 
 function UserProfileRedirection(e) {
     let id = e.parentNode.parentNode.parentNode.querySelector(".UserBox_UserID").innerText;
-    let hiddenField = document.querySelector("#ContentPlaceHolder1_ClickedUserID");
+    let hiddenField = document.querySelector("#ClickedUserID");
     hiddenField.value = id;
     e.click;
+}
+
+
+function GetProjectID_Button(e) {
+    let posID = e.parentNode.parentNode.querySelector(".projBox_ProjectPosID").innerText;
+    let reqID = e.parentNode.parentNode.querySelector(".projBox_RequestID").innerText;
+    hiddenPostPosID.value = posID;
+    hiddenPostReqID.value = reqID;
+}
+
+function GetProjectID2_Button(e) {
+    let userID = e.parentNode.parentNode.querySelector(".UserBox_UserID").innerText;
+    let posID = e.parentNode.parentNode.querySelector(".projBox_ProjectPosID").innerText;
+    let reqID = e.parentNode.parentNode.querySelector(".projBox_RequestID").innerText;
+    let hiddenField = document.querySelector("#ClickedUserID");
+    hiddenField.value = userID;
+    hiddenPostPosID.value = posID;
+    hiddenPostReqID.value = reqID;
 }

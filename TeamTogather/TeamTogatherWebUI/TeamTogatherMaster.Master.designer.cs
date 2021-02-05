@@ -67,6 +67,15 @@ namespace TeamTogatherWebUI {
         protected global::System.Web.UI.WebControls.LinkButton LinkButton1;
         
         /// <summary>
+        /// ProfileDirection control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor ProfileDirection;
+        
+        /// <summary>
         /// NavBarAdmin control.
         /// </summary>
         /// <remarks>
@@ -92,6 +101,15 @@ namespace TeamTogatherWebUI {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton LinkButton;
+        
+        /// <summary>
+        /// ProfileDirectionAdmin control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor ProfileDirectionAdmin;
         
         /// <summary>
         /// ContentPlaceHolder1 control.

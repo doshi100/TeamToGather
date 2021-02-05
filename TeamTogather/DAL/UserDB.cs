@@ -269,7 +269,7 @@ namespace DAL
             string query = $"SELECT TOP 10 ProjectRequests.*, Projects.ProjectContent, ProjectPositions.Profession " +
                 $"FROM(Projects INNER JOIN ProjectPositions ON Projects.ProjectID = ProjectPositions.ProjectID) " +
                 $"INNER JOIN ProjectRequests ON ProjectPositions.ID = ProjectRequests.PositionID WHERE ProjectRequests.RequestStatus = 1 " +
-                $" AND ProjectRequests.RequestType = 1 AND Projects.AdminUsID = {ProjectAdminID} AND ProjectRequests.DateRequested < FORMAT(#{projectDate.ToString("MM/dd/yyyy HH:mm:ss")}#, 'mm/dd/yyyy hh:nn:ss') " +
+                $" AND ProjectRequests.RequestType = 1 AND Projects.AdminUsID = {ProjectAdminID} AND ProjectRequests.DateRequested < FORMAT(#{projectDate}#, 'mm/dd/yyyy hh:nn:ss') " +
                 $" ORDER BY ProjectRequests.DateRequested DESC;";
             DataTable dt = helper.GetDataTable(query);
             return dt;
@@ -284,7 +284,7 @@ namespace DAL
             string query = $"SELECT TOP 10 ProjectRequests.*, Projects.*, ProjectPositions.Profession " +
                 $"FROM(Projects INNER JOIN ProjectPositions ON Projects.ProjectID = ProjectPositions.ProjectID) INNER JOIN ProjectRequests ON ProjectPositions.ID = ProjectRequests.PositionID " +
                 $"WHERE ProjectRequests.RequestStatus = 1 AND ProjectRequests.RequestType = 2 AND ProjectRequests.UserID = {UserID} " +
-                $"AND ProjectRequests.DateRequested < FORMAT(#{projectDate.ToString("MM/dd/yyyy HH:mm:ss")}#, 'mm/dd/yyyy hh:nn:ss') " +
+                $"AND ProjectRequests.DateRequested < FORMAT(#{projectDate}#, 'mm/dd/yyyy hh:nn:ss') " +
                 "ORDER BY ProjectRequests.DateRequested DESC;";
             DataTable dt = helper.GetDataTable(query);
             return dt;
@@ -297,7 +297,7 @@ namespace DAL
             string query = $"SELECT TOP 10 Projects.* " +
                 $"FROM Projects " +
                 $"WHERE AdminUsID = {AdminUserID} AND ProjectStatus = 3 AND " +
-                $"Projects.DateCreated < FORMAT(#{projectDate.ToString("MM/dd/yyyy HH:mm:ss")}#, 'mm/dd/yyyy hh:nn:ss') ORDER BY Projects.DateCreated DESC;";
+                $"Projects.DateCreated < FORMAT(#{projectDate}#, 'mm/dd/yyyy hh:nn:ss') ORDER BY Projects.DateCreated DESC;";
             DataTable dt = helper.GetDataTable(query);
             return dt;
         }

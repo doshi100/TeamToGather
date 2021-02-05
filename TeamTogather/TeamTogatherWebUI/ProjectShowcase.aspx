@@ -39,14 +39,14 @@
             </div>
         </div>
         <div class="ShowCaseProj_Container">
-            <asp:HiddenField ID="PostRate" Value="" runat="server" />
-            <asp:HiddenField ID="PostProjID" Value="" runat="server" />
-            <asp:HiddenField ID="JoinRequestID" Value="" runat="server" />
+            <asp:HiddenField ID="PostRate" ClientIDMode="Static" Value="" runat="server" />
+            <asp:HiddenField ID="PostProjID" ClientIDMode="Static" Value="" runat="server" />
+            <asp:HiddenField ID="JoinRequestID" ClientIDMode="Static" Value="" runat="server" />
             <asp:ScriptManager ID="ProjectShownScriptManager" runat="server">
             </asp:ScriptManager>
             <asp:UpdatePanel ID="UpdateShownProjects" class="ProjectsShowAreaContainer" UpdateMode="Conditional" runat="server">
                 <ContentTemplate>
-                    <asp:HiddenField ID="ShownProjectsIndex" Value="0" runat="server" />
+                    <asp:HiddenField ID="ShownProjectsIndex" ClientIDMode="Static" Value="0" runat="server" />
                     <div class="ProjectsShowArea" id="ProjectsShowArea" runat="server">
                         <div class="ProjectsShowAreaInnerContainer">
                             <asp:Repeater ID="ProjectRepeater" OnItemDataBound="ProjectRepeater_OnItemDataBound" runat="server" EnableViewState="false">

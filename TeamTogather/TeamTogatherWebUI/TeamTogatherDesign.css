@@ -178,7 +178,7 @@ input[type="text"]:focus, input[type="password"]:focus {
     background-color: rgb(242, 147, 235);
 }
 
-.ButtonBlue {
+.ButtonBlue, .ButtonRed {
     background-color: rgb(50, 93, 219);
     border: none;
     color: rgb(249, 249, 249);
@@ -188,6 +188,14 @@ input[type="text"]:focus, input[type="password"]:focus {
     border-top-right-radius: 3px;
     text-align: center;
     cursor: pointer;
+}
+
+.ButtonRed {
+    background-color: rgb(196, 20, 20);
+}
+
+.ButtonRed:hover {
+    background-color: rgb(112, 131, 224);
 }
 
 .ButtonBlue:hover {
@@ -356,6 +364,25 @@ letter-spacing: 0.08em;
     to {
         background-position: top right;
     }
+}
+
+
+@keyframes OpacityDelete {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+        display: none;
+    }
+}
+
+.deletePosAnim {
+    animation-name: OpacityDelete;
+    animation-fill-mode: forwards;
+    animation-duration: 1s;
+    animation-timing-function: linear;
 }
 
 #backgroundsContainer {
@@ -1555,13 +1582,19 @@ input::-webkit-input-placeholder {
     cursor: pointer;
 }
 
-.SendRequestB, .UpdateRate {
+.SendRequestB, .UpdateRate, .RemoveUser, .RemovePos {
     display: none;
 }
 
 .posNumber {
     display: none;
 }
+
+
+.userNumber {
+    display: none;
+}
+
 
 .ProjectDirectionBox {
     background: url(DesignElements/elements/projectTemplate2.jpg) no-repeat;
@@ -1570,7 +1603,7 @@ input::-webkit-input-placeholder {
     width: 100%;
     height: 100%;
     margin-top: 5%;
-    position:relative;
+    position: relative;
 }
 
 .contrast {
@@ -1630,6 +1663,19 @@ input::-webkit-input-placeholder {
     overflow-y: scroll;
     -ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: none; /* Firefox */
+}
+
+.positions_list .ButtonRed {
+    white-space: normal;
+    font-size: 1.5em;
+    margin-right: 0.3em;
+}
+
+.ReJoinButton input[type="button"]:disabled {
+    background-color: rgb(173, 177, 198);
+    white-space: normal;
+    font-size: 1.5em;
+    margin-right: 0.3em;
 }
 
 
@@ -1750,7 +1796,7 @@ input::-webkit-input-placeholder {
     border-radius: 0.3em;
     margin: 2em 2em;
     display: grid;
-    grid-template-rows: 40% 25% 35%;
+    grid-template-rows: 40% 15% 15% 15% 15%;
     cursor: pointer;
     box-shadow: 0 0 10px 3px rgba(30, 30, 30, 0.1);
     border-top: none;
@@ -1805,7 +1851,7 @@ input::-webkit-input-placeholder {
 }
 
 
-.projBox_ProjectID {
+.projBox_ProjectID, .projBox_DateRequested, .projBox_DateCreated {
     display: none;
 }
 
@@ -1989,7 +2035,7 @@ input::-webkit-input-placeholder {
     border-radius: 0.3em;
     margin: 2em 2em;
     display: grid;
-    grid-template-rows: 45% 55%;
+    grid-template-rows: 45% 20% 15% 20%;
     box-shadow: 0 0 10px 3px rgba(30, 30, 30, 0.1);
     cursor: pointer;
 }
@@ -2073,4 +2119,89 @@ input::-webkit-input-placeholder {
 .loadingSymbolImg {
     width: 250px;
     z-index: 20;
+}
+
+/* *********************************** Profile show Project invitations *****************************/
+
+
+
+.ConfirmationBContainer {
+    grid-row: 5;
+    justify-self: center;
+}
+
+.ProjProfContainer {
+    grid-row: 4;
+    width: 100%;
+    display: flex;
+}
+
+.projBox_RequestID, .projBox_ProjectPosID {
+    display: none;
+}
+
+
+.ConfirmationBContainer_Users {
+    grid-row: 4;
+    justify-self: center;
+    align-self: center;
+}
+
+.ProjectHeaderContainer {
+    grid-row: 3;
+    width: 100%;
+    justify-self: center;
+    font-family: tekoregular;
+    font-size: 1.5em;
+    color: rgb(253, 253, 253);
+    background-color: rgb(30, 30, 30);
+    border: 5px solid rgb(30, 30, 30);
+    text-align: center;
+}
+
+.UserProfessionContainer {
+    grid-row: 2;
+    font-family: tekoSemiBold;
+    font-size: 2em;
+    color: rgb(30, 30, 30);
+    text-align: center;
+    align-self: center;
+    justify-self: center;
+}
+
+.UserRequests_section .userBox {
+    width: 220px;
+    height: 350px;
+    grid-template-rows: 35% 25% 20% 20%;
+}
+
+.UserRequests_section .ProjectHeaderContainer {
+    border-top-left-radius: 0.3em;
+    border-top-right-radius: 0.3em;
+}
+
+.UserRequests_section .ProjectHeaderContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgb(29, 237, 167);
+}
+
+
+.DeletePosButton {
+    width: 20px;
+    height: 20px;
+    background-image: url(DesignElements/elements/delete.png);
+    background-size: 18px;
+    background-repeat: no-repeat;
+    cursor: pointer;
+}
+
+
+.DeletePosButton:hover {
+    background-image: url(DesignElements/elements/HoverDelete.png);
+}
+
+.DeleteBContainer {
+    display: flex;
 }
