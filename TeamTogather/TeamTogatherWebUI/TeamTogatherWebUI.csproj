@@ -149,6 +149,7 @@
     <Content Include="Registration.aspx" />
     <Content Include="TeamTogatherDesign.css" />
     <Content Include="TogatherJS.js" />
+    <Content Include="UpdateProject.aspx" />
     <Content Include="UserShowcase.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -212,6 +213,13 @@
     </Compile>
     <Compile Include="TeamTogatherMaster.Master.designer.cs">
       <DependentUpon>TeamTogatherMaster.Master</DependentUpon>
+    </Compile>
+    <Compile Include="UpdateProject.aspx.cs">
+      <DependentUpon>UpdateProject.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UpdateProject.aspx.designer.cs">
+      <DependentUpon>UpdateProject.aspx</DependentUpon>
     </Compile>
     <Compile Include="UserShowcase.aspx.cs">
       <DependentUpon>UserShowcase.aspx</DependentUpon>

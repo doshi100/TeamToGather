@@ -114,6 +114,7 @@ namespace DAL
             }
             catch (Exception e)
             {
+                string s = e.ToString();
                 CloseConnection();
                 return WRITEDATA_ERROR;
             }
@@ -143,6 +144,40 @@ namespace DAL
             }
         }
 
+
+        /// <summary>
+        /// runs an INSERT query
+        /// </summary>
+        /// <param name="sql">SQL INSERT query</param>
+        /// <returns>ID of last elemnt inserted</returns>
+        public int WriteDataWithAutoNumKey(string sql)
+        {
+            try
+            {
+                if (!connOpen) OpenConnection();
+                OleDbCommand cmd = new OleDbCommand(sql, conn);
+                OleDbDataReader reader = cmd.ExecuteReader();
+                int newID = WRITEDATA_ERROR;
+                if (reader != null)
+                {
+                    cmd = new OleDbCommand(@"SELECT @@Identity", conn);
+                    reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        //The new ID will be on the first (and only) column
+                        newID = (int)reader[0];
+                    }
+                }
+                CloseConnection();
+                return newID;
+            }
+            catch (Exception e)
+            {
+                CloseConnection();
+                Console.WriteLine(e.Message);
+                return WRITEDATA_ERROR;
+            }
+        }
 
         /// <summary>
         /// Reads data from an SQL "SELECT" query

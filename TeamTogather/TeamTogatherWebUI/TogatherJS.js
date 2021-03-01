@@ -61,7 +61,7 @@ if (scrollContainer != null) {
     SummaryForm.addEventListener('paste', detectPaste_Limit);
     var path = window.location.pathname;
     var page = path.split("/").pop();
-    if (page == "ProjectCreation.aspx" || page == "Profile.aspx") {
+    if (page == "ProjectCreation.aspx" || page == "Profile.aspx" || page == "UpdateProject.aspx") {
         addPos_button.addEventListener('click', CreatePositions)
         addProg_button.addEventListener('click', () => AddPrograms(checkedElement));
         arrowB.addEventListener('click', () => BackToPos());
@@ -460,6 +460,24 @@ function GetProjectID_Button(e) {
     hiddenPostReqID.value = reqID;
 }
 
+function DeclineInvitation_Button(e) {
+    let posID = e.parentNode.parentNode.querySelector(".projBox_ProjectPosID").innerText;
+    let reqID = e.parentNode.parentNode.querySelector(".projBox_RequestID").innerText;
+    hiddenPostPosID.value = posID;
+    hiddenPostReqID.value = reqID;
+    let declineButton = document.querySelector(".DeclineInvitation");
+    declineButton.click();
+}
+
+function AcceptInvitation_Button(e) {
+    let posID = e.parentNode.parentNode.querySelector(".projBox_ProjectPosID").innerText;
+    let reqID = e.parentNode.parentNode.querySelector(".projBox_RequestID").innerText;
+    hiddenPostPosID.value = posID;
+    hiddenPostReqID.value = reqID;
+    let acceptButton = document.querySelector(".AcceptInvitation");
+    acceptButton.click();
+}
+
 function GetProjectID2_Button(e) {
     let userID = e.parentNode.parentNode.querySelector(".UserBox_UserID").innerText;
     let posID = e.parentNode.parentNode.querySelector(".projBox_ProjectPosID").innerText;
@@ -468,4 +486,14 @@ function GetProjectID2_Button(e) {
     hiddenField.value = userID;
     hiddenPostPosID.value = posID;
     hiddenPostReqID.value = reqID;
+}
+
+function SetNameGroup(e, stringname) {
+    e.name = stringname;
+    e.removeAttribute("onclick");
+}
+
+function RequstPos2(e) {
+    let elementChecked = document.querySelector('input[name="positions"]:checked').value;
+    hiddenPostPosID.value = elementChecked;
 }

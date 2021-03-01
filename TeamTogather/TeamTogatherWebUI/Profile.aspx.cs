@@ -15,7 +15,7 @@ namespace TeamTogatherWebUI
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if(Session["UserID"] == null)
+            if (Session["UserID"] == null)
             {
                 Response.Redirect("HomePage.aspx", true);
             }
@@ -108,11 +108,19 @@ namespace TeamTogatherWebUI
                         // do nothing
                     }
                 }
+                else if (Request.QueryString["section"] == "1")
+                {
+                    ProjectHeaders.DataSource = GetHeaders(Project.returnProjectHeadLines((int)Session["UserID"]));
+                    ProjectHeaders.DataValueField = "Key";
+                    ProjectHeaders.DataTextField = "Value";
+                    ProjectHeaders.DataBind();
+                    UserInfo_Section.Visible = true;
+                }
             }
             else
             {
-                 ProjectRepeater.DataSource = Session["ShownProjects"];
-                 UsersRepeater.DataSource = Session["ShownUsers"];
+                ProjectRepeater.DataSource = Session["ShownProjects"];
+                UsersRepeater.DataSource = Session["ShownUsers"];
             }
         }
 
@@ -121,7 +129,7 @@ namespace TeamTogatherWebUI
         {
             if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
             {
-                if(Request.QueryString["section"] == "4")
+                if (Request.QueryString["section"] == "5")
                 {
                     KeyValuePair<Request, Project> item = (KeyValuePair<Request, Project>)e.Item.DataItem;
                     Project project = item.Value;
@@ -201,11 +209,27 @@ namespace TeamTogatherWebUI
                     ((Label)e.Item.FindControl("ProjectProfPos")).Visible = false;
                     ((Label)e.Item.FindControl("ProjectPos")).Visible = false;
                     ((HtmlGenericControl)e.Item.FindControl("ConfirmationBContainer")).Visible = false;
+                    if (Request.QueryString["userid"] == project.AdminUSID.ToString())
+                    {
+                        DirectionText.InnerHtml = "Edit </br> Project";
+                    }
                 }
             }
 
         }
 
+        public static Dictionary<int, string> GetHeaders(Dictionary<int, string> dic)
+        {
+            Dictionary<int, string> newdic = new Dictionary<int, string>();
+            foreach (KeyValuePair<int, string> item in dic)
+            {
+                var projectText = new HtmlDocument();
+                projectText.LoadHtml(item.Value);
+                string header = projectText.DocumentNode.SelectSingleNode("//div[@class='editor_header']").InnerText;
+                newdic.Add(item.Key, header);
+            }
+            return newdic;
+        }
 
         static public void MergeRepeaters(Repeater a, Repeater b)
         {
@@ -238,7 +262,6 @@ namespace TeamTogatherWebUI
                 list.Add(row);
             }
         }
-
 
         protected void LoadMore_Click(object sender, EventArgs e)
         {
@@ -284,7 +307,7 @@ namespace TeamTogatherWebUI
                 }
                 //UpdateShownProjects.Update();
             }
-            else if(Request.QueryString["section"] == "3" || Request.QueryString["section"] == "2")
+            else if (Request.QueryString["section"] == "3" || Request.QueryString["section"] == "2")
             {
                 Repeater updateReapeter = new Repeater();
                 updateReapeter.ItemTemplate = ProjectRepeater.ItemTemplate;
@@ -292,7 +315,7 @@ namespace TeamTogatherWebUI
                 try
                 {
                     DateTime datetimevalue = Convert.ToDateTime(ShownProjectsIndex.Value);
-                    List<Project> projectsShowcase = null ;
+                    List<Project> projectsShowcase = null;
                     if (Request.QueryString["section"] == "3")
                     {
                         projectsShowcase = loggeduser.GetUserDoneProjects(datetimevalue);
@@ -339,6 +362,65 @@ namespace TeamTogatherWebUI
 
         }
 
+        protected void ProjectInvRepeater_OnItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+            {
+                ProjectPos projectpos = (ProjectPos)e.Item.DataItem;
+                // add OR and check if user has already requested this Position
+                List<int> loggedUser_professions = null;
+                try
+                {
+                    loggedUser_professions = UserInfo.GetUserProfessions(int.Parse(Request.QueryString["UserID"]));
+                }
+                catch
+                {
+                    Response.Redirect("ProjectShowcase.aspx", true);
+                }
+                if (loggedUser_professions.Contains(projectpos.profession.ProfessionID) && projectpos.userID == 1)
+                {
+                    ((RadioButton)e.Item.FindControl("PositionInputID")).ID = $"position{projectpos.id}";
+                    string id = $"position{projectpos.id}";
+                    ((RadioButton)e.Item.FindControl($"{id}")).Attributes.Add("onclick", "SetNameGroup(this, 'positions')");
+                    ((RadioButton)e.Item.FindControl($"{id}")).Attributes.Add("value", projectpos.id.ToString());
+                    ((HtmlGenericControl)e.Item.FindControl("InvPosItem")).Attributes.Add("for", id);
+                    UserInfo PosUser = new UserInfo(projectpos.userID, false, false);
+                    if (PosUser.ProfilePath != null)
+                    {
+                        ((Image)e.Item.FindControl("ProfilePosPic")).ImageUrl = PosUser.ProfilePath;
+                        ((Image)e.Item.FindControl("ProfilePosPic")).AlternateText = PosUser.ID.ToString();
+                    }
+                    else
+                    {
+                        ((Image)e.Item.FindControl("ProfilePosPic")).ImageUrl = "DesignElements/elements/ProfilePicEmpty.png";
+                        ((Image)e.Item.FindControl("ProfilePosPic")).AlternateText = PosUser.ID.ToString();
+                    }
+                    ((HtmlGenericControl)e.Item.FindControl("PosTitle")).InnerText = projectpos.profession.ProfName;
+                    HtmlGenericControl programsArea = ((HtmlGenericControl)e.Item.FindControl("PosPrograms"));
+                    if (projectpos.Programs != null)
+                    {
+                        foreach (Knowledge program in projectpos.Programs)
+                        {
+                            Image programImage = new Image();
+                            programImage.ImageUrl = program.ProgPath;
+                            programsArea.Controls.Add(programImage);
+                        }
+                    }
+                    Label idLabel = new Label();
+                    idLabel.Text = projectpos.id.ToString();
+                    idLabel.CssClass = "posNumber";
+                    Label useridLabel = new Label();
+                    useridLabel.Text = projectpos.userID.ToString();
+                    useridLabel.CssClass = "userNumber";
+                    ((Label)e.Item.FindControl("posNumber")).Controls.Add(idLabel);
+                    ((Label)e.Item.FindControl("userNumber")).Controls.Add(useridLabel);
+                }
+                else
+                {
+                    e.Item.Visible = false;
+                }
+            }
+        }
 
         protected void PosRepeater_OnItemDataBound(object sender, RepeaterItemEventArgs e)
         {
@@ -403,7 +485,7 @@ namespace TeamTogatherWebUI
                 {
                     ((Button)e.Item.FindControl("RemoveUser")).Visible = true;
                 }
-                if (Request.QueryString["section"] == "2" && Request.QueryString["userid"] != (PosUser.ID).ToString() && Request.QueryString["userid"] == currentProject.AdminUSID.ToString())
+                if (Request.QueryString["section"] == "2" && Request.QueryString["userid"] == currentProject.AdminUSID.ToString())
                 {
                     ((HtmlGenericControl)e.Item.FindControl("DeleteButton")).Visible = true;
                 }
@@ -417,11 +499,11 @@ namespace TeamTogatherWebUI
 
         protected void OpenPopUp_Click(object sender, EventArgs e)
         {
-            if(Request.QueryString["section"] == "5")
+            if (Request.QueryString["section"] == "5")
             {
                 PopUp.Visible = true;
                 backDrop.Visible = true;
-                Dictionary<Request ,Project> sessionProjects = (Dictionary<Request, Project>)Session["ShownProjects"];
+                Dictionary<Request, Project> sessionProjects = (Dictionary<Request, Project>)Session["ShownProjects"];
                 ProjectRepeater.DataSource = sessionProjects;
                 ProjectRepeater.DataBind();
                 backDrop.Attributes.Add("onclick", "ClosePopUp();");
@@ -435,7 +517,7 @@ namespace TeamTogatherWebUI
                 PositionsRepeater.DataSource = ChosenProject.ProjectPositions;
                 PositionsRepeater.DataBind();
             }
-            else if(Request.QueryString["section"] == "3" || Request.QueryString["section"] == "2")
+            else if (Request.QueryString["section"] == "3" || Request.QueryString["section"] == "2")
             {
                 PopUp.Visible = true;
                 backDrop.Visible = true;
@@ -457,7 +539,7 @@ namespace TeamTogatherWebUI
 
         protected void ClosePopUp_Click(object sender, EventArgs e)
         {
-            if(Request.QueryString["section"] == "5")
+            if (Request.QueryString["section"] == "5")
             {
                 Dictionary<Request, Project> sessionProjects = (Dictionary<Request, Project>)Session["ShownProjects"];
                 ProjectRepeater.DataSource = sessionProjects;
@@ -465,7 +547,7 @@ namespace TeamTogatherWebUI
                 PopUp.Visible = false;
                 backDrop.Visible = false;
             }
-            else if(Request.QueryString["section"] == "3" || Request.QueryString["section"] == "2")
+            else if (Request.QueryString["section"] == "3" || Request.QueryString["section"] == "2")
             {
                 List<Project> sessionProjects = (List<Project>)Session["ShownProjects"];
                 ProjectRepeater.DataSource = sessionProjects;
@@ -502,8 +584,15 @@ namespace TeamTogatherWebUI
         {
             try
             {
-                int projID = int.Parse(PostProjID.Value);
-                Response.Redirect($"ProjectDescription.aspx?ProjectID={projID}", true);
+                Project currentProject = new Project(int.Parse(PostProjID.Value), false);
+                if (Request.QueryString["userid"] == currentProject.AdminUSID.ToString())
+                {
+                    Response.Redirect($"UpdateProject.aspx?ProjectID={currentProject.ProjectID}", true);
+                }
+                else
+                {
+                    Response.Redirect($"ProjectDescription.aspx?ProjectID={currentProject.ProjectID}", true);
+                }
             }
             catch
             {
@@ -537,7 +626,7 @@ namespace TeamTogatherWebUI
             try
             {
                 string posID = PostPosID.Value;
-                string userIDAtPos = PostUserID.Value; 
+                string userIDAtPos = PostUserID.Value;
                 if (posID != "" && userIDAtPos != "")
                 {
                     Project.AddOrRemoveUserFromPos(1, int.Parse(posID));
@@ -573,7 +662,7 @@ namespace TeamTogatherWebUI
             {
                 int reqID = int.Parse(PostRequestID.Value);
                 bool succeed = Project.UpdateRequestStatus(3, reqID);
-                Response.Redirect($"profile.aspx?userid={int.Parse(Request.QueryString["UserID"])}&section={int.Parse(Request.QueryString["section"])}");
+                Response.Redirect($"profile.aspx?userid={int.Parse(Request.QueryString["UserID"])}&section={int.Parse(Request.QueryString["section"])}", true);
             }
             catch
             {
@@ -589,7 +678,7 @@ namespace TeamTogatherWebUI
                 int posID = int.Parse(PostPosID.Value);
                 Project.UpdateRequestStatus(2, reqID);
                 Project.AddOrRemoveUserFromPos(int.Parse(Request.QueryString["UserID"]), posID);
-                Response.Redirect($"profile.aspx?userid={int.Parse(Request.QueryString["UserID"])}&section={int.Parse(Request.QueryString["section"])}");
+                Response.Redirect($"profile.aspx?userid={int.Parse(Request.QueryString["UserID"])}&section={int.Parse(Request.QueryString["section"])}", true);
             }
             catch
             {
@@ -700,6 +789,18 @@ namespace TeamTogatherWebUI
             Project.neutralizePositionsRequests(int.Parse(PostPosID.Value));
         }
 
+        protected void SetPositions(object sender, EventArgs e)
+        {
+            Project project = new Project(int.Parse(ProjectHeaders.SelectedValue), true);
+            ProjectInvRepeater.DataSource = project.ProjectPositions;
+            ProjectInvRepeater.DataBind();
+        }
 
+        protected void AdminToUserRequest(object sender, EventArgs e)
+        {
+            int projectID = int.Parse(ProjectHeaders.SelectedValue);
+            int PosID = int.Parse(PostPosID.Value);
+            Project.AddProjectRequest(PosID, int.Parse(Request.QueryString["UserID"]), 1, 2);
+        }
     }
 }

@@ -77,13 +77,13 @@ namespace DAL
         /// returns the number of rows affected by it.
         /// IF the method FAILS it will return -1
         /// </summary>
-        public static bool InsertProjPositions(int ProjectID, List<KeyValuePair<int, List<int>>> ProfessionList)
+        public static int InsertProjPositions(int ProjectID, List<KeyValuePair<int, List<int>>> ProfessionList)
         {
             DBHelper helper = new DBHelper(Constants.PROVIDER, Constants.PATH);
             string sql = Build_queryProjectPositions(ProjectID, ProfessionList);
             int outcome = -1;
-            outcome = helper.WriteData(sql);
-            return outcome != -1;
+            outcome = helper.WriteDataWithAutoNumKey(sql);
+            return outcome;
         }
 
 
@@ -95,10 +95,10 @@ namespace DAL
         /// IF the method FAILS it will return -1
         /// if the user didn't specified any programs, it will return true before executing the sql query.
         /// </summary>
-        public static bool InsertPositionPrograms(int ProjectID, List<KeyValuePair<int, List<int>>> ProfessionList)
+        public static bool InsertPositionPrograms(int ProjectID, List<KeyValuePair<int, List<int>>> ProfessionList, int ID)
         {
             DBHelper helper = new DBHelper(Constants.PROVIDER, Constants.PATH);
-            string sql = Build_queryPositionProgram(ProjectID, ProfessionList);
+            string sql = Build_queryPositionProgram(ProjectID, ProfessionList, ID);
             string no_programs = "INSERT INTO ProjPositionPrograms (ProjectPID, ProgramID ) " + "SELECT ProjectPID, ProgramID " + "FROM (" + ") AS [add]"; // if the user didn't specified any programs, it will return true before executing the sql query.
             if (sql == no_programs)
             {
@@ -140,16 +140,16 @@ namespace DAL
             }
         }
 
-        public static DataTable SelectPositionsProfession(int ProjectID, KeyValuePair<int, List<int>> ProfProgPair)
+        public static DataTable SelectPositionsProfession(int ProjectID, KeyValuePair<int, List<int>> ProfProgPair, int ID)
         {
             DBHelper helper = new DBHelper(Constants.PROVIDER, Constants.PATH);
-            string sql = $"SELECT ProjectPositions.ID, Profession FROM ProjectPositions WHERE Profession = {ProfProgPair.Key} AND ProjectID={ProjectID};";
+            string sql = $"SELECT ProjectPositions.ID, Profession FROM ProjectPositions WHERE Profession = {ProfProgPair.Key} AND ProjectID={ProjectID} AND ProjectPositions.ID > {ID};";
             DataTable dt = helper.GetDataTable(sql);
             return dt;
         }
 
 
-        public static string Build_queryPositionProgram(int ProjectID, List<KeyValuePair<int, List<int>>> ProfessionList)
+        public static string Build_queryPositionProgram(int ProjectID, List<KeyValuePair<int, List<int>>> ProfessionList, int ID)
         {
             if (ProfessionList == null)
             {
@@ -165,7 +165,7 @@ namespace DAL
                 {
                     //if (ProfessionList[i].Value.Count != 0)
                     //{
-                    DataTable dt = SelectPositionsProfession(ProjectID, ProfessionList[i]);
+                    DataTable dt = SelectPositionsProfession(ProjectID, ProfessionList[i], ID-ProfessionList.Count);
                     for (int j = 0; j < dt.Rows.Count; j++)
                     {
                         DataRow row = dt.Rows[j];
@@ -222,6 +222,16 @@ namespace DAL
             }
         }
 
+        /// <summary>
+        /// checks if the admin of the project is already in the chosen position or if he is not. (this method is used when updating the project)
+        /// </summary>
+        public static bool CheckProfessionPositionAtpos(int projectid, int userid, int profession)
+        {
+            DBHelper helper = new DBHelper(Constants.PROVIDER, Constants.PATH);
+            string sql = $"SELECT * FROM ProjectPositions WHERE ProjectID = {projectid} AND UserID = {userid} AND Profession = {profession} AND IsDeleted <> 2;";
+            DataTable dt = helper.GetDataTable(sql);
+            return dt.Rows.Count == 1;
+        }
 
         /// <summary>
         /// this method inserts a Project to the table, and returns the if it was succesfull or not.
@@ -231,11 +241,19 @@ namespace DAL
         {
             DBHelper helper = new DBHelper(Constants.PROVIDER, Constants.PATH);
             int projectID = AddProject_only(AdminUSID, MinAge, ProjectStatus, ProjectContent);
-            bool insertPositions = InsertProjPositions(projectID, ProfessionList);
-            bool insertprogPositions = InsertPositionPrograms(projectID, ProfessionList);
+            int insertPositions = InsertProjPositions(projectID, ProfessionList);
+            bool insertprogPositions = InsertPositionPrograms(projectID, ProfessionList, insertPositions);
             bool UpdatePosition = UpdateAdminPosition(AdminProfession, AdminUSID, projectID, helper);
             bool AddAdminRequest = AddAdminProjectRequest(AdminUSID, projectID);
-            return UpdatePosition && AddAdminRequest && insertPositions && insertprogPositions || (UpdatePosition && AddAdminRequest && insertPositions && insertprogPositions == false);
+            return UpdatePosition && AddAdminRequest && insertPositions > 0 && insertprogPositions || (UpdatePosition && AddAdminRequest && insertPositions > 0 && insertprogPositions == false);
+        }
+
+        public static bool UpdatePageAdminPos(int AdminUSID, int AdminProfession, int ProjectID)
+        {
+            DBHelper helper = new DBHelper(Constants.PROVIDER, Constants.PATH);
+            bool UpdatePosition = UpdateAdminPosition2(AdminProfession, AdminUSID, ProjectID, helper);
+            bool AddAdminRequest = AddAdminProjectRequestByProf(AdminUSID, ProjectID, AdminProfession);
+            return UpdatePosition && AddAdminRequest;
         }
 
         /// <summary>
@@ -276,6 +294,20 @@ namespace DAL
         }
 
         /// <summary>
+        /// this method updates the AdminPosition on the project in the ProjectPositions db table.
+        /// </summary>
+        public static bool UpdateAdminPosition2(int AdminProfession, int AdminUSID, int ProjectID, DBHelper helper)
+        {
+            string sql = $"UPDATE(SELECT TOP 1 UserID" +
+                         $" FROM ProjectPositions" +
+                         $" WHERE Profession = {AdminProfession} AND ProjectID = {ProjectID} AND IsDeleted <> 2 AND UserID = 1 AND" +
+                         $" ID NOT IN (SELECT ProjectPID FROM ProjPositionPrograms) ORDER BY ID) AS updateTable" +
+                         $" SET ProjectPositions.UserID = {AdminUSID};";
+            int updatestate = helper.WriteData(sql);
+            return (updatestate != -1);
+        }
+
+        /// <summary>
         /// this method adds to a specified project admin a Project Request to the ProjectRequests db table. and returns true of false based of weather it was 
         /// successful or not.
         /// </summary>
@@ -286,11 +318,28 @@ namespace DAL
             string sql = $"INSERT INTO ProjectRequests (PositionID, UserID, RequestStatus, DateRequested, RequestType)" +
                 $"SELECT ProjectPositions.ID, {userID}, 2, #{dt}#, 2" +
                 $" FROM ProjectPositions" +
-                $" WHERE UserID={userID} AND ProjectPositions.ProjectID = {ProjectID};";
+                $" WHERE UserID={userID} AND ProjectPositions.ProjectID = {ProjectID} AND ProjectPositions.IsDeleted <> 2;";
             int insertion = helper.WriteData(sql);
             return (insertion != -1);
         }
 
+
+        /// <summary>
+        /// this method adds to a specified project admin a Project Request to the ProjectRequests db table. and returns true of false based of wether it was.
+        /// successful or not.
+        /// by prof of the userAdmin
+        /// </summary>
+        public static bool AddAdminProjectRequestByProf(int userID, int ProjectID, int profession)
+        {
+            DBHelper helper = new DBHelper(Constants.PROVIDER, Constants.PATH);
+            DateTime dt = DateTime.Now;
+            string sql = $"INSERT INTO ProjectRequests (PositionID, UserID, RequestStatus, DateRequested, RequestType)" +
+                $"SELECT ProjectPositions.ID, {userID}, 2, #{dt}#, 2" +
+                $" FROM ProjectPositions" +
+                $" WHERE UserID={userID} AND ProjectPositions.ProjectID = {ProjectID} AND ProjectPositions.IsDeleted <> 2 AND ProjectPositions.Profession = {profession};";
+            int insertion = helper.WriteData(sql);
+            return (insertion != -1);
+        }
 
         /// <summary>
         /// OPTION 1 -DON'T USE IN THE MEANTIME, IF YOU USE OPTION 2, DELETE THIS
@@ -528,8 +577,46 @@ namespace DAL
             return affected > 0;
         }
 
+        public static List<int> returnProjAdminProf(int ProjectID, int AdminID)
+        {
+            try
+            {
+                DBHelper helper = new DBHelper(Constants.PROVIDER, Constants.PATH);
+                string query = $"SELECT Profession FROM ProjectPositions WHERE ProjectID = {ProjectID} AND UserID = {AdminID} AND IsDeleted <> 2;";
+                DataTable dt = helper.GetDataTable(query);
+                List<int> professionIDs = new List<int>();
+                if(dt.Rows.Count > 0)
+                {
+                    foreach(DataRow row in dt.Rows)
+                    {
+                        int professionID = (int)row["Profession"];
+                        professionIDs.Add(professionID);
+                    }
+                }
+                
+                return professionIDs;
+            }
+            catch
+            {
+                return null;
+            }
+        }
 
-
+        public static DataTable returnProjectHeadLines(int userid)
+        {
+            try
+            {
+                DBHelper helper = new DBHelper(Constants.PROVIDER, Constants.PATH);
+                string query = $"SELECT ProjectID, ProjectContent FROM Projects WHERE ProjectStatus <> 3 AND AdminUsID = {userid} " +
+                    $"ORDER BY DateCreated DESC; ";
+                DataTable dt = helper.GetDataTable(query);
+                return dt;
+            }
+            catch
+            {
+                return null;
+            }
+        }
     }
 
 

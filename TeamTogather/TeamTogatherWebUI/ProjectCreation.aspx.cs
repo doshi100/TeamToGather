@@ -5,8 +5,8 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using HtmlAgilityPack;
+using System.Text.RegularExpressions;
 using BL;
-
 namespace TeamTogatherWebUI
 {
     public partial class ProjectCreation : System.Web.UI.Page
@@ -45,7 +45,7 @@ namespace TeamTogatherWebUI
                 List<KeyValuePair<int, List<int>>> positions = returnPositions(PositionsList);
                 positions = positions.OrderBy(KeyValuePair => KeyValuePair.Key).ToList();
                 string ProjectContent = EditorText.Text;
-                ProjectContent = ProjectContent.Replace("'", "''"); // santize the apostrophe(') for sql later on to reduce inconvenience
+                ProjectContent = Regex.Replace(ProjectContent, "['’]", "&#39"); // santize the apostrophe(') for sql later on to reduce inconvenience
                 int Age = int.Parse(AgeDropDown.SelectedValue);
                 int ProjectStatusVal = int.Parse(ProjectStatus.SelectedValue);
                 int ProjectAdminProf = int.Parse(PrimaryPositionDrop.SelectedValue);

@@ -76,6 +76,60 @@ namespace TeamTogatherWebUI {
         protected global::System.Web.UI.ScriptManager ProjectShownScriptManager;
         
         /// <summary>
+        /// UserInfo_Section control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl UserInfo_Section;
+        
+        /// <summary>
+        /// sendProjectInv control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button sendProjectInv;
+        
+        /// <summary>
+        /// InvProjPositions control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel InvProjPositions;
+        
+        /// <summary>
+        /// ProjectHeaders control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ProjectHeaders;
+        
+        /// <summary>
+        /// ProjectInvRepeater control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater ProjectInvRepeater;
+        
+        /// <summary>
+        /// SendAdminInvitation control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button SendAdminInvitation;
+        
+        /// <summary>
         /// ProjectRequests_section control.
         /// </summary>
         /// <remarks>
@@ -148,6 +202,24 @@ namespace TeamTogatherWebUI {
         protected global::System.Web.UI.WebControls.Button ClosePopUp;
         
         /// <summary>
+        /// Accept control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button Accept;
+        
+        /// <summary>
+        /// Decline control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button Decline;
+        
+        /// <summary>
         /// backDrop control.
         /// </summary>
         /// <remarks>
@@ -173,6 +245,15 @@ namespace TeamTogatherWebUI {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton DirectProject;
+        
+        /// <summary>
+        /// DirectionText control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl DirectionText;
         
         /// <summary>
         /// PositionsRepeater control.

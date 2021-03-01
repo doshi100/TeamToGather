@@ -220,10 +220,31 @@ namespace BL
             return ProjectDB.UpdateRequestStatusByPos(positionID, userID, statusRe);
         }
 
-        public static bool UpdateProject(int minage, int projectStatus, string ProjectContent, int projectID)
+        public static bool UpdateProject(int minage, int projectStatus, string ProjectContent, int projectID, List<KeyValuePair<int, List<int>>> ProfessionList, int AdminID, int AdminProfession)
         {
-            string ProjectContentSanitized = ProjectContent.Replace("'", "''"); // santize the apostrophe(') for sql later on to reduce inconvenience
-            return ProjectDB.UpdateProject(minage, projectStatus, ProjectContentSanitized, projectID);
+            //if (ProjectDB.CheckProfessionPositionAtpos(projectID, AdminID, AdminProfession))
+            //{
+            //    int AdminCurrProf = returnProjAdminProf(projectID, AdminID);
+
+            //}
+            int Positionsuccess = 0;
+            bool Programssuccess = true;
+            if (ProfessionList.Count > 0)
+            {
+                Positionsuccess = ProjectDB.InsertProjPositions(projectID, ProfessionList);
+                Programssuccess = ProjectDB.InsertPositionPrograms(projectID, ProfessionList, Positionsuccess);
+            }
+            bool updateproject = ProjectDB.UpdateProject(minage, projectStatus, ProjectContent, projectID);
+            if(!ProjectDB.CheckProfessionPositionAtpos(projectID, AdminID, AdminProfession))
+            {
+                ProjectDB.UpdatePageAdminPos(AdminID, AdminProfession, projectID);
+            }
+            return Positionsuccess != -1 && Programssuccess && updateproject;
+        }
+
+        public static bool CheckProfessionPositionAtPos(int projectID, int AdminID, int AdminProfession)
+        {
+            return ProjectDB.CheckProfessionPositionAtpos(projectID, AdminID, AdminProfession);
         }
 
         public static bool DeletePos(int positionID)
@@ -236,5 +257,20 @@ namespace BL
             return ProjectDB.neutralizePositionsRequests(positionID);
         }
 
+        public static List<int> returnProjAdminProf(int ProjectID, int AdminID)
+        {
+            return ProjectDB.returnProjAdminProf(ProjectID, AdminID);
+        }
+
+        public static Dictionary<int,string> returnProjectHeadLines(int userid)
+        {
+            Dictionary<int, string> Headers = new Dictionary<int, string>();
+            DataTable dt = ProjectDB.returnProjectHeadLines(userid);
+            foreach(DataRow row in dt.Rows)
+            {
+                Headers.Add((int)row["ProjectID"], (string)row["ProjectContent"]);
+            }
+            return Headers;
+        }
     }
 }
