@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data;
+using DAL;
 
 namespace BL
 {
@@ -29,6 +30,11 @@ namespace BL
             this.CreationID = (int)UserContact["CreationID "];
             this.CreationPath = (string)UserContact["CreationPath"];
             this.UserID = (int)UserContact["UserID"];
+        }
+
+        public static int AddProtfolioCreation(string creationPath, int userID)
+        {
+            UserDB.AddProtfolioCreation()
         }
     }
 }

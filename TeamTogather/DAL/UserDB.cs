@@ -392,5 +392,7 @@ namespace DAL
                 return rate;
             }
         }
+
+
     }
 }

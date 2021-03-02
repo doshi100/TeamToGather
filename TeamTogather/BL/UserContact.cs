@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data;
+using DAL;
+
 namespace BL
 {
     public class UserContact
@@ -37,5 +39,18 @@ namespace BL
             this.WebSiteIDName = (string)UserContact["WebsiteName"];
             this.SymbolPath = (string)UserContact["SymbolPath"];
         }
+
+        public static int AddContact(int userID, string websiteName, string contactLink, string websiteID)
+        {
+            return UserDB.AddContact(userID, websiteName, contactLink, websiteID);
+        }
+
+        public static bool DeleteContact(int contactID)
+        {
+            return UserDB.DeleteContact(contactID);
+        }
+
+
+
     }
 }

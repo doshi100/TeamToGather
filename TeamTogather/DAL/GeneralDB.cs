@@ -35,5 +35,20 @@ namespace DAL
                 return null;
             }
         }
+
+        public static DataTable ReturnContacts()
+        {
+            try
+            {
+                DBHelper helper = new DBHelper(Constants.PROVIDER, Constants.PATH);
+                string sql = "SELECT * FROM ContactWebsites";
+                DataTable dtContacts = helper.GetDataTable(sql);
+                return dtContacts;
+            }
+            catch
+            {
+                return null;
+            }
+        }
     }
 }

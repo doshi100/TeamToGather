@@ -31,10 +31,17 @@ namespace TeamTogatherWebUI
                 Session["ShownProjects"] = projectsShowcase;
                 ProjectRepeater.DataSource = projectsShowcase;
                 ProjectRepeater.DataBind();
-                Label LastProjID = (Label)ProjectRepeater.Controls[ProjectRepeater.Items.Count - 1].FindControl("ProjectID");
-                if (LastProjID != null)
+                try
                 {
-                    ShownProjectsIndex.Value = LastProjID.Text;
+                    Label LastProjID = (Label)ProjectRepeater.Controls[ProjectRepeater.Items.Count - 1].FindControl("ProjectID");
+                    if (LastProjID != null)
+                    {
+                        ShownProjectsIndex.Value = LastProjID.Text;
+                    }
+                }
+                catch
+                {
+                    
                 }
             }
             DropDownAgeFilter.DataSource = Enumerable.Range(12, 19).ToList();
@@ -58,7 +65,15 @@ namespace TeamTogatherWebUI
                 Project project = (Project)e.Item.DataItem;
                 var projectText = new HtmlDocument();
                 projectText.LoadHtml(project.ProjectContent);
-                string projectName = projectText.DocumentNode.SelectSingleNode("//div[@class='editor_header']").InnerText;
+                string projectName;
+                try
+                {
+                    projectName = projectText.DocumentNode.SelectSingleNode("//div[@class='editor_header']").InnerText;
+                }
+                catch
+                {
+                    projectName = "";
+                }
                 if (projectName != "")
                 {
                     ((Label)e.Item.FindControl("ProjectHeader")).Text = projectName;
