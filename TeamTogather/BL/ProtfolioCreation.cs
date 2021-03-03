@@ -34,7 +34,24 @@ namespace BL
 
         public static int AddProtfolioCreation(string creationPath, int userID)
         {
-            UserDB.AddProtfolioCreation()
+            return UserDB.AddProtfolioCreation(creationPath, userID);
+        }
+
+        public static bool DeleteCreation(int creationID)
+        {
+            return UserDB.DeleteCreation(creationID);
+        }
+
+        public static List<ProtfolioCreation> GetUserCreations(int userID)
+        {
+            DataTable protfoliodt = UserDB.GetUserCreations(userID);
+            List<ProtfolioCreation> protfolioList = new List<ProtfolioCreation>();
+            foreach (DataRow row in protfoliodt.Rows)
+            {
+                ProtfolioCreation creation = new ProtfolioCreation(row);
+                protfolioList.Add(creation);
+            }
+            return protfolioList;
         }
     }
 }

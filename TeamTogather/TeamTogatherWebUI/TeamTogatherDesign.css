@@ -2235,3 +2235,9 @@ input::-webkit-input-placeholder {
     width: 40%;
     align-self: center;
 }
+
+.ProfileHeaderContainer {
+    background-color: rgb(35, 35, 35);
+    height: 45vh;
+    width: 100vw;
+}
