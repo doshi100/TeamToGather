@@ -110,11 +110,32 @@ namespace TeamTogatherWebUI
                 }
                 else if (Request.QueryString["section"] == "1")
                 {
+                    ProtfolioSection.Visible = true;
                     ProjectHeaders.DataSource = GetHeaders(Project.returnProjectHeadLines((int)Session["UserID"]));
                     ProjectHeaders.DataValueField = "Key";
                     ProjectHeaders.DataTextField = "Value";
                     ProjectHeaders.DataBind();
+                    Project project = new Project(int.Parse(ProjectHeaders.SelectedValue), true);
+                    ProjectInvRepeater.DataSource = project.ProjectPositions;
+                    ProjectInvRepeater.DataBind();
+                    List<int> loggedUser_professions = UserInfo.GetUserProfessions(int.Parse(Request.QueryString["UserID"]));
+                    if (CheckVisibleItems(project.ProjectPositions, loggedUser_professions))
+                    {
+                        SendAdminInvitation.Visible = true;
+                    }
+                    else
+                    {
+                        PositionInvmessage.Visible = true;
+                    }
                     UserInfo_Section.Visible = true;
+                }
+                else if(Request.QueryString["section"] == "0")
+                {
+                    Contacts_section.Visible = true;
+                    WebsitesDropDown.DataSource = GeneralMethods.GetContacts();
+                    WebsitesDropDown.DataValueField = "Key";
+                    WebsitesDropDown.DataTextField = "Value";
+                    WebsitesDropDown.DataBind();
                 }
             }
             else
@@ -209,10 +230,6 @@ namespace TeamTogatherWebUI
                     ((Label)e.Item.FindControl("ProjectProfPos")).Visible = false;
                     ((Label)e.Item.FindControl("ProjectPos")).Visible = false;
                     ((HtmlGenericControl)e.Item.FindControl("ConfirmationBContainer")).Visible = false;
-                    if (Request.QueryString["userid"] == project.AdminUSID.ToString())
-                    {
-                        DirectionText.InnerHtml = "Edit </br> Project";
-                    }
                 }
             }
 
@@ -280,12 +297,14 @@ namespace TeamTogatherWebUI
                     {
                         sessionProjects = (Dictionary<Request, Project>)Session["ShownProjects"];
                         AddMany(sessionProjects, projectsShowcase);
+                        Session["ShownProjects"] = sessionProjects;
                     }
                     else
                     {
                         Session["ShownProjects"] = projectsShowcase;
                     }
                     sessionProjects = (Dictionary<Request, Project>)Session["ShownProjects"];
+                    updateReapeter.DataSource = sessionProjects;
                     updateReapeter.DataBind();
                     if (projectsShowcase.Count != 0)
                     {
@@ -492,7 +511,17 @@ namespace TeamTogatherWebUI
             }
         }
 
+        // ********************** ProtfolioSection Methods START
+        protected void UplaodFile_Click(object sender, EventArgs e)
+        {
+            if (CreationUploader.HasFile)
+            {
+                ProtfolioCreation.AddProtfolioCreation("DesignElements/UsersCreations/" + CreationUploader.FileName, int.Parse(Request.QueryString["UserID"]));
+                CreationUploader.SaveAs(Server.MapPath("~/DesignElements/UsersCreations/" + CreationUploader.FileName));
+            }
+        }
 
+        // ********************** ProtfolioSection Methods END
 
 
         // ********************** pop up methods from ProjectShowcase
@@ -534,6 +563,10 @@ namespace TeamTogatherWebUI
                 ShortSummaryDesc_wrap.InnerHtml = projectShortDesc_string;
                 PositionsRepeater.DataSource = ChosenProject.ProjectPositions;
                 PositionsRepeater.DataBind();
+                if (Request.QueryString["userid"] == ChosenProject.AdminUSID.ToString())
+                {
+                    DirectionText.InnerHtml = "Edit </br> Project";
+                }
             }
         }
 
@@ -585,7 +618,7 @@ namespace TeamTogatherWebUI
             try
             {
                 Project currentProject = new Project(int.Parse(PostProjID.Value), false);
-                if (Request.QueryString["userid"] == currentProject.AdminUSID.ToString())
+                if (Request.QueryString["userid"] == currentProject.AdminUSID.ToString() && int.Parse(Request.QueryString["section"]) == 2)
                 {
                     Response.Redirect($"UpdateProject.aspx?ProjectID={currentProject.ProjectID}", true);
                 }
@@ -672,18 +705,18 @@ namespace TeamTogatherWebUI
 
         protected void AcceptReq_Click(object sender, EventArgs e)
         {
-            try
-            {
+            //try
+            //{
                 int reqID = int.Parse(PostRequestID.Value);
                 int posID = int.Parse(PostPosID.Value);
                 Project.UpdateRequestStatus(2, reqID);
                 Project.AddOrRemoveUserFromPos(int.Parse(Request.QueryString["UserID"]), posID);
                 Response.Redirect($"profile.aspx?userid={int.Parse(Request.QueryString["UserID"])}&section={int.Parse(Request.QueryString["section"])}", true);
-            }
-            catch
-            {
+            //}
+            //catch
+            //{
 
-            }
+            //}
         }
 
         protected void AcceptReq2_Click(object sender, EventArgs e)
@@ -791,16 +824,73 @@ namespace TeamTogatherWebUI
 
         protected void SetPositions(object sender, EventArgs e)
         {
+            ProjectInvRepeater.Visible = true;
+            PositionAlreadySentMsg.Visible = false;
+            ScriptManager.RegisterStartupScript(InvProjPositions, typeof(UpdatePanel), "somekey", "ChangeSize()", true);
             Project project = new Project(int.Parse(ProjectHeaders.SelectedValue), true);
             ProjectInvRepeater.DataSource = project.ProjectPositions;
             ProjectInvRepeater.DataBind();
+            if (CheckVisibleItems(ProjectInvRepeater))
+            {
+                SendAdminInvitation.Visible = true;
+                PositionInvmessage.Visible = false;
+            }
+            else
+            {
+                PositionInvmessage.Visible = true;
+                SendAdminInvitation.Visible = false;
+            }
         }
 
         protected void AdminToUserRequest(object sender, EventArgs e)
         {
             int projectID = int.Parse(ProjectHeaders.SelectedValue);
             int PosID = int.Parse(PostPosID.Value);
-            Project.AddProjectRequest(PosID, int.Parse(Request.QueryString["UserID"]), 1, 2);
+            if(!BL.Request.CheckRequestInvitation(PosID, int.Parse(Request.QueryString["UserID"])))
+            {
+                Project.AddProjectRequest(PosID, int.Parse(Request.QueryString["UserID"]), 1, 2);
+                SetPositions(sender, e);
+            }
+            else
+            {
+                SendAdminInvitation.Visible = false;
+                ProjectInvRepeater.Visible = false;
+                PositionAlreadySentMsg.Visible = true;
+            }
         }
+
+        public static bool CheckVisibleItems(Repeater control1)
+        {
+            foreach(RepeaterItem control in control1.Controls)
+            {
+                if(control.Visible == true)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public static bool CheckVisibleItems(List<ProjectPos> list, List<int> loggedUser_professions)
+        {
+            foreach (ProjectPos pos in list)
+            {
+                if (loggedUser_professions.Contains(pos.profession.ProfessionID) && pos.userID == 1)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        // ********************************************************** User Info methods START *************************************************************
+        protected void AddContact(object sender, EventArgs e)
+        {
+            string accountContactname = Contactname.Text;
+            string accountContactLink = ContactLink.Text;
+            int websiteID = int.Parse(WebsitesDropDown.SelectedValue);
+            UserContact.AddContact(int.Parse(Request.QueryString["UserID"]), accountContactname, accountContactLink, websiteID);
+        }
+        // ********************************************************** User Info methods END *************************************************************
     }
 }

@@ -49,6 +49,14 @@ let PopUpButton = document.querySelector(".OpenPopUp"),
     RemovePos = document.querySelector(".RemovePos"),
     RemoveUser = document.querySelector(".RemoveUser");
 
+let Bu_openInvPanel = document.querySelector(".openInvPanel");
+
+if (Bu_openInvPanel) {
+    let ProjectHeaders = document.querySelector(".ProjectHeaders"),
+        positionpanel = document.querySelector(".profileProjectPositions_Container"),
+        inviteUserDropContainer = document.querySelector(".inviteUserDropContainer");
+   popupMenuMechanism(positionpanel, "flex", ProjectHeaders, "rgb(45,45,45)", inviteUserDropContainer);
+}
 
 
 
@@ -125,6 +133,9 @@ if (smallNav != null && ProfilePhoto != null) {
         }
     })
 }
+
+
+
 
 function ListContains(list, valueToAdd) {
     for (let item of list.children) {
@@ -496,4 +507,58 @@ function SetNameGroup(e, stringname) {
 function RequstPos2(e) {
     let elementChecked = document.querySelector('input[name="positions"]:checked').value;
     hiddenPostPosID.value = elementChecked;
+}
+
+function ChangeSize() {
+    let size = document.querySelector(".positions_list").scrollHeight;
+    document.querySelector(".blurdrop").style.height = size + "px";
+}
+
+function popupMenuMechanism(element, displaytype, optionalelement, OptionelementbgNeutralize, elementbgNeutralize, optionalelement2) {
+    switch (getComputedStyle(element, "display").display) {
+        case "block":
+            element.style.display = "none";
+            if (optionalelement) {
+                optionalelement.style.display = "none";
+            }
+            if (optionalelement2) {
+                optionalelement2.style.display = "none";
+            }
+            if (OptionelementbgNeutralize != "") {
+                elementbgNeutralize.style.backgroundColor = "transparent";
+            }
+            break;
+        case "flex":
+            element.style.display = "none";
+            if (optionalelement) {
+                optionalelement.style.display = "none";
+            }
+            if (optionalelement2) {
+                optionalelement2.style.display = "none";
+            }
+            if (OptionelementbgNeutralize != "") {
+                elementbgNeutralize.style.backgroundColor = "transparent";
+            }
+            break;
+        case "none":
+            element.style.display = displaytype;
+            if (optionalelement) {
+                optionalelement.style.display = displaytype;
+            }
+            if (optionalelement2) {
+                optionalelement2.style.display = displaytype;
+            }
+            if (OptionelementbgNeutralize) {
+                elementbgNeutralize.style.backgroundColor = OptionelementbgNeutralize;
+            }
+            break;
+    }
+}
+
+function addevent() {
+    let ProjectHeaders = document.querySelector(".ProjectHeaders"),
+        positionpanel = document.querySelector(".profileProjectPositions_Container"),
+        Bu_openInvPanel = document.querySelector(".openInvPanel"),
+        inviteUserDropContainer = document.querySelector(".inviteUserDropContainer");
+   popupMenuMechanism(positionpanel, "flex", ProjectHeaders, "rgb(45,45,45)", inviteUserDropContainer);
 }

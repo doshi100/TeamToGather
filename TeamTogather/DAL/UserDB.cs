@@ -212,13 +212,18 @@ namespace DAL
         public static bool DeleteContact(int contactID)
         {
             DBHelper helper = new DBHelper(Constants.PROVIDER, Constants.PATH);
-            string query = $"UPDATE UserContacts SET IsDeleted = 2, DateDeleted = FORMAT(Now(), 'mm / dd / yyyy hh: nn: ss') " +
+            string query = $"UPDATE UserContacts SET IsDeleted = 2, DateDeleted = FORMAT(Now(), 'mm/dd/yyyy hh:nn:ss') " +
                 $"WHERE UserContacts.[ID] = {contactID};";
             int affected = helper.WriteData(query);
             return affected != 0;
         }
 
-        public static int AddContact(int userID, string websiteName, string contactLink, string websiteID)
+        /// <summary>
+        /// add a contact to the user by the user to websites, such as artstation, instagram, facebook and etc'.
+        /// </summary>
+        /// <param name="websiteName"></param>
+        /// <param name="contactLink"></param>
+        public static int AddContact(int userID, string websiteName, string contactLink, int websiteID)
         {
             DBHelper helper = new DBHelper(Constants.PROVIDER, Constants.PATH);
             string query = $"INSERT INTO UserContacts ( UserID, WebSiteName, ContactLink, WebsiteID, IsDeleted) " +

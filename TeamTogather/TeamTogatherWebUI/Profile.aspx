@@ -14,38 +14,52 @@
 
         <%-------------------------------------------------------------  START OF Invite User to project for a specific Role in the project SECTION------------------------------------------------%>
         <div runat="server" id="UserInfo_Section" class="UserRequests_section" visible="false">
-            <asp:Button ID="sendProjectInv" runat="server" CssClass="ButtonBlue" Text="Invite User" />
             <div class="updateAreaProfileContainer">
-                <asp:UpdatePanel ID="InvProjPositions" runat="server">
+                <asp:UpdatePanel ID="InvProjPositions" UpdateMode="Conditional" runat="server">
                     <ContentTemplate>
-                        <asp:DropDownList ID="ProjectHeaders" CssClass="dropDown ProjectHeaders" AutoPostBack="true" OnSelectedIndexChanged="SetPositions" EnableViewState="true" runat="server">
-                        </asp:DropDownList>
-                        <div class="profileProjectPositions_Container">
-                            <div class="positions_list">
-                                <asp:Repeater ID="ProjectInvRepeater" OnItemDataBound="ProjectInvRepeater_OnItemDataBound" runat="server">
-                                    <ItemTemplate>
-                                        <asp:RadioButton ID="PositionInputID" ClientIDMode="Static" runat="server" />
-                                        <label id="InvPosItem" class="ProjectPosContainer" for="" runat="server">
-                                            <asp:Label ID="posNumber" CssClass="" runat="server" Text="" Visible="false"></asp:Label>
-                                            <asp:Label ID="userNumber" CssClass="" runat="server" Text="" Visible="false"></asp:Label>
-                                            <asp:Label ID="ProjectManager" CssClass="ProjectManager_text" runat="server" Text="Head of the Project" Visible="false"></asp:Label>
-                                            <ul class="ProjPositionList">
-                                                <li id="DeleteBContainer" class="DeleteBContainer">
-                                                    <div id="DeleteButton" runat="server" class="DeletePosButton" onclick="DeletePos(this); return false;" visible="false">
-                                                    </div>
-                                                </li>
-                                                <li id="profilePosPic" class="profilePosPic UserCredentials_ProfileContainer">
-                                                    <asp:Image ID="ProfilePosPic" CssClass="profilePosPic" runat="server" />
-                                                </li>
-                                                <li id="PosTitle" class="PosTitle" runat="server"></li>
-                                                <li class="PosProgramsAreali">
-                                                    <div id="PosPrograms" class="PosPrograms" runat="server"></div>
-                                                </li>
-                                            </ul>
-                                        </label>
-                                    </ItemTemplate>
-                                </asp:Repeater>
-                                <asp:Button ID="SendAdminInvitation" OnClientClick="RequstPos2(this)" OnClick="AdminToUserRequest" runat="server" CssClass="ButtonBlue SendAdminInv" Text="Send Invitation" />
+                        <div class="SendInvitation_container">
+                            <div class="inviteUserDropContainer">
+                                <input type="button" value="Invite User" id="sendProjectInv" onclick="addevent();" class="ButtonBlue openInvPanel" />
+                                <asp:DropDownList ID="ProjectHeaders" CssClass="ProjectHeaders dropDown" AutoPostBack="true" OnSelectedIndexChanged="SetPositions" EnableViewState="true" runat="server">
+                                </asp:DropDownList>
+                            </div>
+                            <div class="profileProjectPositions_Container">
+                                <div class="positions_list" id="positions_list" runat="server">
+                                    <asp:UpdateProgress ID="updateProgress2" runat="server">
+                                        <ProgressTemplate>
+                                            <div class="loadingSymbol_Child">
+                                                <asp:Image ID="imgUpdateProgress" runat="server" ImageUrl="DesignElements/elements/Loading2.gif" class="loadingSymbolImg" AlternateText="Loading..." />
+                                            </div>
+                                            <div class="blurdrop" id="blurdrop" runat="server"></div>
+                                        </ProgressTemplate>
+                                    </asp:UpdateProgress>
+                                    <asp:Repeater ID="ProjectInvRepeater" OnItemDataBound="ProjectInvRepeater_OnItemDataBound" runat="server">
+                                        <ItemTemplate>
+                                            <asp:RadioButton ID="PositionInputID" ClientIDMode="Static" runat="server" />
+                                            <label id="InvPosItem" class="ProjectPosContainer" for="" runat="server">
+                                                <asp:Label ID="posNumber" CssClass="" runat="server" Text="" Visible="false"></asp:Label>
+                                                <asp:Label ID="userNumber" CssClass="" runat="server" Text="" Visible="false"></asp:Label>
+                                                <asp:Label ID="ProjectManager" CssClass="ProjectManager_text" runat="server" Text="Head of the Project" Visible="false"></asp:Label>
+                                                <ul class="ProjPositionList">
+                                                    <li id="DeleteBContainer" class="DeleteBContainer">
+                                                        <div id="DeleteButton" runat="server" class="DeletePosButton" onclick="DeletePos(this); return false;" visible="false">
+                                                        </div>
+                                                    </li>
+                                                    <li id="profilePosPic" class="profilePosPic UserCredentials_ProfileContainer">
+                                                        <asp:Image ID="ProfilePosPic" CssClass="profilePosPic" runat="server" />
+                                                    </li>
+                                                    <li id="PosTitle" class="PosTitle" runat="server"></li>
+                                                    <li class="PosProgramsAreali">
+                                                        <div id="PosPrograms" class="PosPrograms" runat="server"></div>
+                                                    </li>
+                                                </ul>
+                                            </label>
+                                        </ItemTemplate>
+                                    </asp:Repeater>
+                                    <asp:Label ID="PositionInvmessage" runat="server" CssClass="PositionInvmessage" Visible="false">There are no positions available for invitation in this project</asp:Label>
+                                    <asp:Label ID="PositionAlreadySentMsg" runat="server" CssClass="PositionInvmessage" Visible="false">This invitation was already sent to the user</asp:Label>
+                                    <asp:Button ID="SendAdminInvitation" OnClientClick="RequstPos2(this)" OnClick="AdminToUserRequest" runat="server" CssClass="ButtonBlue SendAdminInv" Text="Send" Visible="false" />
+                                </div>
                             </div>
                         </div>
                     </ContentTemplate>
@@ -55,6 +69,14 @@
         <%-------------------------------------------------------------  END OF Invite User to project for a specific Role in the project SECTION------------------------------------------------%>
     </div>
     <div class="ProfileContentContainer">
+        <%-------------------------------------------------------------  START OF addProtfolioCreations Section ------------------------------------------------%>
+        <div runat="server" id="ProtfolioSection" class="ProtfolioSection_section" visible="false">
+            <div class="addCreation_popup">
+                <asp:FileUpload ID="CreationUploader" CssClass="CreationUploader" runat="server" />
+                <asp:Button ID="Button1" runat="server" CssClass="ButtonBlue" Text="Upload" OnClick="UplaodFile_Click" />
+            </div>
+        </div>
+        <%-------------------------------------------------------------  END OF addProtfolioCreations Section  ------------------------------------------------%>
         <%--  search Project Requests Section  --%>
         <div runat="server" id="ProjectRequests_section" visible="false">
             <div class="updateAreaProfileContainer">
@@ -108,9 +130,11 @@
                                 <div class="ContainerDirectionBox">
                                     <div class="ProjectDirectionBox contrast">
                                     </div>
-                                    <div id="DirectionText" class="DirectionText" runat="server">Open
-                                        <br></br>
-                                        Description</div>
+                                    <div id="DirectionText" class="DirectionText" runat="server">
+                                        Open
+                                        <br>
+                                        Description
+                                    </div>
                                 </div>
                             </asp:LinkButton>
                             <div class="positions_list">
@@ -171,62 +195,79 @@
                 </asp:UpdatePanel>
             </div>
         </div>
-    </div>
+        <%--div here--%>
 
-    <%--  END OF search Project Requests Section  --%>
+        <%--  END OF search Project Requests Section  --%>
 
-    <%--  search User Requests Section  --%>
-    <div runat="server" id="UserRequests_section" class="UserRequests_section" visible="false">
-        <div class="updateAreaProfileContainer">
-            <div class="ShowCaseProj_Container">
-                <asp:UpdatePanel ID="UpdatePanel1" class="ProjectsShowAreaContainer" UpdateMode="Conditional" runat="server">
-                    <ContentTemplate>
-                        <asp:HiddenField ID="ShownUserIndex" Value="0" runat="server" />
-                        <asp:HiddenField ID="ClickedUserID" ClientIDMode="Static" Value="0" runat="server" />
-                        <div class="ProjectsShowArea" id="UsersShowArea" runat="server">
-                            <div class="ProjectsShowAreaInnerContainer">
-                                <asp:Repeater ID="UsersRepeater" OnItemDataBound="UsersRepeater_OnItemDataBound" runat="server">
-                                    <ItemTemplate>
-                                        <div id="userBox" class="userBox" runat="server">
-                                            <div class="userBox_UserCredentials">
-                                                <div class="UserCredentials_ProfileContainer">
-                                                    <asp:ImageButton ID="ProfilePicture" OnClick="ProfilePic_Click" OnClientClick="UserProfileRedirection(this)" runat="server" UseSubmitBehavior="false" class="profilePosPic" />
+        <%--  search User Requests Section  --%>
+        <div runat="server" id="UserRequests_section" class="UserRequests_section" visible="false">
+            <div class="updateAreaProfileContainer">
+                <div class="ShowCaseProj_Container">
+                    <asp:UpdatePanel ID="UpdatePanel1" class="ProjectsShowAreaContainer" UpdateMode="Conditional" runat="server">
+                        <ContentTemplate>
+                            <asp:HiddenField ID="ShownUserIndex" Value="0" runat="server" />
+                            <asp:HiddenField ID="ClickedUserID" ClientIDMode="Static" Value="0" runat="server" />
+                            <div class="ProjectsShowArea" id="UsersShowArea" runat="server">
+                                <div class="ProjectsShowAreaInnerContainer">
+                                    <asp:Repeater ID="UsersRepeater" OnItemDataBound="UsersRepeater_OnItemDataBound" runat="server">
+                                        <ItemTemplate>
+                                            <div id="userBox" class="userBox" runat="server">
+                                                <div class="userBox_UserCredentials">
+                                                    <div class="UserCredentials_ProfileContainer">
+                                                        <asp:ImageButton ID="ProfilePicture" OnClick="ProfilePic_Click" OnClientClick="UserProfileRedirection(this)" runat="server" UseSubmitBehavior="false" class="profilePosPic" />
+                                                    </div>
+                                                    <div class="UserHeaderContainer">
+                                                        <asp:Label ID="UserHeader" CssClass="userBox_userHeader" runat="server" Text=""></asp:Label>
+                                                    </div>
                                                 </div>
-                                                <div class="UserHeaderContainer">
-                                                    <asp:Label ID="UserHeader" CssClass="userBox_userHeader" runat="server" Text=""></asp:Label>
+                                                <div class="UserProfessionContainer">
+                                                    <asp:Label ID="userProfession" CssClass="userBox_ProjectRate" runat="server" Text="Position : "></asp:Label>
                                                 </div>
+                                                <div class="ProjectHeaderContainer">
+                                                    <asp:Label ID="ProjectHeadertext" CssClass="userBox_ProjectRate" runat="server" Text="Project Title : "></asp:Label>
+                                                </div>
+                                                <div class="ConfirmationBContainer_Users">
+                                                    <asp:Button ID="ProjectDeclineButton" CssClass="ButtonRed" OnClientClick="GetProjectID_Button(this)" OnClick="DeclineReq_Click" runat="server" Text="Decline" />
+                                                    <asp:Button ID="ProjectAcceptButton" CssClass="ButtonBlue" OnClientClick="GetProjectID2_Button(this)" runat="server" OnClick="AcceptReq2_Click" Text="Accept" />
+                                                </div>
+                                                <asp:Label ID="UserID" CssClass="UserBox_UserID" runat="server" Text=""></asp:Label>
+                                                <asp:Label ID="ProjectPos" CssClass="projBox_ProjectPosID" runat="server" Text=""></asp:Label>
+                                                <asp:Label ID="RequestID" CssClass="projBox_RequestID" runat="server" Text=""></asp:Label>
+                                                <asp:Label ID="DateRequested" CssClass="projBox_DateRequested" runat="server" Text=""></asp:Label>
                                             </div>
-                                            <div class="UserProfessionContainer">
-                                                <asp:Label ID="userProfession" CssClass="userBox_ProjectRate" runat="server" Text="Position : "></asp:Label>
-                                            </div>
-                                            <div class="ProjectHeaderContainer">
-                                                <asp:Label ID="ProjectHeadertext" CssClass="userBox_ProjectRate" runat="server" Text="Project Title : "></asp:Label>
-                                            </div>
-                                            <div class="ConfirmationBContainer_Users">
-                                                <asp:Button ID="ProjectDeclineButton" CssClass="ButtonRed" OnClientClick="GetProjectID_Button(this)" OnClick="DeclineReq_Click" runat="server" Text="Decline" />
-                                                <asp:Button ID="ProjectAcceptButton" CssClass="ButtonBlue" OnClientClick="GetProjectID2_Button(this)" runat="server" OnClick="AcceptReq2_Click" Text="Accept" />
-                                            </div>
-                                            <asp:Label ID="UserID" CssClass="UserBox_UserID" runat="server" Text=""></asp:Label>
-                                            <asp:Label ID="ProjectPos" CssClass="projBox_ProjectPosID" runat="server" Text=""></asp:Label>
-                                            <asp:Label ID="RequestID" CssClass="projBox_RequestID" runat="server" Text=""></asp:Label>
-                                            <asp:Label ID="DateRequested" CssClass="projBox_DateRequested" runat="server" Text=""></asp:Label>
-                                        </div>
-                                    </ItemTemplate>
-                                </asp:Repeater>
-                            </div>
-                        </div>
-                        <asp:Button ID="LoadMoreUsers" CssClass="ButtonPink LoadPinkB" runat="server" Text="Load More" OnClick="LoadMoreUsers_Click" />
-                        <asp:UpdateProgress ID="updateProgress1" runat="server">
-                            <ProgressTemplate>
-                                <div class="loadingSymbol">
-                                    <asp:Image ID="imgUpdateProgress" runat="server" ImageUrl="DesignElements/elements/Loading2.gif" class="loadingSymbolImg" AlternateText="Loading..." />
+                                        </ItemTemplate>
+                                    </asp:Repeater>
                                 </div>
-                            </ProgressTemplate>
-                        </asp:UpdateProgress>
-                    </ContentTemplate>
-                </asp:UpdatePanel>
+                            </div>
+                            <asp:Button ID="LoadMoreUsers" CssClass="ButtonPink LoadPinkB" runat="server" Text="Load More" OnClick="LoadMoreUsers_Click" />
+                            <asp:UpdateProgress ID="updateProgress1" runat="server">
+                                <ProgressTemplate>
+                                    <div class="loadingSymbol">
+                                        <asp:Image ID="imgUpdateProgress" runat="server" ImageUrl="DesignElements/elements/Loading2.gif" class="loadingSymbolImg" AlternateText="Loading..." />
+                                    </div>
+                                </ProgressTemplate>
+                            </asp:UpdateProgress>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
+                </div>
             </div>
         </div>
+        <%-------------------------------------------------------------  END OF search User Requests Section  ------------------------------------------------%>
+
+        <%-------------------------------------------------------------  START OF addcontacts and show information Section  ------------------------------------------------%>
+        <div runat="server" id="Contacts_section" class="Contacts_section" visible="false">
+            <asp:UpdatePanel ID="contactPanel" class="" UpdateMode="Conditional" runat="server">
+                <ContentTemplate>
+                    <div class="addContact_popup">
+                        <span>choose account's Website</span><asp:DropDownList ID="WebsitesDropDown" CssClass="" runat="server"></asp:DropDownList>
+                        <asp:TextBox ID="Contactname" placeholder="Account username" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="ContactLink" placeholder="Account Link" runat="server"></asp:TextBox>
+                        <asp:Button ID="AddContactButton" CssClass="" runat="server" Text="Add" OnClick="AddContact" />
+                    </div>
+                </ContentTemplate>
+            </asp:UpdatePanel>
+        </div>
+        <%-------------------------------------------------------------  END addcontacts and show information Section  ------------------------------------------------%>
     </div>
-    <%-------------------------------------------------------------  END OF search User Requests Section  ------------------------------------------------%>
+
 </asp:Content>

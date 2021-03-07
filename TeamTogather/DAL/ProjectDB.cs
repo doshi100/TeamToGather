@@ -31,7 +31,7 @@ namespace DAL
                 return null;
             }
         }
-        
+
         public static DataTable ProjectsByUserID(int UserID, DateTime indexDate)
         {
             try
@@ -39,7 +39,7 @@ namespace DAL
                 DBHelper helper = new DBHelper(Constants.PROVIDER, Constants.PATH);
                 string sql = "Select DISTINCT TOP 10 Projects.* FROM " +
                     "(((Users INNER JOIN ProjectRequests ON Users.ID = ProjectRequests.UserID) " +
-                    "INNER JOIN ProjectPositions ON ProjectPositions.ID = ProjectRequests.PositionID) INNER JOIN Projects ON ProjectPositions.ProjectID = Projects.ProjectID) WHERE ProjectPositions.UserID = " + UserID + " AND Projects.ProjectStatus <> 3" +
+                    "INNER JOIN ProjectPositions ON ProjectPositions.ID = ProjectRequests.PositionID) INNER JOIN Projects ON ProjectPositions.ProjectID = Projects.ProjectID) WHERE (ProjectPositions.UserID = " + UserID + " OR Projects.AdminUsID = " + UserID + ") AND Projects.ProjectStatus <> 3" +
                     $"AND Projects.DateCreated< FORMAT(#{indexDate}#, 'mm / dd / yyyy hh: nn: ss') ORDER BY Projects.DateCreated DESC;";
                 DataTable dt = helper.GetDataTable(sql);
                 return dt;
@@ -50,6 +50,24 @@ namespace DAL
                 return null;
             }
         }
+
+        //public static DataTable ProjectsByUserID(int UserID, DateTime indexDate)
+        //{
+        //    try
+        //    {
+        //        DBHelper helper = new DBHelper(Constants.PROVIDER, Constants.PATH);
+        //        string sql = "Select DISTINCT TOP 10 Projects.* FROM " +
+        //            "Projects WHERE Projects.AdminUsID = " + UserID + " AND Projects.ProjectStatus <> 3" +
+        //            $"AND Projects.DateCreated< FORMAT(#{indexDate}#, 'mm / dd / yyyy hh: nn: ss') ORDER BY Projects.DateCreated DESC;";
+        //        DataTable dt = helper.GetDataTable(sql);
+        //        return dt;
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        Console.WriteLine(e.ToString());
+        //        return null;
+        //    }
+        //}
 
         public static DataRow ReturnProject(int ProjectID)
         {
@@ -615,6 +633,25 @@ namespace DAL
             catch
             {
                 return null;
+            }
+        }
+
+        /// <summary>
+        /// checks if an invitation was already sent by the user to a specific position in a project
+        /// </summary>
+        /// <returns></returns>
+        public static bool CheckRequestInvitation(int positionID, int userID)
+        {
+            try
+            {
+                DBHelper helper = new DBHelper(Constants.PROVIDER, Constants.PATH);
+                string query = $"SELECT * FROM ProjectRequests WHERE PositionID = {positionID} AND UserID = {userID} AND RequestType = 2;";
+                DataTable dt = helper.GetDataTable(query);
+                return dt.Rows.Count == 1;
+            }
+            catch
+            {
+                return false;
             }
         }
     }

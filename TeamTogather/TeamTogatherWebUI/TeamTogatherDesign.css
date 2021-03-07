@@ -101,10 +101,10 @@ input[type="text"], input[type="password"] {
     background-color: rgb(251, 251, 251);
 }
 
-input[type="text"]:focus, input[type="password"]:focus {
-    border-color: rgb(112, 131, 224);
-    outline: none;
-}
+    input[type="text"]:focus, input[type="password"]:focus {
+        border-color: rgb(112, 131, 224);
+        outline: none;
+    }
 
 .gray {
     color: rgb(200, 200, 200);
@@ -188,15 +188,16 @@ input[type="text"]:focus, input[type="password"]:focus {
     border-top-right-radius: 3px;
     text-align: center;
     cursor: pointer;
+    outline: none;
 }
 
 .ButtonRed {
     background-color: rgb(196, 20, 20);
 }
 
-.ButtonRed:hover {
-    background-color: rgb(112, 131, 224);
-}
+    .ButtonRed:hover {
+        background-color: rgb(112, 131, 224);
+    }
 
 .ButtonBlue:hover {
     background-color: rgb(112, 131, 224);
@@ -214,9 +215,9 @@ input[type="text"]:focus, input[type="password"]:focus {
     cursor: pointer;
 }
 
-.ButtonPink:hover {
-    background-color: rgb(112, 131, 224);
-}
+    .ButtonPink:hover {
+        background-color: rgb(112, 131, 224);
+    }
 
 
 .smallText {
@@ -245,26 +246,26 @@ input[type="text"]:focus, input[type="password"]:focus {
     z-index: 12;
 }
 
-.loginsmlMenu ul {
-    list-style-type: none;
-}
+    .loginsmlMenu ul {
+        list-style-type: none;
+    }
 
 
-.loginsmlMenu li {
-    width: 100%;
-    height: 2em;
-    border-top: 2px solid rgb(51, 51, 51);
-    text-align: center;
-    font-size: 1.3em;
-}
+    .loginsmlMenu li {
+        width: 100%;
+        height: 2em;
+        border-top: 2px solid rgb(51, 51, 51);
+        text-align: center;
+        font-size: 1.3em;
+    }
 
-.loginsmlMenu li a {
-    color: white;
-    font-family: tekoMedium;
-    text-decoration: none;
-    display: block;
-    margin-top: 3%;
-}
+        .loginsmlMenu li a {
+            color: white;
+            font-family: tekoMedium;
+            text-decoration: none;
+            display: block;
+            margin-top: 3%;
+        }
 
 
 .optional {
@@ -283,30 +284,30 @@ input[type="text"]:focus, input[type="password"]:focus {
     border-bottom: 2px solid rgb(51, 51, 51);
 }
 
-.navbar ul {
-list-style-type: none;
-display: flex;
-flex-direction: row;
-align-items: center;
-flex: 1;
-}
+    .navbar ul {
+        list-style-type: none;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        flex: 1;
+    }
 
-.navbar ul li {
-color: white;
-font-family: "tekoSemiBold";
-font-size: 1.2em;
-letter-spacing: 0.08em;
-}
+        .navbar ul li {
+            color: white;
+            font-family: "tekoSemiBold";
+            font-size: 1.2em;
+            letter-spacing: 0.08em;
+        }
 
-.navbar ul li:nth-last-child(2) {
-    flex-grow: 4;
-}
+            .navbar ul li:nth-last-child(2) {
+                flex-grow: 4;
+            }
 
 
-.navbar ul li a {
-    text-decoration: none;
-    color: white;
-}
+            .navbar ul li a {
+                text-decoration: none;
+                color: white;
+            }
 
 
 
@@ -341,9 +342,9 @@ letter-spacing: 0.08em;
 }
 
 
-.profilePhoto:hover {
-    border: 2px dashed rgb(29, 237, 167);
-}
+    .profilePhoto:hover {
+        border: 2px dashed rgb(29, 237, 167);
+    }
 
 .LogOut {
     height: 100%;
@@ -562,37 +563,37 @@ input::-webkit-input-placeholder {
     right: 10%;
 }
 
-#BrightDivElements img {
-    align-self: center;
-    width: 360px;
-}
-
-#BrightDivElements span {
-    font-family: tekoregular;
-    color: white;
-    font-size: 3em;
-    border-bottom: solid 3px rgb(29, 237, 167);
-    padding: 0 0.3em;
-    padding-bottom: 0.5em;
-}
-
-
-#BrightDivElements a {
-    font-family: tekoregular;
-    color: white;
-    font-size: 2.5em;
-    border-bottom: solid 3px rgb(50, 93, 219);
-    padding: 0 0.5em;
-    padding-bottom: 0.3em;
-    text-decoration: none;
-}
-
-    #BrightDivElements a:hover {
-        border-top-left-radius: 10px;
-        border-top-right-radius: 10px;
-        background-color: rgb(50, 93, 219);
-        padding-top: 0.2em;
+    #BrightDivElements img {
+        align-self: center;
+        width: 360px;
     }
+
+    #BrightDivElements span {
+        font-family: tekoregular;
+        color: white;
+        font-size: 3em;
+        border-bottom: solid 3px rgb(29, 237, 167);
+        padding: 0 0.3em;
+        padding-bottom: 0.5em;
+    }
+
+
+    #BrightDivElements a {
+        font-family: tekoregular;
+        color: white;
+        font-size: 2.5em;
+        border-bottom: solid 3px rgb(50, 93, 219);
+        padding: 0 0.5em;
+        padding-bottom: 0.3em;
+        text-decoration: none;
+    }
+
+        #BrightDivElements a:hover {
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            background-color: rgb(50, 93, 219);
+            padding-top: 0.2em;
+        }
 
 @media only screen and (max-height: 820px) {
     .HomeSize {
@@ -743,29 +744,29 @@ input::-webkit-input-placeholder {
     align-items: center;
 }
 
-.registrationFinal img {
-    margin: 0 auto;
-    display: block;
-    max-width: 250px;
-    padding-bottom: 1em;
-}
+    .registrationFinal img {
+        margin: 0 auto;
+        display: block;
+        max-width: 250px;
+        padding-bottom: 1em;
+    }
 
-.registrationFinal input[type=submit] {
-    font-family: tekoSemiBold;
-    font-size: 2.5em;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-    background-color: rgb(50, 93, 219);
-    padding-top: 0.2em;
-    padding-bottom: 0.4em;
-    border: none;
-    color: white;
-    margin-top: 1em;
-}
+    .registrationFinal input[type=submit] {
+        font-family: tekoSemiBold;
+        font-size: 2.5em;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        background-color: rgb(50, 93, 219);
+        padding-top: 0.2em;
+        padding-bottom: 0.4em;
+        border: none;
+        color: white;
+        margin-top: 1em;
+    }
 
-.registrationFinal input[type=submit]:hover {
-    background-color: rgb(112, 131, 224);
-}
+        .registrationFinal input[type=submit]:hover {
+            background-color: rgb(112, 131, 224);
+        }
 
 
 #RegistrationMessage {
@@ -818,20 +819,20 @@ input::-webkit-input-placeholder {
 }
 
 
-.WhiteDivRe input[type="text"], .WhiteDivRe input[type="password"] {
-    border: solid 3px rgb(50, 93, 219);
-    border-radius: 5px;
-    width: 7em;
-    height: 0.8em;
-    font-size: 1em;
-    font-family: tekoregular;
-    background-color: rgb(251, 251, 251);
-}
+    .WhiteDivRe input[type="text"], .WhiteDivRe input[type="password"] {
+        border: solid 3px rgb(50, 93, 219);
+        border-radius: 5px;
+        width: 7em;
+        height: 0.8em;
+        font-size: 1em;
+        font-family: tekoregular;
+        background-color: rgb(251, 251, 251);
+    }
 
-.WhiteDivRe input[type="text"]:focus, input[type="password"]:focus {
-    border-color: rgb(112, 131, 224);
-    outline: none;
-}
+        .WhiteDivRe input[type="text"]:focus, input[type="password"]:focus {
+            border-color: rgb(112, 131, 224);
+            outline: none;
+        }
 
 
 .regList {
@@ -846,16 +847,16 @@ input::-webkit-input-placeholder {
 }
 
 
-.regList li {
-    width: 90%;
-    display: grid;
-    grid-template-columns: 30% 30% 40%;
-}
+    .regList li {
+        width: 90%;
+        display: grid;
+        grid-template-columns: 30% 30% 40%;
+    }
 
 
-.regList li input[type=text], .regList li input[type=text] {
-    flex-grow: 2;
-}
+        .regList li input[type=text], .regList li input[type=text] {
+            flex-grow: 2;
+        }
 
 .WhiteDivRe input[type=submit] {
     position: absolute;
@@ -872,9 +873,9 @@ input::-webkit-input-placeholder {
     border-top-right-radius: 3px;
 }
 
-.WhiteDivRe input[type=submit]:hover {
-    background-color: rgb(112, 131, 224);
-}
+    .WhiteDivRe input[type=submit]:hover {
+        background-color: rgb(112, 131, 224);
+    }
 
 .graysml {
     font-size: 0.6em;
@@ -904,10 +905,10 @@ input::-webkit-input-placeholder {
     border: solid 3px rgb(254, 254, 254);
 }
 
-.ProfessionContainer img {
-    display: block;
-    margin: 0 auto;
-}
+    .ProfessionContainer img {
+        display: block;
+        margin: 0 auto;
+    }
 
 .imgContainerUserC img {
     position: relative;
@@ -978,7 +979,6 @@ input::-webkit-input-placeholder {
     display: grid;
     grid-template-columns: 0.5fr 3fr 0.35fr 0.15fr;
     grid-template-rows: 2.2fr 1.8fr 6fr;
-
 }
 
 .editor_header {
@@ -1015,16 +1015,15 @@ input::-webkit-input-placeholder {
     width: 75%;
 }
 
-.subHeader span {
-    font-family: tekoregular;
-    text-align: left;
-    font-size: 2.5em;
-    color: rgb(220, 220, 220);
-        
-}
+    .subHeader span {
+        font-family: tekoregular;
+        text-align: left;
+        font-size: 2.5em;
+        color: rgb(220, 220, 220);
+    }
 
 .Markimg_wrapper {
-    display:flex;
+    display: flex;
     height: 100%;
     flex-direction: column;
     align-items: center;
@@ -1045,9 +1044,9 @@ input::-webkit-input-placeholder {
     margin-top: 0.7em;
 }
 
-.Markimg_wrapper2:hover {
-    border-color: rgb(29, 237, 167);
-}
+    .Markimg_wrapper2:hover {
+        border-color: rgb(29, 237, 167);
+    }
 
 .HeaderImage {
     width: 55px;
@@ -1111,24 +1110,25 @@ input::-webkit-input-placeholder {
     align-self: center;
 }
 
-.ScrollDown_text img {
-    width: 100px;
-    max-width: 120px;
-}
+    .ScrollDown_text img {
+        width: 100px;
+        max-width: 120px;
+    }
 
 .PsepContainer {
     margin-top: 0.3em;
     width: 50%;
     display: flex;
     flex-direction: row;
-    justify-content:flex-start;
+    justify-content: flex-start;
     /*margin-top: 0.1em;
     margin-bottom: 1.5em;*/
 }
-.PsepContainer /*White_Section_editor*/ .PsepLine {
-    width: 100%;
-    height: 2px;
-}
+
+    .PsepContainer /*White_Section_editor*/ .PsepLine {
+        width: 100%;
+        height: 2px;
+    }
 
 #CharCountContainer {
     color: rgb(50, 93, 219);
@@ -1136,10 +1136,10 @@ input::-webkit-input-placeholder {
     margin-left: 1em;
 }
 
-#CharCountContainer #CharCount {
-    color: rgb(50, 93, 219);
-    font-size: 1em;
-}
+    #CharCountContainer #CharCount {
+        color: rgb(50, 93, 219);
+        font-size: 1em;
+    }
 
 .Section_editor {
     position: relative;
@@ -1167,56 +1167,56 @@ input::-webkit-input-placeholder {
     cursor: pointer;
 }
 
-.toolBox span {
-    width: 50px;
-    height: 30px;
-    border-right: solid 2px rgb(242, 115, 233);
-}
+    .toolBox span {
+        width: 50px;
+        height: 30px;
+        border-right: solid 2px rgb(242, 115, 233);
+    }
 
 
-.toolBox span:hover {
-    background-color: rgb(112, 131, 224);
-    height: 100%;
-}
+        .toolBox span:hover {
+            background-color: rgb(112, 131, 224);
+            height: 100%;
+        }
 
-.toolBox span:last-child {
-    border: none;
-}
+        .toolBox span:last-child {
+            border: none;
+        }
 
 
 .ProjCreSection2 {
     width: 100vw;
     height: 100vh;
-    display:flex;
+    display: flex;
     flex-direction: row;
     background-color: rgb(254, 254, 254);
     position: relative;
 }
 
-.ProjCreSection2 .PinkSepLine{
-    position: absolute;
-    top:-0.2%;
-    width:80%;
-    left: 50%;
-    height: 3px;
-    transform: translate(-50%, 0);
-}
+    .ProjCreSection2 .PinkSepLine {
+        position: absolute;
+        top: -0.2%;
+        width: 80%;
+        left: 50%;
+        height: 3px;
+        transform: translate(-50%, 0);
+    }
 
 
-.ProjCreSection2 .GraySection {
-    height: 100%;
-    width: 35%;
-    background-color: rgb(251,251,251);
-    display: grid;
-    grid-template-columns: 0.5fr 9fr 0.5fr;
-    grid-template-rows: 2fr 8.9fr 0.1fr;
-    overflow: hidden;
-}
+    .ProjCreSection2 .GraySection {
+        height: 100%;
+        width: 35%;
+        background-color: rgb(251,251,251);
+        display: grid;
+        grid-template-columns: 0.5fr 9fr 0.5fr;
+        grid-template-rows: 2fr 8.9fr 0.1fr;
+        overflow: hidden;
+    }
 
 .GraySection .Header {
     grid-column: 2;
     grid-row: 1;
-    align-self:center;
+    align-self: center;
     justify-self: center;
     font-size: 3em;
 }
@@ -1231,22 +1231,23 @@ input::-webkit-input-placeholder {
     padding-right: 50%;
     justify-self: start;
 }
+
 .elementsContainer {
     width: 100%;
     height: 100%;
 }
 
-.elementsContainer .ProfName {
-    position: absolute;
-    width: 100%;
-    bottom: 2%;
-    text-align: center;
-    color: rgb(30,30,30);
-    border-top: solid 3px rgb(224, 224, 224);
-    font-family: tekolight;
-    font-size: 1.5em;
-    padding-top: 0.09em;
-}
+    .elementsContainer .ProfName {
+        position: absolute;
+        width: 100%;
+        bottom: 2%;
+        text-align: center;
+        color: rgb(30,30,30);
+        border-top: solid 3px rgb(224, 224, 224);
+        font-family: tekolight;
+        font-size: 1.5em;
+        padding-top: 0.09em;
+    }
 
 .ProfContainer, .ProgContainer {
     width: 100%;
@@ -1268,11 +1269,11 @@ input::-webkit-input-placeholder {
     border: solid 3px rgb(240, 240, 240);
 }
 
-.elementsContainer .ProfessionContainer img {
-    display: block;
-    width: 70%;
-    margin: 0 auto;
-}
+    .elementsContainer .ProfessionContainer img {
+        display: block;
+        width: 70%;
+        margin: 0 auto;
+    }
 
 .elementsContainer .ProgContainer .ProfessionContainer img {
     display: block;
@@ -1288,9 +1289,9 @@ input::-webkit-input-placeholder {
     display: none;
 }
 
-.PositionsShowContainer input[type="radio"]:checked + label {
-    border: solid 3px rgb(50, 93, 219);
-}
+    .PositionsShowContainer input[type="radio"]:checked + label {
+        border: solid 3px rgb(50, 93, 219);
+    }
 
 .GraySection .buttonContainer {
     display: block;
@@ -1322,9 +1323,9 @@ input::-webkit-input-placeholder {
     margin-bottom: 5%;
 }
 
-.GraySection .DivButton:hover {
-    background-color: rgb(112, 131, 224);
-}
+    .GraySection .DivButton:hover {
+        background-color: rgb(112, 131, 224);
+    }
 
 .buttonContainer img {
     transform: rotate(90deg);
@@ -1347,9 +1348,9 @@ input::-webkit-input-placeholder {
     background-repeat: no-repeat;
 }
 
-.DeletePosB:hover {
-    background-image: url(DesignElements/elements/HoverDelete.png);
-}
+    .DeletePosB:hover {
+        background-image: url(DesignElements/elements/HoverDelete.png);
+    }
 
 
 .PositionsShowContainer {
@@ -1371,22 +1372,22 @@ input::-webkit-input-placeholder {
     padding-right: 40%;
 }
 
-.PositionsShow .ProfessionContainer {
-    display: inline-block;
-    width: 85%;
-    height: 100%;
-    border-radius: 0.4em;
-    margin: 0.3em;
-    position: relative;
-    background-color: rgb(251, 251, 251);
-    border: solid 3px rgb(240, 240, 240);
-}
-
-    .PositionsShow .ProfessionContainer img {
-        display: block;
-        width: 65%;
-        margin: 0 auto 1.3em auto;
+    .PositionsShow .ProfessionContainer {
+        display: inline-block;
+        width: 85%;
+        height: 100%;
+        border-radius: 0.4em;
+        margin: 0.3em;
+        position: relative;
+        background-color: rgb(251, 251, 251);
+        border: solid 3px rgb(240, 240, 240);
     }
+
+        .PositionsShow .ProfessionContainer img {
+            display: block;
+            width: 65%;
+            margin: 0 auto 1.3em auto;
+        }
 
 
 .PositionsShowContainer .Header {
@@ -1410,16 +1411,14 @@ input::-webkit-input-placeholder {
     grid-column: 1;
     grid-row: 2;
     margin: 0 0 1em 1em;
-
 }
 
-.PositionElement .ProfPosition {
-    grid-column: 1;
-    justify-self: start;
-    align-self: center;
-    font-size: 1.5em;
-
-}
+    .PositionElement .ProfPosition {
+        grid-column: 1;
+        justify-self: start;
+        align-self: center;
+        font-size: 1.5em;
+    }
 
 .ProgramsFatherContainer {
     width: 90%;
@@ -1438,11 +1437,11 @@ input::-webkit-input-placeholder {
     overflow-y: scroll;
 }
 
-.ProgramsContainer img {
-    height: 60px;
-    /*width: 50px;*/
-    margin-right: 1em;
-}
+    .ProgramsContainer img {
+        height: 60px;
+        /*width: 50px;*/
+        margin-right: 1em;
+    }
 
 #ProgramButton {
     display: none;
@@ -1457,16 +1456,16 @@ input::-webkit-input-placeholder {
     display: grid;
 }
 
-#project_fields .Header {
-    font-size: 3em;
-    text-align: left;
-    justify-self: start;
-    margin: 0;
-    align-self: center;
-    grid-row: 1;
-    grid-column: 2;
-    display: block;
-}
+    #project_fields .Header {
+        font-size: 3em;
+        text-align: left;
+        justify-self: start;
+        margin: 0;
+        align-self: center;
+        grid-row: 1;
+        grid-column: 2;
+        display: block;
+    }
 
     #project_fields .header2 {
         font-size: 3em;
@@ -1475,17 +1474,17 @@ input::-webkit-input-placeholder {
         justify-self: start;
     }
 
-#project_fields .ButtonBlue {
-    grid-row: 7;
-    grid-column: 2;
-    width: 5.5em;
-    height: 2em;
-    /*self-justify: center;*/
-    align-self: center;
-    margin: 0 auto;
-    font-family: tekoregular;
-    letter-spacing: 0.7px;
-}
+    #project_fields .ButtonBlue {
+        grid-row: 7;
+        grid-column: 2;
+        width: 5.5em;
+        height: 2em;
+        /*self-justify: center;*/
+        align-self: center;
+        margin: 0 auto;
+        font-family: tekoregular;
+        letter-spacing: 0.7px;
+    }
 
 
 .AgeDropDown, .ProjectStatus {
@@ -1531,7 +1530,7 @@ input::-webkit-input-placeholder {
 }
 
 .FilterBar_users {
-    width:95%;
+    width: 95%;
 }
 
 
@@ -1665,11 +1664,11 @@ input::-webkit-input-placeholder {
     scrollbar-width: none; /* Firefox */
 }
 
-.positions_list .ButtonRed {
-    white-space: normal;
-    font-size: 1.5em;
-    margin-right: 0.3em;
-}
+    .positions_list .ButtonRed {
+        white-space: normal;
+        font-size: 1.5em;
+        margin-right: 0.3em;
+    }
 
 .ReJoinButton input[type="button"]:disabled {
     background-color: rgb(173, 177, 198);
@@ -1706,7 +1705,7 @@ input::-webkit-input-placeholder {
     grid-column: 2;
     grid-row: 1;
 }
-        
+
 .ProjectContentContainer .editor {
     margin: 0;
     position: absolute;
@@ -1771,14 +1770,14 @@ input::-webkit-input-placeholder {
     align-items: center;
 }
 
-.FilterBar select {
-    margin-right: 1em;
-    margin-left: 0.2em;
-}
+    .FilterBar select {
+        margin-right: 1em;
+        margin-left: 0.2em;
+    }
 
-.FilterBar dropDown_sml {
-    height: 1em;
-}
+    .FilterBar dropDown_sml {
+        height: 1em;
+    }
 
 
 .FilterTextOption {
@@ -1802,10 +1801,10 @@ input::-webkit-input-placeholder {
     border-top: none;
 }
 
-.ProjBox:hover {
-    background-color: rgb(230, 230, 230);
-    border-color: rgb(230, 230, 230);
-}
+    .ProjBox:hover {
+        background-color: rgb(230, 230, 230);
+        border-color: rgb(230, 230, 230);
+    }
 
 .ProjHeaderContainer {
     grid-row: 1;
@@ -1890,7 +1889,6 @@ input::-webkit-input-placeholder {
     background-color: rgb(30, 30, 30);
     border-radius: 4px;
     margin: 1em;
-    
 }
 
 .ProjectManager_text {
@@ -1966,11 +1964,11 @@ input::-webkit-input-placeholder {
 }
 
 
-.PosProgramsAreali img {
-    height: 35px;
-    width: 35px;
-    object-fit: scale-down;
-}
+    .PosProgramsAreali img {
+        height: 35px;
+        width: 35px;
+        object-fit: scale-down;
+    }
 
 
 
@@ -1992,38 +1990,38 @@ input::-webkit-input-placeholder {
     position: relative;
 }
 
-.ShortSummaryDesc_wrap .SubHeader_container {
-    grid-column: 2;
-    grid-row: 2;
-    position: absolute;
-    transform: translate(-50%, -50%);
-    width: 80%;
-    height: 100%;
-    min-height: 100%;
-    top: 50%;
-    left: 50%;
-}
+    .ShortSummaryDesc_wrap .SubHeader_container {
+        grid-column: 2;
+        grid-row: 2;
+        position: absolute;
+        transform: translate(-50%, -50%);
+        width: 80%;
+        height: 100%;
+        min-height: 100%;
+        top: 50%;
+        left: 50%;
+    }
 
-.ShortSummaryDesc_wrap .subHeader {
-    width: 100%;
-}
+    .ShortSummaryDesc_wrap .subHeader {
+        width: 100%;
+    }
 
-.ShortSummaryDesc_wrap .subHeader span {
-    font-family: tekoregular;
-    text-align: left;
-    font-size: 2em;
-    color: rgb(220, 220, 220);
-}
+        .ShortSummaryDesc_wrap .subHeader span {
+            font-family: tekoregular;
+            text-align: left;
+            font-size: 2em;
+            color: rgb(220, 220, 220);
+        }
 
 
-.ShortSummaryDesc_wrap .editor_Summary {
-    width: 100%;
-    height: 50%;
-    font-size: 1.5em;
-    overflow-y: scroll;
-    padding-right: 10em;
-    font-family: 'tekoregular';
-}
+    .ShortSummaryDesc_wrap .editor_Summary {
+        width: 100%;
+        height: 50%;
+        font-size: 1.5em;
+        overflow-y: scroll;
+        padding-right: 10em;
+        font-family: 'tekoregular';
+    }
 
 
 /*********************************      UsersSearch stylesheet    ************************/
@@ -2041,10 +2039,10 @@ input::-webkit-input-placeholder {
     cursor: pointer;
 }
 
-.userBox:hover {
-    background-color: rgb(230, 230, 230);
-    border-color: rgb(230, 230, 230);
-}
+    .userBox:hover {
+        background-color: rgb(230, 230, 230);
+        border-color: rgb(230, 230, 230);
+    }
 
 .userBox_UserCredentials {
     grid-row: 1;
@@ -2072,9 +2070,9 @@ input::-webkit-input-placeholder {
     border-radius: 50%;
 }
 
-.UserCredentials_ProfileContainer:hover {
-    border: 3px dashed rgb(221, 138, 219);
-}
+    .UserCredentials_ProfileContainer:hover {
+        border: 3px dashed rgb(221, 138, 219);
+    }
 
 .UserHeaderContainer {
     font-family: tekoregular;
@@ -2084,9 +2082,9 @@ input::-webkit-input-placeholder {
     margin: 5% auto 0 auto;
 }
 
-.UserHeaderContainer span {
-    letter-spacing: 0.5px;
-}
+    .UserHeaderContainer span {
+        letter-spacing: 0.5px;
+    }
 
 .ProjRateContainer {
     grid-row: 2;
@@ -2095,11 +2093,11 @@ input::-webkit-input-placeholder {
     align-items: center;
 }
 
-.ProjRateContainer span {
-    font-family: tekoSemiBold;
-    font-size: 2em;
-    color: rgb(30, 30, 30);
-}
+    .ProjRateContainer span {
+        font-family: tekoSemiBold;
+        font-size: 2em;
+        color: rgb(30, 30, 30);
+    }
 
 .UserBox_UserID {
     display: none;
@@ -2112,7 +2110,7 @@ input::-webkit-input-placeholder {
     transform: translate(-50%, -50%);
     background-color: rgb(15,15,15);
     border-radius: 0.3em;
-    display:flex;
+    display: flex;
     justify-content: center;
     align-content: center;
 }
@@ -2199,12 +2197,15 @@ input::-webkit-input-placeholder {
 }
 
 
-.DeletePosButton:hover {
-    background-image: url(DesignElements/elements/HoverDelete.png);
-}
+    .DeletePosButton:hover {
+        background-image: url(DesignElements/elements/HoverDelete.png);
+    }
 
 .DeleteBContainer {
     display: flex;
+}
+
+.profileProjectPositions_Container {
 }
 
 .profileProjectPositions_Container .positions_list input[type="radio"]:checked + label {
@@ -2221,19 +2222,49 @@ input::-webkit-input-placeholder {
 }
 
 .profileProjectPositions_Container .positions_list {
-    width: 25%;
-    background-color: rgb(240, 240, 240);
+    width: 90%;
+    background-color: rgba(80,80,80,0.4);
     display: flex;
     flex-direction: column;
+    min-height: 100px;
+    position: relative;
+    max-height: 380px;
+    max-width: 390px;
+    border-radius: 3px;
+    border: 2px solid rgb(70,70,70);
 }
+
+
+.profileProjectPositions_Container::after {
+    top: -90%;
+    left: 91%;
+    /* left: auto; */
+    width: 0;
+    height: 0;
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+    border-left: 8px solid rgb(70,70,70);
+    position: relative;
+    display: inline-block;
+    content: "";
+}
+
 
 .ProjectHeaders {
     font-size: 1.5em;
+    grid-column: 2;
+    grid-row: 2;
+    transform: translate(-10px, 0);
+    background-color: rgb(35,35,35);
+    color: rgb(230,230,230);
+    outline: none;
 }
 
+
 .SendAdminInv {
-    width: 40%;
+    width: 25%;
     align-self: center;
+    margin-bottom: 10px;
 }
 
 .ProfileHeaderContainer {
@@ -2241,3 +2272,105 @@ input::-webkit-input-placeholder {
     height: 45vh;
     width: 100vw;
 }
+
+.SendInvitation_container {
+    width: 30%;
+    position: absolute;
+    right: 0;
+    top: 8%;
+    display: grid;
+    grid-template-columns: 6fr 4fr;
+    grid-template-rows: 0.1fr 9.9fr;
+}
+
+.loadingSymbol_Child {
+    position: absolute;
+    bottom: 50%;
+    left: 50%;
+    transform: translate(-50%, 50%);
+    /* background-color: rgb(15,15,15);
+    border-radius: 0.3em; */
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    width: 90px;
+    z-index: 20;
+}
+
+.loadingSymbol_Child .loadingSymbolImg {
+    width: 140px;
+}
+
+
+.blurdrop {
+    position: absolute;
+    width: 100%;
+    min-height: 100%;
+    -webkit-backdrop-filter: blur(2px);
+    backdrop-filter: blur(2px);
+    z-index: 15;
+}
+
+
+
+
+.profileProjectPositions_Container {
+    grid-row: 2;
+    grid-column: 1;
+}
+
+
+.inviteUserDropContainer {
+    grid-column: 2;
+    grid-row: 2;
+    display: flex;
+    flex-direction: column;
+    flex-grow: initial;
+    justify-content: flex-start;
+    background-color: rgb(45,45,45);
+    align-items: flex-end;
+    border-radius: 3px;
+    max-height: 106px;
+    height: 106px;
+    transform: translate(-8px, 0);
+    padding-top: 1em;
+}
+
+.inviteUserDropContainer input[type="button"] {
+    transform: translate(-10px, -10px);
+    width: 120px;
+    color: rgb(30,30,30);
+    background-color: rgb(230,230,230);
+    border: 2px solid rgb(200,200,200);
+    outline: none;
+    margin-bottom: 5%;
+}
+
+.inviteUserDropContainer input[type="button"]:hover {
+    background-color: rgb(50, 93, 219);
+    color: rgb(249, 249, 249);
+    border: 2px solid rgb(50, 93, 219);
+}
+
+.inviteUserDropContainer input[type="button"]:active {
+    background-color: rgb(50, 93, 219);
+    color: rgb(249, 249, 249);
+}
+
+.inviteUserDropContainer .dropDown {
+    width:6em;
+}
+
+.PositionInvmessage {
+    font-family: 'tekoregular';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.5em;
+    width: 90%;
+    text-align: center;
+    color: rgb(200,200,200);
+
+}
+

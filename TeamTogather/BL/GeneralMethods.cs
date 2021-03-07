@@ -73,6 +73,28 @@ namespace BL
             return CountryDic;
         }
 
+        /// <summary>
+        /// the method constructs a dictionary from the Contacts DataTable, id - websiteID and websiteName
+        /// </summary>
+        public static Dictionary<int, string> GetContacts()
+        {
+            DataTable contactsdt = GeneralDB.ReturnContacts();
+            if (contactsdt == null)
+            {
+                return null;
+            }
+            Dictionary<int, string> ContactDic = new Dictionary<int, string>();
+            foreach (DataRow row in contactsdt.Rows)
+            {
+                int Contactid = (int)row["WebsiteID"];
+                string ContactName = (string)row["WebsiteName"].ToString();
+                ContactDic.Add(Contactid, ContactName);
+            }
+            return ContactDic;
+        }
+
+
+
 
     }
 }

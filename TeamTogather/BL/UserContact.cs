@@ -40,7 +40,7 @@ namespace BL
             this.SymbolPath = (string)UserContact["SymbolPath"];
         }
 
-        public static int AddContact(int userID, string websiteName, string contactLink, string websiteID)
+        public static int AddContact(int userID, string websiteName, string contactLink, int websiteID)
         {
             return UserDB.AddContact(userID, websiteName, contactLink, websiteID);
         }

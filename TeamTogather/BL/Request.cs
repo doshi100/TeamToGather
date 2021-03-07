@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data;
+using DAL;
 
 namespace BL
 {
@@ -27,6 +28,11 @@ namespace BL
             {
                 this.ReqProfession = new Profession((int)requestRow["Profession"]);
             }
+        }
+
+        public static bool CheckRequestInvitation(int positionID, int userID)
+        {
+            return ProjectDB.CheckRequestInvitation(positionID, userID);
         }
 
     }
