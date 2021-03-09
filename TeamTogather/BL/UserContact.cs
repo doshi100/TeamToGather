@@ -33,11 +33,18 @@ namespace BL
         {
             this.ID = (int)UserContact["ID"];
             this.UserID = (int)UserContact["UserID"];
-            this.WebSiteName = (string)UserContact["WebSiteName"];
+            this.WebSiteName = (string)UserContact["ContactWebSite"];
             this.ContactLink = (string)UserContact["ContactLink"];
             this.WebsiteID = (int)UserContact["WebsiteID"];
             this.WebSiteIDName = (string)UserContact["WebsiteName"];
-            this.SymbolPath = (string)UserContact["SymbolPath"];
+            try
+            {
+                this.SymbolPath = (string)UserContact["SymbolPath"];
+            }
+            catch
+            {
+                this.SymbolPath = "";
+            }
         }
 
         public static int AddContact(int userID, string websiteName, string contactLink, int websiteID)

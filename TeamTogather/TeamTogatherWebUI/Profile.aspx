@@ -1,6 +1,11 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/TeamTogatherMaster.Master" AutoEventWireup="true" CodeBehind="Profile.aspx.cs" Inherits="TeamTogatherWebUI.Profile" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <style>
+        body {
+            background-color: rgb(250,250,250);
+        }
+    </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <asp:HiddenField ID="PostRate" ClientIDMode="Static" Value="" runat="server" />
@@ -9,6 +14,7 @@
     <asp:HiddenField ID="PostRequestID" ClientIDMode="Static" Value="0" runat="server" />
     <asp:HiddenField ID="PostPosID" ClientIDMode="Static" Value="0" runat="server" />
     <asp:HiddenField ID="PostUserID" ClientIDMode="Static" Value="0" runat="server" />
+    <asp:HiddenField ID="GeneralPost" ClientIDMode="Static" Value="0" runat="server" />
     <asp:ScriptManager ID="ProjectShownScriptManager" runat="server"></asp:ScriptManager>
     <div class="ProfileHeaderContainer">
 
@@ -66,14 +72,55 @@
                 </asp:UpdatePanel>
             </div>
         </div>
+        <input type="button" class="popUpOpen ButtonBlue" id="popUpOpen" value="Upload Creation" runat="server" visible="false" />
+        <input type="button" class="popUpRemoveCreation ButtonRed hiddenElm" id="popUpRemoveCreation" value="Remove Creation" runat="server" visible="false" />
         <%-------------------------------------------------------------  END OF Invite User to project for a specific Role in the project SECTION------------------------------------------------%>
     </div>
+    <div id="confirmationPopUp" class="confirmationPopUp" runat="server" visible="false">
+        <p><span class="Header">Are you sure you want to add this protfolio creation?</span></p>
+        <div class="confirmationButtons_container">
+            <input type="button" class="CancelCreationB ButtonRed" value="don't add the creation" />
+            <asp:Button ID="AddCreationB" runat="server" CssClass="ButtonBlue" Text="Add the creation" OnClick="UplaodFile_Click" />
+        </div>
+    </div>
+
+    <div id="DeleteCreationConfirmation" class="confirmationPopUpRemove" runat="server" visible="false">
+        <p><span class="Header">Are you sure you want to remove this protfolio creation?</span></p>
+        <div class="confirmationButtons_container">
+            <input type="button" class="CancelCreationB ButtonRed" value="Don't Remove the Creation" />
+            <asp:Button ID="Button1" runat="server" CssClass="ButtonBlue" Text="Remove the creation" OnClick="RemoveCreation" />
+        </div>
+    </div>
+
+    <div class="viewPhoto_container">
+        <img id="ViewPhoto" src="#" alt="" /></div>
+    <div class="overlay" onclick="hideImg()"></div>
     <div class="ProfileContentContainer">
         <%-------------------------------------------------------------  START OF addProtfolioCreations Section ------------------------------------------------%>
         <div runat="server" id="ProtfolioSection" class="ProtfolioSection_section" visible="false">
             <div class="addCreation_popup">
                 <asp:FileUpload ID="CreationUploader" CssClass="CreationUploader" runat="server" />
-                <asp:Button ID="Button1" runat="server" CssClass="ButtonBlue" Text="Upload" OnClick="UplaodFile_Click" />
+                <%--<input type="button" class="popUpOpen ButtonBlue" value="Upload" />--%>
+                <%--</div>
+            <div class="flexi">
+            <div class="creation_container"></div>
+            <div class="creation_container"></div>
+            <div class="creation_container"></div>
+            <div class="creation_container"></div>
+            <div class="creation_container"></div>
+            <div class="creation_container"></div>
+            <div class="creation_container"></div>
+            <div class="creation_container"></div>
+            </div>--%>
+                <div class="flexi">
+                    <asp:Repeater ID="CreationsRepeater" OnItemDataBound="CreationRepeater_OnItemDataBound" runat="server" EnableViewState="false">
+                        <ItemTemplate>
+                            <div id="creation_container" class="creation_container" onclick="viewPhoto(this)" runat="server">
+                                <asp:Label ID="CreationID" CssClass="CreationID hiddenElm" runat="server"></asp:Label>
+                            </div>
+                        </ItemTemplate>
+                    </asp:Repeater>
+                </div>
             </div>
         </div>
         <%-------------------------------------------------------------  END OF addProtfolioCreations Section  ------------------------------------------------%>
@@ -256,16 +303,75 @@
 
         <%-------------------------------------------------------------  START OF addcontacts and show information Section  ------------------------------------------------%>
         <div runat="server" id="Contacts_section" class="Contacts_section" visible="false">
-            <asp:UpdatePanel ID="contactPanel" class="" UpdateMode="Conditional" runat="server">
-                <ContentTemplate>
-                    <div class="addContact_popup">
-                        <span>choose account's Website</span><asp:DropDownList ID="WebsitesDropDown" CssClass="" runat="server"></asp:DropDownList>
-                        <asp:TextBox ID="Contactname" placeholder="Account username" runat="server"></asp:TextBox>
-                        <asp:TextBox ID="ContactLink" placeholder="Account Link" runat="server"></asp:TextBox>
-                        <asp:Button ID="AddContactButton" CssClass="" runat="server" Text="Add" OnClick="AddContact" />
+            <div class="data_container">
+                <div class="generalInfo">
+                    <div class="headercontainer"><span class="Header">About</span></div>
+                    <div class="userinfo">
+                        <asp:Label runat="server" ID="info_username" Text="Username: "></asp:Label>
+                        <asp:Label runat="server" ID="info_age" Text="Age: "></asp:Label>
+                        <asp:Label runat="server" ID="info_freehours" Text="Free hours in a week: "></asp:Label>
+                        <asp:Label runat="server" ID="info_nativelang" Text="Native Language: "></asp:Label>
+                        <asp:Label runat="server" ID="info_userrate" Text="User Rate: "></asp:Label>
                     </div>
-                </ContentTemplate>
-            </asp:UpdatePanel>
+                </div>
+                <div class="professionInfo">
+                    <div class="headercontainer"><span class="Header">User's Professions</span></div>
+                    <div class="infoBox">
+                        <asp:Repeater ID="professionRepeater" OnItemDataBound="ProfessionInfo_OnItemDataBound" runat="server">
+                            <ItemTemplate>
+                                <div class="infoElmContainer">
+                                    <div class="infoImgContainer">
+                                        <asp:Image ImageUrl="#" ID="infoImg" AlternateText="" runat="server" />
+                                    </div>
+                                    <asp:Label ID="InfoElmName" runat="server"></asp:Label>
+                                </div>
+                            </ItemTemplate>
+                        </asp:Repeater>
+                    </div>
+                </div>
+                <div class="contactInfo">
+                    <div class="headercontainer">
+                        <span class="Header">User's Contacts</span>
+                        <div class="editimg_container" onclick="editContacts(this)">
+                            <img src="DesignElements/elements/Pencil.png" alt="pencil">
+                        </div>
+                        <div class="addContact_popup">
+                            <span class="Header2">Add Account's Website...</span><asp:DropDownList ID="WebsitesDropDown" CssClass="dropDownBlack dropDown" runat="server"></asp:DropDownList>
+                            <asp:TextBox ID="Contactname" placeholder="Account username" class="slimTextArea" runat="server"></asp:TextBox>
+                            <asp:TextBox ID="ContactLink" placeholder="Account Link" class="slimTextArea" runat="server"></asp:TextBox>
+                            <asp:Button ID="AddContactButton" CssClass="ButtonBlue" runat="server" Text="Add" OnClick="AddContact" />
+                        </div>
+                    </div>
+                    <div class="infoBox">
+                        <asp:Repeater ID="ContactRepeater" OnItemDataBound="ContactInfo_OnItemDataBound" runat="server">
+                            <ItemTemplate>
+                                <div class="infoElmContainer">
+                                    <div class="infoImgContainer">
+                                        <asp:Image ImageUrl="#" ID="infoImg" AlternateText="" runat="server" />
+                                    </div>
+                                    <a href="#" id="ContactInfoLink" runat="server">
+                                        <asp:Label ID="InfoElmName" runat="server"></asp:Label></a>
+                                </div>
+                            </ItemTemplate>
+                        </asp:Repeater>
+                    </div>
+                </div>
+                <div class="programInfo">
+                    <div class="headercontainer"><span class="Header">User's Knowledge</span></div>
+                    <div class="infoBox">
+                        <asp:Repeater ID="ProgramRepeater" OnItemDataBound="ProgramInfo_OnItemDataBound" runat="server">
+                            <ItemTemplate>
+                                <div class="infoElmContainer">
+                                    <div class="infoImgContainer">
+                                        <asp:Image ImageUrl="#" ID="infoImg" AlternateText="" runat="server" />
+                                    </div>
+                                    <asp:Label ID="InfoElmName" runat="server"></asp:Label>
+                                </div>
+                            </ItemTemplate>
+                        </asp:Repeater>
+                    </div>
+                </div>
+            </div>
         </div>
         <%-------------------------------------------------------------  END addcontacts and show information Section  ------------------------------------------------%>
     </div>

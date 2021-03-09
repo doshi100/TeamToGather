@@ -27,7 +27,7 @@ namespace BL
         /// </summary>
         public ProtfolioCreation(DataRow UserContact)
         {
-            this.CreationID = (int)UserContact["CreationID "];
+            this.CreationID = (int)UserContact["CreationID"];
             this.CreationPath = (string)UserContact["CreationPath"];
             this.UserID = (int)UserContact["UserID"];
         }

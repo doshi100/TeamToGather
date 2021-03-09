@@ -49,13 +49,30 @@ let PopUpButton = document.querySelector(".OpenPopUp"),
     RemovePos = document.querySelector(".RemovePos"),
     RemoveUser = document.querySelector(".RemoveUser");
 
-let Bu_openInvPanel = document.querySelector(".openInvPanel");
+let Bu_openInvPanel = document.querySelector(".openInvPanel"),
+    popUpOpen = document.querySelector(".popUpOpen");
 
 if (Bu_openInvPanel) {
     let ProjectHeaders = document.querySelector(".ProjectHeaders"),
         positionpanel = document.querySelector(".profileProjectPositions_Container"),
         inviteUserDropContainer = document.querySelector(".inviteUserDropContainer");
    popupMenuMechanism(positionpanel, "flex", ProjectHeaders, "rgb(45,45,45)", inviteUserDropContainer);
+}
+
+if (popUpOpen) {
+    let confirmationPopUp = document.querySelector(".confirmationPopUp"),
+        CancelCreationB = confirmationPopUp.querySelector(".CancelCreationB"),
+        CreationUploaderB = document.querySelector(".CreationUploader"),
+        confirmationPopUpRemove = document.querySelector(".confirmationPopUpRemove"),
+        CancelCreationB2 = confirmationPopUpRemove.querySelector(".CancelCreationB"),
+        CreationRemoverB2 = document.querySelector(".popUpRemoveCreation");
+    popUpOpen.addEventListener('click', () => clickButton(CreationUploaderB));
+    CreationUploaderB.addEventListener('change', function () { if (CreationUploaderB.files[0]) { OpeningpopupMenuMechanism(confirmationPopUp, "block") }});
+    CancelCreationB.addEventListener('click', () => ClosingpopupMenuMechanism(confirmationPopUp));
+
+    //confirmationPopUpRemove.addEventListener('click', () => clickButton(CreationRemoverB2));
+    CreationRemoverB2.addEventListener('click', function () { OpeningpopupMenuMechanism(confirmationPopUpRemove, "block") });
+    CancelCreationB2.addEventListener('click', () => ClosingpopupMenuMechanism(confirmationPopUpRemove));
 }
 
 
@@ -555,10 +572,101 @@ function popupMenuMechanism(element, displaytype, optionalelement, Optionelement
     }
 }
 
+function popupMenuMechanism2(element, displaytype, optionalelement,defaultbackgroundcolor, OptionelementbgNeutralize, elementbgNeutralize, optionalelement2) {
+    switch (getComputedStyle(element, "display").display) {
+        case "block":
+            element.style.display = "none";
+            if (optionalelement) {
+                optionalelement.style.display = "none";
+            }
+            if (optionalelement2) {
+                optionalelement2.style.display = "none";
+            }
+            if (OptionelementbgNeutralize != "") {
+                elementbgNeutralize.style.backgroundColor = defaultbackgroundcolor;
+            }
+            break;
+        case "flex":
+            element.style.display = "none";
+            if (optionalelement) {
+                optionalelement.style.display = "none";
+            }
+            if (optionalelement2) {
+                optionalelement2.style.display = "none";
+            }
+            if (OptionelementbgNeutralize != "") {
+                elementbgNeutralize.style.backgroundColor = defaultbackgroundcolor;
+            }
+            break;
+        case "none":
+            element.style.display = displaytype;
+            if (optionalelement) {
+                optionalelement.style.display = displaytype;
+            }
+            if (optionalelement2) {
+                optionalelement2.style.display = displaytype;
+            }
+            if (OptionelementbgNeutralize) {
+                elementbgNeutralize.style.backgroundColor = OptionelementbgNeutralize;
+            }
+            break;
+    }
+}
+
+function clickButton(button) {
+    button.click();
+}
+
+
+function OpeningpopupMenuMechanism(popUp_element, displaytype) {
+    popUp_element.style.display = displaytype;
+}
+
+function ClosingpopupMenuMechanism(popUp_element) {
+    popUp_element.style.display = "none";
+}
+
 function addevent() {
     let ProjectHeaders = document.querySelector(".ProjectHeaders"),
         positionpanel = document.querySelector(".profileProjectPositions_Container"),
         Bu_openInvPanel = document.querySelector(".openInvPanel"),
         inviteUserDropContainer = document.querySelector(".inviteUserDropContainer");
    popupMenuMechanism(positionpanel, "flex", ProjectHeaders, "rgb(45,45,45)", inviteUserDropContainer);
+}
+
+function viewPhoto(e) {
+    let photoUrl = e.style.backgroundImage.slice(4, -1).replace(/["']/g, ""),
+        image = document.querySelector("#ViewPhoto"),
+        imagecontainer = document.querySelector(".viewPhoto_container"),
+        overlay = document.querySelector(".overlay"),
+        hiddenGeneral = document.querySelector("#GeneralPost"),
+        popUpRemoveCreation = document.querySelector(".popUpRemoveCreation"),
+        creID = e.querySelector(".CreationID").innerText;
+    hiddenGeneral.value = creID;
+    image.src = photoUrl;
+    OpeningpopupMenuMechanism(imagecontainer, "block");
+    OpeningpopupMenuMechanism(overlay, "block");
+    OpeningpopupMenuMechanism(popUpRemoveCreation, "block");
+}
+
+function hideImg() {
+    let image = document.querySelector("#ViewPhoto"),
+        imagecontainer = document.querySelector(".viewPhoto_container"),
+        overlay = document.querySelector(".overlay"),
+        removeCreationB = document.querySelector(".popUpRemoveCreation");
+    ClosingpopupMenuMechanism(imagecontainer);
+    ClosingpopupMenuMechanism(overlay);
+    ClosingpopupMenuMechanism(removeCreationB);
+}
+
+function editContacts(e) {
+    let contactadder = document.querySelector(".addContact_popup");
+    if (getComputedStyle(contactadder, "display").display == "none") {
+        OpeningpopupMenuMechanism(contactadder, "flex");
+        e.backgroundColor = "rgba(242, 147, 235,0.3)";
+    }
+    else {
+        ClosingpopupMenuMechanism(contactadder);
+        e.backgroundColor = "rgb(29, 237, 167)";
+    }
 }

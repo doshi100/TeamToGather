@@ -86,7 +86,10 @@ namespace BL
                 this.RegistrationDate = (DateTime)userRow["RegistrationDate"]; 
                 this.LoginDate = (DateTime)userRow["LoginDate"]; 
                 this.UserType = (int)userRow["UserType"];
-                this.ProfilePath = (string)userRow["ProfilePath"];
+                if(userRow["ProfilePath"] != DBNull.Value)
+                {
+                    this.ProfilePath = (string)userRow["ProfilePath"];
+                }
                 this.UserProjects = Project.ReturnUserProjects(this.ID);
                 this.UserPK = UserKnowledge.GetUserKnowledgeBL(this.ID);
             }
@@ -450,6 +453,12 @@ namespace BL
                 projects.Add(newpr);
             }
             return projects;
+        }
+
+
+        public string ReturnLangByID()
+        {
+            return UserDB.ReturnLangByID(this.NativeLang);
         }
 
     }

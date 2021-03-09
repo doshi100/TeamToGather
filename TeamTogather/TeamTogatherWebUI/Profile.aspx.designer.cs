@@ -67,6 +67,15 @@ namespace TeamTogatherWebUI {
         protected global::System.Web.UI.WebControls.HiddenField PostUserID;
         
         /// <summary>
+        /// GeneralPost control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField GeneralPost;
+        
+        /// <summary>
         /// ProjectShownScriptManager control.
         /// </summary>
         /// <remarks>
@@ -157,6 +166,60 @@ namespace TeamTogatherWebUI {
         protected global::System.Web.UI.WebControls.Button SendAdminInvitation;
         
         /// <summary>
+        /// popUpOpen control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputButton popUpOpen;
+        
+        /// <summary>
+        /// popUpRemoveCreation control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputButton popUpRemoveCreation;
+        
+        /// <summary>
+        /// confirmationPopUp control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl confirmationPopUp;
+        
+        /// <summary>
+        /// AddCreationB control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button AddCreationB;
+        
+        /// <summary>
+        /// DeleteCreationConfirmation control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl DeleteCreationConfirmation;
+        
+        /// <summary>
+        /// Button1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button Button1;
+        
+        /// <summary>
         /// ProtfolioSection control.
         /// </summary>
         /// <remarks>
@@ -175,13 +238,13 @@ namespace TeamTogatherWebUI {
         protected global::System.Web.UI.WebControls.FileUpload CreationUploader;
         
         /// <summary>
-        /// Button1 control.
+        /// CreationsRepeater control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button1;
+        protected global::System.Web.UI.WebControls.Repeater CreationsRepeater;
         
         /// <summary>
         /// ProjectRequests_section control.
@@ -481,13 +544,58 @@ namespace TeamTogatherWebUI {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl Contacts_section;
         
         /// <summary>
-        /// contactPanel control.
+        /// info_username control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel contactPanel;
+        protected global::System.Web.UI.WebControls.Label info_username;
+        
+        /// <summary>
+        /// info_age control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label info_age;
+        
+        /// <summary>
+        /// info_freehours control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label info_freehours;
+        
+        /// <summary>
+        /// info_nativelang control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label info_nativelang;
+        
+        /// <summary>
+        /// info_userrate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label info_userrate;
+        
+        /// <summary>
+        /// professionRepeater control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater professionRepeater;
         
         /// <summary>
         /// WebsitesDropDown control.
@@ -524,5 +632,23 @@ namespace TeamTogatherWebUI {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button AddContactButton;
+        
+        /// <summary>
+        /// ContactRepeater control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater ContactRepeater;
+        
+        /// <summary>
+        /// ProgramRepeater control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater ProgramRepeater;
     }
 }

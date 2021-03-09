@@ -199,7 +199,7 @@ namespace DAL
         public static DataTable GetUserContacts(int userID)
         {
             DBHelper helper = new DBHelper(Constants.PROVIDER, Constants.PATH);
-            string query = $"SELECT UserContacts.*, ContactWebsites.WebSiteName, ContactWebsites.SymbolPath " +
+            string query = $"SELECT UserContacts.*, ContactWebsites.WebSiteName AS ContactWebSite, ContactWebsites.SymbolPath " +
                 $"FROM UserContacts INNER JOIN ContactWebSites ON ContactWebSites.WebsiteID = UserContacts.WebsiteID " +
                 $"WHERE UserID = {userID} AND IsDeleted = 1;";
             DataTable dt = helper.GetDataTable(query);
@@ -395,6 +395,24 @@ namespace DAL
             else
             {
                 return rate;
+            }
+        }
+
+        public static string ReturnLangByID(int langID)
+        {
+            DBHelper helper = new DBHelper(Constants.PROVIDER, Constants.PATH);
+            string sql = $"SELECT Languages.LangName FROM Languages WHERE ID = {langID};";
+            DataTable dt = helper.GetDataTable(sql);
+            DataRow user = dt.Rows[0];
+            string lang = "";
+            if (user != null)
+            {
+                lang = (string)user["LangName"];
+                return lang;
+            }
+            else
+            {
+                return lang;
             }
         }
 

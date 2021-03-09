@@ -111,6 +111,10 @@ namespace TeamTogatherWebUI
                 else if (Request.QueryString["section"] == "1")
                 {
                     ProtfolioSection.Visible = true;
+                    popUpOpen.Visible = true;
+                    popUpRemoveCreation.Visible = true;
+                    DeleteCreationConfirmation.Visible = true;
+                    confirmationPopUp.Visible = true;
                     ProjectHeaders.DataSource = GetHeaders(Project.returnProjectHeadLines((int)Session["UserID"]));
                     ProjectHeaders.DataValueField = "Key";
                     ProjectHeaders.DataTextField = "Value";
@@ -119,6 +123,11 @@ namespace TeamTogatherWebUI
                     ProjectInvRepeater.DataSource = project.ProjectPositions;
                     ProjectInvRepeater.DataBind();
                     List<int> loggedUser_professions = UserInfo.GetUserProfessions(int.Parse(Request.QueryString["UserID"]));
+                    UserInfo ProfileUser = new UserInfo(int.Parse(Request.QueryString["UserID"]), true);
+                    ProfileUser.SetUserCreations();
+                    List<ProtfolioCreation> creations = ProfileUser.GetUserCreations();
+                    CreationsRepeater.DataSource = creations;
+                    CreationsRepeater.DataBind();
                     if (CheckVisibleItems(project.ProjectPositions, loggedUser_professions))
                     {
                         SendAdminInvitation.Visible = true;
@@ -136,6 +145,27 @@ namespace TeamTogatherWebUI
                     WebsitesDropDown.DataValueField = "Key";
                     WebsitesDropDown.DataTextField = "Value";
                     WebsitesDropDown.DataBind();
+                    UserInfo ProfileUser = new UserInfo(int.Parse(Request.QueryString["UserID"]));
+                    ProfileUser.SetUserContacts();
+                    professionRepeater.DataSource = ProfileUser.GetUserProfessionsList2();
+                    professionRepeater.DataBind();
+                    ProgramRepeater.DataSource = ProfileUser.UserPK;
+                    ProgramRepeater.DataBind();
+                    ContactRepeater.DataSource = ProfileUser.GetUserContacts();
+                    ContactRepeater.DataBind();
+                    info_username.Text += ProfileUser.UserName;
+                    info_freehours.Text += ProfileUser.WeeklyFreeTime;
+                    if(ProfileUser.NumRateVoters == 0)
+                    {
+                        info_userrate.Text += "0";
+                    }
+                    else
+                    {
+                        int rate = (int)(Math.Round((double)ProfileUser.UserRate / ProfileUser.NumRateVoters));
+                        info_userrate.Text += rate.ToString();
+                    }
+                    info_age.Text += (DateTime.Now.Year - ProfileUser.Birthday.Year).ToString();
+                    info_nativelang.Text += ProfileUser.ReturnLangByID();
                 }
             }
             else
@@ -197,12 +227,19 @@ namespace TeamTogatherWebUI
                     Project project = (Project)e.Item.DataItem;
                     var projectText = new HtmlDocument();
                     projectText.LoadHtml(project.ProjectContent);
-                    string projectName = projectText.DocumentNode.SelectSingleNode("//div[@class='editor_header']").InnerText;
-                    if (projectName != "")
+                    try
                     {
-                        ((Label)e.Item.FindControl("ProjectHeader")).Text = projectName;
+                        string projectName = projectText.DocumentNode.SelectSingleNode("//div[@class='editor_header']").InnerText;
+                        if (projectName != "")
+                        {
+                            ((Label)e.Item.FindControl("ProjectHeader")).Text = projectName;
+                        }
+                        else
+                        {
+                            ((Label)e.Item.FindControl("ProjectHeader")).Text = "title";
+                        }
                     }
-                    else
+                    catch
                     {
                         ((Label)e.Item.FindControl("ProjectHeader")).Text = "title";
                     }
@@ -233,6 +270,17 @@ namespace TeamTogatherWebUI
                 }
             }
 
+        }
+
+        protected void CreationRepeater_OnItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+            {
+                ProtfolioCreation creation = (ProtfolioCreation)e.Item.DataItem;
+                ((HtmlGenericControl)e.Item.FindControl("creation_container")).Style.Add("background", "url("+creation.CreationPath+") 50% 50% no-repeat;");
+                ((HtmlGenericControl)e.Item.FindControl("creation_container")).Style.Add("background-size", "cover;");
+                ((Label)e.Item.FindControl("CreationID")).Text = creation.CreationID.ToString();
+            }
         }
 
         public static Dictionary<int, string> GetHeaders(Dictionary<int, string> dic)
@@ -516,9 +564,18 @@ namespace TeamTogatherWebUI
         {
             if (CreationUploader.HasFile)
             {
-                ProtfolioCreation.AddProtfolioCreation("DesignElements/UsersCreations/" + CreationUploader.FileName, int.Parse(Request.QueryString["UserID"]));
-                CreationUploader.SaveAs(Server.MapPath("~/DesignElements/UsersCreations/" + CreationUploader.FileName));
+                string FileName = CreationUploader.FileName.Replace(" ", "");
+                ProtfolioCreation.AddProtfolioCreation("DesignElements/UsersCreations/" + FileName, int.Parse(Request.QueryString["UserID"]));
+                CreationUploader.SaveAs(Server.MapPath("~/DesignElements/UsersCreations/" + FileName));
+                Response.Redirect($"profile.aspx?userid={int.Parse(Request.QueryString["UserID"])}&section={int.Parse(Request.QueryString["section"])}");
             }
+        }
+
+        protected void RemoveCreation(object sender, EventArgs e)
+        {
+            int CreationID = int.Parse(GeneralPost.Value);
+            ProtfolioCreation.DeleteCreation(CreationID);
+            Response.Redirect($"profile.aspx?userid={int.Parse(Request.QueryString["UserID"])}&section={int.Parse(Request.QueryString["section"])}");
         }
 
         // ********************** ProtfolioSection Methods END
@@ -889,8 +946,49 @@ namespace TeamTogatherWebUI
             string accountContactname = Contactname.Text;
             string accountContactLink = ContactLink.Text;
             int websiteID = int.Parse(WebsitesDropDown.SelectedValue);
-            UserContact.AddContact(int.Parse(Request.QueryString["UserID"]), accountContactname, accountContactLink, websiteID);
+            if(accountContactLink != "" && accountContactLink != "")
+            {
+                UserContact.AddContact(int.Parse(Request.QueryString["UserID"]), accountContactname, accountContactLink, websiteID);
+                Response.Redirect($"profile.aspx?userid={int.Parse(Request.QueryString["UserID"])}&section={int.Parse(Request.QueryString["section"])}");
+            }
         }
+
+        protected void ProfessionInfo_OnItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+            {
+                Profession Profession = (Profession)e.Item.DataItem;
+                ((Image)e.Item.FindControl("infoImg")).AlternateText = Profession.ProfName;
+                ((Image)e.Item.FindControl("infoImg")).ImageUrl = Profession.ProfPath;
+                ((Label)e.Item.FindControl("InfoElmName")).Text = Profession.ProfName;
+            }
+        }
+
+        protected void ProgramInfo_OnItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+            {
+                Knowledge program = (Knowledge)e.Item.DataItem;
+                ((Image)e.Item.FindControl("infoImg")).AlternateText = program.PName;
+                ((Image)e.Item.FindControl("infoImg")).ImageUrl = program.ProgPath;
+                ((Label)e.Item.FindControl("InfoElmName")).Text = program.PName;
+            }
+        }
+
+        protected void ContactInfo_OnItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+            {
+                UserContact contact = (UserContact)e.Item.DataItem;
+                ((Image)e.Item.FindControl("infoImg")).AlternateText = contact.WebSiteName;
+                ((Image)e.Item.FindControl("infoImg")).ImageUrl = contact.SymbolPath;
+                ((Label)e.Item.FindControl("InfoElmName")).Text = "@" + contact.WebSiteIDName;
+                ((HtmlAnchor)e.Item.FindControl("ContactInfoLink")).Attributes.Add("href", contact.ContactLink);
+            }
+        }
+
+
         // ********************************************************** User Info methods END *************************************************************
+
     }
 }
