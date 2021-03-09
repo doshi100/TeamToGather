@@ -17,7 +17,16 @@
     <asp:HiddenField ID="GeneralPost" ClientIDMode="Static" Value="0" runat="server" />
     <asp:ScriptManager ID="ProjectShownScriptManager" runat="server"></asp:ScriptManager>
     <div class="ProfileHeaderContainer">
-
+       <%-- <div class="profile_navbar">
+            <ul>
+                <li>Protfolio</li>
+                <li>About</li>
+                <li>Finished Projects</li>
+                <li>My Projects</li>
+                <li>User Join Requests</li>
+                <li>Project Invitation</li>
+            </ul>
+        </div>--%>
         <%-------------------------------------------------------------  START OF Invite User to project for a specific Role in the project SECTION------------------------------------------------%>
         <div runat="server" id="UserInfo_Section" class="UserRequests_section" visible="false">
             <div class="updateAreaProfileContainer">
