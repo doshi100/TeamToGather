@@ -139,11 +139,11 @@
     <Content Include="DesignElements\SitesLogo\facebook.png" />
     <Content Include="DesignElements\SitesLogo\github.png" />
     <Content Include="DesignElements\SitesLogo\instagram.png" />
-    <Content Include="DesignElements\SitesLogo\LinkedIn.png" />
-    <Content Include="DesignElements\SitesLogo\skype.png" />
-    <Content Include="DesignElements\SitesLogo\twitter.png" />
-    <Content Include="DesignElements\SitesLogo\wix.png" />
-    <Content Include="DesignElements\SitesLogo\youtube.png" />
+    <Content Include="DesignElements\SitesLogo\Linked.png" />
+    <Content Include="DesignElements\SitesLogo\skyp.png" />
+    <Content Include="DesignElements\SitesLogo\twit.png" />
+    <Content Include="DesignElements\SitesLogo\wi.png" />
+    <Content Include="DesignElements\SitesLogo\you.png" />
     <Content Include="DesignElements\SitesLogo\zoom.png" />
     <Content Include="global.asax" />
     <Content Include="HomePage.aspx" />

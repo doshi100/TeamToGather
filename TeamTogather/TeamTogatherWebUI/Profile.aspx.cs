@@ -980,7 +980,7 @@ namespace TeamTogatherWebUI
             if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
             {
                 UserContact contact = (UserContact)e.Item.DataItem;
-                ((Image)e.Item.FindControl("infoImg")).AlternateText = contact.WebSiteName;
+                ((Image)e.Item.FindControl("infoImg")).AlternateText = "TeamtogatherContactWebsite";
                 ((Image)e.Item.FindControl("infoImg")).ImageUrl = contact.SymbolPath;
                 ((Label)e.Item.FindControl("InfoElmName")).Text = "@" + contact.WebSiteIDName;
                 ((HtmlAnchor)e.Item.FindControl("ContactInfoLink")).Attributes.Add("href", contact.ContactLink);

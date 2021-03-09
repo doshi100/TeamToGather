@@ -2646,6 +2646,8 @@ img#ViewPhoto{
 .contactInfo .infoElmContainer span {
     color: blue;
     font-size: 1em;
+    margin-top: 0.8em;
+    display: block;
 }
 
 .generalInfo {
@@ -2697,7 +2699,7 @@ img#ViewPhoto{
     border-radius: 50%;
     justify-content: center;
     align-items: center;
-    background-color: rgb(29, 237, 167);
+    background-color: rgb(235, 235, 235);
     position: relative;
     margin-left: 1em;
     transform: translate(0, 30%);
