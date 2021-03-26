@@ -403,8 +403,16 @@ namespace DAL
             DBHelper helper = new DBHelper(Constants.PROVIDER, Constants.PATH);
             string sql = $"SELECT Languages.LangName FROM Languages WHERE ID = {langID};";
             DataTable dt = helper.GetDataTable(sql);
-            DataRow user = dt.Rows[0];
+            DataRow user;
             string lang = "";
+            try
+            {
+                user = dt.Rows[0];
+            }
+            catch
+            {
+                user = null;
+            }
             if (user != null)
             {
                 lang = (string)user["LangName"];
@@ -414,6 +422,14 @@ namespace DAL
             {
                 return lang;
             }
+        }
+
+        public static void UpdateProfilePhoto(string path, int id)
+        {
+            DateTime dt = DateTime.Now;
+            DBHelper helper = new DBHelper(Constants.PROVIDER, Constants.PATH);
+            string sql = $"UPDATE Users SET [ProfilePath] = '{path}' WHERE ID = {id};";
+            helper.WriteData(sql);
         }
 
 

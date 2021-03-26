@@ -116,6 +116,10 @@ namespace TeamTogatherWebUI
                 {
                     ((ImageButton)e.Item.FindControl("ProfilePosPic")).ImageUrl = PosUser.ProfilePath;
                     ((ImageButton)e.Item.FindControl("ProfilePosPic")).AlternateText = PosUser.ID.ToString();
+                    if (PosUser.ID == 1)
+                    {
+                        ((ImageButton)e.Item.FindControl("ProfilePosPic")).Enabled = false;
+                    }
                 }
                 else
                 {
@@ -437,7 +441,7 @@ namespace TeamTogatherWebUI
             ImageButton currentbutton = (ImageButton)sender;
             if(currentbutton.AlternateText != "1")
             {
-                Response.Redirect($"Profile.aspx?UserID={currentbutton.AlternateText}", true);
+                Response.Redirect($"Profile.aspx?UserID={currentbutton.AlternateText}&section=1", true);
             }
             else
             {

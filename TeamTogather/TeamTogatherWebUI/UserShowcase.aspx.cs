@@ -85,7 +85,7 @@ namespace TeamTogatherWebUI
 
         protected void ProfilePic_Click(object sender, EventArgs e)
         {
-            Response.Redirect($"Profile.aspx?UserID={ClickedUserID.Value}", true);
+            Response.Redirect($"Profile.aspx?UserID={ClickedUserID.Value}&section=1", true);
         }
 
 

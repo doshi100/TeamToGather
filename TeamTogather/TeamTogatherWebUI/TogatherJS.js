@@ -52,12 +52,29 @@ let PopUpButton = document.querySelector(".OpenPopUp"),
 let Bu_openInvPanel = document.querySelector(".openInvPanel"),
     popUpOpen = document.querySelector(".popUpOpen");
 
+let profile_pic = document.querySelector(".profileImg_container"),
+    chgProfileTxt = document.querySelector(".ChangeProfile_txt");
+
+if (chgProfileTxt) {
+    chgProfileTxt.addEventListener('mouseover', () => { profile_pic.classList.add("profileImgHover_container") });
+    chgProfileTxt.addEventListener('mouseout', () => { profile_pic.classList.remove("profileImgHover_container") });
+    let confirmationPopUp = document.querySelector(".confirmationPopUp2"),
+        CancelCreationB = confirmationPopUp.querySelector(".CancelCreationB"),
+        CreationUploaderB = document.querySelector(".profileUploader");
+    chgProfileTxt.addEventListener('click', () => clickButton(CreationUploaderB));
+    CreationUploaderB.addEventListener('change', function () { if (CreationUploaderB.files[0]) { OpeningpopupMenuMechanism(confirmationPopUp, "block") } });
+    CancelCreationB.addEventListener('click', () => ClosingpopupMenuMechanism(confirmationPopUp));
+    //confirmationPopUpRemove.addEventListener('click', () => clickButton(CreationRemoverB2));
+}
+
 if (Bu_openInvPanel) {
     let ProjectHeaders = document.querySelector(".ProjectHeaders"),
         positionpanel = document.querySelector(".profileProjectPositions_Container"),
         inviteUserDropContainer = document.querySelector(".inviteUserDropContainer");
    popupMenuMechanism(positionpanel, "flex", ProjectHeaders, "rgb(45,45,45)", inviteUserDropContainer);
 }
+
+
 
 if (popUpOpen) {
     let confirmationPopUp = document.querySelector(".confirmationPopUp"),

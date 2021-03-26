@@ -19,6 +19,29 @@ namespace TeamTogatherWebUI
             {
                 Response.Redirect("HomePage.aspx", true);
             }
+            About_section.NavigateUrl = $"profile.aspx?userid={Request.QueryString["userid"]}&section={"0"}";
+            Protfolio_section.NavigateUrl = $"profile.aspx?userid={Request.QueryString["userid"]}&section={"1"}";
+            myProj_section.NavigateUrl = $"profile.aspx?userid={Request.QueryString["userid"]}&section={"2"}";
+            FinishedProj_section.NavigateUrl = $"profile.aspx?userid={Request.QueryString["userid"]}&section={"3"}";
+            if(Session["UserID"].ToString() == Request.QueryString["UserID"] || UserInfo.CheckAdmin((int)Session["UserID"]))
+            {
+                ChangeProfile_popUp.Visible = true;
+                ChangeProfile_txt.Visible = true;
+                JoinReqLi_section.Visible = true;
+                ProjInvLi_section.Visible = true;
+                JoinReq_section.NavigateUrl = $"profile.aspx?userid={Request.QueryString["userid"]}&section={"4"}";
+                ProjInv_section.NavigateUrl = $"profile.aspx?userid={Request.QueryString["userid"]}&section={"5"}";
+            }
+            UserInfo profileUser = new UserInfo(int.Parse(Request.QueryString["UserID"]), false, true);
+            if(profileUser.ProfilePath == null)
+            {
+                ProfileImg.ImageUrl = "DesignElements/elements/ProfilePicEmpty.png";
+            }
+            else
+            {
+                ProfileImg.ImageUrl = profileUser.ProfilePath;
+            }
+            ProfileUsername.Text = profileUser.UserName;
             if (!Page.IsPostBack)
             {
                 Session["ShownProjects"] = null;
@@ -119,23 +142,30 @@ namespace TeamTogatherWebUI
                     ProjectHeaders.DataValueField = "Key";
                     ProjectHeaders.DataTextField = "Value";
                     ProjectHeaders.DataBind();
-                    Project project = new Project(int.Parse(ProjectHeaders.SelectedValue), true);
-                    ProjectInvRepeater.DataSource = project.ProjectPositions;
-                    ProjectInvRepeater.DataBind();
-                    List<int> loggedUser_professions = UserInfo.GetUserProfessions(int.Parse(Request.QueryString["UserID"]));
+                    try
+                    {
+                        Project project = new Project(int.Parse(ProjectHeaders.SelectedValue), true);
+                        ProjectInvRepeater.DataSource = project.ProjectPositions;
+                        ProjectInvRepeater.DataBind();
+                        List<int> loggedUser_professions = UserInfo.GetUserProfessions(int.Parse(Request.QueryString["UserID"]));
+                        if (CheckVisibleItems(project.ProjectPositions, loggedUser_professions))
+                        {
+                            SendAdminInvitation.Visible = true;
+                        }
+                        else
+                        {
+                            PositionInvmessage.Visible = true;
+                        }
+                    }
+                    catch
+                    {
+
+                    }
                     UserInfo ProfileUser = new UserInfo(int.Parse(Request.QueryString["UserID"]), true);
                     ProfileUser.SetUserCreations();
                     List<ProtfolioCreation> creations = ProfileUser.GetUserCreations();
                     CreationsRepeater.DataSource = creations;
                     CreationsRepeater.DataBind();
-                    if (CheckVisibleItems(project.ProjectPositions, loggedUser_professions))
-                    {
-                        SendAdminInvitation.Visible = true;
-                    }
-                    else
-                    {
-                        PositionInvmessage.Visible = true;
-                    }
                     UserInfo_Section.Visible = true;
                 }
                 else if(Request.QueryString["section"] == "0")
@@ -187,7 +217,15 @@ namespace TeamTogatherWebUI
                     Request req = item.Key;
                     var projectText = new HtmlDocument();
                     projectText.LoadHtml(project.ProjectContent);
-                    string projectName = projectText.DocumentNode.SelectSingleNode("//div[@class='editor_header']").InnerText;
+                    string projectName;
+                    try
+                    {
+                        projectName = projectText.DocumentNode.SelectSingleNode("//div[@class='editor_header']").InnerText;
+                    }
+                    catch
+                    {
+                        projectName = "title";
+                    }
                     if (projectName != "")
                     {
                         ((Label)e.Item.FindControl("ProjectHeader")).Text = projectName;
@@ -499,6 +537,10 @@ namespace TeamTogatherWebUI
                 {
                     ((ImageButton)e.Item.FindControl("ProfilePosPic")).ImageUrl = PosUser.ProfilePath;
                     ((ImageButton)e.Item.FindControl("ProfilePosPic")).AlternateText = PosUser.ID.ToString();
+                    if(PosUser.ID == 1)
+                    {
+                        ((ImageButton)e.Item.FindControl("ProfilePosPic")).Enabled = false;
+                    }
                 }
                 else
                 {
@@ -548,11 +590,11 @@ namespace TeamTogatherWebUI
                 {
                     ((Label)e.Item.FindControl("ProjectManager")).Visible = true;
                 }
-                if (PosUser.ID != 1 && Request.QueryString["section"] == "2" && Request.QueryString["userid"] != (PosUser.ID).ToString() && Request.QueryString["userid"] == currentProject.AdminUSID.ToString())
+                if (PosUser.ID != 1 && Request.QueryString["section"] == "2" && Request.QueryString["userid"] != (PosUser.ID).ToString() && (Session["UserID"].ToString() == currentProject.AdminUSID.ToString() || UserInfo.CheckAdmin((int)Session["UserID"])))
                 {
                     ((Button)e.Item.FindControl("RemoveUser")).Visible = true;
                 }
-                if (Request.QueryString["section"] == "2" && Request.QueryString["userid"] == currentProject.AdminUSID.ToString())
+                if (Request.QueryString["section"] == "2" && (Session["UserID"].ToString() == currentProject.AdminUSID.ToString() || UserInfo.CheckAdmin((int)Session["UserID"])))
                 {
                     ((HtmlGenericControl)e.Item.FindControl("DeleteButton")).Visible = true;
                 }
@@ -567,6 +609,17 @@ namespace TeamTogatherWebUI
                 string FileName = CreationUploader.FileName.Replace(" ", "");
                 ProtfolioCreation.AddProtfolioCreation("DesignElements/UsersCreations/" + FileName, int.Parse(Request.QueryString["UserID"]));
                 CreationUploader.SaveAs(Server.MapPath("~/DesignElements/UsersCreations/" + FileName));
+                Response.Redirect($"profile.aspx?userid={int.Parse(Request.QueryString["UserID"])}&section={int.Parse(Request.QueryString["section"])}");
+            }
+        }
+
+        protected void ChangeProfile_Click(object sender, EventArgs e)
+        {
+            if (profileUploader.HasFile)
+            {
+                string FileName = profileUploader.FileName.Replace(" ", "");
+                UserInfo.UpdateProfilePhoto("DesignElements/ProfilePictures/" + FileName, int.Parse(Request.QueryString["UserID"]));
+                profileUploader.SaveAs(Server.MapPath("~/DesignElements/ProfilePictures/" + FileName));
                 Response.Redirect($"profile.aspx?userid={int.Parse(Request.QueryString["UserID"])}&section={int.Parse(Request.QueryString["section"])}");
             }
         }
@@ -612,17 +665,29 @@ namespace TeamTogatherWebUI
                 ProjectRepeater.DataBind();
                 backDrop.Attributes.Add("onclick", "ClosePopUp();");
                 Project ChosenProject = new Project(int.Parse(PostProjID.Value), true);
-                var projectText = new HtmlDocument();
-                projectText.LoadHtml(ChosenProject.ProjectContent);
-                string projectShortDesc = projectText.DocumentNode.SelectSingleNode("//div[@class='SubHeader_container']").OuterHtml;
-                projectShortDesc = projectShortDesc.Replace("contenteditable=\"true\"", "contenteditable=\"false\"");
-                string projectShortDesc_string = projectShortDesc;
+                string projectShortDesc_string;
+                try
+                {
+                    var projectText = new HtmlDocument();
+                    projectText.LoadHtml(ChosenProject.ProjectContent);
+                    string projectShortDesc = projectText.DocumentNode.SelectSingleNode("//div[@class='SubHeader_container']").OuterHtml;
+                    projectShortDesc = projectShortDesc.Replace("contenteditable=\"true\"", "contenteditable=\"false\"");
+                    projectShortDesc_string = projectShortDesc;
+                }
+                catch
+                {
+                    projectShortDesc_string = "";
+                }
                 ShortSummaryDesc_wrap.InnerHtml = projectShortDesc_string;
                 PositionsRepeater.DataSource = ChosenProject.ProjectPositions;
                 PositionsRepeater.DataBind();
-                if (Request.QueryString["userid"] == ChosenProject.AdminUSID.ToString())
+                if (Session["UserID"].ToString() == ChosenProject.AdminUSID.ToString() || UserInfo.CheckAdmin((int)Session["UserID"]))
                 {
                     DirectionText.InnerHtml = "Edit </br> Project";
+                }
+                else
+                {
+                    DirectionText.InnerHtml = "Open </br> Description";
                 }
             }
         }
@@ -675,7 +740,7 @@ namespace TeamTogatherWebUI
             try
             {
                 Project currentProject = new Project(int.Parse(PostProjID.Value), false);
-                if (Request.QueryString["userid"] == currentProject.AdminUSID.ToString() && int.Parse(Request.QueryString["section"]) == 2)
+                if ((Session["UserID"].ToString() == currentProject.AdminUSID.ToString() || UserInfo.CheckAdmin((int)Session["UserID"])) && (int.Parse(Request.QueryString["section"]) == 2 || int.Parse(Request.QueryString["section"]) == 3))
                 {
                     Response.Redirect($"UpdateProject.aspx?ProjectID={currentProject.ProjectID}", true);
                 }
@@ -734,7 +799,7 @@ namespace TeamTogatherWebUI
             ImageButton currentbutton = (ImageButton)sender;
             if (currentbutton.AlternateText != "1")
             {
-                Response.Redirect($"Profile.aspx?UserID={currentbutton.AlternateText}", true);
+                Response.Redirect($"Profile.aspx?UserID={currentbutton.AlternateText}&section=1", true);
             }
             else
             {

@@ -85,6 +85,105 @@ namespace TeamTogatherWebUI {
         protected global::System.Web.UI.ScriptManager ProjectShownScriptManager;
         
         /// <summary>
+        /// ProfileImg control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image ProfileImg;
+        
+        /// <summary>
+        /// ProfileUsername control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label ProfileUsername;
+        
+        /// <summary>
+        /// ChangeProfile_txt control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl ChangeProfile_txt;
+        
+        /// <summary>
+        /// Protfolio_section control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink Protfolio_section;
+        
+        /// <summary>
+        /// About_section control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink About_section;
+        
+        /// <summary>
+        /// FinishedProj_section control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink FinishedProj_section;
+        
+        /// <summary>
+        /// myProj_section control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink myProj_section;
+        
+        /// <summary>
+        /// JoinReqLi_section control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl JoinReqLi_section;
+        
+        /// <summary>
+        /// JoinReq_section control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink JoinReq_section;
+        
+        /// <summary>
+        /// ProjInvLi_section control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl ProjInvLi_section;
+        
+        /// <summary>
+        /// ProjInv_section control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink ProjInv_section;
+        
+        /// <summary>
         /// UserInfo_Section control.
         /// </summary>
         /// <remarks>
@@ -182,6 +281,33 @@ namespace TeamTogatherWebUI {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputButton popUpRemoveCreation;
+        
+        /// <summary>
+        /// ChangeProfile_popUp control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl ChangeProfile_popUp;
+        
+        /// <summary>
+        /// ChangeProfileB control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ChangeProfileB;
+        
+        /// <summary>
+        /// profileUploader control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.FileUpload profileUploader;
         
         /// <summary>
         /// confirmationPopUp control.

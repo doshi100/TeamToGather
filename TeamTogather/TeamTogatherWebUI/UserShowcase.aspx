@@ -44,8 +44,8 @@
             </asp:ScriptManager>
             <asp:UpdatePanel ID="UpdateShownProjects" class="ProjectsShowAreaContainer" UpdateMode="Conditional" runat="server">
                 <ContentTemplate>
-                    <asp:HiddenField ID="ShownUserIndex" Value="0" runat="server" />
-                    <asp:HiddenField ID="ClickedUserID" Value="0" runat="server" />
+                    <asp:HiddenField ID="ShownUserIndex"  Value="0" runat="server" />
+                    <asp:HiddenField ID="ClickedUserID" ClientIDMode="Static" Value="0" runat="server" />
                     <div class="ProjectsShowArea" id="UsersShowArea" runat="server">
                         <div class="ProjectsShowAreaInnerContainer">
                             <asp:Repeater ID="UsersRepeater" OnItemDataBound="UsersRepeater_OnItemDataBound" runat="server" EnableViewState="false">

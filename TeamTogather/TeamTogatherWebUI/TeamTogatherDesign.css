@@ -95,8 +95,8 @@ ul {
     width: 100vw;
     height: 100vh;
     position: fixed;
-    top:0;
-    left:0;
+    top: 0;
+    left: 0;
     background-color: rgba(0,0,0,0.8);
     z-index: 9;
     display: none;
@@ -411,6 +411,17 @@ input[type="text"], input[type="password"] {
         display: none;
     }
 }
+
+@keyframes FadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
 
 .deletePosAnim {
     animation-name: OpacityDelete;
@@ -1416,11 +1427,11 @@ input::-webkit-input-placeholder {
         border: solid 3px rgb(240, 240, 240);
     }
 
-.PositionsShow .ProfessionContainer img {
-    display: block;
-    width: 65%;
-    margin: 0 auto 1.3em auto;
-}
+        .PositionsShow .ProfessionContainer img {
+            display: block;
+            width: 65%;
+            margin: 0 auto 1.3em auto;
+        }
 
 .ProfileContentContainer {
     position: relative;
@@ -1958,11 +1969,12 @@ input::-webkit-input-placeholder {
     justify-self: center;
     width: 55px;
     z-index: 13;
+    object-fit: cover;
+    object-position: 50% 20%;
 }
 
 .ProjPositionList .profilePosPic {
     width: 40px;
-    border: 2px solid rgb(30, 30, 30);
 }
 
 .PosPrograms::-webkit-scrollbar, .positions_list::-webkit-scrollbar {
@@ -2107,12 +2119,13 @@ input::-webkit-input-placeholder {
     display: flex;
     justify-content: center;
     align-items: center;
-    border-radius: 50%;
+    clip-path: circle();
+    -webkit-clip-path: circle();
 }
 
-    .UserCredentials_ProfileContainer:hover {
-        border: 3px dashed rgb(221, 138, 219);
-    }
+.UserCredentials_ProfileContainer:hover {
+    opacity: 0.9;
+}
 
 .UserHeaderContainer {
     font-family: tekoregular;
@@ -2248,46 +2261,46 @@ input::-webkit-input-placeholder {
 .profileProjectPositions_Container {
 }
 
-.profileProjectPositions_Container .positions_list input[type="radio"]:checked + label {
-    border: solid 3px rgb(236, 43, 130) /*rgb(29, 237, 167)*/;
-}
+    .profileProjectPositions_Container .positions_list input[type="radio"]:checked + label {
+        border: solid 3px rgb(236, 43, 130) /*rgb(29, 237, 167)*/;
+    }
 
-.profileProjectPositions_Container .positions_list input[type="radio"] {
-    display: none;
-}
+    .profileProjectPositions_Container .positions_list input[type="radio"] {
+        display: none;
+    }
 
-.profileProjectPositions_Container .positions_list .ProjectPosContainer {
-    border: solid 3px rgb(30,30,30);
-    height: 80px;
-}
+    .profileProjectPositions_Container .positions_list .ProjectPosContainer {
+        border: solid 3px rgb(30,30,30);
+        height: 80px;
+    }
 
-.profileProjectPositions_Container .positions_list {
-    width: 90%;
-    background-color: rgba(80,80,80,0.4);
-    display: flex;
-    flex-direction: column;
-    min-height: 100px;
-    position: relative;
-    max-height: 380px;
-    max-width: 390px;
-    border-radius: 3px;
-    border: 2px solid rgb(70,70,70);
-}
+    .profileProjectPositions_Container .positions_list {
+        width: 90%;
+        background-color: rgba(80,80,80,0.4);
+        display: flex;
+        flex-direction: column;
+        min-height: 100px;
+        position: relative;
+        max-height: 380px;
+        max-width: 390px;
+        border-radius: 3px;
+        border: 2px solid rgb(70,70,70);
+    }
 
 
-.profileProjectPositions_Container::after {
-    top: -90%;
-    left: 91%;
-    /* left: auto; */
-    width: 0;
-    height: 0;
-    border-top: 8px solid transparent;
-    border-bottom: 8px solid transparent;
-    border-left: 8px solid rgb(70,70,70);
-    position: relative;
-    display: inline-block;
-    content: "";
-}
+    .profileProjectPositions_Container::after {
+        top: -90%;
+        left: 91%;
+        /* left: auto; */
+        width: 0;
+        height: 0;
+        border-top: 8px solid transparent;
+        border-bottom: 8px solid transparent;
+        border-left: 8px solid rgb(70,70,70);
+        position: relative;
+        display: inline-block;
+        content: "";
+    }
 
 
 .ProjectHeaders {
@@ -2339,9 +2352,9 @@ input::-webkit-input-placeholder {
     z-index: 20;
 }
 
-.loadingSymbol_Child .loadingSymbolImg {
-    width: 140px;
-}
+    .loadingSymbol_Child .loadingSymbolImg {
+        width: 140px;
+    }
 
 
 .blurdrop {
@@ -2378,30 +2391,30 @@ input::-webkit-input-placeholder {
     padding-top: 1em;
 }
 
-.inviteUserDropContainer input[type="button"] {
-    transform: translate(-10px, -10px);
-    width: 120px;
-    color: rgb(30,30,30);
-    background-color: rgb(230,230,230);
-    border: 2px solid rgb(200,200,200);
-    outline: none;
-    margin-bottom: 5%;
-}
+    .inviteUserDropContainer input[type="button"] {
+        transform: translate(-10px, -10px);
+        width: 120px;
+        color: rgb(30,30,30);
+        background-color: rgb(230,230,230);
+        border: 2px solid rgb(200,200,200);
+        outline: none;
+        margin-bottom: 5%;
+    }
 
-.inviteUserDropContainer input[type="button"]:hover {
-    background-color: rgb(50, 93, 219);
-    color: rgb(249, 249, 249);
-    border: 2px solid rgb(50, 93, 219);
-}
+        .inviteUserDropContainer input[type="button"]:hover {
+            background-color: rgb(50, 93, 219);
+            color: rgb(249, 249, 249);
+            border: 2px solid rgb(50, 93, 219);
+        }
 
-.inviteUserDropContainer input[type="button"]:active {
-    background-color: rgb(50, 93, 219);
-    color: rgb(249, 249, 249);
-}
+        .inviteUserDropContainer input[type="button"]:active {
+            background-color: rgb(50, 93, 219);
+            color: rgb(249, 249, 249);
+        }
 
-.inviteUserDropContainer .dropDown {
-    width:6em;
-}
+    .inviteUserDropContainer .dropDown {
+        width: 6em;
+    }
 
 .PositionInvmessage {
     font-family: 'tekoregular';
@@ -2413,7 +2426,6 @@ input::-webkit-input-placeholder {
     width: 90%;
     text-align: center;
     color: rgb(200,200,200);
-
 }
 
 .addContact_popup {
@@ -2430,33 +2442,33 @@ input::-webkit-input-placeholder {
     top: 60%;
 }
 
-.addContact_popup input[type="text"].slimTextArea {
-    font-size: 1.5em;
-    width: 60%;
-    margin-left: 1.8em;
-    margin-top: 0.8em;
-    margin-bottom: 0.8em;
-    background: none;
-}
+    .addContact_popup input[type="text"].slimTextArea {
+        font-size: 1.5em;
+        width: 60%;
+        margin-left: 1.8em;
+        margin-top: 0.8em;
+        margin-bottom: 0.8em;
+        background: none;
+    }
 
-.addContact_popup .dropDownBlack {
-    margin-left: 1.8em;
-}
+    .addContact_popup .dropDownBlack {
+        margin-left: 1.8em;
+    }
 
-.addContact_popup .ButtonBlue {
-    align-self: center;
-    width: 30%;
-    margin-bottom: 0.3em;
-}
+    .addContact_popup .ButtonBlue {
+        align-self: center;
+        width: 30%;
+        margin-bottom: 0.3em;
+    }
 
-.addContact_popup .Header2 {
-    border-bottom: 3px solid rgb(29, 237, 167);
-    font-size: 1.6em;
-    margin: 0.5em 0em;
-    align-self: center;
-    padding: 0 0.5em;
-    font-family: tekoregular;
-}
+    .addContact_popup .Header2 {
+        border-bottom: 3px solid rgb(29, 237, 167);
+        font-size: 1.6em;
+        margin: 0.5em 0em;
+        align-self: center;
+        padding: 0 0.5em;
+        font-family: tekoregular;
+    }
 
 .popUpOpen {
     position: absolute;
@@ -2464,7 +2476,7 @@ input::-webkit-input-placeholder {
     bottom: 2%;
 }
 
-.confirmationPopUp, .confirmationPopUpRemove {
+.confirmationPopUp, .confirmationPopUpRemove, .confirmationPopUp2 {
     background-color: rgb(84, 53, 216);
     background-image: url(DesignElements/elements/pattern.png);
     background-size: 400px;
@@ -2482,7 +2494,7 @@ input::-webkit-input-placeholder {
     z-index: 20;
 }
 
-.confirmationPopUp::before, .confirmationPopUpRemove::before {
+.confirmationPopUp::before, .confirmationPopUpRemove::before, .confirmationPopUp2::before {
     content: "";
     width: 100%;
     display: block;
@@ -2490,7 +2502,7 @@ input::-webkit-input-placeholder {
     background-color: rgba(105, 0, 226,0.6);
 }
 
-.confirmationPopUp > *, .confirmationPopUpRemove > * {
+.confirmationPopUp > *, .confirmationPopUpRemove > *, .confirmationPopUp2 > * {
     z-index: 10;
 }
 
@@ -2504,6 +2516,22 @@ input::-webkit-input-placeholder {
     font-family: tekoregular;
     top: 20%;
     left: 0%;
+    line-height: 1.2;
+    text-decoration: underline;
+    text-underline-offset: 14%;
+}
+
+.confirmationPopUp2 .Header {
+    position: absolute;
+    font-size: 3em;
+    /* margin-top: 15%; */
+    padding: 0;
+    display: inline-block;
+    color: rgb(255,255,255);
+    font-family: tekoregular;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%,-20%);
     line-height: 1.2;
     text-decoration: underline;
     text-underline-offset: 14%;
@@ -2525,11 +2553,11 @@ input::-webkit-input-placeholder {
     border-top: solid 3px rgb(29, 237, 167)
 }
 
-.confirmationButtons_container .ButtonBlue, .confirmationButtons_container .ButtonRed {
-    max-height: 40%;
-}
+    .confirmationButtons_container .ButtonBlue, .confirmationButtons_container .ButtonRed {
+        max-height: 40%;
+    }
 
-.CreationUploader {
+.CreationUploader, .profileUploader {
     display: none;
 }
 
@@ -2539,13 +2567,13 @@ input::-webkit-input-placeholder {
     height: calc(20vw);
 }
 
-.creation_container:hover::after {
-    content: "";
-    position: absolute;
-    width: 20vw;
-    height: calc(20vw);
-    background: linear-gradient(0deg, rgba(240,97,34,0.9) 0%, rgba(0,0,0,0.9) 0%, rgba(255,255,255,0) 60%);
-}
+    .creation_container:hover::after {
+        content: "";
+        position: absolute;
+        width: 20vw;
+        height: calc(20vw);
+        background: linear-gradient(0deg, rgba(240,97,34,0.9) 0%, rgba(0,0,0,0.9) 0%, rgba(255,255,255,0) 60%);
+    }
 
 .ProtfolioSection_section {
     width: 100%;
@@ -2568,7 +2596,7 @@ input::-webkit-input-placeholder {
     z-index: 10;
 }
 
-img#ViewPhoto{
+img#ViewPhoto {
     max-height: 80vh;
 }
 
@@ -2590,14 +2618,14 @@ img#ViewPhoto{
     background-color: rgb(250,250,250)
 }
 
-.data_container .headercontainer {
-    margin: 5% 0 0.4em 5%;
-    width: 90%;
-}
+    .data_container .headercontainer {
+        margin: 5% 0 0.4em 5%;
+        width: 90%;
+    }
 
-.data_container .Header {
-    font-size: 3em;
-}
+    .data_container .Header {
+        font-size: 3em;
+    }
 
 
 .infoBox {
@@ -2606,7 +2634,8 @@ img#ViewPhoto{
     flex-direction: row;
     width: 90%;
     height: 100%;
-    align-content:flex-start;
+    align-content: flex-start;
+    min-height: 200px;
 }
 
 .infoElmContainer {
@@ -2621,17 +2650,18 @@ img#ViewPhoto{
     padding: 0.2em;
 }
 
-.infoElmContainer span {
-    font-family: tekoregular;
-    font-size: 1.4em;
-}
+    .infoElmContainer span {
+        font-family: tekoregular;
+        font-size: 1.4em;
+    }
 
-.infoElmContainer:hover {
-    background-color:rgb(240,240,240);
-}
+    .infoElmContainer:hover {
+        background-color: rgb(240,240,240);
+    }
+
 .infoImgContainer {
     display: flex;
-    justify-content:center;
+    justify-content: center;
     align-content: center;
 }
 
@@ -2653,6 +2683,7 @@ img#ViewPhoto{
 .generalInfo {
     grid-column: 1;
     grid-row: 1;
+    min-height: 200px;
 }
 
 .userinfo {
@@ -2661,17 +2692,17 @@ img#ViewPhoto{
     color: rgb(10,10,10);
     font-size: 2em;
     margin-left: 5%;
-    font-family:tekoregular
+    font-family: tekoregular
 }
 
-.userinfo span {
-    margin: 1% 0;
-    letter-spacing: 2px;
-}
+    .userinfo span {
+        margin: 1% 0;
+        letter-spacing: 2px;
+    }
 
 .professionInfo {
     grid-column: 2;
-    grid-row:1;
+    grid-row: 1;
 }
 
 .headercontainer {
@@ -2688,9 +2719,9 @@ img#ViewPhoto{
     grid-row: 2;
 }
 
-.programInfo img {
-    height: 80px;
-}
+    .programInfo img {
+        height: 80px;
+    }
 
 .editimg_container {
     display: inline-flex;
@@ -2705,30 +2736,120 @@ img#ViewPhoto{
     transform: translate(0, 30%);
 }
 
-.editimg_container:hover {
-    background-color: rgba(242, 147, 235,0.3);
-}
+    .editimg_container:hover {
+        background-color: rgba(242, 147, 235,0.3);
+    }
 
-.editimg_container img {
-    height: 50px;
-    position: absolute;
-    left: -8%;
-    margin-left: 2em;
-    transform: rotate( 20deg );
-}
+    .editimg_container img {
+        height: 50px;
+        position: absolute;
+        left: -8%;
+        margin-left: 2em;
+        transform: rotate( 20deg );
+    }
 
 
 .profile_navbar {
     background-color: rgb(20,20,20);
-    width: 40%;
+    width: 50%;
     height: 60px;
     border-radius: 4px;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%, 0);
 }
 
 .profile_navbar ul {
     display: flex;
+    position: relative;
     list-style-type: none;
     flex-direction: row;
-    justify-content:space-around;
+    justify-content: space-around;
     align-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.profile_navbar ul li {
+width: 0 20%;
+}
+
+.profile_navbar ul li a {
+    color: rgb(250,250,250);
+    font-family: tekoregular;
+    text-decoration: none;
+    font-size: 1.5em;
+    letter-spacing: 0.7px;
+}
+
+
+.profile_navbar ul li a:hover {
+    border-bottom: solid 2px rgb(242, 115, 233);
+}
+
+.profileImg_wrapper {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    left: 50%;
+    top: 20%;
+    transform: translate(-50%, 0);
+    text-align: center;
+}
+
+.profileImg_wrapper span {
+    font-family: tekolight;
+    color: rgb(230,230,230);
+    font-size: 2em;
+    margin-top: 0.5em;
+    letter-spacing: 0.6px;
+}
+
+.profileImg_container {
+    justify-self: center;
+    align-self: center;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    clip-path: circle();
+    position: relative;
+}
+
+.profileImgHover_container::after {
+    content: "";
+    animation-name: FadeIn;
+    animation-fill-mode: forwards;
+    animation-duration: 0.2s;
+    animation-timing-function: linear;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    clip-path: circle();
+    -webkit-clip-path: circle();
+    background-image: url(DesignElements/elements/profileBrush.png);
+    background-size: 60%;
+    background-repeat: no-repeat;
+    background-color: rgba(20,20,20,0.6);
+    background-position: center;
+}
+
+.profileImg {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    object-position: 50% 20%;
+}
+
+span.ChangeProfile_txt {
+    margin-top: unset;
+    font-size: 1em;
+    color: rgb(54,126,198);
+    display: block;
+    font-family: tekoSemiBold;
+    cursor: pointer;
+    text-decoration: underline;
 }

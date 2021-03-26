@@ -78,6 +78,7 @@
     <Content Include="DesignElements\elements\Loading2.gif" />
     <Content Include="DesignElements\elements\pattern.png" />
     <Content Include="DesignElements\elements\Pencil.png" />
+    <Content Include="DesignElements\elements\profileBrush.png" />
     <Content Include="DesignElements\elements\ProfilePicEmpty.png" />
     <Content Include="DesignElements\elements\ProjectTemplate.jpg" />
     <Content Include="DesignElements\elements\projectTemplate2.jpg" />
@@ -103,6 +104,7 @@
     <Content Include="DesignElements\professions\VideoEditor.png" />
     <Content Include="DesignElements\professions\VoiceActor.png" />
     <Content Include="DesignElements\professions\writer.png" />
+    <Content Include="DesignElements\ProfilePictures\Bleach.jpg" />
     <Content Include="DesignElements\ProfilePictures\monkey.jpg" />
     <Content Include="DesignElements\ProfilePictures\NoUserProfile.png" />
     <Content Include="DesignElements\ProgramsLogo\3DSMAX.png" />

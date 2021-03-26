@@ -121,7 +121,10 @@ namespace BL
                 this.UserRate = (int)userRow["UserRate"];
                 this.IsBanned = (bool)userRow["IsBanned"];
                 this.RegistrationDate = (DateTime)userRow["RegistrationDate"];
-                this.LoginDate = (DateTime)userRow["LoginDate"];
+                if(userRow["LoginDate"] != DBNull.Value)
+                {
+                    this.LoginDate = (DateTime)userRow["LoginDate"];
+                }
                 this.UserType = (int)userRow["UserType"];
                 this.ProfilePath = (string)userRow["ProfilePath"];
                 if(BuildLists)
@@ -459,6 +462,11 @@ namespace BL
         public string ReturnLangByID()
         {
             return UserDB.ReturnLangByID(this.NativeLang);
+        }
+
+        public static void UpdateProfilePhoto(string path, int id)
+        {
+            UserDB.UpdateProfilePhoto(path, id);
         }
 
     }

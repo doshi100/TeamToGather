@@ -17,16 +17,31 @@
     <asp:HiddenField ID="GeneralPost" ClientIDMode="Static" Value="0" runat="server" />
     <asp:ScriptManager ID="ProjectShownScriptManager" runat="server"></asp:ScriptManager>
     <div class="ProfileHeaderContainer">
-       <%-- <div class="profile_navbar">
+
+        
+        <div id="profileImg_wrapper" class="profileImg_wrapper">
+            <div class="profileImg_container">
+                <asp:Image ID="ProfileImg" CssClass="profileImg" runat="server" />
+            </div>
+            <asp:Label ID="ProfileUsername" runat="server"></asp:Label>
+            <span runat="server" visible="false" class="ChangeProfile_txt" id="ChangeProfile_txt">change profile photo</span>
+        </div>
+        <div class="profile_navbar">
             <ul>
-                <li>Protfolio</li>
-                <li>About</li>
-                <li>Finished Projects</li>
-                <li>My Projects</li>
-                <li>User Join Requests</li>
-                <li>Project Invitation</li>
+                <li>
+                    <asp:HyperLink ID="Protfolio_section" runat="server">Protfolio</asp:HyperLink></li>
+                <li>
+                    <asp:HyperLink ID="About_section" runat="server">About</asp:HyperLink></li>
+                <li>
+                    <asp:HyperLink ID="FinishedProj_section" runat="server">Finished Projects</asp:HyperLink></li>
+                <li>
+                    <asp:HyperLink ID="myProj_section" runat="server">Current Projects</asp:HyperLink></li>
+                <li id="JoinReqLi_section" runat="server" visible="false">
+                    <asp:HyperLink ID="JoinReq_section" runat="server">User Join Requests</asp:HyperLink></li>
+                <li id="ProjInvLi_section" runat="server" visible="false">
+                    <asp:HyperLink ID="ProjInv_section" runat="server">Project Invitation</asp:HyperLink></li>
             </ul>
-        </div>--%>
+        </div>
         <%-------------------------------------------------------------  START OF Invite User to project for a specific Role in the project SECTION------------------------------------------------%>
         <div runat="server" id="UserInfo_Section" class="UserRequests_section" visible="false">
             <div class="updateAreaProfileContainer">
@@ -85,6 +100,16 @@
         <input type="button" class="popUpRemoveCreation ButtonRed hiddenElm" id="popUpRemoveCreation" value="Remove Creation" runat="server" visible="false" />
         <%-------------------------------------------------------------  END OF Invite User to project for a specific Role in the project SECTION------------------------------------------------%>
     </div>
+
+    <div id="ChangeProfile_popUp" class="confirmationPopUp2" runat="server" visible="false">
+        <p><span class="Header">Are you sure You want to change this profile photo?</span></p>
+        <div class="confirmationButtons_container">
+            <input type="button" class="CancelCreationB ButtonRed" value="No" />
+            <asp:Button ID="ChangeProfileB" runat="server" CssClass="ChangeProfileB ButtonBlue" Text="yes" OnClick="ChangeProfile_Click"/>
+            <asp:FileUpload ID="profileUploader" CssClass="profileUploader" runat="server" />
+        </div>
+    </div>
+
     <div id="confirmationPopUp" class="confirmationPopUp" runat="server" visible="false">
         <p><span class="Header">Are you sure you want to add this protfolio creation?</span></p>
         <div class="confirmationButtons_container">
@@ -102,7 +127,8 @@
     </div>
 
     <div class="viewPhoto_container">
-        <img id="ViewPhoto" src="#" alt="" /></div>
+        <img id="ViewPhoto" src="#" alt="" />
+    </div>
     <div class="overlay" onclick="hideImg()"></div>
     <div class="ProfileContentContainer">
         <%-------------------------------------------------------------  START OF addProtfolioCreations Section ------------------------------------------------%>
@@ -358,7 +384,7 @@
                                     <div class="infoImgContainer">
                                         <asp:Image ImageUrl="#" ID="infoImg" AlternateText="" runat="server" />
                                     </div>
-                                    <a href="#" id="ContactInfoLink" runat="server">
+                                    <a href="#" id="ContactInfoLink" target="_blank" runat="server">
                                         <asp:Label ID="InfoElmName" runat="server"></asp:Label></a>
                                 </div>
                             </ItemTemplate>
