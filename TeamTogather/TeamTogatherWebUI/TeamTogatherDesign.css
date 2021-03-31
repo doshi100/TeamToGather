@@ -367,11 +367,14 @@ input[type="text"], input[type="password"] {
 }
 
 .profilePhoto {
-    background-color: rgb(11, 11, 11);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
     width: 40px;
     height: 40px;
     border-radius: 50%;
     z-index: 13;
+    border: 2px;
 }
 
 
@@ -1967,14 +1970,17 @@ input::-webkit-input-placeholder {
     grid-column: 1;
     align-self: center;
     justify-self: center;
-    width: 55px;
+    width: 52px;
+    height: 52px;
     z-index: 13;
     object-fit: cover;
     object-position: 50% 20%;
 }
 
 .ProjPositionList .profilePosPic {
-    width: 40px;
+    width: 45px;
+    height: 45px;
+    z-index:7;
 }
 
 .PosPrograms::-webkit-scrollbar, .positions_list::-webkit-scrollbar {
@@ -2793,7 +2799,7 @@ width: 0 20%;
     flex-direction: column;
     position: absolute;
     left: 50%;
-    top: 20%;
+    bottom: 22%;
     transform: translate(-50%, 0);
     text-align: center;
 }
@@ -2852,4 +2858,209 @@ span.ChangeProfile_txt {
     font-family: tekoSemiBold;
     cursor: pointer;
     text-decoration: underline;
+}
+
+.rateBt_container {
+    margin: 0 auto;
+    padding-top: 2%;
+    width: 35%;
+    height: 10%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-content: center;
+    padding-bottom: 2%;
+}
+
+.rateBt_container .userRateBu {
+    border-radius: 50%;
+    background-color: rgb(240,240,240);
+    border: solid 2px rgb(200,200,200);
+    outline: none;
+    width: 20px;
+    height: 20px;
+}
+
+.rateBt_container .userRateBuHover {
+    background-color: rgb(112, 131, 224);
+    border-color: transparent;
+}
+
+.btText {
+    font-size: 1.5em;
+    font-family:tekolight;
+}
+
+.header_rateuser {
+    padding-top: 0.5em;
+    font-size: 3em;
+    font-family: tekoSemiBold;
+    text-align: center;
+    display:block;
+}
+
+.RequestBlockRep {
+    width: 50%;
+    height: 85px;
+    margin-bottom: 0.45em;
+    display: grid;
+    grid-template-columns: 2fr 3fr 2.5fr 2.5fr;
+    background-color: rgb(30,30,30);
+    font-family: tekoMedium;
+    color: rgb(240,240,240);
+    font-size: 1.4em;
+}
+
+.ReqBlockGeneral {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+.RequestBlockRep .profileImg_container {
+    grid-column: 1;
+}
+
+.RequestBlockRep .profileImg_container .profileImg {
+    width: 60px;
+    height: 60px;
+}
+
+
+.ReqProjHeader {
+    font-family:tekoSemiBold;
+    font-size: 1.2em;
+    text-align: center;
+}
+
+.reqBlock_Proj {
+    grid-column: 2;
+    background: linear-gradient(to bottom, rgb(230,230,230) 50%, rgb(30,30,30) 50%);
+    background-size: 200% 200%;
+    background-position: right bottom;
+    transition: all .3s ease-out;
+}
+
+.reqBlock_Proj:hover {
+    background-position: left top;
+    color: rgb(30,30,30);
+}
+
+.reqStatus_container {
+    grid-column: 3;
+}
+
+.reqRole_container {
+    grid-column: 4;
+}
+
+.ReqBlocks_container {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+    /* height: 75vh; */
+    background-color: rgb(250,250,250);
+    width: 100%;
+    padding-top: 2em;
+}
+
+
+
+.headerReqBlocks_container {
+    background-color: rgb(250,250,250);
+    height: 45vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    position: relative;
+    padding-top: 2em;
+}
+
+.headerReqBlocks_container .header {
+    padding-top: 0.5em;
+    font-size: 5em;
+    font-family: tekoMedium;
+    display: block;
+    text-align: center;
+    align-self: center;
+    border-bottom: 3px solid rgb(29, 237, 167);
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+}
+
+.RequestBlocksPageContainer {
+    width: 100vw;
+    height: 100vh;
+}
+
+
+.redirectProjDesc {
+    text-decoration: none;
+    color: rgb(240,240,240);
+}
+
+.RequestBlocknoRep {
+    background-color: rgb(235,235,235);
+    color: rgb(30,30,30);
+    font-size: 1.8em;
+    border-top-left-radius: 0.1em;
+    border-top-right-radius: 0.1em;
+    margin-bottom: 0.2em;
+    box-sizing: border-box;
+    box-shadow: 0 0 10px 0 rgb(200,200,200);
+}
+
+.RequestBlocknoRep div {
+    border-right: 2px solid rgb(220,220,220);
+}
+
+div.posAreaRequst {
+    border-right: 2px solid transparent;
+}
+
+.subTextReq {
+    margin-top: 1em;
+    font-size: 2em;
+    font-family: tekolight;
+    align-self: center;
+    text-align: left;
+    line-height: 2;
+}
+
+.reqNavBar {
+    display: flex;
+    position: absolute;
+    bottom: 2px;
+    border-bottom: 3px solid rgb(242, 147, 235);
+}
+
+.reqNavBar a{
+    text-decoration: none;
+}
+
+.reqNavBar div {
+    display: flex;
+    width: 50vw;
+    height: 10vh;
+    background-color: rgb(243,243,243);
+    color: rgb(30,30,30);
+    text-align: center;
+    justify-content:center;
+    align-items: center;
+    font-size: 2em;
+    font-family: tekoregular;
+    box-sizing: border-box;
+}
+
+.reqNavBar div:hover {
+    background-color: rgb(235,235,235);
+}
+
+.reqSideBorder {
+    border-right: 3px solid rgb(230,230,230)
 }

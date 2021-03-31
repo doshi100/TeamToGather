@@ -29,6 +29,8 @@ namespace TeamTogatherWebUI
                 ChangeProfile_txt.Visible = true;
                 JoinReqLi_section.Visible = true;
                 ProjInvLi_section.Visible = true;
+                RequestsLi.Visible = true;
+                Requests.NavigateUrl = $"RequestsStatus.aspx?UserID={Request.QueryString["userid"]}&section=1";
                 JoinReq_section.NavigateUrl = $"profile.aspx?userid={Request.QueryString["userid"]}&section={"4"}";
                 ProjInv_section.NavigateUrl = $"profile.aspx?userid={Request.QueryString["userid"]}&section={"5"}";
             }
@@ -48,6 +50,7 @@ namespace TeamTogatherWebUI
                 Session["ShownUsers"] = null;
                 if (Request.QueryString["section"] == "5")
                 {
+                    Profile_DirectBack();
                     ProjectRequests_section.Visible = true;
                     UserInfo loggedinUser = new UserInfo(int.Parse(Request.QueryString["UserID"]), true);
                     Dictionary<Request, Project> projectsShowcase = loggedinUser.GetUserRequestsToProjects(DateTime.Now);
@@ -70,6 +73,7 @@ namespace TeamTogatherWebUI
 
                 else if (Request.QueryString["section"] == "4")
                 {
+                    Profile_DirectBack();
                     UserRequests_section.Visible = true;
                     UserInfo loggedinUser = new UserInfo(int.Parse(Request.QueryString["UserID"]), true);
                     Dictionary<Request, string> UsersShowcase = loggedinUser.GetProjectsUserRequest(DateTime.Now);
@@ -196,6 +200,14 @@ namespace TeamTogatherWebUI
                     }
                     info_age.Text += (DateTime.Now.Year - ProfileUser.Birthday.Year).ToString();
                     info_nativelang.Text += ProfileUser.ReturnLangByID();
+                    if ((int)Session["UserID"] == int.Parse(Request.QueryString["UserID"]))
+                    {
+                        rateSection.Visible = false;
+                    }
+                    else
+                    {
+                        CurrentRate.Value = UserInfo.ReturnUserRateAtUserNum((int)Session["UserID"], int.Parse(Request.QueryString["UserID"])).ToString();
+                    }
                 }
             }
             else
@@ -799,7 +811,7 @@ namespace TeamTogatherWebUI
             ImageButton currentbutton = (ImageButton)sender;
             if (currentbutton.AlternateText != "1")
             {
-                Response.Redirect($"Profile.aspx?UserID={currentbutton.AlternateText}&section=1", true);
+                Response.Redirect($"Profile.aspx?UserID={currentbutton.AlternateText}&section=0", true);
             }
             else
             {
@@ -935,6 +947,7 @@ namespace TeamTogatherWebUI
         }
 
 
+
         // ********************************************************** userSectionMethods END *************************************************************
 
         // ********************************************************** Manage Projects START *************************************************************
@@ -1055,5 +1068,20 @@ namespace TeamTogatherWebUI
 
         // ********************************************************** User Info methods END *************************************************************
 
+
+        protected void Profile_DirectBack()
+        {
+            if (!UserInfo.CheckAdmin((int)Session["UserID"]) && Session["UserID"].ToString() != Request.QueryString["UserID"])
+            {
+                Response.Redirect($"Profile.aspx?UserID={Request.QueryString["UserID"]}&section=0", true);
+            }
+        }
+
+        protected void RateUser(object sender, EventArgs e) 
+        {
+            int rate = int.Parse((sender as Button).ID.Replace("Rate", ""));
+            UserInfo.RateUser((int)Session["UserID"], int.Parse(Request.QueryString["UserID"]), rate);
+            Response.Redirect($"profile.aspx?userid={int.Parse(Request.QueryString["UserID"])}&section={int.Parse(Request.QueryString["section"])}");
+        }
     }
 }

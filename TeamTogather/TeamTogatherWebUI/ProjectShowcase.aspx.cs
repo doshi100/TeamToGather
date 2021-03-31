@@ -441,7 +441,7 @@ namespace TeamTogatherWebUI
             ImageButton currentbutton = (ImageButton)sender;
             if(currentbutton.AlternateText != "1")
             {
-                Response.Redirect($"Profile.aspx?UserID={currentbutton.AlternateText}&section=1", true);
+                Response.Redirect($"Profile.aspx?UserID={currentbutton.AlternateText}&section=0", true);
             }
             else
             {

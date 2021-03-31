@@ -53,7 +53,16 @@ let Bu_openInvPanel = document.querySelector(".openInvPanel"),
     popUpOpen = document.querySelector(".popUpOpen");
 
 let profile_pic = document.querySelector(".profileImg_container"),
-    chgProfileTxt = document.querySelector(".ChangeProfile_txt");
+    chgProfileTxt = document.querySelector(".ChangeProfile_txt"),
+    RateButtons = document.querySelectorAll(".userRateBu");
+
+if (RateButtons.length != 0) {
+    RateButtons.forEach(item => { item.addEventListener("mouseover", () => mouseoverRate(item, RateButtons)) })
+    let currentRate = document.getElementById("CurrentRate").value;
+    for (let i = 0; i < currentRate; i++) {
+        RateButtons[i].classList.add("userRateBuHover");
+    }
+}
 
 if (chgProfileTxt) {
     chgProfileTxt.addEventListener('mouseover', () => { profile_pic.classList.add("profileImgHover_container") });
@@ -168,6 +177,18 @@ if (smallNav != null && ProfilePhoto != null) {
     })
 }
 
+function mouseoverRate(e, array) {
+    removeMarks(array);
+    let element = e;
+    while (element.tagName == "INPUT") {
+        element.classList.add("userRateBuHover");
+        element = element.previousElementSibling;
+    }
+}
+
+function removeMarks(array) {
+    array.forEach(item => { item.classList.remove("userRateBuHover") });
+}
 
 
 

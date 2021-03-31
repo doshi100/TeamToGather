@@ -469,5 +469,55 @@ namespace BL
             UserDB.UpdateProfilePhoto(path, id);
         }
 
+        public static string ReturnUserProfilePath(int userID)
+        {
+            return UserDB.ReturnUserProfilePath(userID);
+        }
+
+
+        public static int ReturnUserRateAtUserNum(int UserRatedID, int userID)
+        {
+            return UserDB.ReturnUserRateAtUserNum(UserRatedID, userID);
+        }
+
+        /// <summary>
+        /// return a list of the requests the user sent to project's admins. (contains adminUSID and ProjectID on project object, and request's info on request.)
+        /// </summary>
+        public static List<KeyValuePair<Project, Request>> returnSentUserReq(int userID, DateTime ReqFromDate)
+        {
+            List<KeyValuePair<Project, Request>> reqList = new List<KeyValuePair<Project, Request>>();
+            DataTable dt = UserDB.returnSentUserReq(userID, ReqFromDate);
+            foreach(DataRow row in dt.Rows)
+            {
+                Request req = new Request(row);
+                Project proj = new Project();
+                proj.AdminUSID = (int)row["AdminUsID"];
+                proj.ProjectID = (int)row["ProjectID"];
+                proj.ProjectContent = (string)row["ProjectContent"];
+                KeyValuePair<Project, Request> record = new KeyValuePair<Project, Request>(proj, req);
+                reqList.Add(record);
+            }
+            return reqList;
+        }
+
+        /// <summary>
+        /// return a list of the requests the user sent to project's admins. (contains adminUSID and ProjectID on project object, and request's info on request.)
+        /// </summary>
+        public static List<KeyValuePair<Project, Request>> returnSentUserInv(int userID, DateTime ReqFromDate)
+        {
+            List<KeyValuePair<Project, Request>> reqList = new List<KeyValuePair<Project, Request>>();
+            DataTable dt = UserDB.returnSentUserInv(userID, ReqFromDate);
+            foreach (DataRow row in dt.Rows)
+            {
+                Request req = new Request(row);
+                Project proj = new Project();
+                proj.AdminUSID = (int)row["AdminUsID"];
+                proj.ProjectID = (int)row["ProjectID"];
+                proj.ProjectContent = (string)row["ProjectContent"];
+                KeyValuePair<Project, Request> record = new KeyValuePair<Project, Request>(proj, req);
+                reqList.Add(record);
+            }
+            return reqList;
+        }
     }
 }

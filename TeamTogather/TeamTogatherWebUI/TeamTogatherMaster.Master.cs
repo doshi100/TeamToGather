@@ -17,17 +17,34 @@ namespace TeamTogatherWebUI
                 bool isAdmin = UserInfo.CheckAdmin((int)Session["UserID"]);
                 navbar1.Visible = false;
                 string LoggedInID = ((int)Session["UserID"]).ToString();
-                if(isAdmin)
+                string userProfile = UserInfo.ReturnUserProfilePath((int)Session["UserID"]);
+                if (isAdmin)
                 {
-                    ProfileDirectionAdmin.Attributes.Add("href", $"profile.aspx?userid={LoggedInID}&section=5");
+                    ProfileDirectionAdmin.Attributes.Add("href", $"profile.aspx?userid={LoggedInID}&section=0");
                     NavBarAdmin.Visible = true;
                     loginsmlMenuAdmin.Visible = true;
+                    if (userProfile != "")
+                    {
+                        profile_type1.Style["background-image"] = Page.ResolveUrl(userProfile);
+                    }
+                    else
+                    {
+                        profile_type1.Style["background-image"] = Page.ResolveUrl("DesignElements/ProfilePictures/NoUserProfile.png");
+                    }
                 }
                 else
                 {
-                    ProfileDirection.Attributes.Add("href", $"profile.aspx?userid={LoggedInID}&section=5");
+                    ProfileDirection.Attributes.Add("href", $"profile.aspx?userid={LoggedInID}&section=0");
                     navbar2.Visible = true;
                     LoginsmlMenuUser.Visible = true;
+                    if (userProfile != "")
+                    {
+                        profile_type2.Style["background-image"] = Page.ResolveUrl(userProfile);
+                    }
+                    else
+                    {
+                        profile_type2.Style["background-image"] = Page.ResolveUrl("DesignElements/ProfilePictures/NoUserProfile.png");
+                    }
                 }
             }
         }

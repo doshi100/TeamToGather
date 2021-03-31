@@ -35,7 +35,7 @@
                     <li class="navTextItem PinkLineH"><a href="#">User Showcase</a></li>
                     <li class="navTextItem PinkLineH"><a href="ProjectShowcase.aspx">Project Search</a></li>
                     <li class="navTextItem PinkLineH"><a href="UserShowcase.aspx">Team Search</a></li>
-                    <li class="navTextItem BlueLineH"><div class="profilePhoto"></div></li>
+                    <li class="navTextItem BlueLineH"><div class="profilePhoto" runat="server" id="profile_type2"></div></li>
                 </ul>
             </div>
             <%--small menu of the regular User--%>
@@ -70,7 +70,7 @@
                     <li class="navTextItem PinkLineH"><a href="#">User Showcase</a></li>
                     <li class="navTextItem PinkLineH"><a href="ProjectShowcase.aspx">Project Search</a></li>
                     <li class="navTextItem PinkLineH"><a href="UserShowcase.aspx">Team Search</a></li>
-                    <li class="navTextItem BlueLineH"><div class="profilePhoto"></div></li>
+                    <li class="navTextItem BlueLineH"><div class="profilePhoto" runat="server" id="profile_type1"></div></li>
                 </ul>
             </div>
             <%--small menu of the Admin--%>

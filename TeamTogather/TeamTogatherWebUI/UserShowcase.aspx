@@ -53,7 +53,7 @@
                                     <div id="userBox" class="userBox" runat="server">
                                         <div class="userBox_UserCredentials">
                                             <div class="UserCredentials_ProfileContainer">
-                                                <asp:ImageButton ID="ProfilePicture" OnClick="ProfilePic_Click" OnClientClick="UserProfileRedirection(this)" runat="server" UseSubmitBehavior="false"  class="profilePosPic" />
+                                                <asp:ImageButton ID="ProfilePicture" OnCommand="ProfilePic_Click" OnClientClick="UserProfileRedirection(this)" runat="server" class="profilePosPic" />
                                             </div>
                                             <div class="UserHeaderContainer">
                                                 <asp:Label ID="UserHeader" CssClass="userBox_userHeader" runat="server" Text=""></asp:Label>

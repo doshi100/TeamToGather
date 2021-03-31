@@ -12,13 +12,13 @@ namespace TeamTogatherWebUI
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if(!IsPostBack)
-            {
-                Session["ShownUsers"] =null;
-            }
             if (Session["UserID"] == null)
             {
                 Response.Redirect("HomePage.aspx", true);
+            }
+            if (!IsPostBack)
+            {
+                Session["ShownUsers"] = null;
             }
             List<Profession> profList = Profession.GetProfessionList();
             DropDownProfFilter.DataTextField = "ProfName";
@@ -43,7 +43,6 @@ namespace TeamTogatherWebUI
                         ShownUserIndex.Value = LastUserID.Text;
                     }
                 }
-                UsersRepeater.DataBind();
                 DropDownProfFilter.DataBind();
                 DropDownProfFilter.Items.Insert(0, new ListItem("none", "-1"));
                 DropDownAgeFilter.DataBind();
@@ -85,7 +84,7 @@ namespace TeamTogatherWebUI
 
         protected void ProfilePic_Click(object sender, EventArgs e)
         {
-            Response.Redirect($"Profile.aspx?UserID={ClickedUserID.Value}&section=1", true);
+            Response.Redirect($"Profile.aspx?UserID={ClickedUserID.Value}&section=0", true);
         }
 
 
@@ -252,7 +251,6 @@ namespace TeamTogatherWebUI
                 UsersRepeater.DataBind();
                 MergeRepeaters(UsersRepeater, updateReapeter);
             }
-            //UpdateShownUsers.Update();
         }
     }
 }

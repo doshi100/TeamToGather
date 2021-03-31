@@ -49,6 +49,15 @@ namespace TeamTogatherWebUI {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl navbar2;
         
         /// <summary>
+        /// profile_type2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl profile_type2;
+        
+        /// <summary>
         /// LoginsmlMenuUser control.
         /// </summary>
         /// <remarks>
@@ -83,6 +92,15 @@ namespace TeamTogatherWebUI {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl NavBarAdmin;
+        
+        /// <summary>
+        /// profile_type1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl profile_type1;
         
         /// <summary>
         /// loginsmlMenuAdmin control.

@@ -14,6 +14,7 @@ namespace BL
         public int PositionID { get; set; }
         public int UserID { get; set; }
         public int RequestType { get; set; }
+        public int requestStatus { get; set; }
         public DateTime DateRequested { get; set; }
         public Profession ReqProfession { get; set; }
 
@@ -28,6 +29,17 @@ namespace BL
             {
                 this.ReqProfession = new Profession((int)requestRow["Profession"]);
             }
+        }
+
+        public Request(DataRow requestRow)
+        {
+            this.RequestID = (int)requestRow["RequestID"];
+            this.PositionID = (int)requestRow["PositionID"];
+            this.UserID = (int)requestRow["UserID"];
+            this.RequestType = (int)requestRow["RequestType"];
+            this.requestStatus = (int)requestRow["RequestStatus"];
+            this.DateRequested = (DateTime)requestRow["DateRequested"];
+            this.ReqProfession = new Profession((int)requestRow["Profession"]);
         }
 
         public static bool CheckRequestInvitation(int positionID, int userID)

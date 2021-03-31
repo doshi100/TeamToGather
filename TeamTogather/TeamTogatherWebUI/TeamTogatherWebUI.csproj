@@ -161,6 +161,7 @@
     <Content Include="ProjectShowcase.aspx" />
     <Content Include="RegisterUserControl.ascx" />
     <Content Include="Registration.aspx" />
+    <Content Include="RequestsStatus.aspx" />
     <Content Include="TeamTogatherDesign.css" />
     <Content Include="TogatherJS.js" />
     <Content Include="UpdateProject.aspx" />
@@ -220,6 +221,13 @@
     </Compile>
     <Compile Include="Registration.aspx.designer.cs">
       <DependentUpon>Registration.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="RequestsStatus.aspx.cs">
+      <DependentUpon>RequestsStatus.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RequestsStatus.aspx.designer.cs">
+      <DependentUpon>RequestsStatus.aspx</DependentUpon>
     </Compile>
     <Compile Include="TeamTogatherMaster.Master.cs">
       <DependentUpon>TeamTogatherMaster.Master</DependentUpon>

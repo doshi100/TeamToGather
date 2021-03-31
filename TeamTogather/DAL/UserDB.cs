@@ -22,7 +22,7 @@ namespace DAL
                 DataTable userTable = helper.GetDataTable(sql);
                 return userTable.Rows[0];
             }
-            catch(Exception)
+            catch (Exception)
             {
                 return null;
             }
@@ -72,8 +72,8 @@ namespace DAL
             int IsAdded = -1;
             DBHelper helper = new DBHelper(Constants.PROVIDER, Constants.PATH);
             string sql = "INSERT INTO Users(UserName, Pass, Email, Birthday, NativeLang, Country, WeeklyFreeTime, NumRateVoters, UserRate, IsBanned, RegistrationDate, UserType)" +
-                         " VALUES( '" + UserName + "', '" + Pass + "', '" + Email + "', #" + Birthday.ToString("MM/dd/yyyy") + "#, " + NativeLang + ", " + Country + ", "  + WeeklyFreeTime + ", " + 0 + ", " + 0 + ", " + "false" + ", " 
-                         + "#" + RegistrationDate.ToString("MM/dd/yyyy HH:mm:ss") + "#, " + 1+ ");";
+                         " VALUES( '" + UserName + "', '" + Pass + "', '" + Email + "', #" + Birthday.ToString("MM/dd/yyyy") + "#, " + NativeLang + ", " + Country + ", " + WeeklyFreeTime + ", " + 0 + ", " + 0 + ", " + "false" + ", "
+                         + "#" + RegistrationDate.ToString("MM/dd/yyyy HH:mm:ss") + "#, " + 1 + ");";
             IsAdded = helper.InsertWithAutoNumKey(sql);
             return (IsAdded); // if one row was affected(added) the method return the id of the user(the insert was succesful) if not it will return -1
         }
@@ -104,7 +104,7 @@ namespace DAL
             }
             UserKnowledgeDB.InsertUserKnowledge(userID, ProgramsList);
             int countProfession = ProfessionDB.InsertUserProfessions(userID, ProfessionList);
-            if(countProfession < 1)
+            if (countProfession < 1)
             {
                 return false;
             }
@@ -180,11 +180,11 @@ namespace DAL
                 $"FROM Users INNER JOIN UserProf ON Users.ID = UserProf.UserID " +
                 $"WHERE Users.Birthday <= #{age.ToString("MM/dd/yyyy HH:mm:ss")}# " +
                 $"AND Users.WeeklyFreeTime >= {WeeklyFreeTime} AND Users.ID > {IndexUserID} AND (Users.UserRate / IIF(Users.NumRateVoters = 0, 1, Users.NumRateVoters) >= {userRate})";
-            if(langID != -1)
+            if (langID != -1)
             {
                 query += $" AND Users.NativeLang = {langID} ";
             }
-            if(profID != -1)
+            if (profID != -1)
             {
                 query += $" AND UserProf.ProfID = {profID} ";
             }
@@ -308,12 +308,22 @@ namespace DAL
         }
 
 
+        public static int ReturnUserRateAtUserNum(int UserRatedID, int userID)
+        {
+            DataRow userRow = ReturnUserRateAtUser(UserRatedID, userID);
+            if (userRow != null)
+            {
+                return (int)userRow["Rate"];
+            }
+            return 0;
+        }
+
         public static bool RateUser(int UserRatedID, int userID, int UserRate)
         {
             DataRow userRow = ReturnUserRateAtUser(UserRatedID, userID);
             if (userRow == null)
             {
-                
+
                 InsertUserRate_Rec(UserRatedID, userID, UserRate);
                 int rate = ReturnUserRate(userID);
                 rate = rate + UserRate;
@@ -322,7 +332,9 @@ namespace DAL
             else
             {
                 int rate = ReturnUserRate(userID);
-                rate = rate + UserRate;
+                int PreviousRatedNum = (int)userRow["Rate"];
+                rate = (UserRate - PreviousRatedNum) + rate;
+                UpdatePersonalUserRate(UserRatedID, userID, UserRate);
                 bool success = updateUserRate(userID, rate, false);
                 return success;
             }
@@ -333,6 +345,14 @@ namespace DAL
         /// this method inserts a user rate record into the UserRate db table.
         /// user rates are from 1 to 5.
         /// </summary>
+        public static bool UpdatePersonalUserRate(int UserRatedID, int userID, int UserRate)
+        {
+            DBHelper helper = new DBHelper(Constants.PROVIDER, Constants.PATH);
+            string query = $"UPDATE UserRate SET UserRate.Rate = {UserRate} WHERE UserRatedID = {UserRatedID} AND UserID = {userID};";
+            int exe_status = helper.InsertWithAutoNumKey(query);
+            return exe_status != -1;
+        }
+
         public static bool InsertUserRate_Rec(int UserRatedID, int userID, int UserRate)
         {
             DBHelper helper = new DBHelper(Constants.PROVIDER, Constants.PATH);
@@ -357,6 +377,18 @@ namespace DAL
             {
                 return null;
             }
+        }
+
+        public static string ReturnUserProfilePath(int userID)
+        {
+            DBHelper helper = new DBHelper(Constants.PROVIDER, Constants.PATH);
+            string query = $"SELECT ProfilePath FROM Users WHERE ID = {userID};";
+            DataTable dt = helper.GetDataTable(query);
+            if (dt.Rows[0]["ProfilePath"] is DBNull)
+            {
+                return "";
+            }
+            return (string)dt.Rows[0]["ProfilePath"];
         }
 
 
@@ -432,6 +464,32 @@ namespace DAL
             helper.WriteData(sql);
         }
 
+        /// <summary>
+        /// retrieves the status of the requests the user has sent to the admin of a project. the date provided sets how old does the requests returned will be
+        /// (exmple. 3 weeks ago will get all of the requests sent during the last 3 weeks)
+        /// </summary>
+        public static DataTable returnSentUserReq(int userID, DateTime ReqFromDate)
+        {
+            DBHelper helper = new DBHelper(Constants.PROVIDER, Constants.PATH);
+            string sql = $"SELECT DISTINCT ProjectPositions.ID, Projects.AdminUsID, Projects.ProjectID, Projects.ProjectContent, ProjectPositions.Profession, ProjectRequests.* " +
+                $"FROM(ProjectRequests INNER JOIN ProjectPositions ON ProjectRequests.PositionID = ProjectPositions.ID) INNER JOIN Projects ON ProjectPositions.ProjectID = Projects.ProjectID " +
+                $"WHERE ProjectRequests.UserID = {userID} AND ProjectPositions.IsDeleted = 1 AND ProjectRequests.RequestType = 1 AND ProjectRequests.DateRequested > FORMAT(#{ReqFromDate}#, 'mm / dd / yyyy hh: nn: ss') ORDER BY ProjectRequests.DateRequested DESC;";
+            DataTable dt = helper.GetDataTable(sql);
+            return dt;
+        }
 
+        /// <summary>
+        /// retrieves the status of the invitation the user has sent to the other users as the Project's Admin. the date provided sets how old does the requests returned will be
+        /// (exmple. 3 weeks ago will get all of the requests sent during the last 3 weeks)
+        /// </summary>
+        public static DataTable returnSentUserInv(int userID, DateTime ReqFromDate)
+        {
+            DBHelper helper = new DBHelper(Constants.PROVIDER, Constants.PATH);
+            string sql = $"SELECT DISTINCT ProjectPositions.ID, Projects.AdminUsID, Projects.ProjectID, Projects.ProjectContent, ProjectPositions.Profession, ProjectRequests.* FROM (Projects INNER JOIN ProjectPositions  " +
+                $"ON Projects.ProjectID = ProjectPositions.ProjectID) INNER JOIN ProjectRequests ON ProjectPositions.ID = ProjectRequests.PositionID WHERE Projects.AdminUsID = {userID} AND ProjectRequests.RequestType = 2 " +
+                $"AND ProjectPositions.IsDeleted <> 2 AND ProjectRequests.DateRequested > FORMAT(#{ReqFromDate}#, 'mm / dd / yyyy hh: nn: ss') ORDER BY ProjectRequests.DateRequested DESC;";
+            DataTable dt = helper.GetDataTable(sql);
+            return dt;
+        }
     }
 }

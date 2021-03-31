@@ -18,7 +18,7 @@
     <asp:ScriptManager ID="ProjectShownScriptManager" runat="server"></asp:ScriptManager>
     <div class="ProfileHeaderContainer">
 
-        
+
         <div id="profileImg_wrapper" class="profileImg_wrapper">
             <div class="profileImg_container">
                 <asp:Image ID="ProfileImg" CssClass="profileImg" runat="server" />
@@ -40,6 +40,8 @@
                     <asp:HyperLink ID="JoinReq_section" runat="server">User Join Requests</asp:HyperLink></li>
                 <li id="ProjInvLi_section" runat="server" visible="false">
                     <asp:HyperLink ID="ProjInv_section" runat="server">Project Invitation</asp:HyperLink></li>
+                <li id="RequestsLi" runat="server" visible="false">
+                    <asp:HyperLink ID="Requests" runat="server">user's Requests</asp:HyperLink></li>
             </ul>
         </div>
         <%-------------------------------------------------------------  START OF Invite User to project for a specific Role in the project SECTION------------------------------------------------%>
@@ -105,7 +107,7 @@
         <p><span class="Header">Are you sure You want to change this profile photo?</span></p>
         <div class="confirmationButtons_container">
             <input type="button" class="CancelCreationB ButtonRed" value="No" />
-            <asp:Button ID="ChangeProfileB" runat="server" CssClass="ChangeProfileB ButtonBlue" Text="yes" OnClick="ChangeProfile_Click"/>
+            <asp:Button ID="ChangeProfileB" runat="server" CssClass="ChangeProfileB ButtonBlue" Text="yes" OnClick="ChangeProfile_Click" />
             <asp:FileUpload ID="profileUploader" CssClass="profileUploader" runat="server" />
         </div>
     </div>
@@ -338,6 +340,19 @@
 
         <%-------------------------------------------------------------  START OF addcontacts and show information Section  ------------------------------------------------%>
         <div runat="server" id="Contacts_section" class="Contacts_section" visible="false">
+            <asp:HiddenField ID="CurrentRate" ClientIDMode="Static" Value="" runat="server" />
+            <div class="rateSection" id="rateSection" runat="server" visible="true">
+                <span class="header_rateuser">Rate User</span>
+                <div class="rateBt_container">
+                    <span class="btText">Beginner</span>
+                    <asp:Button ID="Rate1" CssClass="userRateBu" OnClick="RateUser" runat="server" />
+                    <asp:Button ID="Rate2" CssClass="userRateBu" OnClick="RateUser" runat="server" />
+                    <asp:Button ID="Rate3" CssClass="userRateBu" OnClick="RateUser" runat="server" />
+                    <asp:Button ID="Rate4" CssClass="userRateBu" OnClick="RateUser" runat="server" />
+                    <asp:Button ID="Rate5" CssClass="userRateBu" OnClick="RateUser" runat="server" />
+                    <span class="btText">Professional</span>
+                </div>
+            </div>
             <div class="data_container">
                 <div class="generalInfo">
                     <div class="headercontainer"><span class="Header">About</span></div>
