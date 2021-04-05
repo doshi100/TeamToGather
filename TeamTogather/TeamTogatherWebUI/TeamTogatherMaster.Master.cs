@@ -29,7 +29,7 @@ namespace TeamTogatherWebUI
                     }
                     else
                     {
-                        profile_type1.Style["background-image"] = Page.ResolveUrl("DesignElements/ProfilePictures/NoUserProfile.png");
+                        profile_type1.Style["background-image"] = Page.ResolveUrl("DesignElements/elements/ProfilePicEmpty.png");
                     }
                 }
                 else
@@ -43,7 +43,7 @@ namespace TeamTogatherWebUI
                     }
                     else
                     {
-                        profile_type2.Style["background-image"] = Page.ResolveUrl("DesignElements/ProfilePictures/NoUserProfile.png");
+                        profile_type2.Style["background-image"] = Page.ResolveUrl("DesignElements/elements/ProfilePicEmpty.png");
                     }
                 }
             }

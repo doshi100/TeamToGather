@@ -182,6 +182,31 @@ namespace BL
             }
         }
 
+        public UserInfo(DataRow userRow)
+        {
+            this.ID = (int)userRow["ID"];
+            this.UserName = (string)userRow["UserName"];
+            this.Password = (string)userRow["Pass"];
+            this.Email = (string)userRow["Email"];
+            this.Birthday = (DateTime)userRow["Birthday"];
+            this.NativeLang = (int)userRow["NativeLang"];
+            this.Country = (int)userRow["Country"];
+            this.WeeklyFreeTime = (int)userRow["WeeklyFreeTime"];
+            this.NumRateVoters = (int)userRow["NumRateVoters"];
+            this.UserRate = (int)userRow["UserRate"];
+            this.IsBanned = (bool)userRow["IsBanned"];
+            this.RegistrationDate = (DateTime)userRow["RegistrationDate"];
+            if (userRow["LoginDate"] != DBNull.Value)
+            {
+                this.LoginDate = (DateTime)userRow["LoginDate"];
+            }
+            this.UserType = (int)userRow["UserType"];
+            if (userRow["ProfilePath"] != DBNull.Value)
+            {
+                this.ProfilePath = (string)userRow["ProfilePath"];
+            }
+        }
+
         /// <summary>
         /// checks if the given password and username match, if so, the function returns a user object which contains he's credentials
         /// </summary>
@@ -518,6 +543,25 @@ namespace BL
                 reqList.Add(record);
             }
             return reqList;
+        }
+
+
+        public static List<UserInfo> RetrieveUsersByCredentials(string UsNa, string email)
+        {
+            DataTable dt = UserDB.RetrieveUsersByCredentials(UsNa, email);
+            List<UserInfo> list = new List<UserInfo>();
+            foreach (DataRow row in dt.Rows)
+            {
+                UserInfo newProject = new UserInfo(row);
+                list.Add(newProject);
+            }
+            return list;
+        }
+
+        public static DataTable RetrieveUserTableByCredentials(string UsNa, string email)
+        {
+            DataTable dt = UserDB.RetrieveUserTableByCredentials(UsNa, email);
+            return dt;
         }
     }
 }

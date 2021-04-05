@@ -93,6 +93,28 @@ namespace BL
             return ContactDic;
         }
 
+        public static int ReturnMostRequestedProfession(DateTime date)
+        {
+            return GeneralDB.ReturnMostRequestedProfession(date);
+        }
+
+        public static int ReturnLoggedUsers(DateTime date)
+        {
+            return GeneralDB.ReturnLoggedUsers(date);
+        }
+
+        public static void BanUser(int id)
+        {
+            GeneralDB.BanUser(id);
+        }
+
+
+        public static void UnBanUser(int id)
+        {
+            GeneralDB.UnBanUser(id);
+        }
+
+
 
 
 

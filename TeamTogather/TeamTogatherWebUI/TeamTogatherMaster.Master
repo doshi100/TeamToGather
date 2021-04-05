@@ -83,7 +83,7 @@
                         <a href="#" id="ProfileDirectionAdmin" runat="server">Profile</a>
                     </li>
                     <li class="navsmlItem">
-                        <a href="#">Admin</a>
+                        <a href="adminPage.aspx">Admin</a>
                     </li>
                     <li class="navsmlItem">
                         <a href="ProjectCreation.aspx">Create Project</a>

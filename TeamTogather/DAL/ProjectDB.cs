@@ -645,13 +645,33 @@ namespace DAL
             try
             {
                 DBHelper helper = new DBHelper(Constants.PROVIDER, Constants.PATH);
-                string query = $"SELECT * FROM ProjectRequests WHERE PositionID = {positionID} AND UserID = {userID} AND RequestType = 2;";
+                string query = $"SELECT * FROM ProjectRequests WHERE PositionID = {positionID} AND UserID = {userID} AND RequestType = 2 AND RequestStatus = 1;";
                 DataTable dt = helper.GetDataTable(query);
                 return dt.Rows.Count == 1;
             }
             catch
             {
                 return false;
+            }
+        }
+
+        /// <summary>
+        /// returns the DataTable of top of the 10 projects(max) from a specified time until now. otherwise it returns null
+        public static DataTable ReturnTopProjects(DateTime date)
+        {
+            try
+            {
+                DBHelper helper = new DBHelper(Constants.PROVIDER, Constants.PATH);
+                string query = $"SELECT TOP 10 * " +
+                    $"FROM(SELECT(Projects.ProjectRate / IIF(Projects.NumRateVoters = 0, 1, Projects.NumRateVoters)) AS total, *FROM Projects WHERE Projects.DateCreated > FORMAT(#{date}#, 'mm / dd / yyyy hh: nn: ss'))" +
+                    $" AS newtbl " +
+                    $"WHERE total <> 0 ORDER BY total DESC; ";
+                DataTable dt = helper.GetDataTable(query);
+                return dt;
+            }
+            catch
+            {
+                return null;
             }
         }
     }

@@ -491,5 +491,47 @@ namespace DAL
             DataTable dt = helper.GetDataTable(sql);
             return dt;
         }
+
+
+        /// <summary>
+        /// the function query's users credentials by username and email from the database, if there is a match, it will return a DataTable of all users matched
+        /// </summary>
+        public static DataTable RetrieveUsersByCredentials(string UsNa, string email)
+        {
+            try
+            {
+
+                DBHelper helper = new DBHelper(Constants.PROVIDER, Constants.PATH);
+                //string sql = $"SELECT * FROM Users WHERE UserName LIKE '{UsNa}*' AND Email LIKE '{email}*' ORDER BY (ID);";
+                string sql = $"SELECT * FROM Users WHERE UserName LIKE '{UsNa}%' AND Email LIKE '{email}%' ORDER BY (ID);"; 
+                DataTable userTable = helper.GetDataTable(sql);
+                return userTable;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+        public static DataTable RetrieveUserTableByCredentials(string UsNa, string email)
+        {
+            try
+            {
+
+                DBHelper helper = new DBHelper(Constants.PROVIDER, Constants.PATH);
+                string sql = $"SELECT Users.ID, Users.UserName, Users.Pass, Users.Email, Users.Birthday, Languages.LangName, " +
+                    $"Countries.Name AS Country, Users.WeeklyFreeTime, Users.NumRateVoters, Users.UserRate, Users.IsBanned, Users.RegistrationDate, Users.LogInDate, Users.UserType " +
+                    $"FROM((Users " +
+                    $"INNER JOIN Languages ON Users.NativeLang = Languages.ID) " +
+                    $"INNER JOIN Countries ON Users.Country = Countries.ID) " +
+                    $"WHERE UserName LIKE '{UsNa}%' AND Email LIKE '{email}%' ORDER BY(Users.ID); ";
+                DataTable userTable = helper.GetDataTable(sql);
+                return userTable;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
     }
 }

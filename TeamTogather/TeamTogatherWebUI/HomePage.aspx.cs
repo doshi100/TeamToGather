@@ -26,11 +26,15 @@ namespace TeamTogatherWebUI
             UserInfo user = UserInfo.Authentication(userName, password);
             if(user != null)
             {
-                if(user.Password == password && user.UserName == userName)
+                if(user.Password == password && user.UserName == userName && !user.IsBanned)
                 {
                     Session["UserID"] = user.ID;
                     user.UpdateLoginDate();
                     Response.Redirect("HomePage.aspx");
+                }
+                else if(user.IsBanned)
+                {
+                    ClientScript.RegisterStartupScript(this.GetType(), "prompt", "prompt('Your user has been banned from the site.')", true);
                 }
             }
             else

@@ -100,6 +100,21 @@ namespace BL
             }
         }
 
+        /// <summary>
+        /// Constructor no.5 that builds a project object from an existing project in the db with a datarow that is given to it
+        /// </summary>
+        public Project(DataRow row)
+        {
+            this.ProjectID = (int)row["ProjectID"];
+            this.AdminUSID = (int)row["AdminUSID"];
+            this.MinAge = (int)row["MinAge"];
+            this.ProjectStatus = (int)row["ProjectStatus"];
+            this.NumRateVoters = (int)row["NumRateVoters"];
+            this.ProjectRate = (int)row["ProjectRate"];
+            this.ProjectContent = (string)row["ProjectContent"];
+            this.DateCreated = (DateTime)row["DateCreated"];
+        }
+
 
         /// <summary>
         /// method that use the DataRow that is given by ProjectDB.ProjectByUserID(userID) and returns a list of projects the user has, that method will later be used +
@@ -271,6 +286,18 @@ namespace BL
                 Headers.Add((int)row["ProjectID"], (string)row["ProjectContent"]);
             }
             return Headers;
+        }
+
+        public static List<Project> ReturnTopProjects(DateTime date)
+        {
+            DataTable dt = ProjectDB.ReturnTopProjects(date);
+            List<Project> list = new List<Project>();
+            foreach (DataRow row in dt.Rows)
+            {
+                Project newProject = new Project(row);
+                list.Add(newProject);
+            }
+            return list;
         }
     }
 }
