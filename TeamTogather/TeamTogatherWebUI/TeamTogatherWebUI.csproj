@@ -50,6 +50,8 @@
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -150,6 +152,7 @@
     <Content Include="DesignElements\SitesLogo\zoom.png" />
     <Content Include="global.asax" />
     <Content Include="HomePage.aspx" />
+    <Content Include="JobsPage.aspx" />
     <Content Include="librarys\medium.js" />
     <Content Include="librarys\medium.min.js" />
     <Content Include="librarys\rangy-classapplier.js" />
@@ -167,6 +170,14 @@
     <Content Include="TogatherJS.js" />
     <Content Include="UpdateProject.aspx" />
     <Content Include="UserShowcase.aspx" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Web References\JobsWS\JobOffer.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <None Include="Web References\JobsWS\JobsWS.disco" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -186,6 +197,13 @@
     </Compile>
     <Compile Include="HomePage.aspx.designer.cs">
       <DependentUpon>HomePage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="JobsPage.aspx.cs">
+      <DependentUpon>JobsPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="JobsPage.aspx.designer.cs">
+      <DependentUpon>JobsPage.aspx</DependentUpon>
     </Compile>
     <Compile Include="Profile.aspx.cs">
       <DependentUpon>Profile.aspx</DependentUpon>
@@ -216,6 +234,11 @@
       <DependentUpon>ProjectShowcase.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
     <Compile Include="RegisterUserControl.ascx.cs">
       <DependentUpon>RegisterUserControl.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -258,6 +281,11 @@
     <Compile Include="UserShowcase.aspx.designer.cs">
       <DependentUpon>UserShowcase.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Web References\JobsWS\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="TeamTogatherMaster.Master" />
@@ -272,6 +300,14 @@
     <Content Include="DesignElements\fonts\teko\Teko-SemiBold.ttf" />
     <Content Include="DesignElements\fonts\teko\teko.zip" />
     <None Include="packages.config" />
+    <None Include="Web References\JobsWS\JobsWS.wsdl" />
+    <Content Include="Web References\JobsWS\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </Content>
+    <Content Include="Web References\JobsWS\User.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -287,6 +323,25 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DesignElements\UsersCreations\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferences Include="Web References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferenceUrl Include="http://localhost:64069/JobsWS.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\JobsWS\</RelPath>
+      <UpdateFromURL>http://localhost:64069/JobsWS.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>TeamTogatherWebUI_JobsWS_JobsWS</CachedSettingsPropName>
+    </WebReferenceUrl>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
