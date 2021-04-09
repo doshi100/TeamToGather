@@ -237,6 +237,17 @@ namespace TeamTogatherWebUI
             return list;
         }
 
+        public static Dictionary<int, int> GetDays(int days)
+        {
+            int MonthDays = days;
+            Dictionary<int, int> list = new Dictionary<int, int>();
+            for (int i = 0; i < days; i++)
+            {
+                list.Add(i + 1, i + 1);
+            }
+            return list;
+        }
+
         public static Dictionary<int, int> GetMonth()
         {
             const int MONTH = 12;
@@ -408,6 +419,36 @@ namespace TeamTogatherWebUI
                 }
             }
             return id_list;
+        }
+
+        protected void UpdateDate(object sender,EventArgs e)
+        {
+            DropDownDay.SelectedIndex = 0;
+            int indexMonth = DropDownMonth.SelectedIndex;
+            Dictionary<int, int> numdays = new Dictionary<int, int>();
+            switch (indexMonth) {
+                case 0: case 2: case 4: case 6: case 7: case 9: case 11:
+                    numdays = GetDays(31);
+                    BindDropDown(DropDownDay, numdays);
+                    break;
+                case 3: case 5: case 8: case 10:
+                    numdays = GetDays(30);
+                    BindDropDown(DropDownDay, numdays);
+                    break;
+                case 1:
+                    DateTime date = new DateTime(int.Parse(DropDownYear.Text), 1, 1);
+                    if (DateTime.IsLeapYear(date.Year))
+                    {
+                        numdays = GetDays(29);
+                        BindDropDown(DropDownDay, numdays);
+                    }
+                    else
+                    {
+                        numdays = GetDays(28);
+                        BindDropDown(DropDownDay, numdays);
+                    }
+                    break;
+            }
         }
     }
 }

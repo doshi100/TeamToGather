@@ -894,16 +894,27 @@ input::-webkit-input-placeholder {
 }
 
 
-    .regList li {
-        width: 90%;
-        display: grid;
-        grid-template-columns: 30% 30% 40%;
-    }
+.regList li {
+    width: 90%;
+    display: grid;
+    grid-template-columns: 30% 30% 40%;
+}
 
+.DateBoxReg {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 30% 30% 40%;
+}
 
-        .regList li input[type=text], .regList li input[type=text] {
-            flex-grow: 2;
-        }
+li.BirthdayGrid {
+    width:90%;
+    display: flex;
+    flex-direction: column; 
+}
+
+.regList li input[type=text], .regList li input[type=text] {
+    flex-grow: 2;
+}
 
 .WhiteDivRe input[type=submit] {
     position: absolute;
