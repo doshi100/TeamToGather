@@ -19,7 +19,7 @@
                         <img src="DesignElements/logo/TeamTogatherLogo.png" id="logoImg" alt="TeamTogatherLogo">
                     </li>
                     <li class="navTextItem GreenLine"><a href="HomePage.aspx">Home</a></li>
-                    <li class="navTextItem PinkLineH"><a href="#">Project Showcase</a></li>
+                    <li class="navTextItem PinkLineH"><a href="JobsPage.aspx">Job Offers</a></li>
                     <li class="navTextItem PinkLineH"><a href="#">User Showcase</a></li>
                     <li class="navTextItem BlueLineH"><a href="Registration.aspx">Sign Up</a></li>
                 </ul>
@@ -31,7 +31,7 @@
                         <img src="DesignElements/logo/TeamTogatherLogo.png" id="logoImg" alt="TeamTogatherLogo">
                     </li>
                     <li class="navTextItem GreenLine"><a href="HomePage.aspx">Home</a></li>
-                    <li class="navTextItem PinkLineH"><a href="#">Project Showcase</a></li>
+                    <li class="navTextItem PinkLineH"><a href="JobsPage.aspx">Job Offers</a></li>
                     <li class="navTextItem PinkLineH"><a href="#">User Showcase</a></li>
                     <li class="navTextItem PinkLineH"><a href="ProjectShowcase.aspx">Project Search</a></li>
                     <li class="navTextItem PinkLineH"><a href="UserShowcase.aspx">Team Search</a></li>
@@ -66,7 +66,7 @@
                         <img src="DesignElements/logo/TeamTogatherLogo.png" id="logoImg" alt="TeamTogatherLogo">
                     </li>
                     <li class="navTextItem GreenLine"><a href="HomePage.aspx">Home</a></li>
-                    <li class="navTextItem PinkLineH"><a href="#">Project Showcase</a></li>
+                    <li class="navTextItem PinkLineH"><a href="JobsPage.aspx">Job Offers</a></li>
                     <li class="navTextItem PinkLineH"><a href="#">User Showcase</a></li>
                     <li class="navTextItem PinkLineH"><a href="ProjectShowcase.aspx">Project Search</a></li>
                     <li class="navTextItem PinkLineH"><a href="UserShowcase.aspx">Team Search</a></li>

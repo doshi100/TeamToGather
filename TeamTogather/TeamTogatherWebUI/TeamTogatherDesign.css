@@ -3182,11 +3182,11 @@ ul.BanUserList {
 .NumJobsOffer_container {
     width: 15vw;
     height: calc(15vw);
-    background-color: rgb(249,249,249);
+    background-color: rgb(253,253,253);
     border-radius: 50%;
     box-shadow: 0 0px 40px 5px rgb(29 237 167);
     display: flex;
-    flex-direction:column;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     margin: 2em auto;
@@ -3210,20 +3210,39 @@ ul.BanUserList {
 }
 
 .OffersSubTitle {
-    font-size: 1.4em;
+    font-size: 1.3em;
     font-family: tekoregular;
 }
 
 .JobOffersGrid {
     margin: 0 auto;
+    box-shadow: 0 0 20px 15px rgb(200 200 255 / 70%);
+    margin-top: 2%;
+    padding-bottom: 2%;
+}
+
+.JobOffersGrid th {
+    background-color: #410ED3;
+}
+
+.JobOffersGrid tr:nth-child(odd) {
+    background-color: #0F0231;
+}
+
+.JobOffersGrid tr:nth-child(even) {
+    background-color: #15053D;
+}
+
+.JobOffersGrid tr:hover {
+    background-image: linear-gradient(to right bottom, #5215fc, #4e13f2, #4911e7, #4510dd, #410ed3);
 }
 
 .JobOffersGrid th, .JobOffersGrid td, .JobOffersGrid tr, .JobOffersGrid table {
-    color: rgb(250,250,250);
-    background-color: #12043E;
+    color: rgb(215,215,215);
+    /*background-color: #12043E;*/
     border: 1px solid transparent;
     border-spacing: 0;
-    padding:0.5em;
+    padding: 0.5em;
 }
 
 .JobOffersGrid{
@@ -3243,6 +3262,87 @@ ul.BanUserList {
 }
 .JobOffersGrid tr:first-child th:last-child{
     border-top-right-radius:5px;
+}
+
+.JobPopUp {
+    background-color: rgb(40,40,40);
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 80vw;
+    height: 90vh;
+    color: rgb(240,240,240);
+    border-radius: 0.4em;
+}
+
+.JobPopSec1 {
+    display: flex;
+    flex-direction: column;
+    position:absolute;
+    top:50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    font-family: tekolight;
+    font-size: 2em;
+}
+
+.JobPopSec1 .ButtonBlue {
+    padding: 0.1em 0.4em;
+    font-size: 1.3em;
+}
+
+.JobPopSec1 div {
+    margin: 1.5em 0;
+}
+
+.JobHeader {
+    font-family: tekoSemiBold;
+    font-size: 2.5em;
+    color: rgb(216, 112, 209);
+    border-bottom: solid 3px rgb(216, 112, 209);
+    padding: 0 0.5em 0.2em 0.5em;
+}
+
+.JobHeader2 {
+    font-family: tekoSemiBold;
+    font-size: 1.5em;
+    margin-top: 1%;
+    margin-left: 1%;
+    display: block;
+}
+
+.jobErrorMsg {
+    position: absolute;
+    left: 50%;
+    margin-top: 2em;
+    display: block;
+    font-family: tekoregular;
+    color: rgb(190, 20, 90);
+    transform: translate(-50%, 0);
+    font-size: 2em;
+}
+
+.ExeIcon {
+    height: 20px;
+    position: absolute;
+    right: 1.5%;
+    top: 2%;
+    outline: none;
+    display: block;
+}
+
+.addOfferOpen {
+    margin-left: 1%;
+}
+
+.FnameText {
+    min-height: 1px;
+    min-width: 1px;
+    margin-left: 8%;
+    font-size: 1.9em;
+    font-family: tekoregular;
 }
 
 
