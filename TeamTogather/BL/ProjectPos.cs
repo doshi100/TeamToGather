@@ -14,6 +14,10 @@ namespace BL
         public Profession profession { get; set; }
         public List<Knowledge> Programs { get; set; }
 
+        /// <summary>
+        /// no. 1 constructor that takes id, user id and profession to create the object.
+        /// </summary>
+        
         public ProjectPos(int id, int userID, int profession)
         {
             this.id = id;
@@ -33,6 +37,9 @@ namespace BL
             }
         }
 
+        /// <summary>
+        /// no. 2 constructor that takes a position id, gets it from the db and builds an object.
+        /// </summary>
         public ProjectPos(int id)
         {
             DataRow posFields = ProjectDB.GetPosition(id);
@@ -42,6 +49,9 @@ namespace BL
             this.profession = pos_prof;
         }
 
+        /// <summary>
+        /// checks if the position is filled by a user or not. returns true if isn't filled false otherwise.
+        /// </summary>
         public bool CheckFilled()
         {
             return (this.userID == 1);

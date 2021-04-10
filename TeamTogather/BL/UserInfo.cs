@@ -182,6 +182,9 @@ namespace BL
             }
         }
 
+        /// <summary>
+        /// constructor no. 5, by datarow of user.
+        /// </summary>
         public UserInfo(DataRow userRow)
         {
             this.ID = (int)userRow["ID"];
@@ -253,12 +256,17 @@ namespace BL
             
         }
 
+        /// <summary>
+        /// checks if the user exists by its username.
+        /// </summary>
         public static bool UserExist(string userN)
         {
             return UserDB.UserExist(userN);
         }
 
-
+        /// <summary>
+        /// checks if the user is an admin.
+        /// </summary>
         public static bool CheckAdmin(int id)
         {
             return UserDB.CheckAdmin(id);
@@ -298,6 +306,9 @@ namespace BL
             return userProfessions;
         }
 
+        /// <summary>
+        /// gets profession list (profession table as a whole)
+        /// </summary>
         public List<Profession> GetUserProfessionsList2()
         {
             List<Profession> userProfessions = new List<Profession>();
@@ -312,6 +323,7 @@ namespace BL
             }
             return userProfessions;
         }
+
         /// <summary>
         /// STATIC : Gets the user Professions by his id And returns a list that contains valus as a list of : <ProfessionID>
         /// </summary>
@@ -329,7 +341,9 @@ namespace BL
             return userProfessions;
         }
 
-
+        /// <summary>
+        /// show users by an index.
+        /// </summary>
         public static List<UserInfo> ShowUsers(int profID, DateTime age, int langID, int WeeklyFreeTime, int userRate,
                                           int IndexUserID)
         {
@@ -409,12 +423,17 @@ namespace BL
             return creations;
         }
 
+        /// <summary>
+        /// rate user
+        /// </summary>
         public static bool RateUser(int UserRatedID, int userID, int UserRate)
         {
             return UserDB.RateUser(UserRatedID, userID, UserRate);
         }
 
-
+        /// <summary>
+        /// gets finished projects of a user.
+        /// </summary>
         public List<Project> GetUserDoneProjects(DateTime projectDate)
         {
             List<Project> doneProjects = new List<Project>();
@@ -430,6 +449,9 @@ namespace BL
             return doneProjects;
         }
 
+        /// <summary>
+        /// gets requests of a project
+        /// </summary>
         public Dictionary<Request, string> GetProjectsUserRequest(DateTime projectDate)
         {
             Dictionary<Request, string> requests = new Dictionary<Request, string>();
@@ -446,6 +468,9 @@ namespace BL
             return requests;
         }
 
+        /// <summary>
+        /// gets the user requests to a project
+        /// </summary>
         public Dictionary<Request, Project> GetUserRequestsToProjects(DateTime projectDate)
         {
             Dictionary<Request, Project> requests = new Dictionary<Request, Project>();
@@ -462,7 +487,9 @@ namespace BL
             return requests;
         }
 
-
+        /// <summary>
+        /// return user projects from a specific date
+        /// </summary>
         public List<Project> ReturnUserProjects(DateTime dtIndex)
         {
             List<Project> projects = new List<Project>();
@@ -483,23 +510,33 @@ namespace BL
             return projects;
         }
 
-
+        /// <summary>
+        /// returns language name.
+        /// </summary>
         public string ReturnLangByID()
         {
             return UserDB.ReturnLangByID(this.NativeLang);
         }
 
+        /// <summary>
+        /// updates profile photo by path and userid.
+        /// </summary>
         public static void UpdateProfilePhoto(string path, int id)
         {
             UserDB.UpdateProfilePhoto(path, id);
         }
 
+        /// <summary>
+        /// returns user profile picture path.
+        /// </summary>
         public static string ReturnUserProfilePath(int userID)
         {
             return UserDB.ReturnUserProfilePath(userID);
         }
 
-
+        /// <summary>
+        /// returnes the user rate of an another user.
+        /// </summary>
         public static int ReturnUserRateAtUserNum(int UserRatedID, int userID)
         {
             return UserDB.ReturnUserRateAtUserNum(UserRatedID, userID);
@@ -545,7 +582,9 @@ namespace BL
             return reqList;
         }
 
-
+        /// <summary>
+        /// retrieve users by their credentials.
+        /// </summary>
         public static List<UserInfo> RetrieveUsersByCredentials(string UsNa, string email)
         {
             DataTable dt = UserDB.RetrieveUsersByCredentials(UsNa, email);
@@ -558,6 +597,9 @@ namespace BL
             return list;
         }
 
+        /// <summary>
+        /// returnes datatable of users by user name and email.
+        /// </summary>
         public static DataTable RetrieveUserTableByCredentials(string UsNa, string email)
         {
             DataTable dt = UserDB.RetrieveUserTableByCredentials(UsNa, email);

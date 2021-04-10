@@ -24,6 +24,9 @@ namespace BL
             this.ProfPath = ProfPath;
         }
 
+        /// <summary>
+        /// constructor no. 1 builds a profession by its ID.
+        /// </summary>
         public Profession (int profID)
         {
             DataRow prof = ProfessionDB.RetProfession(profID);

@@ -113,6 +113,7 @@ if (scrollContainer != null) {
     var path = window.location.pathname;
     var page = path.split("/").pop();
     if (page == "ProjectCreation.aspx" || page == "Profile.aspx" || page == "UpdateProject.aspx") {
+        CountChars();
         addPos_button.addEventListener('click', CreatePositions)
         addProg_button.addEventListener('click', () => AddPrograms(checkedElement));
         arrowB.addEventListener('click', () => BackToPos());
@@ -488,7 +489,7 @@ function RemoveUserFromPos(e) {
     hiddenPostUserID.value = userID;
     RemoveUser.click();
     e.setAttribute("disabled", "disabled")
-    e.classList.remove("ButtonRed")
+    //e.classList.remove("ButtonRed")
 }
 
 function DeletePos(e) {
@@ -529,6 +530,8 @@ function GetProjectID_Button(e) {
 function DeclineInvitation_Button(e) {
     let posID = e.parentNode.parentNode.querySelector(".projBox_ProjectPosID").innerText;
     let reqID = e.parentNode.parentNode.querySelector(".projBox_RequestID").innerText;
+    let hiddenGeneral = document.querySelector("#General");
+    hiddenGeneral.value = "1";
     hiddenPostPosID.value = posID;
     hiddenPostReqID.value = reqID;
     let declineButton = document.querySelector(".DeclineInvitation");
@@ -538,6 +541,8 @@ function DeclineInvitation_Button(e) {
 function AcceptInvitation_Button(e) {
     let posID = e.parentNode.parentNode.querySelector(".projBox_ProjectPosID").innerText;
     let reqID = e.parentNode.parentNode.querySelector(".projBox_RequestID").innerText;
+    let hiddenGeneral = document.querySelector("#General");
+    hiddenGeneral.value = "1";
     hiddenPostPosID.value = posID;
     hiddenPostReqID.value = reqID;
     let acceptButton = document.querySelector(".AcceptInvitation");
@@ -684,7 +689,9 @@ function viewPhoto(e) {
     image.src = photoUrl;
     OpeningpopupMenuMechanism(imagecontainer, "block");
     OpeningpopupMenuMechanism(overlay, "block");
-    OpeningpopupMenuMechanism(popUpRemoveCreation, "block");
+    if (popUpRemoveCreation) {
+        OpeningpopupMenuMechanism(popUpRemoveCreation, "block");
+    }
 }
 
 function hideImg() {
@@ -694,7 +701,9 @@ function hideImg() {
         removeCreationB = document.querySelector(".popUpRemoveCreation");
     ClosingpopupMenuMechanism(imagecontainer);
     ClosingpopupMenuMechanism(overlay);
-    ClosingpopupMenuMechanism(removeCreationB);
+    if (removeCreationB) {
+        ClosingpopupMenuMechanism(removeCreationB);
+    }
 }
 
 function editContacts(e) {

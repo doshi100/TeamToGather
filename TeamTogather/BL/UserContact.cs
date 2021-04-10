@@ -47,11 +47,17 @@ namespace BL
             }
         }
 
+        /// <summary>
+        /// add a contact by user id, contact website name(profile name in a website and etc'), contact link, and the website id on the contacts table.
+        /// </summary>
         public static int AddContact(int userID, string websiteName, string contactLink, int websiteID)
         {
             return UserDB.AddContact(userID, websiteName, contactLink, websiteID);
         }
 
+        /// <summary>
+        /// deletes a contact by its id.
+        /// </summary>
         public static bool DeleteContact(int contactID)
         {
             return UserDB.DeleteContact(contactID);

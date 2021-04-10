@@ -93,22 +93,33 @@ namespace BL
             return ContactDic;
         }
 
+        /// <summary>
+        /// gets the profession that has the most project requests to join to in the website, by date.
+        /// </summary>
         public static int ReturnMostRequestedProfession(DateTime date)
         {
             return GeneralDB.ReturnMostRequestedProfession(date);
         }
 
+        /// <summary>
+        /// gets the number of users from a specific date chosen.
+        /// </summary>
         public static int ReturnLoggedUsers(DateTime date)
         {
             return GeneralDB.ReturnLoggedUsers(date);
         }
 
+        /// <summary>
+        /// bans user by his ID.
+        /// </summary>
         public static void BanUser(int id)
         {
             GeneralDB.BanUser(id);
         }
 
-
+        /// <summary>
+        /// unbans user by his ID.
+        /// </summary>
         public static void UnBanUser(int id)
         {
             GeneralDB.UnBanUser(id);

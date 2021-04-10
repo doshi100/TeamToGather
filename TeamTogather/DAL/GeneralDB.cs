@@ -20,7 +20,9 @@ namespace DAL
             return dtLang;
         }
 
-
+        /// <summary>
+        /// returnes all of the countries form the Countrys DB
+        /// </summary>
         public static DataTable ReturnCountries()
         {
             try
@@ -36,6 +38,9 @@ namespace DAL
             }
         }
 
+        /// <summary>
+        /// retrieves all of the contact websites there is on the DB
+        /// </summary>
         public static DataTable ReturnContacts()
         {
             try

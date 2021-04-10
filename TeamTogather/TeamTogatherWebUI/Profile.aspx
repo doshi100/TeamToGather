@@ -15,6 +15,7 @@
     <asp:HiddenField ID="PostPosID" ClientIDMode="Static" Value="0" runat="server" />
     <asp:HiddenField ID="PostUserID" ClientIDMode="Static" Value="0" runat="server" />
     <asp:HiddenField ID="GeneralPost" ClientIDMode="Static" Value="0" runat="server" />
+    <asp:HiddenField ID="General" ClientIDMode="Static" Value="0" runat="server" />
     <asp:ScriptManager ID="ProjectShownScriptManager" runat="server"></asp:ScriptManager>
     <div class="ProfileHeaderContainer">
 
@@ -382,7 +383,7 @@
                 <div class="contactInfo">
                     <div class="headercontainer">
                         <span class="Header">User's Contacts</span>
-                        <div class="editimg_container" onclick="editContacts(this)">
+                        <div class="editimg_container" onclick="editContacts(this)" id="editimg_container" runat="server" visible="false">
                             <img src="DesignElements/elements/Pencil.png" alt="pencil">
                         </div>
                         <div class="addContact_popup">

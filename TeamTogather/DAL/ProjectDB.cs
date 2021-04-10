@@ -51,24 +51,6 @@ namespace DAL
             }
         }
 
-        //public static DataTable ProjectsByUserID(int UserID, DateTime indexDate)
-        //{
-        //    try
-        //    {
-        //        DBHelper helper = new DBHelper(Constants.PROVIDER, Constants.PATH);
-        //        string sql = "Select DISTINCT TOP 10 Projects.* FROM " +
-        //            "Projects WHERE Projects.AdminUsID = " + UserID + " AND Projects.ProjectStatus <> 3" +
-        //            $"AND Projects.DateCreated< FORMAT(#{indexDate}#, 'mm / dd / yyyy hh: nn: ss') ORDER BY Projects.DateCreated DESC;";
-        //        DataTable dt = helper.GetDataTable(sql);
-        //        return dt;
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        Console.WriteLine(e.ToString());
-        //        return null;
-        //    }
-        //}
-
         public static DataRow ReturnProject(int ProjectID)
         {
             DBHelper helper = new DBHelper(Constants.PROVIDER, Constants.PATH);
@@ -560,6 +542,9 @@ namespace DAL
             return affected > 0;
         }
 
+        /// <summary>
+        /// updates a request status by his position, user id and new status.
+        /// </summary>
         public static bool UpdateRequestStatusByPos(int positionID, int userID, int statusRe)
         {
             DBHelper helper = new DBHelper(Constants.PROVIDER, Constants.PATH);
@@ -579,6 +564,9 @@ namespace DAL
             return affected > 0;
         }
 
+        /// <summary>
+        /// Deletes a position from the ProjectPositions DB
+        /// </summary>
         public static bool DeletePos(int positionID)
         {
             DBHelper helper = new DBHelper(Constants.PROVIDER, Constants.PATH);
@@ -587,6 +575,9 @@ namespace DAL
             return affected > 0;
         }
 
+        /// <summary>
+        /// "deletes" all of the requests for a position that has been deleted (signs '1' as deleted on the DB)
+        /// </summary>
         public static bool neutralizePositionsRequests(int positionID)
         {
             DBHelper helper = new DBHelper(Constants.PROVIDER, Constants.PATH);
@@ -595,6 +586,10 @@ namespace DAL
             return affected > 0;
         }
 
+        /// <summary>
+        /// returns the admin's project Professions on the project his in, to determine wether you need to add another position to the project
+        /// if the project admin updates the project.
+        /// </summary>
         public static List<int> returnProjAdminProf(int ProjectID, int AdminID)
         {
             try
@@ -620,6 +615,9 @@ namespace DAL
             }
         }
 
+        /// <summary>
+        /// returns all of the user project but by headers.
+        /// </summary>
         public static DataTable returnProjectHeadLines(int userid)
         {
             try

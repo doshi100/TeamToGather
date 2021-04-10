@@ -126,6 +126,9 @@ namespace DAL
             return false;
         }
 
+        /// <summary>
+        /// gets the user professions (profession table is only providing the profname).
+        /// </summary>
         public static DataTable GetUserProfessions(int id)
         {
             try
@@ -143,6 +146,9 @@ namespace DAL
             }
         }
 
+        /// <summary>
+        /// gets the user professions (profession table as a whole).
+        /// </summary>
         public static DataTable GetUserProfessions2(int id)
         {
             try
@@ -256,6 +262,9 @@ namespace DAL
             return affected != 0;
         }
 
+        /// <summary>
+        /// adds a protfolio creation to the table (provide path and user id)
+        /// </summary>
         public static int AddProtfolioCreation(string creationPath, int userID)
         {
             DBHelper helper = new DBHelper(Constants.PROVIDER, Constants.PATH);
@@ -295,7 +304,9 @@ namespace DAL
             return dt;
         }
 
-
+        /// <summary>
+        /// gets all of the Projects which are finished - (has the status of 3) 
+        /// </summary>
         public static DataTable GetUserDoneProjects(int AdminUserID, DateTime projectDate)
         {
             DBHelper helper = new DBHelper(Constants.PROVIDER, Constants.PATH);
@@ -307,7 +318,9 @@ namespace DAL
             return dt;
         }
 
-
+        /// <summary>
+        /// returns the user rate by his id.
+        /// </summary>
         public static int ReturnUserRateAtUserNum(int UserRatedID, int userID)
         {
             DataRow userRow = ReturnUserRateAtUser(UserRatedID, userID);
@@ -318,6 +331,9 @@ namespace DAL
             return 0;
         }
 
+        /// <summary>
+        /// rates a user by who is rating him, who is rated(second argument) and the rate.
+        /// </summary>
         public static bool RateUser(int UserRatedID, int userID, int UserRate)
         {
             DataRow userRow = ReturnUserRateAtUser(UserRatedID, userID);
@@ -353,6 +369,9 @@ namespace DAL
             return exe_status != -1;
         }
 
+        /// <summary>
+        /// inserts a new rate record to the user rates table.
+        /// </summary>
         public static bool InsertUserRate_Rec(int UserRatedID, int userID, int UserRate)
         {
             DBHelper helper = new DBHelper(Constants.PROVIDER, Constants.PATH);
@@ -411,7 +430,9 @@ namespace DAL
             return updateSucceeded != -1;
         }
 
-
+        /// <summary>
+        /// returns userrate by his id.
+        /// </summary>
         public static int ReturnUserRate(int UserID)
         {
             DBHelper helper = new DBHelper(Constants.PROVIDER, Constants.PATH);
@@ -430,6 +451,9 @@ namespace DAL
             }
         }
 
+        /// <summary>
+        /// returnes Language name by its ID.
+        /// </summary>
         public static string ReturnLangByID(int langID)
         {
             DBHelper helper = new DBHelper(Constants.PROVIDER, Constants.PATH);
@@ -456,6 +480,10 @@ namespace DAL
             }
         }
 
+
+        /// <summary>
+        /// updates user's profile photo by a path an his id.
+        /// </summary>
         public static void UpdateProfilePhoto(string path, int id)
         {
             DateTime dt = DateTime.Now;
@@ -513,6 +541,9 @@ namespace DAL
             }
         }
 
+        /// <summary>
+        /// gets a user by his username and email.
+        /// </summary>
         public static DataTable RetrieveUserTableByCredentials(string UsNa, string email)
         {
             try

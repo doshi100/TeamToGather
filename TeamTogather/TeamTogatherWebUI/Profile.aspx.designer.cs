@@ -76,6 +76,15 @@ namespace TeamTogatherWebUI {
         protected global::System.Web.UI.WebControls.HiddenField GeneralPost;
         
         /// <summary>
+        /// General control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField General;
+        
+        /// <summary>
         /// ProjectShownScriptManager control.
         /// </summary>
         /// <remarks>
@@ -803,6 +812,15 @@ namespace TeamTogatherWebUI {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Repeater professionRepeater;
+        
+        /// <summary>
+        /// editimg_container control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl editimg_container;
         
         /// <summary>
         /// WebsitesDropDown control.

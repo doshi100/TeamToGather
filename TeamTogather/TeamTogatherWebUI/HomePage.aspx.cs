@@ -16,6 +16,14 @@ namespace TeamTogatherWebUI
             {
                 Session.Remove("DivID");
             }
+            if (Session["UserID"] != null)
+            {
+                SignUpButton.Visible = false;
+                loginWrapper.Visible = false;
+                UserSuggestions.Visible = true;
+                UserStatusSugg.NavigateUrl = $"RequestsStatus.aspx?UserID={(int)Session["UserID"]}&section=1";
+                ManageProjectsSugg.NavigateUrl = $"Profile.aspx?userid={(int)Session["UserID"]}&section=2";
+            }
 
         }
 

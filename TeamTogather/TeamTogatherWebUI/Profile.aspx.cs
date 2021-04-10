@@ -25,6 +25,17 @@ namespace TeamTogatherWebUI
             FinishedProj_section.NavigateUrl = $"profile.aspx?userid={Request.QueryString["userid"]}&section={"3"}";
             if(Session["UserID"].ToString() == Request.QueryString["UserID"] || UserInfo.CheckAdmin((int)Session["UserID"]))
             {
+                if(Request.QueryString["section"] == "1")
+                {
+                    popUpOpen.Visible = true;
+                    popUpRemoveCreation.Visible = true;
+                    DeleteCreationConfirmation.Visible = true;
+                    confirmationPopUp.Visible = true;
+                }
+                else if (Request.QueryString["section"] == "0")
+                {
+                    editimg_container.Visible = true;
+                }
                 ChangeProfile_popUp.Visible = true;
                 ChangeProfile_txt.Visible = true;
                 JoinReqLi_section.Visible = true;
@@ -138,10 +149,6 @@ namespace TeamTogatherWebUI
                 else if (Request.QueryString["section"] == "1")
                 {
                     ProtfolioSection.Visible = true;
-                    popUpOpen.Visible = true;
-                    popUpRemoveCreation.Visible = true;
-                    DeleteCreationConfirmation.Visible = true;
-                    confirmationPopUp.Visible = true;
                     ProjectHeaders.DataSource = GetHeaders(Project.returnProjectHeadLines((int)Session["UserID"]));
                     ProjectHeaders.DataValueField = "Key";
                     ProjectHeaders.DataTextField = "Value";
@@ -341,6 +348,11 @@ namespace TeamTogatherWebUI
                 var projectText = new HtmlDocument();
                 projectText.LoadHtml(item.Value);
                 string header = projectText.DocumentNode.SelectSingleNode("//div[@class='editor_header']").InnerText;
+                if(header == "")
+                {
+                    header = "title";
+                }
+                header = header.Replace("&#39", "'");
                 newdic.Add(item.Key, header);
             }
             return newdic;
@@ -650,57 +662,64 @@ namespace TeamTogatherWebUI
 
         protected void OpenPopUp_Click(object sender, EventArgs e)
         {
-            if (Request.QueryString["section"] == "5")
+            if(General.Value == "0")
             {
-                PopUp.Visible = true;
-                backDrop.Visible = true;
-                Dictionary<Request, Project> sessionProjects = (Dictionary<Request, Project>)Session["ShownProjects"];
-                ProjectRepeater.DataSource = sessionProjects;
-                ProjectRepeater.DataBind();
-                backDrop.Attributes.Add("onclick", "ClosePopUp();");
-                Project ChosenProject = new Project(int.Parse(PostProjID.Value), true);
-                var projectText = new HtmlDocument();
-                projectText.LoadHtml(ChosenProject.ProjectContent);
-                string projectShortDesc = projectText.DocumentNode.SelectSingleNode("//div[@class='SubHeader_container']").OuterHtml;
-                projectShortDesc = projectShortDesc.Replace("contenteditable=\"true\"", "contenteditable=\"false\"");
-                string projectShortDesc_string = projectShortDesc;
-                ShortSummaryDesc_wrap.InnerHtml = projectShortDesc_string;
-                PositionsRepeater.DataSource = ChosenProject.ProjectPositions;
-                PositionsRepeater.DataBind();
-            }
-            else if (Request.QueryString["section"] == "3" || Request.QueryString["section"] == "2")
-            {
-                PopUp.Visible = true;
-                backDrop.Visible = true;
-                List<Project> sessionProjects = (List<Project>)Session["ShownProjects"];
-                ProjectRepeater.DataSource = sessionProjects;
-                ProjectRepeater.DataBind();
-                backDrop.Attributes.Add("onclick", "ClosePopUp();");
-                Project ChosenProject = new Project(int.Parse(PostProjID.Value), true);
-                string projectShortDesc_string;
-                try
+                if (Request.QueryString["section"] == "5")
                 {
+                    PopUp.Visible = true;
+                    backDrop.Visible = true;
+                    Dictionary<Request, Project> sessionProjects = (Dictionary<Request, Project>)Session["ShownProjects"];
+                    ProjectRepeater.DataSource = sessionProjects;
+                    ProjectRepeater.DataBind();
+                    backDrop.Attributes.Add("onclick", "ClosePopUp();");
+                    Project ChosenProject = new Project(int.Parse(PostProjID.Value), true);
                     var projectText = new HtmlDocument();
                     projectText.LoadHtml(ChosenProject.ProjectContent);
                     string projectShortDesc = projectText.DocumentNode.SelectSingleNode("//div[@class='SubHeader_container']").OuterHtml;
                     projectShortDesc = projectShortDesc.Replace("contenteditable=\"true\"", "contenteditable=\"false\"");
-                    projectShortDesc_string = projectShortDesc;
+                    string projectShortDesc_string = projectShortDesc;
+                    ShortSummaryDesc_wrap.InnerHtml = projectShortDesc_string;
+                    PositionsRepeater.DataSource = ChosenProject.ProjectPositions;
+                    PositionsRepeater.DataBind();
                 }
-                catch
+                else if (Request.QueryString["section"] == "3" || Request.QueryString["section"] == "2")
                 {
-                    projectShortDesc_string = "";
+                    PopUp.Visible = true;
+                    backDrop.Visible = true;
+                    List<Project> sessionProjects = (List<Project>)Session["ShownProjects"];
+                    ProjectRepeater.DataSource = sessionProjects;
+                    ProjectRepeater.DataBind();
+                    backDrop.Attributes.Add("onclick", "ClosePopUp();");
+                    Project ChosenProject = new Project(int.Parse(PostProjID.Value), true);
+                    string projectShortDesc_string;
+                    try
+                    {
+                        var projectText = new HtmlDocument();
+                        projectText.LoadHtml(ChosenProject.ProjectContent);
+                        string projectShortDesc = projectText.DocumentNode.SelectSingleNode("//div[@class='SubHeader_container']").OuterHtml;
+                        projectShortDesc = projectShortDesc.Replace("contenteditable=\"true\"", "contenteditable=\"false\"");
+                        projectShortDesc_string = projectShortDesc;
+                    }
+                    catch
+                    {
+                        projectShortDesc_string = "";
+                    }
+                    ShortSummaryDesc_wrap.InnerHtml = projectShortDesc_string;
+                    PositionsRepeater.DataSource = ChosenProject.ProjectPositions;
+                    PositionsRepeater.DataBind();
+                    if (Session["UserID"].ToString() == ChosenProject.AdminUSID.ToString() || UserInfo.CheckAdmin((int)Session["UserID"]))
+                    {
+                        DirectionText.InnerHtml = "Edit </br> Project";
+                    }
+                    else
+                    {
+                        DirectionText.InnerHtml = "Open </br> Description";
+                    }
                 }
-                ShortSummaryDesc_wrap.InnerHtml = projectShortDesc_string;
-                PositionsRepeater.DataSource = ChosenProject.ProjectPositions;
-                PositionsRepeater.DataBind();
-                if (Session["UserID"].ToString() == ChosenProject.AdminUSID.ToString() || UserInfo.CheckAdmin((int)Session["UserID"]))
-                {
-                    DirectionText.InnerHtml = "Edit </br> Project";
-                }
-                else
-                {
-                    DirectionText.InnerHtml = "Open </br> Description";
-                }
+            }
+            else
+            {
+                Server.TransferRequest(Request.Url.AbsolutePath);
             }
         }
 
@@ -829,11 +848,11 @@ namespace TeamTogatherWebUI
             {
                 int reqID = int.Parse(PostRequestID.Value);
                 bool succeed = Project.UpdateRequestStatus(3, reqID);
-                Response.Redirect($"profile.aspx?userid={int.Parse(Request.QueryString["UserID"])}&section={int.Parse(Request.QueryString["section"])}", true);
+                Server.TransferRequest(Request.Url.AbsolutePath, false);
             }
-            catch
+            catch (Exception ex)
             {
-
+                string msg = ex.ToString();
             }
         }
 
@@ -845,7 +864,7 @@ namespace TeamTogatherWebUI
                 int posID = int.Parse(PostPosID.Value);
                 Project.UpdateRequestStatus(2, reqID);
                 Project.AddOrRemoveUserFromPos(int.Parse(Request.QueryString["UserID"]), posID);
-                Response.Redirect($"profile.aspx?userid={int.Parse(Request.QueryString["UserID"])}&section={int.Parse(Request.QueryString["section"])}", true);
+                Response.Redirect(Request.Url.AbsolutePath);
             //}
             //catch
             //{

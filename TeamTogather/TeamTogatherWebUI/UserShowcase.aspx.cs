@@ -63,12 +63,13 @@ namespace TeamTogatherWebUI
                 UserInfo user = (UserInfo)e.Item.DataItem;
                 if(user.ProfilePath != "")
                 {
-                    ((ImageButton)e.Item.FindControl("ProfilePicture")).ImageUrl = user.ProfilePath;
+                    ((Image)e.Item.FindControl("ProfilePicture")).ImageUrl = user.ProfilePath;
                 }
                 else
                 {
-                    ((ImageButton)e.Item.FindControl("ProfilePicture")).ImageUrl = "DesignElements/elements/ProfilePicEmpty.png";
+                    ((Image)e.Item.FindControl("ProfilePicture")).ImageUrl = "DesignElements/elements/ProfilePicEmpty.png";
                 }
+                ((HyperLink)e.Item.FindControl("ProfileRedirecting")).NavigateUrl = $"profile.aspx?userid={user.ID}&section=0";
                 ((Label)e.Item.FindControl("UserHeader")).Text = user.UserName;
                 double rate = (double)user.UserRate / (double)user.NumRateVoters;
                 if (double.IsNaN(rate))

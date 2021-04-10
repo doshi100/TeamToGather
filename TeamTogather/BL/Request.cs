@@ -18,6 +18,9 @@ namespace BL
         public DateTime DateRequested { get; set; }
         public Profession ReqProfession { get; set; }
 
+        /// <summary>
+        /// builds an object by its Datarow, have the option not the initialize a profession object
+        /// </summary>
         public Request(DataRow requestRow, bool prof)
         {
             this.RequestID = (int)requestRow["RequestID"];
@@ -31,6 +34,9 @@ namespace BL
             }
         }
 
+        /// <summary>
+        /// builds an object by its Datarow
+        /// </summary>
         public Request(DataRow requestRow)
         {
             this.RequestID = (int)requestRow["RequestID"];
@@ -42,6 +48,9 @@ namespace BL
             this.ReqProfession = new Profession((int)requestRow["Profession"]);
         }
 
+        /// <summary>
+        /// checks if an invitation was already sent by the user to a specific position in a project
+        /// </summary>
         public static bool CheckRequestInvitation(int positionID, int userID)
         {
             return ProjectDB.CheckRequestInvitation(positionID, userID);

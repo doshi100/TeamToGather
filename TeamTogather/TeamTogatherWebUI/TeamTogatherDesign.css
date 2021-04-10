@@ -425,6 +425,26 @@ input[type="text"], input[type="password"] {
     }
 }
 
+@-webkit-keyframes float {
+    0% {
+        transform: translateY(0);
+    }
+
+    100% {
+        transform: translateY(-10px);
+    }
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0);
+    }
+
+    100% {
+        transform: translateY(-10px);
+    }
+}
+
 
 .deletePosAnim {
     animation-name: OpacityDelete;
@@ -474,7 +494,12 @@ input[type="text"], input[type="password"] {
     order: 2;
 }
 
-#loginContainer {
+.animatefloat {
+    -webkit-animation: float 2s infinite alternate;
+    animation: float 2s infinite alternate;
+}
+
+.loginWrapper {
     height: 79%;
     width: 33%;
     background-color: rgb(243, 243, 243);
@@ -482,6 +507,64 @@ input[type="text"], input[type="password"] {
     position: absolute;
     right: 10%;
     top: 10%;
+}
+
+.UserSuggestions {
+    height: 79%;
+    width: 40%;
+    position: absolute;
+    right: 13%;
+    top: 10%;
+    font-size: 2em;
+    font-family: tekoSemiBold;
+}
+
+.UserSuggestions a {
+    color: rgb(249,249,249);
+    text-decoration: none;
+    overflow: hidden;
+    background: linear-gradient(to right, #F4BFF3, #F4BFF3 50%, rgb(249,249,249) 50%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: 200% 100%;
+    background-position: 100%;
+    transition: background-position 275ms ease;
+}
+
+.UserSuggestions a:hover {
+    background-position: 0 100%;
+}
+
+.UserSuggestions ul {
+    list-style-type: none;
+    display: flex;
+    flex-direction:column;
+    align-items: flex-start;
+    height: 100%;
+    justify-content:space-around;
+}
+
+.PinkUnderline {
+    border-bottom: 2px solid rgb(221, 138, 219);
+}
+
+.UserSuggestions li::before {
+    content:"";
+    display:inline-block;
+    background-image: url(DesignElements/elements/ulTypeImage.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    height: 60px;
+    width: 45px;
+    transform:translate(-10%, 20%);
+}
+
+#loginContainer {
+    height: 100%;
+    width: 100%;
+    background-color: rgb(243, 243, 243);
+    border-radius: 2px;
     font-family: "tekoSemiBold";
     font-size: 1.6em;
 }
@@ -1735,6 +1818,12 @@ li.BirthdayGrid {
     }
 
 .ReJoinButton input[type="button"]:disabled {
+    background-color: rgb(173, 177, 198);
+    white-space: normal;
+    font-size: 2em;
+}
+
+.ReJoinButton input[type="button"]:disabled .ButtonRed {
     background-color: rgb(173, 177, 198);
     white-space: normal;
     font-size: 1.5em;

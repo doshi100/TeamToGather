@@ -139,7 +139,9 @@ namespace BL
             return projects;
         }
 
-
+        /// <summary>
+        /// add a project by the credentials needed.
+        /// </summary>
         public static bool AddProject(int AdminUSID, int MinAge, int ProjectStatus, string ProjectContent,
             int AdminProfession, List<KeyValuePair<int, List<int>>> ProfessionList)
         {
@@ -147,6 +149,9 @@ namespace BL
         }
 
 
+        /// <summary>
+        /// gets 10 projects from a specific index.
+        /// </summary>
         public static List<Project> ShowProjects(int UserID, int AgeFilter, DateTime DateFilter, int RateFilter, int ProjectIndexShow)
         {
             List<Project> projects = new List<Project>();
@@ -173,7 +178,9 @@ namespace BL
             return ProjectDB.AddProjectReqeust(PositionID, userID, RequestStatus, RequestType);
         }
 
-
+        /// <summary>
+        /// gets the userrate of a project (the rate that was rated by the user.
+        /// </summary>
         public static bool CheckUserRate_Project(int projectID, int userID)
         {
             return ProjectDB.CheckUserRate_Project(projectID, userID);
@@ -220,21 +227,33 @@ namespace BL
             return ProjectDB.updateUserRateAtProject(ProjectID, userID, rate);
         }
 
+        /// <summary>
+        /// adds or remove user from pos by inserting a user id in it, if the id = 1 its deleting.
+        /// </summary>
         public static bool AddOrRemoveUserFromPos(int userID, int PosID)
         {
             return ProjectDB.AddOrRemoveUserFromPos(userID, PosID);
         }
 
+        /// <summary>
+        /// update request status by request id.
+        /// </summary>
         public static bool UpdateRequestStatus(int requestStatus, int requestID)
         {
             return ProjectDB.UpdateRequestStatus(requestStatus, requestID);
         }
 
+        /// <summary>
+        /// updates a request status by a project positiong and the user in it.
+        /// </summary>
         public static bool UpdateRequestStatusByPos(int positionID, int userID, int statusRe)
         {
             return ProjectDB.UpdateRequestStatusByPos(positionID, userID, statusRe);
         }
 
+        /// <summary>
+        /// updated the project
+        /// </summary>
         public static bool UpdateProject(int minage, int projectStatus, string ProjectContent, int projectID, List<KeyValuePair<int, List<int>>> ProfessionList, int AdminID, int AdminProfession)
         {
             //if (ProjectDB.CheckProfessionPositionAtpos(projectID, AdminID, AdminProfession))
@@ -257,26 +276,41 @@ namespace BL
             return Positionsuccess != -1 && Programssuccess && updateproject;
         }
 
+        /// <summary>
+        /// checks the Project position profession by its id.
+        /// </summary>
         public static bool CheckProfessionPositionAtPos(int projectID, int AdminID, int AdminProfession)
         {
             return ProjectDB.CheckProfessionPositionAtpos(projectID, AdminID, AdminProfession);
         }
 
+        /// <summary>
+        /// deleted a position by its id.
+        /// </summary>
         public static bool DeletePos(int positionID)
         {
             return ProjectDB.DeletePos(positionID);
         }
 
+        /// <summary>
+        /// "deletes" position request when a position is being deleted.
+        /// </summary>
         public static bool neutralizePositionsRequests(int positionID)
         {
             return ProjectDB.neutralizePositionsRequests(positionID);
         }
 
+        /// <summary>
+        /// returns the Admin Project Professions in his project as ID's
+        /// </summary>
         public static List<int> returnProjAdminProf(int ProjectID, int AdminID)
         {
             return ProjectDB.returnProjAdminProf(ProjectID, AdminID);
         }
 
+        /// <summary>
+        /// returns all of the project the user is a admin of, by ProjectID, ProjectContent.
+        /// </summary>
         public static Dictionary<int,string> returnProjectHeadLines(int userid)
         {
             Dictionary<int, string> Headers = new Dictionary<int, string>();
@@ -288,6 +322,9 @@ namespace BL
             return Headers;
         }
 
+        /// <summary>
+        /// returns the top rated projects from a specific date.
+        /// </summary>
         public static List<Project> ReturnTopProjects(DateTime date)
         {
             DataTable dt = ProjectDB.ReturnTopProjects(date);
