@@ -12,11 +12,18 @@
                 <li>Email:
                     <asp:TextBox ID="Email" runat="server"></asp:TextBox></li>
                 <li>
+                <li>Country:
+                    <asp:TextBox ID="Country" runat="server"></asp:TextBox></li>
+                <li>
+                <li>Language:
+                    <asp:TextBox ID="lang" runat="server"></asp:TextBox></li>
+                <li>
                     <asp:Button ID="GetUsersB" CssClass="ButtonBlue" Text="Search Users" OnClick="UserGridBind" runat="server" /></li>
             </ul>
             <span id="BanUserH" class="greenBg UlHeader" runat="server" visible="false">Ban User By ID</span>
             <ul id="BanUser" visible="false" class="BanUserList" runat="server">
-                <li>User ID: <asp:TextBox ID="UserBanNum" runat="server"></asp:TextBox></li>
+                <li>User ID:
+                    <asp:TextBox ID="UserBanNum" runat="server"></asp:TextBox></li>
                 <li>
                     <asp:Button ID="BanUserBu" CssClass="ButtonRed" Text="Ban User" OnClick="BanUserByID" runat="server" />
                 </li>
@@ -26,14 +33,14 @@
             </ul>
             <asp:GridView ID="UsersGridView" CssClass="smltableText TopProjTable" OnRowDataBound="UsersGrid_RowDataBound" runat="server" AutoGenerateColumns="true">
                 <Columns>
-                <asp:HyperLinkField
-                    text="enter Profile"
-                    DataNavigateUrlFields="ID"
-                    DataNavigateUrlFormatString="Profile.aspx?userid={0}&section=0"
-                    DataTextField="ID"
-                    HeaderText="ProfileLink"
-                    SortExpression="ID"
-                    target="_blank"/>
+                    <asp:HyperLinkField
+                        Text="enter Profile"
+                        DataNavigateUrlFields="ID"
+                        DataNavigateUrlFormatString="Profile.aspx?userid={0}&section=0"
+                        DataTextField="ID"
+                        HeaderText="ProfileLink"
+                        SortExpression="ID"
+                        Target="_blank" />
                 </Columns>
             </asp:GridView>
         </div>

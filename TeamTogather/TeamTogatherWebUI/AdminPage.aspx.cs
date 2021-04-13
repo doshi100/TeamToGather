@@ -62,7 +62,9 @@ namespace TeamTogatherWebUI
             BanUser.Visible = true;
             string username = Username.Text;
             string email = Email.Text;
-            DataTable listUsers = UserInfo.RetrieveUserTableByCredentials(username, email);
+            string country = Country.Text;
+            string languages = lang.Text;
+            DataTable listUsers = UserInfo.RetrieveUserTableByCredentials(username, email, country, languages);
             UsersGridView.DataSource = listUsers;
             UsersGridView.DataBind();
         }

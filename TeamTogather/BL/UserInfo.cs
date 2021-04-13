@@ -600,9 +600,9 @@ namespace BL
         /// <summary>
         /// returnes datatable of users by user name and email.
         /// </summary>
-        public static DataTable RetrieveUserTableByCredentials(string UsNa, string email)
+        public static DataTable RetrieveUserTableByCredentials(string UsNa, string email, string country, string lang)
         {
-            DataTable dt = UserDB.RetrieveUserTableByCredentials(UsNa, email);
+            DataTable dt = UserDB.RetrieveUserTableByCredentials(UsNa, email, country, lang);
             return dt;
         }
     }

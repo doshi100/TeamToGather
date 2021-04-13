@@ -544,7 +544,7 @@ namespace DAL
         /// <summary>
         /// gets a user by his username and email.
         /// </summary>
-        public static DataTable RetrieveUserTableByCredentials(string UsNa, string email)
+        public static DataTable RetrieveUserTableByCredentials(string UsNa, string email, string country, string lang)
         {
             try
             {
@@ -555,7 +555,7 @@ namespace DAL
                     $"FROM((Users " +
                     $"INNER JOIN Languages ON Users.NativeLang = Languages.ID) " +
                     $"INNER JOIN Countries ON Users.Country = Countries.ID) " +
-                    $"WHERE UserName LIKE '{UsNa}%' AND Email LIKE '{email}%' ORDER BY(Users.ID); ";
+                    $"WHERE UserName LIKE '{UsNa}%' AND Email LIKE '{email}%' AND Country LIKE '{country}%' AND Languages.LangName LIKE '{lang}%' ORDER BY(Users.ID); ";
                 DataTable userTable = helper.GetDataTable(sql);
                 return userTable;
             }
