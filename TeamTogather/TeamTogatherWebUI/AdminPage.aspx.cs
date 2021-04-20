@@ -31,8 +31,7 @@ namespace TeamTogatherWebUI
                 ((Label)e.Row.FindControl("AdminUsID")).Text = p.AdminUSID.ToString();
                 ((Label)e.Row.FindControl("MinAge")).Text = p.MinAge.ToString();
                 ((Label)e.Row.FindControl("ProjectStatus")).Text = p.ProjectStatus.ToString();
-                ((Label)e.Row.FindControl("NumRateVoters")).Text = p.NumRateVoters.ToString();
-                ((Label)e.Row.FindControl("ProjectRate")).Text = p.ProjectRate.ToString();
+                ((Label)e.Row.FindControl("ProjectRate")).Text = (p.ProjectRate / p.NumRateVoters).ToString();
                 ((Label)e.Row.FindControl("DateCreated")).Text = p.DateCreated.ToString();
                 ((HyperLink)e.Row.FindControl("AdminProfile")).NavigateUrl = $"profile.aspx?userid={p.AdminUSID.ToString()}&section=0";
                 ((HyperLink)e.Row.FindControl("AdminProfile")).Text = "enter Profile";
@@ -60,6 +59,8 @@ namespace TeamTogatherWebUI
         {
             BanUserH.Visible = true;
             BanUser.Visible = true;
+            GeneralUsInfoHead.Visible = true;
+            GeneralUsInfo.Visible = true;
             string username = Username.Text;
             string email = Email.Text;
             string country = Country.Text;

@@ -456,9 +456,11 @@ function createScroller() {
 
 
 function OpenPopUp(e) {
-    let id = e.querySelector(".projBox_ProjectID").innerText;
-    hiddenPostID.value = id;
-    PopUpButton.click();
+    if (event.target.nodeName != "INPUT") {
+        let id = e.querySelector(".projBox_ProjectID").innerText;
+        hiddenPostID.value = id;
+        PopUpButton.click();
+    }
 }
 
 function OpenPopUp_date(e) {

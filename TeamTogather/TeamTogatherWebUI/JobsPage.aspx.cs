@@ -45,7 +45,11 @@ namespace TeamTogatherWebUI
         protected void InsertJob(object sender, EventArgs e)
         {
             JobsWS.JobsWS proxy = new JobsWS.JobsWS();
-            bool inserted = proxy.AddJobOffer((string)Session["JobUser"], (string)Session["JobPass"], PhoneNumberText.Text, CompanyText.Text, Position.Text);
+            JobsWS.JobOffer offer = new JobsWS.JobOffer();
+            offer.Phone = PhoneNumberText.Text;
+            offer.Company = CompanyText.Text;
+            offer.Position = Position.Text;
+            bool inserted = proxy.AddJobOffer((string)Session["JobUser"], (string)Session["JobPass"], offer);
             if (inserted)
             {
                 Response.Redirect("JobsPage.aspx");

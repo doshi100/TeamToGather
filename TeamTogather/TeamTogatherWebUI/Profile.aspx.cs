@@ -45,16 +45,23 @@ namespace TeamTogatherWebUI
                 JoinReq_section.NavigateUrl = $"profile.aspx?userid={Request.QueryString["userid"]}&section={"4"}";
                 ProjInv_section.NavigateUrl = $"profile.aspx?userid={Request.QueryString["userid"]}&section={"5"}";
             }
-            UserInfo profileUser = new UserInfo(int.Parse(Request.QueryString["UserID"]), false, true);
-            if(profileUser.ProfilePath == null)
+            try
+            {
+                UserInfo profileUser = new UserInfo(int.Parse(Request.QueryString["UserID"]), false, true);
+                if(profileUser.ProfilePath == null)
+                {
+                    ProfileImg.ImageUrl = "DesignElements/elements/ProfilePicEmpty.png";
+                }
+                else
+                {
+                    ProfileImg.ImageUrl = profileUser.ProfilePath;
+                }
+                ProfileUsername.Text = profileUser.UserName;
+            }
+            catch
             {
                 ProfileImg.ImageUrl = "DesignElements/elements/ProfilePicEmpty.png";
             }
-            else
-            {
-                ProfileImg.ImageUrl = profileUser.ProfilePath;
-            }
-            ProfileUsername.Text = profileUser.UserName;
             if (!Page.IsPostBack)
             {
                 Session["ShownProjects"] = null;
@@ -848,7 +855,7 @@ namespace TeamTogatherWebUI
             {
                 int reqID = int.Parse(PostRequestID.Value);
                 bool succeed = Project.UpdateRequestStatus(3, reqID);
-                Server.TransferRequest(Request.Url.AbsolutePath, false);
+                Response.Redirect($"Profile.aspx?userid={Request.QueryString["UserID"]}&section={Request.QueryString["section"]}");
             }
             catch (Exception ex)
             {
@@ -864,7 +871,7 @@ namespace TeamTogatherWebUI
                 int posID = int.Parse(PostPosID.Value);
                 Project.UpdateRequestStatus(2, reqID);
                 Project.AddOrRemoveUserFromPos(int.Parse(Request.QueryString["UserID"]), posID);
-                Response.Redirect(Request.Url.AbsolutePath);
+                Response.Redirect($"Profile.aspx?userid={Request.QueryString["UserID"]}&section={Request.QueryString["section"]}");
             //}
             //catch
             //{

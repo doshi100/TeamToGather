@@ -157,32 +157,28 @@ namespace TeamTogatherWebUI.JobsWS {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/AddJobOffer", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public bool AddJobOffer(string username, string password, string phone, string company, string pos) {
+        public bool AddJobOffer(string username, string password, JobOffer offer) {
             object[] results = this.Invoke("AddJobOffer", new object[] {
                         username,
                         password,
-                        phone,
-                        company,
-                        pos});
+                        offer});
             return ((bool)(results[0]));
         }
         
         /// <remarks/>
-        public void AddJobOfferAsync(string username, string password, string phone, string company, string pos) {
-            this.AddJobOfferAsync(username, password, phone, company, pos, null);
+        public void AddJobOfferAsync(string username, string password, JobOffer offer) {
+            this.AddJobOfferAsync(username, password, offer, null);
         }
         
         /// <remarks/>
-        public void AddJobOfferAsync(string username, string password, string phone, string company, string pos, object userState) {
+        public void AddJobOfferAsync(string username, string password, JobOffer offer, object userState) {
             if ((this.AddJobOfferOperationCompleted == null)) {
                 this.AddJobOfferOperationCompleted = new System.Threading.SendOrPostCallback(this.OnAddJobOfferOperationCompleted);
             }
             this.InvokeAsync("AddJobOffer", new object[] {
                         username,
                         password,
-                        phone,
-                        company,
-                        pos}, this.AddJobOfferOperationCompleted, userState);
+                        offer}, this.AddJobOfferOperationCompleted, userState);
         }
         
         private void OnAddJobOfferOperationCompleted(object arg) {

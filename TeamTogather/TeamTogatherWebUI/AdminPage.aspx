@@ -31,6 +31,15 @@
                     <asp:Button ID="UnBanUser" CssClass="ButtonBlue" Text="Release User Ban" OnClick="UnBanUserByID" runat="server" />
                 </li>
             </ul>
+            <span id="GeneralUsInfoHead" class="greenBg UlHeader" runat="server" visible="false">general Information</span>
+            <ul id="GeneralUsInfo" visible="false" class="generalInfoUl" runat="server">
+                <li>
+                    <b>NumRateVoters</b> - the number of user's who voted for this praticular user.</li>
+                <li>
+                    <b>UserRate</b> - the sum of rates the user had been given</li>
+                                <li>
+                    <b>user type</b> - determines if the user is an admin or not, 1 for regular users and 2 for an admin.</li>
+            </ul>
             <asp:GridView ID="UsersGridView" CssClass="smltableText TopProjTable" OnRowDataBound="UsersGrid_RowDataBound" runat="server" AutoGenerateColumns="true">
                 <Columns>
                     <asp:HyperLinkField
@@ -56,6 +65,13 @@
                     <span class="greenBg">The Top rated Projects of this month</span>
                 </li>
                 <li>
+                    <span class="greenBg UlHeader">General Information</span>
+                    </li>
+                <li>
+                    <span class="GeneInfoSubHe"><b>Project Status</b> - 1 for a 'sketch' status, 2 - for an 'In-Process' status and 3 - for a 'finished' status</span>
+                    </li>
+                    
+                <li>
                     <asp:GridView ID="GridView1" runat="server" CssClass="TopProjTable" OnRowDataBound="GridView1_RowDataBound" AutoGenerateColumns="false">
                         <Columns>
                             <asp:TemplateField HeaderText="Project ID">
@@ -78,12 +94,7 @@
                                     <asp:Label ID="ProjectStatus" runat="server"></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
-                            <asp:TemplateField HeaderText="number of raters">
-                                <ItemTemplate>
-                                    <asp:Label ID="NumRateVoters" runat="server"></asp:Label>
-                                </ItemTemplate>
-                            </asp:TemplateField>
-                            <asp:TemplateField HeaderText="Sum of rates">
+                            <asp:TemplateField HeaderText="Rate">
                                 <ItemTemplate>
                                     <asp:Label ID="ProjectRate" runat="server"></asp:Label>
                                 </ItemTemplate>
