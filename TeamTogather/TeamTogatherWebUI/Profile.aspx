@@ -299,7 +299,7 @@
                                             <div id="userBox" class="userBox" runat="server">
                                                 <div class="userBox_UserCredentials">
                                                     <div class="UserCredentials_ProfileContainer">
-                                                        <asp:ImageButton ID="ProfilePicture" OnClick="ProfilePic_Click" OnClientClick="UserProfileRedirection(this)" runat="server" UseSubmitBehavior="false" class="profilePosPic" />
+                                                        <asp:HyperLink ID="ProfileRedirecting" runat="server"><asp:Image ID="ProfilePicture" runat="server" class="profilePosPic" /></asp:HyperLink>
                                                     </div>
                                                     <div class="UserHeaderContainer">
                                                         <asp:Label ID="UserHeader" CssClass="userBox_userHeader" runat="server" Text=""></asp:Label>
