@@ -2742,6 +2742,7 @@ img#ViewPhoto {
     height: 100%;
     align-content: flex-start;
     min-height: 200px;
+    margin-bottom: 10%;
 }
 
 .infoElmContainer {
